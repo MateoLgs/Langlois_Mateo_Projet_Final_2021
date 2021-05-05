@@ -1,0 +1,37 @@
+Controles: 
+	Q►déplacement a gauche
+	D►Déplacement a droite
+	Z►Saut
+	Flèche bas►Tir boule de feu
+	
+
+__________________________________________________________________________________________________________________________________
+
+V 1.0  :
+
+Bugs:
+	❌ Manette :	
+		❌ Problème d'interaction avec le bounce / mountainBounce lors du jeu a la manette
+		❌ Impossible de retourner au clavier après avoir joué à la manette
+		❌ Problème d'animation avec la manette
+	❌Le jeu crash lorsqu'une boule de feu arrive, au pixel près, dans un angle aigu
+	❌Animation de mort ne se lance pas 
+	❌Pas de reset de saut dans l'eau
+
+
+Nouveau : 
+
+	✔️ Contrôles au clavier et à la manette, au choix du joueur ou de la joueuse   ( input constamment autorisé )
+	✔️ Indicateur de vie (coeurs ou jauge) & frames d’invulnérabilité  ( icones de froid / invulnérabilité après prise de dégat )
+	✔️ Ennemis
+		✔️ ET faisant perdre de la vie ( au contact: yéti, snowman et boule de neige )
+		✔️ ET ayant un comportement déterminé ( Marmotte )
+		✔️ ET que l’on peut faire disparaître ( yéti et snowman ) 
+	✔️ Action déplacement, selon thème :
+		✔️ rebond sur les parois rocheuses ( wallJump possible )
+	✔️ Altération déplacement, selon thème :
+		✔️ inertie sur la glace & ralentissement sur la neige 
+	✔️ Obstacles causant instantanément la fin du jeu (“mort” du personnage)  (pics , pics caché, chute et goombas)
+	✔️ Power-up débloquant une nouvelle capacité (au choix, à expliquer) ( Lancer des boules de feu / regagner de la vie)
+	✔️ Scrolling vertical & horizontal
+	✔️ Et plein d'autres encore ...
