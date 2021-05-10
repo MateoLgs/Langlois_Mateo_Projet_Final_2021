@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
-    <title>Moutain Rush</title>
+    <title>MARIOOOO</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
@@ -1880,51 +1880,25 @@ this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null
 
 
     /////////////////
-    graphics = this.add.graphics();
-
-    line = new Phaser.Geom.Line(260, 200, player.x, player.y);
-    rect = new Phaser.Geom.Rectangle(32, 32,48, 96);
-
 
 }
 
 
   update (){    
-    Phaser.Geom.Rectangle.CenterOn(rect, player.x, player.y);
 
-    for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
-        line =  new Phaser.Geom.Line(sniperEnnemi.x, sniperEnnemi.y, player.x, player.y);
-    }
-
-
-
-    graphics.clear();
-   // line.rotation = Phaser.Math.Angle.BetweenPoints(line, player);
+        ray = new Phaser.Geom.Line(0,0, player.x, player.y);
+  
+   
+    var intersect = this.getWallIntersection(ray, this.snowmen);
 
 
-
-graphics.lineStyle(2, 0x00ff00);
-graphics.strokeLineShape(line);
-
-if (Phaser.Geom.Intersects.LineToRectangle(line, rect))
-{
-    graphics.lineStyle(2, 0xff0000);
+    if (intersect) {
+  // A wall is blocking their vision so change them to normal speed
+  cooldownTirSniperEnnemiBeforeShoot = 200;
+} else {
+    // Enemy can see Player so change them to faster speed
+    cooldownTirSniperEnnemiBeforeShoot = 200;
 }
-else
-{
-    graphics.lineStyle(2, 0xffff00);
-}
-
-graphics.strokeRectShape(rect, 2);
-
-    if (Phaser.Geom.Intersects.LineToRectangle(line,rect))
-    {
-        console.log("touché raycasting ")
-        player.setAlpha(1)
-    }
-
-
-
 
 
     /////////////
@@ -2303,6 +2277,19 @@ for (const platformMoving of this.platformsMoving.children.entries) {
     }
  
 
+getWallIntersection(ray, snowmen) {
+tileHits = snowmen.getRayCastTiles(ray, 4, true, false);     //getRayCastTiles(line, stepRate, collides, interestingFace)
+    if (tileHits.length > 0) {
+        return true;
+    }
+    return false;
+}
+
+
+
+
+
+
 
 }
   
@@ -2606,7 +2593,12 @@ var vitesseBalleSniperEnnemi=1000
 var cooldownTirSniperEnnemi=360
 var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
 
+var tileHits = [];
+
+var ray
 var game = new Phaser.Game(config);
+
+//http://examples.phaser.io/_site/view_full.html?d=tilemaps&f=tilemap+ray+cast.js&t=tilemap%20ray%20cast
         </script>
 
 </body>
