@@ -869,7 +869,19 @@
          "draworder":"topdown",
          "id":20,
          "name":"yeti",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1532,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":592,
+                 "y":528
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1006,7 +1018,7 @@
          "y":0
         }],
  "nextlayerid":40,
- "nextobjectid":1532,
+ "nextobjectid":1533,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",

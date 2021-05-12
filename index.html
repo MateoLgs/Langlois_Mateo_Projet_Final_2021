@@ -191,24 +191,33 @@ class Jeu extends Phaser.Scene{
 }
 
    }
-   tirSniperEnnemi(sniperEnnemi){
+
+  joueurPrendDegats(degat){
+       pvPlayer-=degat
+      /* if(pvPlayer<0.1){
+           this.death();
+       }*/
+       console.log(pvPlayer)
+   }
+  
+  tirSniperEnnemi(sniperEnnemi){
       
       if(hardcoreMode=="off"){
       
             let pointer = this.input.activePointer;
             for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
-            var snowball = snowballs.create(sniperEnnemi.x, sniperEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
-            this.physics.moveTo(snowball, player.x, player.y, vitesseBalleSniperEnnemi);
+            var ballesSniper = this.ballesSnipers.create(sniperEnnemi.x, sniperEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
+            this.physics.moveTo(ballesSniper, player.x, player.y, vitesseBalleSniperEnnemi);
             var angleBalle = (Math.atan2(player.y - sniperEnnemi.y, player.x - sniperEnnemi.x) * 180 / Math.PI);
            // snowball.angleBalle -= 90;
-            snowball.rotation = Phaser.Math.Angle.BetweenPoints(player, sniperEnnemi);
+           ballesSniper.rotation = Phaser.Math.Angle.BetweenPoints(player, sniperEnnemi);
+           this.physics.add.overlap(player, ballesSniper,  this.degatBalleSniper,null,this)
 
-
-            snowball.body.setAllowGravity(false);
+           ballesSniper.body.setAllowGravity(false);
         if(player.x<sniperEnnemi.x){
 
             sniperEnnemi.play('soldierShoot', true).setFlipX(false);
-        snowball.setGravityY(1000);
+            ballesSniper.setGravityY(1000);
         }
         else if(player.x>sniperEnnemi.x){
 
@@ -237,24 +246,29 @@ class Jeu extends Phaser.Scene{
       }
       }
   }
+  
+  destroyBalle(platform, balle){
+      balle.destroy();
+  }
+
   lancerSnowballYeti(yeti){
       
       if(hardcoreMode=="off"){
       
-            let pointer = this.input.activePointer;
+        
             for (const yeti of this.yetis.children.entries) {
-            var snowball = snowballs.create(yeti.x, yeti.y, 'snowball').setFlipX(true).setScale(0.80);
-            this.physics.moveTo(snowball, player.x, player.y, vitesseBalleSoldatEnnemi);
+            var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball').setFlipX(true).setScale(0.80);
+            this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
             var angleBalle = (Math.atan2(player.y - yeti.y, player.x - yeti.x) * 180 / Math.PI);
            // snowball.angleBalle -= 90;
-            snowball.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti);
+           ballesSoldat.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti);
+           this.physics.add.overlap(player, ballesSoldat,  this.degatBalleSoldat,null,this)
 
-
-            snowball.body.setAllowGravity(false);
+           ballesSoldat.body.setAllowGravity(false);
         if(player.x<yeti.x){
 
         yeti.play('soldierShoot', true).setFlipX(false);
-        snowball.setGravityY(1000);
+        ballesSoldat.setGravityY(1000);
         }
         else if(player.x>yeti.x){
 
@@ -293,6 +307,7 @@ class Jeu extends Phaser.Scene{
     sniperEnnemi.destroy();
       fireball.destroy();
   }     
+  
   killYeti(yeti, fireball){
       yeti.destroy();
       fireball.destroy();
@@ -356,9 +371,10 @@ class Jeu extends Phaser.Scene{
  
   destroyFireball(bomb){
 
-    this.shurikensItems.create(bomb.x+8, bomb.y-3, 'fireball').setScale(1.5)
+    this.shurikensItems.create(bomb.x+8, bomb.y-3, 'fireball').setScale(1)
         .setOrigin(0.5,0.5)
         .setDepth(-1)
+        .setSize(20,20)
         bomb.destroy();
         
 }  
@@ -424,17 +440,18 @@ class Jeu extends Phaser.Scene{
       // (totalCoins);
 
 }    
-  pickUpShuriken(qplayer,shuriken){
+  
+  pickUpShuriken(player,shuriken){
       shuriken.destroy();
       fireballLeft+=1;
       this.changeShuriken();
   }
+  
   changeShuriken(){
     fireballLeftText.destroy();
     fireballLeftText = this.add.text(1170, 50,  fireballLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);       
 }
    
-    
   collectPowerUpFireball(powerUpFireball){
      ("pickupfireball")
     powerUpFireball.destroy();
@@ -568,24 +585,34 @@ class Jeu extends Phaser.Scene{
     playerCanResetVelocity=true
   }
 
-  degatSnowballJoueur(player, snowball){
-  snowball.destroy();
+  degatBalleSniper(player,ballesSniper, degats){
+
+    ballesSniper.destroy();
       if(hardcoreMode=="on" ){
           this.death();
       }
     if(playerInvincible==false && hardcoreMode=="off"){
      froid+=1;
-
- 
-     this.updateFroid();
-
-
-        this.playerGoInvincible();
+    this.joueurPrendDegats(40);
+    this.playerGoInvincible();
     }
-      
-
   }
     
+  degatBalleSoldat(player,ballesSoldat, degats){
+
+    ballesSoldat.destroy();
+  if(hardcoreMode=="on" ){
+      this.death();
+  }
+if(playerInvincible==false && hardcoreMode=="off"){
+ froid+=1;
+this.joueurPrendDegats(15);
+this.playerGoInvincible();
+}
+  
+
+}
+
   hitBomb (player, bomb){
     death();
 }
@@ -606,7 +633,6 @@ class Jeu extends Phaser.Scene{
 
       playerInWater=false
   }
-
 
   setSpeedPlatform (player, platform) {
 
@@ -1115,7 +1141,7 @@ class Jeu extends Phaser.Scene{
     froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     froid3 = this.physics.add.sprite(700, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     }
-    player = this.physics.add.sprite(32, 160, 'spritesheetPlayerNinja');
+    player = this.physics.add.sprite(32, 500, 'spritesheetPlayerNinja');
     player.setGravityY(1000)
 
     player.setCollideWorldBounds(false).setScale(0.2);
@@ -1370,7 +1396,7 @@ this.anims.create({
     for (const shurikensItem of this.shurikensItems.children.entries) {
 }  
 
-this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null, this);
+this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null, this);
     ///////////////////////////////////////
     ////////////Goomba////////////////////
     
@@ -1563,6 +1589,16 @@ this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null
 }  
           ///////////////////////////////////////
     ////////////SniperEnnemi////////////////////
+    this.ballesSnipers = this.physics.add.group({
+        immovable: true,
+        degats : 50,
+     });
+     console.log("test")
+    /* for (const ballesSniper of this.ballesSnipers.children.entries) {
+     this.physics.add.overlap( player,ballesSniper, this.degatSnowballJoueur, [ballesSniper, 50], this);
+     }*/
+    //this.physics.add.overlap(player,this.ballesSoldats, this.degatSnowballJoueur, [ballesSoldat, snowball, 20], this);
+     
 
 
 
@@ -1604,7 +1640,9 @@ this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null
       
     ///////////////////////////////////////
     ////////////Yeti////////////////////
-
+    this.ballesSoldats = this.physics.add.group({
+        immovable: true,
+     });
 
 
     this.anims.create({
@@ -1847,9 +1885,11 @@ this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null
     this.physics.add.collider(player, this.goomba, this.death, null, this);
 
 
+    this.physics.add.collider(platform, ballesSoldat,  this.destroyBalle,null,this)
+    this.physics.add.collider(platform, ballesSniper,  this.destroyBalle,null,this)
       
    // this.physics.add.collider(snowballs, platform, this.destroySnowball, null, this);
-    this.physics.add.overlap(snowballs, player, this.degatSnowballJoueur, null, this);
+
 
  //   this.physics.add.collider(fireball, platform);
     
@@ -1883,22 +1923,10 @@ this.physics.add.collider(this.shurikensItems, player, this.pickUpShuriken, null
 
 }
 
-
   update (){    
 
-        ray = new Phaser.Geom.Line(0,0, player.x, player.y);
-  
    
-    var intersect = this.getWallIntersection(ray, this.snowmen);
 
-
-    if (intersect) {
-  // A wall is blocking their vision so change them to normal speed
-  cooldownTirSniperEnnemiBeforeShoot = 200;
-} else {
-    // Enemy can see Player so change them to faster speed
-    cooldownTirSniperEnnemiBeforeShoot = 200;
-}
 
 
     /////////////
@@ -2009,7 +2037,7 @@ for (const platformMoving of this.platformsMoving.children.entries) {
       if(cooldownTirSniperEnnemiBeforeShoot<=0){
         cooldownTirSniperEnnemiBeforeShoot=cooldownTirSniperEnnemi
           this.tirSniperEnnemi();
-          console.log("sniper")
+          
       }
        //this.time.delayedCall(1000, this.lancerSnowballSnowman, null, this);
       
@@ -2276,17 +2304,6 @@ for (const platformMoving of this.platformsMoving.children.entries) {
 
     }
  
-
-getWallIntersection(ray, snowmen) {
-tileHits = snowmen.getRayCastTiles(ray, 4, true, false);     //getRayCastTiles(line, stepRate, collides, interestingFace)
-    if (tileHits.length > 0) {
-        return true;
-    }
-    return false;
-}
-
-
-
 
 
 
@@ -2585,17 +2602,17 @@ var line;
 var rect;
 var graphics;
 
-var vitesseBalleSoldatEnnemi=600
-var cooldownTirSoldatEnnemi=120
+var vitesseBalleSoldatEnnemi=400
+var cooldownTirSoldatEnnemi=60
 var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
+var ballesSoldat;
 
-var vitesseBalleSniperEnnemi=1000
-var cooldownTirSniperEnnemi=360
+var vitesseBalleSniperEnnemi=700
+var cooldownTirSniperEnnemi=300
 var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
+var ballesSniper;
 
-var tileHits = [];
-
-var ray
+var pvPlayer = 100;
 var game = new Phaser.Game(config);
 
 //http://examples.phaser.io/_site/view_full.html?d=tilemaps&f=tilemap+ray+cast.js&t=tilemap%20ray%20cast
