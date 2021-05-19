@@ -717,7 +717,10 @@ this.playerGoInvincible();
   }
 
   setSpeedPlatform (player, platform) {
-
+    if(velociteChute>800){
+    console.log("CHUTE!")
+}
+velociteChute=player.body.velocity.y
     playerCanResetVelocity=true 
     canResetIceVelocity=true
     player.setGravityY(gravity)
@@ -1223,7 +1226,7 @@ this.playerGoInvincible();
     froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     froid3 = this.physics.add.sprite(700, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     }
-    player = this.physics.add.sprite(32, 500, 'spritesheetPlayerNinja');
+    player = this.physics.add.sprite(32, 100, 'spritesheetPlayerNinja');
     player.setGravityY(1000)
 
     player.setCollideWorldBounds(false).setScale(0.2);
@@ -2007,7 +2010,8 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
 
   update (){    
 
-   
+velociteChute=player.body.velocity.y;
+
 
 
 
@@ -2206,6 +2210,10 @@ for (const platformMoving of this.platformsMoving.children.entries) {
     
     if (standing==true)
     {
+        if(player.body.velocity.y > 800){
+       console.log("chute")
+   }
+
         jumpingPlayer=false
     }
 
@@ -2701,6 +2709,7 @@ var cooldownTirSniperEnnemi=300
 var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
 var ballesSniper;
 
+var velociteChute = 0;
 var pvPlayer = 100;
 var game = new Phaser.Game(config);
 
