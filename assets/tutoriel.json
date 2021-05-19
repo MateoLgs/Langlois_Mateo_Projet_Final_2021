@@ -126,19 +126,7 @@
          "draworder":"topdown",
          "id":38,
          "name":"shurikensItem",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1523,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":176,
-                 "y":640
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -858,19 +846,7 @@
          "draworder":"topdown",
          "id":39,
          "name":"sniperEnnemi",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1529,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":464,
-                 "y":624
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -881,19 +857,7 @@
          "draworder":"topdown",
          "id":20,
          "name":"yeti",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1532,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":592,
-                 "y":528
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1030,7 +994,7 @@
          "y":0
         }],
  "nextlayerid":40,
- "nextobjectid":1534,
+ "nextobjectid":1536,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",

@@ -189,7 +189,6 @@ ninjaSkin.on('pointerdown', () => {
 } 
 }
 
-
 class ShopSkin extends Phaser.Scene {
     constructor (){
         super('ShopSkin');
@@ -282,8 +281,7 @@ class ShopSkin extends Phaser.Scene {
     }*/
 }
 }
-
-       
+    
 class Jeu extends Phaser.Scene{
       constructor () {
         super('Jeu');
@@ -1232,7 +1230,7 @@ velociteChute=player.body.velocity.y
     
     this.tileset = this.map.addTilesetImage('tileset', 'tiles');
     var background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
-    var platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
+    this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
     var platformEscalierDroit = this.map.createDynamicLayer('platformEscalierDroit', this.tileset, 0, 0);
     var platformEscalierGauche = this.map.createDynamicLayer('platformEscalierGauche', this.tileset, 0, 0);
     var platformMontagne = this.map.createDynamicLayer('platformMontagne', this.tileset, 0, 0);
@@ -1242,7 +1240,7 @@ velociteChute=player.body.velocity.y
     //const texteTuto = this.map.getObjectLayer('tutoTexte').objects;
     
       
-   platform.setCollisionByExclusion(-1, true);
+   this.platform.setCollisionByExclusion(-1, true);
    pics.setCollisionByExclusion(-1, true);
    platformEscalierDroit.setCollisionByExclusion(-1, true);
    platformEscalierGauche.setCollisionByExclusion(-1, true);
@@ -1276,7 +1274,7 @@ velociteChute=player.body.velocity.y
     froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     froid3 = this.physics.add.sprite(700, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
     }
-    player = this.physics.add.sprite(32, 500, 'spritesheetPlayerNinja');
+    player = this.physics.add.sprite(60, 500, 'spritesheetPlayerNinja');
     player.setGravityY(1000)
 
     player.setCollideWorldBounds(false).setScale(0.2);
@@ -1567,7 +1565,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
         goomba.isDed = false;
 }  
    this.collider = this.physics.add.collider(player, this.goombas, this.death, null, this)
-   this.physics.add.collider(this.goombas, platform);
+   this.physics.add.collider(this.goombas, this.platform);
 
    this.physics.add.collider(this.goombas, platformIce);
    this.physics.add.collider(this.goombas, platformSnow);
@@ -1767,7 +1765,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
         //sniperEnnemi.collider = this.physics.add.overlap(sniperEnnemi, player, this.contactYetiJoueur, null, this);
         sniperEnnemi.direction = 'RIGHT';
 }  
-   this.physics.add.collider(this.sniperEnnemis, platform);
+   this.physics.add.collider(this.sniperEnnemis, this.platform);
    this.physics.add.collider(this.sniperEnnemis, platformIce);
    this.physics.add.collider(this.sniperEnnemis, platformSnow);
    this.physics.add.collider(this.sniperEnnemis, platformMontagne);
@@ -1810,7 +1808,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
     yeti.collider = this.physics.add.overlap(yeti, player, this.contactYetiJoueur, null, this);
     yeti.direction = 'RIGHT';
 }  
-   this.physics.add.collider(this.yetis, platform);
+   this.physics.add.collider(this.yetis, this.platform);
    this.physics.add.collider(this.yetis, platformIce);
    this.physics.add.collider(this.yetis, platformSnow);
    this.physics.add.collider(this.yetis, platformMontagne);
@@ -1837,7 +1835,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
     snowman.collider = this.physics.add.overlap(snowman, player, this.degatSnowmanJoueur, null, this);
 
 }  
-        this.physics.add.collider(this.snowmen, platform);
+        this.physics.add.collider(this.snowmen, this.platform);
         this.physics.add.collider(this.snowmen, this.platformsFalling);
     this.physics.add.collider(this.snowmen, this.snowmen);
 
@@ -2005,7 +2003,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
 
     //this.physics.add.collider(healthPowerUp, platform);
     
-    this.physics.add.collider(bombs, platform, this.destroyFireball, null, this);
+    this.physics.add.collider(bombs, this.platform, this.destroyFireball, null, this);
     this.physics.add.collider(bombs, platformIce, this.destroyFireball, null, this);
     this.physics.add.collider(bombs, platformSnow, this.destroyFireball, null, this);
     this.physics.add.collider(bombs, this.platformFake, this.destroyFireball, null, this);
@@ -2020,8 +2018,8 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
     this.physics.add.collider(player, this.goomba, this.death, null, this);
 
 
-    this.physics.add.collider(platform, ballesSoldat,  this.destroyBalle,null,this)
-    this.physics.add.collider(platform, ballesSniper,  this.destroyBalle,null,this)
+    this.physics.add.collider(this.platform, ballesSoldat,  this.destroyBalle,null,this)
+    this.physics.add.collider(this.platform, ballesSniper,  this.destroyBalle,null,this)
       
    // this.physics.add.collider(snowballs, platform, this.destroySnowball, null, this);
 
@@ -2044,7 +2042,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
     
     this.physics.add.collider(player, roquettes, this.hitBomb, null, this);
     
-    this.physics.add.collider(player, platform, this.setSpeedPlatform, null, this);
+    this.physics.add.collider(player, this.platform, this.setSpeedPlatform, null, this);
       
     this.physics.add.collider(player, platformMontagne, this.bouncePlatformMontagne, null, this);
           
@@ -2280,21 +2278,33 @@ for (const platformMoving of this.platformsMoving.children.entries) {
         player.anims.play('crouchNinjaGreen');            
         } 
     }
-    else{
+   /* else{
         
         player.body.setSize(230, 480, true);
         player.body.setOffset(150,0); 
-}
+}*/
     if (keyZ.isDown && (standing == true || playerInWater==true))
     {   
         this.jump();
     }
 
-    if(keyS.isUp && !(platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-1) || platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-1))) {
+    if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
+       
+            console.log("test")
+            player.body.setSize(230, 480, false).setOffset(150, 0);
+    }
+    if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
-player.body.setSize(64, 64, false).setOffset(0, 0);
-
+if(playerSkin=="ninja"){
+player.anims.play('crouch');            
+} 
+if(playerSkin=="ninjaRouge"){
+player.anims.play('crouchNinjaRouge');            
+} 
+if(playerSkin=="ninjaGreen"){
+player.anims.play('crouchNinjaGreen');            
+}
 }
 
 
@@ -2325,6 +2335,7 @@ player.body.setSize(64, 64, false).setOffset(0, 0);
         player.setVelocityX(0);
 
         if(keyS.isUp){
+            if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
         if(playerSkin=="ninja"){
         player.anims.play('idle');            
         } 
@@ -2335,12 +2346,13 @@ player.body.setSize(64, 64, false).setOffset(0, 0);
         player.anims.play('idleNinjaGreen');            
         } }
     }
+}
     if (keyD.isUp && keyQ.isUp && keyS.isUp  && playerCanResetVelocity==false )
     {
 
         player.setAccelerationX(0);
-
-        if(playerSkin=="ninja"){
+        if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
+        if(playerSkind=="ninja"){
         player.anims.play('idle');            
         } 
         if(playerSkin=="ninjaRouge"){
@@ -2349,6 +2361,7 @@ player.body.setSize(64, 64, false).setOffset(0, 0);
         if(playerSkin=="ninjaGreen"){
         player.anims.play('idleNinjaGreen');            
         } 
+        }
     }
 
     if(standing==false){
