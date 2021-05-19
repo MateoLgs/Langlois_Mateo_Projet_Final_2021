@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="40" nextobjectid="1533">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="40" nextobjectid="1534">
  <editorsettings>
   <export target="tutoriel.json" format="json"/>
  </editorsettings>
@@ -103,6 +103,7 @@
  </objectgroup>
  <objectgroup id="4" name="coin">
   <object id="1507" gid="467" x="176" y="224" width="16" height="16"/>
+  <object id="1533" gid="692" x="128" y="480" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="16" name="platformFake">
   <object id="1460" gid="734" x="960" y="208" width="16" height="16"/>
