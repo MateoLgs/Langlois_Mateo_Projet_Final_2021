@@ -93,7 +93,6 @@ class Menu extends Phaser.Scene {
 }
    
 class Skins extends Phaser.Scene {
-
 constructor () {
     super('Skins');
 }
@@ -109,7 +108,7 @@ preload(){
 
     this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
     this.load.image('exitButton', 'assets/exitButton.png');
-    this.load.image('ninjaRougeSkin', 'assets/playerNinjaRedIdle1.png');
+    this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
     this.load.image('ninjaSkin', 'assets/playerNinjaIdle1.png');
     this.load.image('ninjaSkinGreen', 'assets/playerNinjaGreenIdle1.png');
 }
@@ -125,32 +124,115 @@ create() {
     var patchNote = this.add.image(640,320, 'patchNote').setAlpha(0);
     var choixSkinScreen = this.add.image(640,360, 'choixSkinScreen').setScale(3).setAlpha(1);
     var exitButton = this.add.image(1050,140, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
-    var ninjaRougeSkin = this.add.image(300,250, 'ninjaRougeSkin').setScale(0.4).setInteractive().setAlpha(1);
-    var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1);
-    var ninjaGreenSkin = this.add.image(700,250, 'ninjaSkinGreen').setScale(0.4).setInteractive().setAlpha(1);
+    
+    if(ninjaRougeSkinUnlocked==true){
+        var ninjaRougeSkin = this.add.image(300,250, 'ninjaSkinRouge').setScale(0.4).setInteractive().setAlpha(1);
+    }
+    else {
+        var ninjaRougeSkin = this.add.image(300,250, 'ninjaSkinRouge').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
+        this.add.text(285, 240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
+    }
+    if(ninjaGreenSkinUnlocked==true){
+        var ninjaGreenSkin = this.add.image(700,250, 'ninjaSkinGreen').setScale(0.4).setInteractive().setAlpha(1);
+    }
+    else {
+        var ninjaGreenSkin = this.add.image(700,250, 'ninjaSkinGreen').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
+        this.add.text(685,240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
+    }
+    if(ninjaSkinUnlocked==true){
+        var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1);
+    }
+    else {
+        var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
+        this.add.text(485,240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
+    }
     
 exitButton.on('pointerdown', () => {
     this.scene.start('Menu');
     }) 
 
 ninjaRougeSkin.on('pointerdown', () => {
-    playerSkin = "ninjaRouge"
-    this.scene.start('Menu');
+        if(ninjaRougeSkinUnlocked==true){
+            playerSkin = "ninjaRouge"
+            this.scene.start('Menu');
+        }
+        if(ninjaRougeSkinUnlocked==false){
+            this.scene.start('ShopSkin');
+        }
     }) 
 
 ninjaGreenSkin.on('pointerdown', () => {
-    playerSkin = "ninjaGreen"
-    this.scene.start('Menu');
+    if(ninjaGreenSkinUnlocked==true){
+            playerSkin = "ninjaGreen"
+            this.scene.start('Menu');
+        }
+        if(ninjaGreenSkinUnlocked==false){
+            this.scene.start('ShopSkin');
+        }
     }) 
 
 ninjaSkin.on('pointerdown', () => {
-    playerSkin = "ninja"
-    this.scene.start('Menu');
+    if(ninjaSkinUnlocked==true){
+            playerSkin = "ninja"
+            this.scene.start('Menu');
+        }
+        if(ninjaSkinUnlocked==false){
+            this.scene.start('ShopSkin');
+        }
     }) 
+} 
 }
 
- 
+
+class ShopSkin extends Phaser.Scene {
+    constructor (){
+        super('ShopSkin');
+    }
+    preload(){
+        this.load.image('randomButton', 'assets/random.png');
+        this.load.image('whiteSquare', 'assets/whiteSquare.png');
+    }
+    create(){
+        console.log("test")
+        var menuBackground = this.add.image(640, 360, 'Menu');
+        var screenShopSkinBackground = this.add.image(640, 360, 'whiteSquare').setScale(0.75).setOrigin(0.5,0.5);
+        var randomButton = this.add.image(640, 360, 'randomButton').setScale(0.75).setOrigin(0.5,0.5).setInteractive();
+        this.add.text(410, 80,  "Buy a Skin",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(75);  
+
+        randomButton.on('pointerdown', () => {
+            this.randomUnlockSkin(randomButton);
+        }) 
+    }
+    randomUnlockSkin(randomButton){
+        randomButton.destroy()
+
+       // while(cooldownRandomUnlockSkinActive==true){
+        cooldownRandomUnlockSkin--
+        if(cooldownRandomUnlockSkin<=0){
+            cooldownRandomUnlockSkin=cooldownRandomUnlockSkinReset
+           
+      //  var skinAfficheRandomUnlockSkin = Phaser.Math.Between(1, 3);
+        //console.log(skinAfficheRandomUnlockSkin)
+            var skinAfficheRandomUnlockSkin = 1;
+        if(skinAfficheRandomUnlockSkin==1){
+            console.log("1")
+           this.add.image(300,300, 'ninjaSkinGreen').setScale(0.75).setInteractive().setAlpha(1).setTint(0x000000);
+            //var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinGreen').setScale(0.75).setOrigin(0.5,0.5);
+        }
+        if(skinAfficheRandomUnlockSkin==2){
+            console.log("2")
+            var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinRouge').setScale(0.75).setOrigin(0.5,0.5);
+        }
+        if(skinAfficheRandomUnlockSkin==3){
+            console.log("3")
+            var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkin').setScale(0.75).setOrigin(0.5,0.5);
+        }
+    }
+
+    //}
 }
+}
+
        
 class Jeu extends Phaser.Scene{
       constructor () {
@@ -2036,8 +2118,7 @@ for (const platformMoving of this.platformsMoving.children.entries) {
       cooldownTirSniperEnnemiBeforeShoot--
       if(cooldownTirSniperEnnemiBeforeShoot<=0){
         cooldownTirSniperEnnemiBeforeShoot=cooldownTirSniperEnnemi
-          this.tirSniperEnnemi();
-          
+          this.tirSniperEnnemi();  
       }
        //this.time.delayedCall(1000, this.lancerSnowballSnowman, null, this);
       
@@ -2535,7 +2616,7 @@ class Victoire extends Phaser.Scene {
             
             gamepad: true
         },
-    scene: [Menu, Jeu, Skins, Death, GameOver, Victoire]
+    scene: [Menu, Jeu, Skins, ShopSkin, Death, GameOver, Victoire]
 
 };
 
@@ -2597,6 +2678,14 @@ var canResetIceVelocity=true
 var viesRestantesText 
 var morts = 0
 var playerSkin="ninja";
+var skinAfficheRandomUnlockSkinImage;
+var cooldownRandomUnlockSkin=600
+var cooldownRandomUnlockSkinReset =cooldownRandomUnlockSkin
+cooldownRandomUnlockSkinActive=true
+
+var ninjaRougeSkinUnlocked = false;
+var ninjaGreenSkinUnlocked = false;
+var ninjaSkinUnlocked = true;
 
 var line;
 var rect;
