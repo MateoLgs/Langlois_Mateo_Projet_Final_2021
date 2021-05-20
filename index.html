@@ -15,7 +15,7 @@
 <script type="text/javascript">
      
 
-    
+
     
 class Menu extends Phaser.Scene {
 
@@ -813,7 +813,7 @@ velociteChute=player.body.velocity.y
         if(padConnected){
     if((paddle.left) && onPlatform != "ice"){
         player.setVelocityX(0);
-        player.anims.play('idle').setFlipX(false);
+        player.anims.play('idleNinja',true).setFlipX(false);
     }
       else if(standing==true){    
         if(playerSkin=="ninja"){
@@ -846,7 +846,7 @@ velociteChute=player.body.velocity.y
      if((keyQ.isDown) && onPlatform != "ice"){
         player.setVelocityX(0);
 
-        player.anims.play('idle').setFlipX(false);
+        player.anims.play('idleNinja',true).setFlipX(false);
     }
       else if(standing==true){    
         if(playerSkin=="ninja"){
@@ -864,13 +864,13 @@ velociteChute=player.body.velocity.y
       }
       else if(standing==false){
         if(playerSkin=="ninja"){
-            player.play('jump', true).setFlipX(false);      
+            player.anims.play('jumpUpNinja',true).setFlipX(false);      
         } 
         if(playerSkin=="ninjaRouge"){
-            player.play('jumpNinjaRouge', true).setFlipX(false);        
+            player.play('jumpUpRouge', true).setFlipX(false);        
         } 
         if(playerSkin=="ninjaGreen"){
-            player.play('runNinjaGreen', true).setFlipX(false);            
+            player.play('jumpUpNinjaGreen', true).setFlipX(false);            
         } 
       
       player.setVelocityX(250*runSpeed);
@@ -949,13 +949,13 @@ velociteChute=player.body.velocity.y
         player.setVelocityY(-500);
         standing=false;
         if(playerSkin=="ninja"){
-            player.play('jump', true);        
+            player.play('jumpUpNinja', true);        
         } 
         if(playerSkin=="ninjaRouge"){
-            player.play('jumpNinjaRouge', true);        
+            player.play('jumpUpNinjaRouge', true);        
         }         
         if(playerSkin=="ninjaGreen"){
-            player.play('jumpNinjaGreen', true);        
+            player.play('jumpUpNinjaGreen', true);        
         } 
 
         if(padConnected){
@@ -1043,7 +1043,7 @@ velociteChute=player.body.velocity.y
   }
      
   death(){
-     // if(level!="tutoriel"){
+      if(level!="tutoriel"){
 
 
       this.input.keyboard.shutdown();
@@ -1056,7 +1056,7 @@ velociteChute=player.body.velocity.y
         keyZ.reset(); 
 
       this.time.delayedCall(1000, this.mort, null, this);
-      //}
+      }
     }
 
   mort(){
@@ -1313,43 +1313,43 @@ velociteChute=player.body.velocity.y
 
 if(playerSkin=="ninja"){
     this.anims.create({
-        key: 'run',
+        key: 'runNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 1, end: 3 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'idle',
+        key: 'idleNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'jumpUp',
+        key: 'jumpUpNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 4, end: 4 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'jumpDown',
+        key: 'jumpDownNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 5, end: 5 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'crouch',
+        key: 'crouchDownNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 6, end: 6 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'die',
+        key: 'dieNinjaGreen',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
-        key: 'throwFireball',
+        key: 'throwFireballNinja',
         frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
         frameRate: 10,
         repeat: -1
@@ -1429,7 +1429,7 @@ if(playerSkin=="ninjaGreen"){
     });
     this.anims.create({
         key: 'crouchDownNinjaGreen',
-        frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 6, end: 6 }),
+        frames: this.anims.generateFrameNumbers('spritesheetPlayerNinjaGreen',  {start: 6, end: 6 }),
         frameRate: 10,
         repeat: -1
     });
@@ -2054,12 +2054,12 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
 
     /////////////////
 
+
 }
 
   update (){    
 
-
-
+  
 
 
 
@@ -2269,13 +2269,13 @@ for (const platformMoving of this.platformsMoving.children.entries) {
         player.body.setSize(230, 340, true);
         player.body.setOffset(150,140);
         if(playerSkin=="ninja"){
-        player.anims.play('crouch');            
+        player.anims.play('crouchDownNinja');            
         } 
         if(playerSkin=="ninjaRouge"){
-        player.anims.play('crouchNinjaRouge');            
+        player.anims.play('crouchDownNinjaRouge');            
         } 
         if(playerSkin=="ninjaGreen"){
-        player.anims.play('crouchNinjaGreen');            
+        player.anims.play('crouchDownNinjaGreen');            
         } 
     }
    /* else{
@@ -2290,20 +2290,18 @@ for (const platformMoving of this.platformsMoving.children.entries) {
 
     if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
-       
-            console.log("test")
             player.body.setSize(230, 480, false).setOffset(150, 0);
     }
     if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
 if(playerSkin=="ninja"){
-player.anims.play('crouch');            
+    player.anims.play('crouchDownNinja');            
 } 
 if(playerSkin=="ninjaRouge"){
-player.anims.play('crouchNinjaRouge');            
+    player.anims.play('crouchDownNinjaRouge');            
 } 
 if(playerSkin=="ninjaGreen"){
-player.anims.play('crouchNinjaGreen');            
+    player.anims.play('crouchDownNinjaGreen');            
 }
 }
 
@@ -2381,13 +2379,13 @@ player.anims.play('crouchNinjaGreen');
         if(player.body.velocity.y>0){
 
         if(playerSkin=="ninja"){
-        player.anims.play('jumpDown');            
+        player.anims.play('jumpDownNinja');            
         } 
         if(playerSkin=="ninjaRouge"){
         player.anims.play('jumpDownNinjaRouge');            
         } 
         if(playerSkin=="ninjaGreen"){
-        player.anims.play('idleNinjaGreen');            
+        player.anims.play('jumpDownNinjaGreen');            
         } 
         }
     }
@@ -2481,7 +2479,7 @@ class Death extends Phaser.Scene {
     }
     
     switchDeathToLevel(){
-
+        keyS.reset();
         keyD.reset();
         keyQ.reset();
         keyZ.reset();        
@@ -2533,7 +2531,7 @@ class GameOver extends Phaser.Scene {
     }
     
     switchGameOverToMenu(){
-        
+        keyS.reset();
         keyD.reset();
         keyQ.reset();
         keyZ.reset(); 
@@ -2608,7 +2606,8 @@ class Victoire extends Phaser.Scene {
     }
     
     switchToWin(){
-                keyD.reset();
+        keyS.reset();
+        keyD.reset();
         keyQ.reset();
         keyZ.reset(); 
 

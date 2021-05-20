@@ -846,7 +846,19 @@
          "draworder":"topdown",
          "id":39,
          "name":"sniperEnnemi",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1537,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":560,
+                 "y":560
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -857,7 +869,19 @@
          "draworder":"topdown",
          "id":20,
          "name":"yeti",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1536,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":448,
+                 "y":656
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -994,7 +1018,7 @@
          "y":0
         }],
  "nextlayerid":40,
- "nextobjectid":1536,
+ "nextobjectid":1538,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
