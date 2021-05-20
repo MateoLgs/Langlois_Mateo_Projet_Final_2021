@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="40" nextobjectid="1538">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="41" nextobjectid="1546">
  <editorsettings>
   <export target="tutoriel.json" format="json"/>
  </editorsettings>
@@ -101,7 +101,6 @@
  </objectgroup>
  <objectgroup id="4" name="coin">
   <object id="1507" gid="467" x="176" y="224" width="16" height="16"/>
-  <object id="1533" gid="692" x="128" y="480" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="16" name="platformFake">
   <object id="1460" gid="734" x="960" y="208" width="16" height="16"/>
@@ -120,11 +119,12 @@
   <object id="1452" gid="618" x="960" y="80" width="16" height="16"/>
   <object id="1453" gid="618" x="944" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="39" name="sniperEnnemi">
-  <object id="1537" gid="505" x="560" y="560" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="20" name="yeti">
-  <object id="1536" gid="505" x="448" y="656" width="16" height="16"/>
+ <objectgroup id="39" name="sniperEnnemi"/>
+ <objectgroup id="20" name="yeti"/>
+ <objectgroup id="40" name="machineGunnerEnnemi">
+  <object id="1543" gid="505" x="576" y="544" width="16" height="16"/>
+  <object id="1544" gid="505" x="688" y="448" width="16" height="16"/>
+  <object id="1545" gid="505" x="432" y="592" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="28" name="platformFalling">
   <object id="1465" gid="734" x="960" y="240" width="16" height="16"/>
