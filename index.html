@@ -338,8 +338,9 @@ class Jeu extends Phaser.Scene{
             let pointer = this.input.activePointer;
             for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
             var ballesSniper = this.ballesSnipers.create(sniperEnnemi.x, sniperEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
-            this.physics.moveTo(ballesSniper, player.x, player.y, vitesseBalleSniperEnnemi);
-            var angleBalle = (Math.atan2(player.y - sniperEnnemi.y, player.x - sniperEnnemi.x) * 180 / Math.PI);
+            var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
+            this.physics.moveTo(ballesSniper, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSniperEnnemi);
+            //var angleBalle = (Math.atan2(player.y - sniperEnnemi.y, player.x - sniperEnnemi.x) * 180 / Math.PI);
            // snowball.angleBalle -= 90;
            ballesSniper.rotation = Phaser.Math.Angle.BetweenPoints(player, sniperEnnemi);
            this.physics.add.overlap(player, ballesSniper,  this.degatBalleSniper,null,this)
@@ -358,30 +359,15 @@ class Jeu extends Phaser.Scene{
       }
       }
       
-        if(hardcoreMode=="on"){
-                   
-      for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
-        sniperEnnemi.play('yetiThrow', true);
-              var snowball = snowballs.create(sniperEnnemi.x, sniperEnnemi.y, 'snowball');
 
-        if(player.x<sniperEnnemi.x){
-        snowball.setVelocity(Phaser.Math.FloatBetween(-200, -400), Phaser.Math.FloatBetween(-200, -400));
-        sniperEnnemi.anims.play('yetiThrow',true).setFlipX(false);
-        snowball.setGravityY(1000);
-        }
-        else if(player.x>sniperEnnemi.x){
-        snowball.setVelocity(Phaser.Math.FloatBetween(200, 400), Phaser.Math.FloatBetween(-200, -400));
-        sniperEnnemi.anims.play('yetiThrow',true).setFlipX(true)
-        snowball.setGravityY(1000);
-        }
-      }
-      }
   }
   
   tirMachineGunnerEnnemi(machineGunnerEnnemi){
+            
             for (const machineGunnerEnnemi of this.machineGunnerEnnemis.children.entries) {
-            var ballesMachineGunner = this.machineGunnerEnnemis.create(machineGunnerEnnemi.x, machineGunnerEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
-            this.physics.moveTo(ballesMachineGunner, player.x, player.y, vitesseBalleMachineGunnerEnnemi);
+            var ballesMachineGunner = this.ballesMachineGunners.create(machineGunnerEnnemi.x, machineGunnerEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
+            var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
+            this.physics.moveTo(ballesMachineGunner, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
             var angleBalle = (Math.atan2(player.y - machineGunnerEnnemi.y, player.x - machineGunnerEnnemi.x) * 180 / Math.PI);
            // snowball.angleBalle -= 90;
            ballesMachineGunner.rotation = Phaser.Math.Angle.BetweenPoints(player, machineGunnerEnnemi);
@@ -393,7 +379,7 @@ class Jeu extends Phaser.Scene{
             machineGunnerEnnemi.play('soldierShoot', true).setFlipX(false);
             ballesMachineGunner.setGravityY(1000);
         }
-        else if(player.x>sniperEnnemi.x){
+        else if(player.x>machineGunnerEnnemi.x){
 
             machineGunnerEnnemi.play('soldierShoot', true).setFlipX(true);
  
@@ -415,7 +401,8 @@ class Jeu extends Phaser.Scene{
             for (const yeti of this.yetis.children.entries) {
             var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball').setFlipX(true).setScale(0.80);
             this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
-            var angleBalle = (Math.atan2(player.y - yeti.y, player.x - yeti.x) * 180 / Math.PI);
+            var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
+            //var angleBalle = (Math.atan2(player.y - yeti.y, player.x - yeti.x) * 180 / Math.PI);
            // snowball.angleBalle -= 90;
            ballesSoldat.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti);
            this.physics.add.overlap(player, ballesSoldat,  this.degatBalleSoldat,null,this)
@@ -1804,7 +1791,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
 
              ///////////////////////////////////////
     ////////////MachineGunnerennemi////////////////////
-    this.ballesMachineGunner = this.physics.add.group({
+    this.ballesMachineGunners = this.physics.add.group({
         immovable: true,
         degats : 50,
      });
@@ -2121,6 +2108,7 @@ this.physics.add.overlap(this.shurikensItems, player, this.pickUpShuriken, null,
     
     this.physics.add.overlap(this.yetis, bombs, this.killYeti, null, this);
     
+    this.physics.add.overlap(this.machineGunnerEnnemis, bombs, this.killMachineGunner, null, this);
     this.physics.add.overlap(this.sniperEnnemis, bombs, this.killSniperEnnemi, null, this);
     this.physics.add.overlap(this.snowmen, bombs, this.killSnowman, null, this);
     
@@ -2412,13 +2400,13 @@ if(playerSkin=="ninjaGreen"){
         if(keyS.isUp){
             if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
         if(playerSkin=="ninja"){
-        player.anims.play('idle');            
+        player.anims.play('idleNinja',true).setFlipX(false);           
         } 
         if(playerSkin=="ninjaRouge"){
-        player.anims.play('idleNinjaRouge');            
+            player.anims.play('idleNinjaRouge',true).setFlipX(false);         
         } 
         if(playerSkin=="ninjaGreen"){
-        player.anims.play('idleNinjaGreen');            
+            player.anims.play('idleNinjaGreen',true).setFlipX(false);           
         } }
     }
 }
@@ -2829,7 +2817,7 @@ var rect;
 var graphics;
 
 var vitesseBalleSoldatEnnemi=400
-var cooldownTirSoldatEnnemi=60
+var cooldownTirSoldatEnnemi=120
 var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
 var ballesSoldat;
 
@@ -2838,10 +2826,10 @@ var cooldownTirSniperEnnemi=300
 var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
 var ballesSniper;
 
-var vitesseBalleMachineGunnerEnnemi=100
-var cooldownTirMachineGunnerEnnemi=30
+var vitesseBalleMachineGunnerEnnemi=200
+var cooldownTirMachineGunnerEnnemi=60
 var cooldownTirMachineGunnerEnnemiBeforeShoot =cooldownTirMachineGunnerEnnemi
-var ballesMachineGunner;
+var ballesMachineGunners;
 
 var velociteChute = 0;
 var pvPlayer = 100;
