@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="41" nextobjectid="1546">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="43" nextobjectid="1550">
  <editorsettings>
   <export target="tutoriel.json" format="json"/>
  </editorsettings>
@@ -94,11 +94,7 @@
  <objectgroup id="9" name="powerUpHealth">
   <object id="1510" gid="505" x="240" y="224" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="3" name="snowman">
-  <object id="1443" gid="506" x="592" y="144" width="16" height="16"/>
-  <object id="1444" gid="506" x="560" y="144" width="16" height="16"/>
-  <object id="1445" gid="506" x="528" y="144" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="3" name="snowman"/>
  <objectgroup id="4" name="coin">
   <object id="1507" gid="467" x="176" y="224" width="16" height="16"/>
  </objectgroup>
@@ -121,16 +117,12 @@
  </objectgroup>
  <objectgroup id="39" name="sniperEnnemi"/>
  <objectgroup id="20" name="yeti"/>
- <objectgroup id="40" name="machineGunnerEnnemi">
-  <object id="1543" gid="505" x="576" y="544" width="16" height="16"/>
-  <object id="1544" gid="505" x="688" y="448" width="16" height="16"/>
-  <object id="1545" gid="505" x="432" y="592" width="16" height="16"/>
+ <objectgroup id="40" name="machineGunnerEnnemi"/>
+ <objectgroup id="41" name="teleportItem"/>
+ <objectgroup id="42" name="lanceGrenade">
+  <object id="1549" gid="506" x="96" y="672" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="28" name="platformFalling">
-  <object id="1465" gid="734" x="960" y="240" width="16" height="16"/>
-  <object id="1466" gid="734" x="928" y="240" width="16" height="16"/>
-  <object id="1467" gid="734" x="896" y="240" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="28" name="platformFalling"/>
  <objectgroup id="31" name="platformMoving">
   <object id="1501" gid="734" x="1200" y="96" width="16" height="16"/>
   <object id="1502" gid="734" x="1216" y="96" width="16" height="16"/>
