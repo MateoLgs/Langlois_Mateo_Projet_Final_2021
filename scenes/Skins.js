@@ -30,6 +30,7 @@ class Skins extends Phaser.Scene {
         var menuHardcoreModeOn = this.add.image(1190, 675, 'hard').setScale(0.5).setInteractive().setAlpha(0);
         var menuHardcoreModeOff = this.add.image(1190, 675, 'easy').setScale(0.5).setInteractive();
         var patchNote = this.add.image(640,320, 'patchNote').setAlpha(0);
+        var shopButton = this.add.image(1100, 70, 'shopButton').setScale(0.2).setInteractive();
         var choixSkinScreen = this.add.image(640,360, 'choixSkinScreen').setScale(3).setAlpha(1);
         var buySkin = this.add.image(1030,550, 'buySkin').setScale(0.20).setInteractive().setAlpha(1);
         var exitButton = this.add.image(1050,140, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
