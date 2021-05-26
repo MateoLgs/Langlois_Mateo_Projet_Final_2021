@@ -36,7 +36,7 @@ class ShopSkin extends Phaser.Scene {
             totalCoinsTextBuySkin.destroy();
             totalCoinsTextBuySkin = this.add.text(410, 150,  "Coins : "+ totalCoins,{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25); 
             
-            this.randomUnlockSkin(randomButton, totalCoinsTextBuySkin);
+            this.randomUnlockSkin(randomButton, totalCoinsTextBuySkin, shareButton);
             }
             else if (totalCoins<50){
                 totalCoinsTextBuySkin.destroy();
@@ -48,14 +48,13 @@ class ShopSkin extends Phaser.Scene {
         exitButton.on('pointerdown', () => {
             this.scene.start('Skins');
         }) 
-        shareButton.on('pointerdown', () => {
-            this.shareSkin();
-        }) 
+
     }
 
-    shareSkin ()
+    shareSkin (text)
     {
-        var shareLink = 'https://twitter.com/intent/tweet?text=Look at what I just unlocked !'
+        var textTweet = text;
+        var shareLink = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTweet);
         var checkFenetre = window.open(shareLink, '_blank');
         if (checkFenetre && checkFenetre.focus)
         {
@@ -68,7 +67,7 @@ class ShopSkin extends Phaser.Scene {
     }
 
 
-    randomUnlockSkin(randomButton, totalCoinsTextBuySkin){
+    randomUnlockSkin(randomButton, totalCoinsTextBuySkin, shareButton){
         randomButton.destroy()
 
        // while(cooldownRandomUnlockSkinActive==true){
@@ -85,8 +84,11 @@ class ShopSkin extends Phaser.Scene {
                 
                 var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinGreen').setScale(0.75).setOrigin(0.5,0.5);
                 ninjaGreenSkinUnlocked=true
-                var shareButton = this.add.image(screen.width/4, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
-
+                shareButton.destroy();
+                shareButton = this.add.image(660, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
+                shareButton.on('pointerdown', () => {
+                    this.shareSkin("I just unlocked the Green Ninja !");
+                }) 
             }
             else if(ninjaGreenSkinUnlocked==true){
                 var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'coin').setScale(0.33).setOrigin(0.5,0.5);
@@ -101,8 +103,11 @@ class ShopSkin extends Phaser.Scene {
             if(ninjaRougeSkinUnlocked==false){
                 var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinRouge').setScale(0.75).setOrigin(0.5,0.5);
                 ninjaRougeSkinUnlocked=true
-                var shareButton = this.add.image(screen.width/4, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
-
+                shareButton.destroy();
+                shareButton = this.add.image(660, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
+                shareButton.on('pointerdown', () => {
+                    this.shareSkin("I just unlocked the Red Ninja !");
+                }) 
             }            
             else if(ninjaRougeSkinUnlocked==true){
                 totalCoins+=10
