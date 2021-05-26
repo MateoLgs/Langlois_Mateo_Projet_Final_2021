@@ -218,6 +218,7 @@ killMachineGunner(machineGunner, fireball){
  
 lancerfireball(player){
     if(fireballLeft>0){
+        shotsDone+=1; 
   let pointer = this.input.activePointer;
        var bomb = bombs.create(player.x, player.y-5, 'fireball');
   this.physics.moveTo(bomb, pointer.worldX, pointer.worldY, 700);
@@ -896,6 +897,8 @@ delayStart(){
   player.body.setOffset(150,0);
 
 }
+
+
 
 
 preload (){

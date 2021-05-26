@@ -56,7 +56,14 @@ class Skins extends Phaser.Scene {
             var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
             this.add.text(485,240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
         }
-        
+
+
+
+
+
+
+
+
     exitButton.on('pointerdown', () => {
         this.scene.start('Menu');
         }) 

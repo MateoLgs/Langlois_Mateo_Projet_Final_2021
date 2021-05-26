@@ -29,7 +29,6 @@ class GameOver extends Phaser.Scene {
  bomb;
  snowball;
  runSpeed = 1;
- totalCoins=0;
  player;
  healthAmount = 100;
  health;

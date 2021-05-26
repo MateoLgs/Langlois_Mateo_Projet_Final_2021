@@ -5,6 +5,7 @@
     <title>MARIOOOO</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <script src="./scenes/Menu.js"></script>
+    <script src="./scenes/Achievements.js"></script>
     <script src="./scenes/Skins.js"></script>
     <script src="./scenes/ShopSkin.js"></script>
     <script src="./scenes/Shop.js"></script>
@@ -31,8 +32,8 @@
     var config = {
 
     type: Phaser.AUTO,
-    width: 1280,
-    height: 720,
+    width: 896,
+    height: 448,
     backgroundColor: '#538192',
     pixelArt: true,
     physics: {
@@ -46,7 +47,7 @@
         input: {
             gamepad: true
         },
-    scene: [Menu, Jeu, Skins, ShopSkin, Shop, Death, GameOver, Victoire]
+    scene: [Menu, Jeu, Achievements, Skins, ShopSkin, Shop, Death, GameOver, Victoire]
 
 };
 
@@ -63,7 +64,39 @@ var bomb;
 var snowball;
 var runSpeed = 1;
 var platform;
-var totalCoins=200;
+
+
+///////////////ACHIEVEMENTS////////////////////
+var morts = 200
+var mortsForAchievement = 100
+var popupMortAchievementShown = false
+
+var totalCoinsAchievement = 10000
+var totalCoins=20000;
+var popupCoinsAchievementShown = false
+
+
+var achievementsAmount= 6;
+var achievementsCompleted = 0;
+var popupAchievementsCompletedAchievementShown = false
+
+
+var shotsDone = 0
+var shotsDoneForAchievement = 1000;
+var popupShotsAchievementShown = false
+
+
+var clicksForEasterEggAchievement = 100;
+var clicksDoneForEasterEggAchievement = 0;
+var easterEggClicksCompleted = false;
+var popupMEasterEggN1AchievementShown = false
+
+
+var skinAmount = 0;
+var skinsPossessed = 2;
+var popupSkinAchievementShown = false
+
+////////////////////////////////////////////////////
 
 var platform;
 
@@ -111,7 +144,7 @@ var patchNote;
 var exitButton;
 var canResetIceVelocity=true
 var viesRestantesText 
-var morts = 0
+
 
 var playerSkin="ninja";
 var skinAfficheRandomUnlockSkinImage;
@@ -119,6 +152,7 @@ var cooldownRandomUnlockSkin=600
 var cooldownRandomUnlockSkinReset =cooldownRandomUnlockSkin
 var cooldownRandomUnlockSkinActive=true
 var priceToPaySkinNumber = 50;
+
 
 var ninjaRougeSkinUnlocked = false;
 var ninjaGreenSkinUnlocked = false;

@@ -27,7 +27,6 @@ class Death extends Phaser.Scene {
  cooldownFireball = 120;
  onPlatform ="";
  runSpeed = 1;
- totalCoins=0;
 
  jumpingPlayer = true
  gravity=1000;

@@ -84,6 +84,7 @@ class ShopSkin extends Phaser.Scene {
                 
                 var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinGreen').setScale(0.75).setOrigin(0.5,0.5);
                 ninjaGreenSkinUnlocked=true
+                skinsPossessed +=1
                 shareButton.destroy();
                 shareButton = this.add.image(660, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
                 shareButton.on('pointerdown', () => {
@@ -104,6 +105,7 @@ class ShopSkin extends Phaser.Scene {
                 var skinAfficheRandomUnlockSkinImage = this.add.image(640, 360, 'ninjaSkinRouge').setScale(0.75).setOrigin(0.5,0.5);
                 ninjaRougeSkinUnlocked=true
                 shareButton.destroy();
+                skinsPossessed +=1
                 shareButton = this.add.image(660, 600, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
                 shareButton.on('pointerdown', () => {
                     this.shareSkin("I just unlocked the Red Ninja !");
