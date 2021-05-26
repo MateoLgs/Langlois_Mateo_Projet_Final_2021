@@ -83,10 +83,10 @@ class Menu extends Phaser.Scene {
         if((morts > mortsForAchievement-1) && popupMortAchievementShown==false && popUpAchievementInProgress == false){
             popupMortAchievementShown = true
             popUpAchievementInProgress = true
-            var achievementMortsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-            var achievementMortsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-            var achievementMortsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.18,  "PERSISTANT").setScale(1).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
-            var achievementMortsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Die a total of " + mortsForAchievement + " times)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementMortsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementMortsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementMortsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.20,  "PERSISTANT").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementMortsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.26,  "(Die " + mortsForAchievement + " times)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementMortsPopup,
                 alpha: 1,
@@ -110,16 +110,17 @@ class Menu extends Phaser.Scene {
             this.time.delayedCall(5000, this.destroyPopup, [achievementMortsPopupText1], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementMortsPopupText2], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementMortsPopupText3], this);
-            this.time.delayedCall(5000, this.destroyPopup, [achievementMortsPopup], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementMortsPopup], this);        
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
         }
 
-        if((skinsPossessed == skinAmount) && popupSkinAchievementShown==false && popUpAchievementInProgress == false){
+        else if((skinsPossessed == skinAmount) && popupSkinAchievementShown==false && popUpAchievementInProgress == false){
             popupSkinAchievementShown = true
             popUpAchievementInProgress = true
-             var achievementSkinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-             var achievementSkinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-             var achievementSkinsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.06, (this.cameras.main.centerY*2)*0.18,  "COLLECTOR").setScale(1).setScrollFactor(1).setTint(0xffffff).setAlpha(0);  
-             var achievementSkinsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Possess all skins)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementSkinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+             var achievementSkinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+             var achievementSkinsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.18,  "COLLECTOR").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setAlpha(0).setOrigin(0.5,0.5);  
+             var achievementSkinsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Possess all skins)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
              this.tweens.add({
                  targets: achievementSkinsPopup,
                  alpha: 1,
@@ -143,16 +144,17 @@ class Menu extends Phaser.Scene {
              this.time.delayedCall(5000, this.destroyPopup, [achievementSkinsPopup], this);
              this.time.delayedCall(5000, this.destroyPopup, [achievementSkinsPopupText1], this);
              this.time.delayedCall(5000, this.destroyPopup, [achievementSkinsPopupText2], this);
-             this.time.delayedCall(5000, this.destroyPopup, [achievementSkinsPopupText3], this);
+             this.time.delayedCall(5000, this.destroyPopup, [achievementSkinsPopupText3], this);         
+             this.time.delayedCall(5000, this.popupAchievement, null, this);
         }
 
-        if((totalCoins > totalCoinsAchievement-1) && popupCoinsAchievementShown==false && popUpAchievementInProgress == false){
+        else if((totalCoins > totalCoinsAchievement-1) && popupCoinsAchievementShown==false && popUpAchievementInProgress == false){
             popupCoinsAchievementShown = true
             popUpAchievementInProgress = true
-            var achievementCoinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-            var achievementCoinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-            var achievementCoinsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.19,  "RICH").setScale(1).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
-            var achievementCoinsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Collect " + totalCoinsAchievement +" coins)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementCoinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementCoinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementCoinsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "RICH").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementCoinsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Collect " + totalCoinsAchievement +" coins)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementCoinsPopup,
                 alpha: 1,
@@ -176,16 +178,17 @@ class Menu extends Phaser.Scene {
             this.time.delayedCall(5000, this.destroyPopup, [achievementCoinsPopupText1], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementCoinsPopupText2], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementCoinsPopupText3], this);
-            this.time.delayedCall(5000, this.destroyPopup, [achievementCoinsPopup], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCoinsPopup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
         }
 
-        if((shotsDone > shotsDoneForAchievement-1) && popupShotsAchievementShown==false && popUpAchievementInProgress == false){
+        else if((shotsDone > shotsDoneForAchievement-1) && popupShotsAchievementShown==false && popUpAchievementInProgress == false){
             popupShotsAchievementShown = true
             popUpAchievementInProgress = true
-            var achievementShotsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-            var achievementShotsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-            var achievementShotsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.19,  "SERIAL SHOOTER").setScale(1).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
-            var achievementShotsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Shoot " + shotsDoneForAchievement + " times)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementShotsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementShotsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementShotsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "SERIAL SHOOTER").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementShotsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Shoot " + shotsDoneForAchievement + " times)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementShotsPopup,
                 alpha: 1,
@@ -209,16 +212,17 @@ class Menu extends Phaser.Scene {
             this.time.delayedCall(5000, this.destroyPopup, [achievementShotsPopupText1], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementShotsPopupText2], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementShotsPopupText3], this);
-            this.time.delayedCall(5000, this.destroyPopup, [achievementShotsPopup], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementShotsPopup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
         }
 
-        if((clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1) && popupMEasterEggN1AchievementShown==false && popUpAchievementInProgress == false){
+        else if((clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1) && popupMEasterEggN1AchievementShown==false && popUpAchievementInProgress == false){
             popupMEasterEggN1AchievementShown = true
             popUpAchievementInProgress = true
-            var achievementEEN1Popup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-            var achievementEEN1PopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-            var achievementEEN1PopupText2 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.19,  "EASTER EGG N°1").setScale(1).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
-            var achievementEEN1PopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Visit skin tab "+ clicksForEasterEggAchievement+" times)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementEEN1Popup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementEEN1PopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementEEN1PopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "EASTER EGG N°1").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementEEN1PopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Visit skin tab "+ clicksForEasterEggAchievement+" times)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementEEN1Popup,
                 alpha: 1,
@@ -242,16 +246,17 @@ class Menu extends Phaser.Scene {
             this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText1], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText2], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText3], this);
-            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1Popup], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1Popup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
         }
 
-        if((achievementsCompleted > achievementsAmount-2) && popupAchievementsCompletedAchievementShown==false && popUpAchievementInProgress == false){
+        else if((achievementsCompleted > achievementsAmount-2) && popupAchievementsCompletedAchievementShown==false && popUpAchievementInProgress == false){
             popupAchievementsCompletedAchievementShown = true
             popUpAchievementInProgress = true
-            var achievementCompletedAchievementsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
-            var achievementCompletedAchievementsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.006, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setScale(0.9).setScrollFactor(1).setTint(0x00ff00).setAlpha(0);  
-            var achievementCompletedAchievementsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.19,  "TRYHARD").setScale(1).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
-            var achievementCompletedAchievementsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.108, (this.cameras.main.centerY*2)*0.24,  "(Complete all achievements)").setScale(0.8).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementCompletedAchievementsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementCompletedAchievementsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementCompletedAchievementsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "TRYHARD").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementCompletedAchievementsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Complete all achievements)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementCompletedAchievementsPopup,
                 alpha: 1,
@@ -275,7 +280,9 @@ class Menu extends Phaser.Scene {
             this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText1], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText2], this);
             this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText3], this);
-            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopup], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
+            
         }
 
     }
@@ -288,10 +295,13 @@ class Menu extends Phaser.Scene {
             alpha: 0,
             duration: 1000,
         });
-        this.popupAchievement();
+
+
         //element.destroy();
         //console.log("étezogv")
        // }
     }
+
+
      
 }

@@ -14,7 +14,6 @@ class Shop extends Phaser.Scene {
         this.load.image('hard', 'assets/hard.png');
         this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
     
-        this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
         this.load.image('blackSquare', 'assets/blackSquare.png');
         this.load.image('exitButton', 'assets/exitButton.png');
         this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
@@ -22,23 +21,22 @@ class Shop extends Phaser.Scene {
         this.load.image('ninjaSkinGreen', 'assets/playerNinjaGreenIdle1.png');
     }
     create() {
-        var menuBackground = this.add.image(640, 360, 'Menu');
-        var menuLevel1Button = this.add.image(400, 600, 'startButton').setScale(1).setInteractive();
-        var menuLevel2Button = this.add.image(800, 600, 'tutorialButton').setScale(1).setInteractive();
-        var patchNoteButton = this.add.image(30, 30, 'patchNoteButton').setScale(1).setInteractive();
-        var skinsButton = this.add.image(700, 30, 'skinsButton').setScale(0.5).setInteractive();
-        var shopButton = this.add.image(1100, 70, 'shopButton').setScale(0.2).setInteractive();
-        var menuHardcoreModeOn = this.add.image(1190, 675, 'hard').setScale(0.5).setInteractive().setAlpha(0);
-        var menuHardcoreModeOff = this.add.image(1190, 675, 'easy').setScale(0.5).setInteractive();
-        var patchNote = this.add.image(640,320, 'patchNote').setAlpha(0);
-        var choixSkinScreen = this.add.image(640,360, 'choixSkinScreen').setScale(3).setAlpha(1);
-        var exitButton = this.add.image(1050,140, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack1 = this.add.image(350,230, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack2 = this.add.image(600,230, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack3 = this.add.image(850,230, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack4 = this.add.image(350,500, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack5 = this.add.image(600,500, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
-        var shopPack6 = this.add.image(850,500, 'blackSquare').setScale(0.1).setInteractive().setAlpha(1);
+        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
+        var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
+        var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
+        var patchNoteButton = this.add.image((this.cameras.main.centerX*2)*0.0234, (this.cameras.main.centerY*2)*0.06, 'patchNoteButton').setScale(0.7).setInteractive();
+        var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
+        var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
+        var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
+        
+        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1);
+        var exitButton = this.add.image((this.cameras.main.centerX*2)*0.83,(this.cameras.main.centerY*2)*0.14, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
+        var shopPack1 = this.add.image((this.cameras.main.centerX*2)*0.27,(this.cameras.main.centerY*2)*0.32, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
+        var shopPack2 = this.add.image((this.cameras.main.centerX*2)*0.47,(this.cameras.main.centerY*2)*0.32, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
+        var shopPack3 = this.add.image((this.cameras.main.centerX*2)*0.67,(this.cameras.main.centerY*2)*0.32, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
+        var shopPack4 = this.add.image((this.cameras.main.centerX*2)*0.27,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
+        var shopPack5 = this.add.image((this.cameras.main.centerX*2)*0.47,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
+        var shopPack6 = this.add.image((this.cameras.main.centerX*2)*0.67,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
         
         
         

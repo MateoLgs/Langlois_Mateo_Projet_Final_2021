@@ -10,8 +10,6 @@ class Death extends Phaser.Scene {
     create() {
         morts+=1
         var gameOverScreen = this.add.image(640, 360, 'deathScreen').setScale(2.2);
-		this.add.text(10, 10, 'Morts : ')
-        this.add.text(100, 10, morts)
       this.time.delayedCall(1500, this.switchDeathToLevel, null, this);
     }
     

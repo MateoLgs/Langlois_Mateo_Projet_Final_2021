@@ -22,43 +22,44 @@ class Skins extends Phaser.Scene {
     }
     create() {
        
-        var menuBackground = this.add.image(640, 360, 'Menu');
-        var menuLevel1Button = this.add.image(400, 600, 'startButton').setScale(1).setInteractive();
-        var menuLevel2Button = this.add.image(800, 600, 'tutorialButton').setScale(1).setInteractive();
-        var patchNoteButton = this.add.image(30, 30, 'patchNoteButton').setScale(1).setInteractive();
-        var skinsButton = this.add.image(700, 30, 'skinsButton').setScale(0.5).setInteractive();
-        var menuHardcoreModeOn = this.add.image(1190, 675, 'hard').setScale(0.5).setInteractive().setAlpha(0);
-        var menuHardcoreModeOff = this.add.image(1190, 675, 'easy').setScale(0.5).setInteractive();
-        var patchNote = this.add.image(640,320, 'patchNote').setAlpha(0);
-        var shopButton = this.add.image(1100, 70, 'shopButton').setScale(0.2).setInteractive();
-        var choixSkinScreen = this.add.image(640,360, 'choixSkinScreen').setScale(3).setAlpha(1);
-        var buySkin = this.add.image(1030,550, 'buySkin').setScale(0.20).setInteractive().setAlpha(1);
-        var exitButton = this.add.image(1050,140, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
+        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
+        var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
+        var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
+        var patchNoteButton = this.add.image((this.cameras.main.centerX*2)*0.0234, (this.cameras.main.centerY*2)*0.06, 'patchNoteButton').setScale(0.7).setInteractive();
+        var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
+        var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
+        var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
+        
+        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setOrigin(0.5,0.5);
+        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.80, (this.cameras.main.centerY*2)*0.76, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+        var exitButton = this.add.image((this.cameras.main.centerX*2)*0.83, (this.cameras.main.centerY*2)*0.15, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
+
         
         if(ninjaRougeSkinUnlocked==true){
-            var ninjaRougeSkin = this.add.image(300,250, 'ninjaSkinRouge').setScale(0.4).setInteractive().setAlpha(1);
+            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.30,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaRougeSkin = this.add.image(300,250, 'ninjaSkinRouge').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text(285, 240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
+            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.30,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
+            this.add.text((this.cameras.main.centerX*2)*0.308,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10); ;       
         }
         if(ninjaGreenSkinUnlocked==true){
-            var ninjaGreenSkin = this.add.image(700,250, 'ninjaSkinGreen').setScale(0.4).setInteractive().setAlpha(1);
+            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.40,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaGreenSkin = this.add.image(700,250, 'ninjaSkinGreen').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text(685,240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
+            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.40,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000).setOrigin(0.5,0.5);
+            this.add.text((this.cameras.main.centerX*2)*0.408,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);      
+             
         }
         if(ninjaSkinUnlocked==true){
-            var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1);
+            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.20,(this.cameras.main.centerY*2)*0.25, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaSkin = this.add.image(500,250, 'ninjaSkin').setScale(0.4).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text(485,240,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff);       
-        }
+            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.20,(this.cameras.main.centerY*2)*0.25, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
+            this.add.text((this.cameras.main.centerX*2)*0.208,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10); ;          }
 
 
 
+            this.popupAchievement();
 
 
 
@@ -102,5 +103,90 @@ class Skins extends Phaser.Scene {
             }
         }) 
     } 
+
+    popupAchievement(){
+        var popUpAchievementInProgress = false
+        if((clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1) && popupMEasterEggN1AchievementShown==false && popUpAchievementInProgress == false){
+            popupMEasterEggN1AchievementShown = true
+            popUpAchievementInProgress = true
+            var achievementEEN1Popup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementEEN1PopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementEEN1PopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "EASTER EGG N°1").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementEEN1PopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Visit skin tab "+ clicksForEasterEggAchievement+" times)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            this.tweens.add({
+                targets: achievementEEN1Popup,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementEEN1PopupText1,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementEEN1PopupText2,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementEEN1PopupText3,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText1], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText2], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1PopupText3], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementEEN1Popup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
+        }
+        else if((achievementsCompleted > achievementsAmount-2) && popupAchievementsCompletedAchievementShown==false && popUpAchievementInProgress == false){
+            popupAchievementsCompletedAchievementShown = true
+            popUpAchievementInProgress = true
+            var achievementCompletedAchievementsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
+            var achievementCompletedAchievementsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
+            var achievementCompletedAchievementsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.19,  "TRYHARD").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementCompletedAchievementsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.24,  "(Complete all achievements)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            this.tweens.add({
+                targets: achievementCompletedAchievementsPopup,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementCompletedAchievementsPopupText1,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementCompletedAchievementsPopupText2,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.tweens.add({
+                targets: achievementCompletedAchievementsPopupText3,
+                alpha: 1,
+                duration: 1000,
+            });
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText1], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText2], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopupText3], this);
+            this.time.delayedCall(5000, this.destroyPopup, [achievementCompletedAchievementsPopup], this);      
+            this.time.delayedCall(5000, this.popupAchievement, null, this);
+            
+        }
+    }
+    destroyPopup(element){
+        //  while(element.alpha>0){
+            
+          this.tweens.add({
+              targets: element,
+              alpha: 0,
+              duration: 1000,
+          });
+  
+  
+          //element.destroy();
+          //console.log("étezogv")
+         // }
+      }
     }
     

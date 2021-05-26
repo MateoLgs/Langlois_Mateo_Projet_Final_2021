@@ -14,11 +14,8 @@
     <script src="./scenes/GameOver.js"></script>
     <script src="./scenes/Victoire.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/phaser-raycaster@0.9.2/dist/phaser-raycaster.min.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+    <style type="text/css">* { padding: 0; margin: 0; }</style>
+
 </head>
  <body>
 
@@ -67,17 +64,17 @@ var platform;
 
 
 ///////////////ACHIEVEMENTS////////////////////
-var morts = 200
+var morts = 0
 var mortsForAchievement = 100
 var popupMortAchievementShown = false
 
+var totalCoins=1000;
 var totalCoinsAchievement = 10000
-var totalCoins=20000;
 var popupCoinsAchievementShown = false
 
 
-var achievementsAmount= 6;
 var achievementsCompleted = 0;
+var achievementsAmount= 6;
 var popupAchievementsCompletedAchievementShown = false
 
 
@@ -86,22 +83,25 @@ var shotsDoneForAchievement = 1000;
 var popupShotsAchievementShown = false
 
 
-var clicksForEasterEggAchievement = 100;
 var clicksDoneForEasterEggAchievement = 0;
+var clicksForEasterEggAchievement = 100;
 var easterEggClicksCompleted = false;
 var popupMEasterEggN1AchievementShown = false
 
 
-var skinAmount = 0;
-var skinsPossessed = 2;
+var skinsPossessed = 0;
+var skinAmount = 2;
 var popupSkinAchievementShown = false
 
 ////////////////////////////////////////////////////
 
-var platform;
 
+
+
+
+
+var platform;
 var player;
-var healthAmount = 100;
 var health;
 var bombs;
 var teleportations;
@@ -115,7 +115,6 @@ var scoreText;
 var roquettes;
 var viesRestantes=1;
 var jumpingPlayer = true
-var gravity=1000;
 var fireballPowerUpActive = true
 var fireballPlayer = true
 var cooldownTirSoldatEnnemi
@@ -146,6 +145,7 @@ var canResetIceVelocity=true
 var viesRestantesText 
 
 
+//////////SKINS/////////////////
 var playerSkin="ninja";
 var skinAfficheRandomUnlockSkinImage;
 var cooldownRandomUnlockSkin=600
@@ -153,15 +153,18 @@ var cooldownRandomUnlockSkinReset =cooldownRandomUnlockSkin
 var cooldownRandomUnlockSkinActive=true
 var priceToPaySkinNumber = 50;
 
-
 var ninjaRougeSkinUnlocked = false;
 var ninjaGreenSkinUnlocked = false;
 var ninjaSkinUnlocked = true;
 
-var line;
-var rect;
-var graphics;
 
+var probaDropSkinGreenNinja = 10
+var probaDropSkinRedNinja = 5
+var probaDropCoins = 100-probaDropSkinGreenNinja-probaDropSkinRedNinja
+
+////////////////////////////////
+
+//////////////ENNEMIS//////////////
 var vitesseBalleSoldatEnnemi=400
 var cooldownTirSoldatEnnemi=120
 var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
@@ -181,6 +184,16 @@ var vitesseGrenadeLanceGrenadeEnnemi=600
 var cooldownTirLanceGrenadeEnnemi=100
 var cooldownTirLanceGrenadeEnnemiBeforeShoot =cooldownTirLanceGrenadeEnnemi
 var ballesLanceGrenades;
+/////////////////////////////////
+
+//////////VALEURS/////////////
+var gravity=1000;
+var healthAmount = 100;
+
+
+
+
+
 
 var velociteChute = 0;
 var pvPlayer = 100;

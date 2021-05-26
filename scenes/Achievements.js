@@ -27,7 +27,7 @@ class Achievements extends Phaser.Scene {
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.82,(this.cameras.main.centerY*2)*0.17, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
         var achievementsTitle = this.add.text((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.2,  "ACHIEVEMENTS",{ fill:'#ffffff', size:200}).setDepth(1).setOrigin(0.5,0.5).setTint(0x000000).setScale(2);       
         
-        achievementsCompleted = 0
+
 
         var achievementsDeath = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.3,  "Persistant (Die a total of " + mortsForAchievement + " times)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
         if(morts < mortsForAchievement){
