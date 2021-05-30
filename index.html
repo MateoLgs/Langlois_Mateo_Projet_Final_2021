@@ -38,7 +38,7 @@
         default: 'arcade',
         arcade: {
             //gravity: { y: 1000 },
-            debug: true,
+            debug: false,
             fps: 90
         },
     },
@@ -53,10 +53,10 @@
 
 var level="level1";
 var teleportationsLeft = 10;
-var fireballLeft =5;
-var fireballLeftText;
+var shurikenLeft =5;
+var shurikenLeftText;
 
-var cooldownFireball = 120;
+var cooldownShuriken = 120;
 var onPlatform ="";
 var bomb;
 var snowball;
@@ -125,16 +125,16 @@ var snowballs;
 var platforms;
 var cursors;
 var snowman;
-var fireball;
+var shuriken;
 var roquette;
 var scoreText;
 var roquettes;
 var viesRestantes=1;
 var jumpingPlayer = true
-var fireballPowerUpActive = true
-var fireballPlayer = true
+var shurikenPowerUpActive = true
+var shurikenPlayer = true
 var cooldownTirSoldatEnnemi
-var delaiFireballPlayer = 120;
+var delaiShurikenPlayer = 120;
 var standing;
 var keyA
 var keyZ;
@@ -161,6 +161,7 @@ var canResetIceVelocity=true
 var viesRestantesText 
 
 
+
 //////////SKINS/////////////////
 var playerSkin="ninja";
 var skinAfficheRandomUnlockSkinImage;
@@ -174,8 +175,8 @@ var ninjaGreenSkinUnlocked = false;
 var ninjaSkinUnlocked = true;
 
 
-var probaDropSkinGreenNinja = 10
-var probaDropSkinRedNinja = 5
+var probaDropSkinGreenNinja = 70
+var probaDropSkinRedNinja = 50
 var probaDropCoins = 100-probaDropSkinGreenNinja-probaDropSkinRedNinja
 
 ////////////////////////////////
@@ -200,14 +201,31 @@ var vitesseGrenadeLanceGrenadeEnnemi=600
 var cooldownTirLanceGrenadeEnnemi=100
 var cooldownTirLanceGrenadeEnnemiBeforeShoot =cooldownTirLanceGrenadeEnnemi
 var ballesLanceGrenades;
+
+
+var vitesseDeplacementDrone = 50
+var cooldownTirDrone = 300
+var cooldownTirDroneReset = cooldownTirDrone
+
+var cooldownActivationLaserVertical = 300
+var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
+var laserVertical;
+var laserVerticalActivated = true;
+
+
+var cooldownActivationLaserHorizontal = 300
+var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
+var laserHorizontal;
+var laserHorizontalActivated = true;
+
 /////////////////////////////////
 
 //////////VALEURS/////////////
 var gravity=1000;
 var healthAmount = 100;
 
-
-
+var line
+var graphics
 
 
 

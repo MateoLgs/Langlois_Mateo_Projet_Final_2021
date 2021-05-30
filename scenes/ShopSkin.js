@@ -60,6 +60,7 @@ class ShopSkin extends Phaser.Scene {
         }) 
 
         exitButton.on('pointerdown', () => {
+            console.log("button")
             this.scene.start('Skins');
         }) 
 
@@ -128,6 +129,10 @@ class ShopSkin extends Phaser.Scene {
                         buySkin.on('pointerdown', () => {
                             this.scene.start('ShopSkin');
                         }) 
+                        exitButton.on('pointerdown', () => {
+                            console.log("button1")
+                            this.scene.start('Skins');
+                        }) 
                     }
                 })
 
@@ -169,6 +174,10 @@ class ShopSkin extends Phaser.Scene {
                             buySkin.on('pointerdown', () => {
                                 this.scene.start('ShopSkin');
                             }) 
+                            exitButton.on('pointerdown', () => {
+                                console.log("button1")
+                                this.scene.start('Skins');
+                            }) 
                         }
                     })
 
@@ -200,11 +209,17 @@ class ShopSkin extends Phaser.Scene {
                         buySkin.on('pointerdown', () => {
                             this.scene.start('ShopSkin');
                         }) 
+                        exitButton.on('pointerdown', () => {
+                            console.log("button1")
+                            this.scene.start('Skins');
+                        }) 
                     }
                 })
 
 
             }
+
+
         }
         this.popupAchievement();
 

@@ -56,7 +56,7 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         })    
         menuLevel1Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("tutoriel");
         })      
         menuLevel2Button.on('pointerdown', () => {
             this.choixMenuLevelButton("level1");
@@ -71,7 +71,7 @@ class LevelMenu extends Phaser.Scene {
             this.choixMenuLevelButton("level1");
             }) 
         menuLevel6Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         }) 
     }
 

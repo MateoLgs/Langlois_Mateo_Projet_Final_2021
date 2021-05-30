@@ -110,7 +110,7 @@ tirLanceGrenadeEnnemi(lanceGrenade){
         grenadeLanceGrenade.body.setGravityY(700)
         grenadeLanceGrenade.body.setBounce(0.5)
         this.physics.add.collider(grenadeLanceGrenade,this.platform)
-        this.physics.add.collider(grenadeLanceGrenade,player)
+        this.physics.add.overlap(grenadeLanceGrenade,player)
 
 
         this.time.delayedCall(3000, this.explodeGrenadeLanceGrenade, [grenadeLanceGrenade], this);
@@ -125,6 +125,49 @@ tirLanceGrenadeEnnemi(lanceGrenade){
             lanceGrenade.play('soldierShoot', true).setFlipX(true);
 
         }
+    }
+}
+
+activateLaserVertical(){
+    if(laserVerticalActivated==true){
+        this.physics.world.removeCollider(this.colliderLasersVertical);
+        this.physics.world.removeCollider(this.colliderShurikenLaserVertical);
+
+        for (const laserVertical of this.lasersVertical.children.entries) {
+            laserVertical.setAlpha(0);
+        }   
+        laserVerticalActivated=false;
+    }
+    else if(laserVerticalActivated==false){
+        this.colliderLasersVertical = this.physics.add.overlap(player,this.lasersVertical, this.death, null, this);
+        this.colliderShurikenLaserVertical = this.physics.add.collider(bombs, this.lasersVertical, this.killShuriken, null, this);
+
+        for (const laserVertical of this.lasersVertical.children.entries) {
+            laserVertical.setAlpha(1);
+        }  
+        laserVerticalActivated=true; 
+    }
+}
+
+activateLaserHorizontal(){
+    if(laserHorizontalActivated==true){
+        this.physics.world.removeCollider(this.colliderLasersHorizontal);
+        this.physics.world.removeCollider(this.colliderShurikenLaserHorizontal);
+
+        for (const laserHorizontal of this.lasersHorizontal.children.entries) {
+            laserHorizontal.setAlpha(0);
+        }   
+        laserHorizontalActivated=false;
+    }
+    else if(laserHorizontalActivated==false){
+        this.colliderLasersHorizontal = this.physics.add.overlap(player,this.lasersHorizontal, this.death, null, this);
+        this.colliderShurikenLaserHorizontal = this.physics.add.collider(bombs, this.lasersHorizontal, this.killShuriken, null, this);
+
+        
+        for (const laserHorizontal of this.lasersHorizontal.children.entries) {
+            laserHorizontal.setAlpha(1);
+        }  
+        laserHorizontalActivated=true; 
     }
 }
 
@@ -191,41 +234,41 @@ lancerSnowballYeti(yeti){
     }
 }
   
-killSnowman(snowman, fireball){
+killSnowman(snowman, bomb){
     snowman.destroy();
-    fireball.destroy();
+    bomb.destroy();
 }   
 
-killSniperEnnemi(sniperEnnemi, fireball){
+killSniperEnnemi(sniperEnnemi, bomb){
   sniperEnnemi.destroy();
-    fireball.destroy();
+  bomb.destroy();
 }     
 
-killYeti(yeti, fireball){
+killYeti(yeti, bomb){
     yeti.destroy();
-    fireball.destroy();
+    bomb.destroy();
 }     
 
-killLanceGrenade(lanceGrenade, fireball){
+killLanceGrenade(lanceGrenade, bomb){
     lanceGrenade.destroy();
-    fireball.destroy();
+    bomb.destroy();
 }   
 
-killMachineGunner(machineGunner, fireball){
+killMachineGunner(machineGunner, bomb){
       machineGunner.destroy();
-      fireball.destroy();
+      bomb.destroy();
 }   
  
-lancerfireball(player){
-    if(fireballLeft>0){
+lancershuriken(player){
+    if(shurikenLeft>0){
         shotsDone+=1; 
   let pointer = this.input.activePointer;
-       var bomb = bombs.create(player.x, player.y-5, 'fireball');
+       var bomb = bombs.create(player.x, player.y-5, 'shuriken');
   this.physics.moveTo(bomb, pointer.worldX, pointer.worldY, 700);
   bomb.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
-  bomb.play('fireballSpin', true).setFlipX(false).setScale(0.1);
+  bomb.play('shurikenSpin', true).setFlipX(false).setScale(0.1);
   bomb.setGravityY(500)
-    fireballLeft -=1;
+    shurikenLeft -=1;
     this.changeShuriken();
     }
 }
@@ -248,20 +291,20 @@ teleportToTeleporter(teleport){
     console.log(teleportationsLeft)
 }
 
-destroyFireball(bomb){
-
-  this.shurikensItems.create(bomb.x+8, bomb.y-3, 'fireball').setScale(1)
+destroyShuriken(bomb){
+  this.shurikensItems.create(bomb.x+8, bomb.y-3, 'shuriken').setScale(1)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
       .setSize(20,20)
-      bomb.destroy();
-      
+      bomb.destroy();    
 }  
 
-destroyFireballPics(bomb){
-    
-        bomb.destroy();
-      
+killShuriken(bomb){
+    bomb.destroy();
+}
+
+destroyShurikenPics(bomb){
+        bomb.destroy();    
 }  
 
 destroySnowball(snowball){
@@ -322,7 +365,7 @@ collectCoin(coin){
 
 pickUpShuriken(player,shuriken){
     shuriken.destroy();
-    fireballLeft+=1;
+    shurikenLeft+=1;
     this.changeShuriken();
 }
 pickUpTeleport(player,teleport){
@@ -332,15 +375,15 @@ pickUpTeleport(player,teleport){
 }
 
 changeShuriken(){
-  fireballLeftText.destroy();
-  fireballLeftText = this.add.text(1170, 50,  fireballLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);       
+  shurikenLeftText.destroy();
+  shurikenLeftText = this.add.text(1170, 50,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);       
 }
  
-collectPowerUpFireball(powerUpFireball){
-   ("pickupfireball")
-  powerUpFireball.destroy();
+collectPowerUpShuriken(powerUpShuriken){
+   ("pickupshuriken")
+  powerUpShuriken.destroy();
 
-  fireballPowerUpActive= true;
+  shurikenPowerUpActive= true;
 }
   
 contactDrapeau(){
@@ -781,7 +824,7 @@ invicibleAfterHitAlpha1(){
     player.setTint(0xff0000)
 }
   
-destroyFireballSnowball(bomb, snowball){
+destroyShurikenSnowball(bomb, snowball){
     bomb.destroy();
     snowball.destroy();
 }
@@ -904,15 +947,19 @@ delayStart(){
 preload (){
 
 
-  var powerUpSnow = this.load.image('powerupFireball', 'assets/powerupFireball.png');
-  var powerUpHealth = this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
-  var platformFake = this.load.image('platformFake', 'assets/platformFake.png');
-  var platformFalling = this.load.image('platformFalling', 'assets/platformFake.png');
-  var platformInvisible = this.load.image('platformInvisible', 'assets/platformFake.png');
-  var platformMoving = this.load.image('platformMoving', 'assets/platformFake.png');
-  var picsInvisible = this.load.image('picsInvisible', 'assets/picsInvisible.png');
+  this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
+  this.load.image('platformFake', 'assets/platformFake.png');
+  this.load.image('platformFalling', 'assets/platformFake.png');
+  this.load.image('platformInvisible', 'assets/platformFake.png');
+  this.load.image('platformMoving', 'assets/platformFake.png');
+  this.load.image('picsInvisible', 'assets/picsInvisible.png');
+  this.load.image('laserHorizontal', 'assets/laserHorizontal.png');
+  this.load.image('laserVertical', 'assets/laserVertical.png');
+
+  this.load.image('drone', 'assets/drone.png');
+
   this.load.image('blackSquare', 'assets/blackSquare.png');
-  this.load.image('fireball', 'assets/fireball.png');
+  this.load.image('shuriken', 'assets/shuriken.png');
   this.load.image('coin', 'assets/cles.png');
   this.load.image('snowball', 'assets/snowball.png');
   this.load.image('soldatEnnemi', 'assets/soldatEnnemi.png');
@@ -941,7 +988,7 @@ preload (){
   
   
   
-  this.load.spritesheet('spritesheetFireball', 'assets/spritesheetFireball.png', { frameWidth: 263, frameHeight: 280 });
+  this.load.spritesheet('spritesheetShuriken', 'assets/spritesheetShuriken.png', { frameWidth: 263, frameHeight: 280 });
   this.load.spritesheet('spritesheetCastor', 'assets/spritesheetCastor.png', { frameWidth: 27, frameHeight: 20 });
 
   
@@ -951,11 +998,11 @@ preload (){
 
     
 
-   this.load.tilemapTiledJSON('tutoriel', './assets/tutoriel.json');
-   this.load.tilemapTiledJSON('level1', './assets/level1.json');
-   this.load.tilemapTiledJSON('level2', './assets/level2.json');
-   this.load.tilemapTiledJSON('level3', './assets/level3.json');
-   this.load.tilemapTiledJSON('level4', './assets/level4.json');
+   this.load.tilemapTiledJSON('tutoriel', './levels/tutoriel.json');
+   this.load.tilemapTiledJSON('level1', './levels/level1.json');
+   this.load.tilemapTiledJSON('level2', './levels/level2.json');
+   this.load.tilemapTiledJSON('level3', './levels/level3.json');
+   this.load.tilemapTiledJSON('level4', './levels/level4.json');
 
 
 }
@@ -1012,8 +1059,8 @@ create (){
     /////////////////////////////////////////
     /////////////PLAYER//////////////////////
   var blackScreen = this.physics.add.sprite(1210, 50, 'blackSquare').setScrollFactor(0).setScale(0.15).setDepth(1);
-  fireballLeftText = this.add.text(1170, 50,  fireballLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);  
-  var fireballLeftImage = this.physics.add.sprite(1220, 65, 'fireball').setScrollFactor(0).setScale(1.5).setDepth(1);
+  shurikenLeftText = this.add.text(1170, 50,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);  
+  var shurikenLeftImage = this.physics.add.sprite(1220, 65, 'shuriken').setScrollFactor(0).setScale(1.5).setDepth(1);
     
   viesRestantesText = this.add.text(280, 170,  viesRestantes,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
   var life = this.physics.add.sprite(320, 180, 'life').setScrollFactor(0).setScale(0.05).setDepth(1);
@@ -1100,7 +1147,7 @@ if(playerSkin=="ninja"){
       repeat: -1
   });
   this.anims.create({
-      key: 'throwFireballNinja',
+      key: 'throwShurikenNinja',
       frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
       frameRate: 10,
       repeat: -1
@@ -1145,7 +1192,7 @@ if(playerSkin=="ninjaRouge"){
       repeat: -1
   });
   this.anims.create({
-      key: 'throwFireballNinjaRouge',
+      key: 'throwShurikenNinjaRouge',
       frames: this.anims.generateFrameNumbers('spritesheetPlayerNinjaRed',  {start: 0, end: 0 }),
       frameRate: 10,
       repeat: -1
@@ -1191,7 +1238,7 @@ if(playerSkin=="ninjaGreen"){
       repeat: -1
   });
   this.anims.create({
-      key: 'throwFireballNinjaGreen',
+      key: 'throwShurikenNinjaGreen',
       frames: this.anims.generateFrameNumbers('spritesheetPlayerNinjaGreen',  {start: 0, end: 0 }),
       frameRate: 10,
       repeat: -1
@@ -1253,8 +1300,8 @@ if(playerSkin=="ninjaGreen"){
 
 
 this.anims.create({
-  key: 'fireballSpin',
-  frames: this.anims.generateFrameNumbers('spritesheetFireball',  {start: 0, end: 1 }),
+  key: 'shurikenSpin',
+  frames: this.anims.generateFrameNumbers('spritesheetShuriken',  {start: 0, end: 1 }),
   frameRate: 10,
   repeat: -1
 });
@@ -1270,7 +1317,7 @@ this.anims.create({
       });
 
   for (const teleportItem of teleportItemObjects) {
-  this.teleportItems.create(teleportItem.x+8, teleportItem.y-3, 'fireball').setScale(1.5)
+  this.teleportItems.create(teleportItem.x+8, teleportItem.y-3, 'shuriken').setScale(1.5)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -1289,7 +1336,7 @@ this.anims.create({
       });
 
   for (const shurikensItem of shurikensItemObjects) {
-  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'fireball').setScale(1.5)
+  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(1.5)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -1366,7 +1413,7 @@ this.anims.create({
   ////////////platformInvisible////////////////////
     
   const platformInvisibleObjects = this.map.getObjectLayer('platformInvisible').objects;
-  this.platformInvisible = this.physics.add.group({
+    this.platformInvisible = this.physics.add.group({
           immovable: true,
           allowGravity: false
       });
@@ -1385,29 +1432,81 @@ this.anims.create({
     
     
     
-    
-    
+  ///////////////////////////////////////
+  ////////////lasersHorizontal////////////////////
+
+    const laserHorizontalObjects = this.map.getObjectLayer('laserHorizontal').objects;
+        this.lasersHorizontal = this.physics.add.group({
+            immovable: true,
+            allowGravity: false
+    });
+
+    for (const laserHorizontal of laserHorizontalObjects) {
+        this.lasersHorizontal.create(laserHorizontal.x+laserHorizontal.width/2, laserHorizontal.y-laserHorizontal.height/2, 'laserHorizontal')
+            .setOrigin(0.5,0.5)
+            .setDepth(1)
+    }
+
+
+    this.colliderLasersHorizontal = this.physics.add.overlap(player, this.lasersHorizontal, this.death, null, this)
+
+      ///////////////////////////////////////
+  ////////////lasersVertical///////////////////
+
+  const laserVerticalObjects = this.map.getObjectLayer('laserVertical').objects;
+  this.lasersVertical = this.physics.add.group({
+      immovable: true,
+      allowGravity: false
+});
+
+for (const laserVertical of laserVerticalObjects) {
+  this.lasersVertical.create(laserVertical.x+laserVertical.width/2, laserVertical.y-laserVertical.height/2, 'laserVertical')
+      .setOrigin(0.5,0.5)
+      .setDepth(1)
+}
+
+
+this.colliderLasersVertical = this.physics.add.overlap(player, this.lasersVertical, this.death, null, this)
+
+  //////////////////////////////////////
+  ////////////Drones////////////////////
+
+const droneObjects = this.map.getObjectLayer('drone').objects;
+    this.drones = this.physics.add.group({
+        immovable: true,
+        allowGravity: false
+});
+
+for (const drone of droneObjects) {
+    this.drones.create(drone.x+drone.width/2, drone.y-drone.height/2, 'drone')
+      .setOrigin(0.5,0.5)
+      .setDepth(1)
+
+}
+
+
+this.physics.add.collider(player, this.drones, this.death, null, this)
+this.physics.add.collider(this.platform, this.drones)
     
   ///////////////////////////////////////
   ////////////platformMoving////////////////////
 
-  const platformMovingObjects = this.map.getObjectLayer('platformMoving').objects;
-  this.platformsMoving = this.physics.add.group({
-          immovable: true,
-          allowGravity: false
-      });
+    const platformMovingObjects = this.map.getObjectLayer('platformMoving').objects;
+        this.platformsMoving = this.physics.add.group({
+            immovable: true,
+            allowGravity: false
+    });
 
-  for (const platformMoving of platformMovingObjects) {
-  this.platformsMoving.create(platformMoving.x+7, platformMoving.y-8, 'platformMoving')
-      .setOrigin(0.5,0.5)
-      .setDepth(-1)
-   
-  }
+    for (const platformMoving of platformMovingObjects) {
+        this.platformsMoving.create(platformMoving.x+7, platformMoving.y-8, 'platformMoving')
+            .setOrigin(0.5,0.5)
+            .setDepth(-1)
+    }
 
-  for (const platformMoving of this.platformsMoving.children.entries) {
-      this.physics.add.collider(player, platformMoving, this.playerPlatformMoving, null, this)
-      this.physics.add.collider(platformMoving, platform);
-}    
+    for (const platformMoving of this.platformsMoving.children.entries) {
+        this.physics.add.collider(player, platformMoving, this.playerPlatformMoving, null, this)
+        this.physics.add.collider(platformMoving, platform);
+    }    
     
 
   ///////////////////////////////////////
@@ -1719,29 +1818,6 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
 }
   
 
-  
-  ///////////////////////////////////////
-  ////////////PowerUpFireball////////////
-  
-  const powerUpFireballObjects = this.map.getObjectLayer('powerUpFireball').objects;
-   this.powerUpFireball = this.physics.add.group({
-          immovable: true,
-          allowGravity: false
-      });
-
-  for (const powerUpFireball of powerUpFireballObjects) {
-  this.powerUpFireball.create(powerUpFireball.x+10, powerUpFireball.y-13,'powerupFireball').setScale(0.15)
-      .setOrigin(0.5,0.5)
-      .setDepth(-1);
-
-}
-      
-  
-  
-  for (const powerUpFireball of this.powerUpFireball.children.entries) {
-      this.physics.add.collider(powerUpFireball, pics)
-      powerUpFireball.collider = this.physics.add.overlap(powerUpFireball, player, this.collectPowerUpFireball, null, this);
-}
 
   
    ///////////////////////////////////////
@@ -1852,7 +1928,7 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
   snowballs = this.physics.add.group();
 
   
-  fireball = this.physics.add.group();
+  shuriken = this.physics.add.group();
   roquettes = this.physics.add.group();
   //  The score
 
@@ -1863,18 +1939,22 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
   
   this.physics.add.collider(teleportations, this.platform);
 
-  this.physics.add.collider(bombs, this.platform, this.destroyFireball, null, this);
-  this.physics.add.collider(bombs, platformIce, this.destroyFireball, null, this);
-  this.physics.add.collider(bombs, platformSnow, this.destroyFireball, null, this);
-  this.physics.add.collider(bombs, this.platformFake, this.destroyFireball, null, this);
-  this.physics.add.collider(bombs, snowballs, this.destroyFireballSnowball, null, this);
-  this.physics.add.collider(bombs, pics, this.destroyFireballPics, null, this);
- // this.physics.add.collider(snowballs, platform, this.destroyFireball, null, this);
-  this.physics.add.collider(snowballs, platformIce, this.destroyFireball, null, this);
-  this.physics.add.collider(snowballs, platformSnow, this.destroyFireball, null, this);
-  this.physics.add.collider(snowballs, this.platformFake, this.destroyFireball, null, this);
-  this.physics.add.collider(snowballs, snowballs, this.destroyFireballSnowball, null, this);
-  this.physics.add.collider(snowballs, pics, this.destroyFireballPics, null, this);
+  this.physics.add.collider(bombs, this.platform, this.destroyShuriken, null, this);
+  this.physics.add.collider(bombs, platformIce, this.destroyShuriken, null, this);
+  this.physics.add.collider(bombs, platformSnow, this.destroyShuriken, null, this);
+  this.physics.add.collider(bombs, this.platformFake, this.destroyShuriken, null, this);
+  this.physics.add.collider(bombs, snowballs, this.destroyShurikenSnowball, null, this);
+  this.physics.add.collider(bombs, pics, this.destroyShurikenPics, null, this);4
+  this.colliderShurikenLaserHorizontal = this.physics.add.collider(bombs, this.lasersHorizontal, this.killShuriken, null, this);
+  this.colliderShurikenLaserVertical = this.physics.add.collider(bombs, this.lasersVertical, this.killShuriken, null, this);
+
+
+ // this.physics.add.collider(snowballs, platform, this.destroyShuriken, null, this);
+  this.physics.add.collider(snowballs, platformIce, this.destroyShuriken, null, this);
+  this.physics.add.collider(snowballs, platformSnow, this.destroyShuriken, null, this);
+  this.physics.add.collider(snowballs, this.platformFake, this.destroyShuriken, null, this);
+  this.physics.add.collider(snowballs, snowballs, this.destroyShurikenSnowball, null, this);
+  this.physics.add.collider(snowballs, pics, this.destroyShurikenPics, null, this);
   this.physics.add.collider(player, this.goomba, this.death, null, this);
 
 
@@ -1884,9 +1964,9 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
  // this.physics.add.collider(snowballs, platform, this.destroySnowball, null, this);
 
 
-//   this.physics.add.collider(fireball, platform);
+//   this.physics.add.collider(shuriken, platform);
   
-//   this.physics.add.collider(fireball, platformSnow);
+//   this.physics.add.collider(shuriken, platformSnow);
 
 
   //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar  
@@ -1919,12 +1999,29 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
   /////////////////
 
 
+  graphics = this.add.graphics();
 
 
-  
 }
 
 update (){    
+
+    for (const drone of this.drones.children.entries) {    
+        this.physics.moveTo(drone, player.x,player.y-300, vitesseDeplacementDrone);
+    }
+    
+
+
+
+    for (const drone of this.drones.children.entries) {
+
+        line =  new Phaser.Geom.Line(drone.x, drone.y, player.x, player.y);      
+    }
+    graphics.clear();
+    graphics.lineStyle(4, 0xffffff);
+    graphics.strokeLineShape(line);
+
+
 
 
 
@@ -2047,13 +2144,25 @@ for (const platformMoving of this.platformsMoving.children.entries) {
         this.tirMachineGunnerEnnemi();  
     }
 
-
     cooldownTirLanceGrenadeEnnemiBeforeShoot--
     if(cooldownTirLanceGrenadeEnnemiBeforeShoot<=0){
         cooldownTirLanceGrenadeEnnemiBeforeShoot=cooldownTirLanceGrenadeEnnemi
         this.tirLanceGrenadeEnnemi();  
     }
     
+    cooldownActivationLaserHorizontal--
+    if(cooldownActivationLaserHorizontal<=0){
+        cooldownActivationLaserHorizontal=cooldownActivationLaserHorizontalReset
+        this.activateLaserHorizontal();  
+    }
+
+    cooldownActivationLaserVertical--
+    if(cooldownActivationLaserVertical<=0){
+        cooldownActivationLaserVertical=cooldownActivationLaserVerticalReset
+        this.activateLaserVertical();  
+    }
+     
+
      
 
 
@@ -2068,25 +2177,25 @@ for (const platformMoving of this.platformsMoving.children.entries) {
   
   
   
-if(fireballPlayer == false){
-   delaiFireballPlayer --
+if(shurikenPlayer == false){
+   delaiShurikenPlayer --
 }
-if (delaiFireballPlayer <= 0 && fireballPlayer == false) {
-  delaiFireballPlayer = cooldownFireball;
-  fireballPlayer = true;
+if (delaiShurikenPlayer <= 0 && shurikenPlayer == false) {
+  delaiShurikenPlayer = cooldownShuriken;
+  shurikenPlayer = true;
 }
   
        
 
 this.input.on('pointerdown', function (pointer) {
-    if(fireballPlayer == true && fireballPowerUpActive==true ){
+    if(shurikenPlayer == true && shurikenPowerUpActive==true ){
         if(keyA.isDown){
           keyA.reset();
           this.lancerTeleport(player);
         }
         else if(keyA.isUp){
-            fireballPlayer = false;
-            this.lancerfireball(player);
+            shurikenPlayer = false;
+            this.lancershuriken(player);
         }
     }
 }, this);
@@ -2264,9 +2373,9 @@ if(playerSkin=="ninjaGreen"){
  
   if(padConnected){
       if(paddle.B){
-          if(fireballPlayer == true && fireballPowerUpActive==true){
-              fireballPlayer = false;
-              this.lancerfireball(player);
+          if(shurikenPlayer == true && shurikenPowerUpActive==true){
+              shurikenPlayer = false;
+              this.lancershuriken(player);
           } 
       }
       if(paddle.left){
