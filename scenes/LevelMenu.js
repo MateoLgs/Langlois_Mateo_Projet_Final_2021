@@ -1,80 +1,217 @@
     
-class Menu extends Phaser.Scene {
+class LevelMenu extends Phaser.Scene {
 
     constructor () {
-        super('Menu');
+        super('LevelMenu');
     }
-        preload(){
-              this.load.image('Menu', 'assets/menuScreen.png');
-              this.load.image('startButton', 'assets/startButton.png');
-              this.load.image('tutorialButton', 'assets/tutorialButton.png');
-              this.load.image('skinsButton', 'assets/skinsButton.png');
-              this.load.image('shopButton', 'assets/shopButton.png');
-              this.load.image('patchNoteButton', 'assets/patchNoteButton.png');
-              this.load.image('easy', 'assets/easy.png');
-              this.load.image('hard', 'assets/hard.png');
-              this.load.image('patchNote', 'assets/patchNote.png');
-              this.load.image('achievementsButton', 'assets/achievements.png');
-              this.load.image('exitButton', 'assets/exitButton.png');
-              this.load.image('blackSquare', 'assets/blackSquare.png');       
-              this.load.image('blackRectangle', 'assets/blackRectangle.png');        
-            }
+        preload(){     
+            this.load.image('backButton', 'assets/backButton.png');    
+        }
     create() {
-       
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
-        var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
-        var menuTutorialButton = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
-        var patchNoteButton = this.add.image((this.cameras.main.centerX*2)*0.0234, (this.cameras.main.centerY*2)*0.06, 'patchNoteButton').setScale(0.7).setInteractive();
-        var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
-        var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
-        var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
-        var patchNote = this.add.image((this.cameras.main.centerX),(this.cameras.main.centerY), 'patchNote').setAlpha(0).setScale(0.7);
-        var exitButtonPatchNote = this.add.image((this.cameras.main.centerX*2)*0.703,(this.cameras.main.centerY*2)*0.07, 'exitButton').setScale(0.1).setInteractive().setAlpha(0);
+        var backButton = this.add.image((this.cameras.main.centerX*2)*0.04,(this.cameras.main.centerY*2)*0.075, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5);
 
-        this.popupAchievement();
+        if(pageLevelMenu==1){
+            var nextPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.9, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(4.7);
 
-        
-        choixMenuStartButton.on('pointerdown', () => {
-      this.choixMenuStartButton();
+            if(level1Unlocked == true){
+                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level1Unlocked == false){
+                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+            if(level2Unlocked == true){
+                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level2Unlocked == false){
+                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+            if(level3Unlocked == true){
+                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level3Unlocked == false){
+                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+            if(level4Unlocked == true){
+                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level4Unlocked == false){
+                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+            if(level5Unlocked == true){
+                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level5Unlocked == false){
+                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+            if(level6Unlocked == true){
+                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            }
+            else if(level6Unlocked == false){
+                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            } 
+
+        nextPageButton.on('pointerdown', () => {
+            pageLevelMenu+=1;
+            this.scene.restart();
+        })    
+        menuLevel1Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
+        })      
+        menuLevel2Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
         }) 
-        
-    menuTutorialButton.on('pointerdown', () => {
-      this.choixMenuTutorialButton();
+        menuLevel3Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
+            })    
+        menuLevel4Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
         }) 
-   
-    skinsButton.on('pointerdown', () => {
-        clicksDoneForEasterEggAchievement +=1;
-        this.scene.start('Skins');
+        menuLevel5Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
+            }) 
+        menuLevel6Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        }) 
+    }
+
+    if(pageLevelMenu==2){
+        var nextPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.9, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(4.7);
+        var previousPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.1, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(1.6);
+        if(level7Unlocked == true){
+            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level7Unlocked == false){
+            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level8Unlocked == true){
+            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level8Unlocked == false){
+            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level9Unlocked == true){
+            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level9Unlocked == false){
+            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level10Unlocked == true){
+            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level10Unlocked == false){
+            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level11Unlocked == true){
+            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level11Unlocked == false){
+            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level12Unlocked == true){
+            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level12Unlocked == false){
+            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        previousPageButton.on('pointerdown', () => {
+            pageLevelMenu-=1;
+            this.scene.restart();
+        })    
+        nextPageButton.on('pointerdown', () => {
+            pageLevelMenu+=1;
+            this.scene.restart();
+        }) 
+        menuLevel7Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        })      
+        menuLevel8Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        }) 
+        menuLevel9Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+            })    
+        menuLevel10Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        }) 
+        menuLevel11Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+            }) 
+        menuLevel12Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
+        }) 
+    }
+    if(pageLevelMenu==3){
+        var previousPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.1, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(1.6);
+        if(level13Unlocked == true){
+            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level13Unlocked == false){
+            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level14Unlocked == true){
+            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level14Unlocked == false){
+            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level15Unlocked == true){
+            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level15Unlocked == false){
+            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level16Unlocked == true){
+            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level16Unlocked == false){
+            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level17Unlocked == true){
+            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level17Unlocked == false){
+            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        if(level18Unlocked == true){
+            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+        }
+        else if(level18Unlocked == false){
+            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+        } 
+        previousPageButton.on('pointerdown', () => {
+            pageLevelMenu-=1;
+            this.scene.restart();
+        })    
+        menuLevel13Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        })      
+        menuLevel14Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        }) 
+        menuLevel15Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+            })    
+        menuLevel16Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+        }) 
+        menuLevel17Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("tutoriel");
+            }) 
+        menuLevel18Button.on('pointerdown', () => {
+            this.choixMenuLevelButton("level1");
+        }) 
+    }
+
+    backButton.on('pointerdown', () => {
+        this.scene.start('Menu');
     }) 
-
-    shopButton.on('pointerdown', () => {
-      this.scene.start('Shop');
-  }) 
-
-  achievementsButton.on('pointerdown', () => {
-    this.scene.start('Achievements');
-}) 
-
-
-    patchNoteButton.on('pointerdown', () => {
-        patchNote.setAlpha(1)
-        exitButtonPatchNote.setAlpha(1)
-        }) 
-        
-    exitButtonPatchNote.on('pointerdown', () => {
-        exitButtonPatchNote.setAlpha(0)
-        patchNote.setAlpha(0)
-        }) 
-    }
-
-    choixMenuStartButton(){
-      this.scene.start('LevelMenu');
-    }
-
-    choixMenuTutorialButton(){
-        level="tutoriel"
+}
+    choixMenuLevelButton(varLevel){
+              level=varLevel
       this.scene.start('Jeu');
     }
+
 
     
     popupAchievement(){

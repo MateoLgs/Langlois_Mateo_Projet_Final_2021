@@ -5,6 +5,7 @@
     <title>MARIOOOO</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <script src="./scenes/Menu.js"></script>
+    <script src="./scenes/LevelMenu.js"></script>
     <script src="./scenes/Achievements.js"></script>
     <script src="./scenes/Skins.js"></script>
     <script src="./scenes/ShopSkin.js"></script>
@@ -44,7 +45,7 @@
         input: {
             gamepad: true
         },
-    scene: [Menu, Jeu, Achievements, Skins, ShopSkin, Shop, Death, GameOver, Victoire]
+    scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, Death, GameOver, Victoire]
 
 };
 
@@ -61,7 +62,7 @@ var bomb;
 var snowball;
 var runSpeed = 1;
 var platform;
-
+var pageLevelMenu = 1;
 
 ///////////////ACHIEVEMENTS////////////////////
 var morts = 0
@@ -93,13 +94,28 @@ var skinsPossessed = 0;
 var skinAmount = 2;
 var popupSkinAchievementShown = false
 
-////////////////////////////////////////////////////
+///////////////LEVELS////////////////////////////////
 
+var level1Unlocked = true;
+var level2Unlocked = false;
+var level3Unlocked = false;
+var level4Unlocked = false;
+var level5Unlocked = false;
+var level6Unlocked = false;
+var level7Unlocked = false;
+var level8Unlocked = false;
+var level9Unlocked = false;
+var level10Unlocked = false;
+var level11Unlocked = false;
+var level12Unlocked = false;
+var level13Unlocked = false;
+var level14Unlocked = false;
+var level15Unlocked = false;
+var level16Unlocked = false;
+var level17Unlocked = false;
+var level18Unlocked = false;
 
-
-
-
-
+/////////////////////////////////////////////////////////////
 var platform;
 var player;
 var health;

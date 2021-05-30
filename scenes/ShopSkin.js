@@ -8,6 +8,7 @@ class ShopSkin extends Phaser.Scene {
         this.load.image('whiteSquare', 'assets/whiteSquare.png');
         this.load.image('coin', 'assets/coin.png');
         this.load.image('shareButton', 'assets/share.png');
+        this.load.spritesheet('unlockCoinsAnimation', 'assets/unlockCoinsSpritesheet.png', { frameWidth: 200, frameHeight: 200 });
         
     }
     create(){
@@ -32,15 +33,21 @@ class ShopSkin extends Phaser.Scene {
         var shareButton = this.add.image((this.cameras.main.centerX*2)*100,(this.cameras.main.centerY*2)*100, 'shareButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
        
         
-        this.load.spritesheet('unlockCoinsAnimation', 'assets/unlockCoins.png', { frameWidth: 200, frameHeight: 200 });
+        this.anims.create({
+            key: 'unlockCoins',
+            frames: this.anims.generateFrameNumbers('unlockCoinsAnimation',  {start: 0, end: 6 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
 
 
         randomButton.on('pointerdown', () => {
             if(totalCoins>=50){
                 totalCoins-=50
                 priceToPaySkin.destroy();
-                totalCoinsTextBuySkin.destroy();
                 buyASkinText.destroy();
+                exitButton.destroy();
 
                 this.randomUnlockSkin(randomButton, totalCoinsTextBuySkin, totalCoinsTextBuySkinNumber, shareButton);
             }
@@ -59,12 +66,7 @@ class ShopSkin extends Phaser.Scene {
 
 
 
-        this.anims.create({
-            key: 'unlockCoins',
-            frames: this.anims.generateFrameNumbers('unlockCoinsAnimation',  {start: 0, end: 6 }),
-            frameRate: 10,
-            repeat: -1
-        });
+
 
 
     }
@@ -86,71 +88,128 @@ class ShopSkin extends Phaser.Scene {
 
 
     randomUnlockSkin(randomButton, totalCoinsTextBuySkin, totalCoinsTextBuySkinNumber, shareButton){
-      //  randomButton.destroy()
+        randomButton.destroy()
 
 
-        var skinAfficheRandomUnlockSkin = Phaser.Math.Between(0, 100);
+        var skinAfficheRandomUnlockSkin = Phaser.Math.Between(1, 100);
         console.log(skinAfficheRandomUnlockSkin)
            
         if(skinAfficheRandomUnlockSkin < probaDropSkinGreenNinja && ninjaGreenSkinUnlocked==false){
             if(ninjaGreenSkinUnlocked==false){
                 
-                var skinAfficheRandomUnlockSkinImage = this.add.image((this.cameras.main.centerX*2)*0.6, (this.cameras.main.centerY*2)*0.6, 'ninjaSkinGreen').setScale(0.55).setOrigin(0.5,0.5);
                 ninjaGreenSkinUnlocked=true
+                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                 totalCoinsTextBuySkin.destroy();
                 totalCoinsTextBuySkinNumber.destroy();
-    
                 totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
-                totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5); 
+                totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
                 
-                skinsPossessed +=1
-                shareButton.destroy();
-                shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
-                shareButton.on('pointerdown', () => {
-                    this.shareSkin("I just unlocked the Green Ninja !");
-                }) 
+
+
+                this.time.addEvent({
+                    delay: 1000,
+                    callback: ()=>{
+                        var skinAfficheRandomUnlockSkinImage = this.add.image((this.cameras.main.centerX*2)*0.6, (this.cameras.main.centerY*2)*0.6, 'ninjaSkinGreen').setScale(0.55).setOrigin(0.5,0.5);
+
+                        totalCoinsTextBuySkin.destroy();
+                        totalCoinsTextBuySkinNumber.destroy();
+                        totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
+                        totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
+                        exitButton = this.add.image((this.cameras.main.centerX*2)*0.78,(this.cameras.main.centerY*2)*0.31, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
+                        animUnlock.destroy()
+                        shareButton.destroy();
+                        skinsPossessed +=1
+                        shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
+                        shareButton.on('pointerdown', () => {
+                        this.shareSkin("I just unlocked the Green Ninja !");
+                        }) 
+                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                        buySkin.on('pointerdown', () => {
+                            this.scene.start('ShopSkin');
+                        }) 
+                    }
+                })
+
             }
         }
         else{
-            skinAfficheRandomUnlockSkin = Phaser.Math.Between(0, 100);
+            skinAfficheRandomUnlockSkin = Phaser.Math.Between(1, 100);
             console.log("2ème :" +skinAfficheRandomUnlockSkin)
             if(skinAfficheRandomUnlockSkin < probaDropSkinRedNinja && ninjaRougeSkinUnlocked==false){            
                 if(ninjaRougeSkinUnlocked==false){
-                    var skinAfficheRandomUnlockSkinImage = this.add.image((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.6, 'ninjaSkinRouge').setScale(0.55).setOrigin(0.5,0.5);
                     ninjaRougeSkinUnlocked=true
+
+                    var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                    animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                     totalCoinsTextBuySkin.destroy();
                     totalCoinsTextBuySkinNumber.destroy();
-        
                     totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
-                    totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);   
+                    totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
+                    
 
-                    shareButton.destroy();
-                    skinsPossessed +=1
-                    shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
-                    shareButton.on('pointerdown', () => {
-                    this.shareSkin("I just unlocked the Red Ninja !");
-                    }) 
+                    this.time.addEvent({
+                        delay: 1000,
+                        callback: ()=>{
+                            var skinAfficheRandomUnlockSkinImage = this.add.image((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.6, 'ninjaSkinRouge').setScale(0.55).setOrigin(0.5,0.5);
+
+                            totalCoinsTextBuySkin.destroy();
+                            totalCoinsTextBuySkinNumber.destroy();
+                            totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
+                            totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
+                            exitButton = this.add.image((this.cameras.main.centerX*2)*0.78,(this.cameras.main.centerY*2)*0.31, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
+                            animUnlock.destroy()
+                            shareButton.destroy();
+                            skinsPossessed +=1
+                            shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
+                            shareButton.on('pointerdown', () => {
+                            this.shareSkin("I just unlocked the Red Ninja !");
+                            }) 
+                            var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                            buySkin.on('pointerdown', () => {
+                                this.scene.start('ShopSkin');
+                            }) 
+                        }
+                    })
+
                 }   
-        }
+            }
 
-        else{
-            var skinAfficheRandomUnlockSkinImage = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.6, 'coin').setScale(0.22).setOrigin(0.5,0.5);
-            totalCoins+=10
-            totalCoinsTextBuySkin.destroy();
-            totalCoinsTextBuySkinNumber.destroy();
+            else{
+                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                animUnlock.anims.play('unlockCoins',true).setFlipX(false);
+                totalCoinsTextBuySkin.destroy();
+                totalCoinsTextBuySkinNumber.destroy();
+                totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
+                totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
+                
+                totalCoins+=10
 
-            totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
-            totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);       
-           // skinAfficheRandomUnlockSkinImage.anims.play('unlockCoins', true);
+
+                this.time.addEvent({
+                    delay: 1000,
+                    callback: ()=>{
+                        var skinAfficheRandomUnlockSkinImage = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.6, 'coin').setScale(0.22).setOrigin(0.5,0.5);
+                        totalCoinsTextBuySkin.destroy();
+                        totalCoinsTextBuySkinNumber.destroy();
+                        totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
+                        totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
+                        exitButton = this.add.image((this.cameras.main.centerX*2)*0.78,(this.cameras.main.centerY*2)*0.31, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
+                        animUnlock.destroy()
+                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                        buySkin.on('pointerdown', () => {
+                            this.scene.start('ShopSkin');
+                        }) 
+                    }
+                })
+
+
+            }
         }
-    }
         this.popupAchievement();
 
-        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
 
-        buySkin.on('pointerdown', () => {
-            this.scene.start('ShopSkin');
-        }) 
+
 
       
     }
