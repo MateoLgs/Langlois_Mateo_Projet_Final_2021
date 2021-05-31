@@ -946,67 +946,7 @@
          "draworder":"topdown",
          "id":45,
          "name":"laserHorizontal",
-         "objects":[
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1602,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":192,
-                 "y":688
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1603,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":208,
-                 "y":688
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1604,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":224,
-                 "y":688
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1605,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":256,
-                 "y":688
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1606,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":240,
-                 "y":688
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1017,19 +957,7 @@
          "draworder":"topdown",
          "id":42,
          "name":"lanceGrenade",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1601,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":704,
-                 "y":480
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1040,19 +968,7 @@
          "draworder":"topdown",
          "id":46,
          "name":"lanceRoquette",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1598,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":544,
-                 "y":544
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1071,10 +987,10 @@
          "y":0
         }],
  "nextlayerid":47,
- "nextobjectid":1607,
+ "nextobjectid":1609,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.4.3",
+ "tiledversion":"1.4.2",
  "tileheight":16,
  "tilesets":[
         {

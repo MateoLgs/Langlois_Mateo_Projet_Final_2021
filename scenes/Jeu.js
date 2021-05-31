@@ -106,12 +106,12 @@ tirLanceGrenadeEnnemi(){
         var angleBalle = (Math.atan2(player.y - lanceGrenade.y, player.x - lanceGrenade.x) * 180 / Math.PI);
         // snowball.angleBalle -= 90;
 
+        this.physics.add.collider(grenadeLanceGrenade, this.platform);
+
         grenadeLanceGrenade.rotation = Phaser.Math.Angle.BetweenPoints(player, lanceGrenade);
         grenadeLanceGrenade.body.setGravityY(700)
         grenadeLanceGrenade.body.setBounce(0.5)
-        this.physics.add.collider(grenadeLanceGrenade,this.platform)
-        this.physics.add.overlap(grenadeLanceGrenade,player)
-
+ 
 
         this.time.delayedCall(3000, this.explodeGrenadeLanceGrenade, [grenadeLanceGrenade], this);
 
@@ -137,10 +137,9 @@ tirLanceRoquetteEnnemi(){
 
         roquetteLanceRoquette.rotation = Phaser.Math.Angle.BetweenPoints(player, lanceRoquette);
 
-        this.physics.add.collider(roquetteLanceRoquette,this.platform)
-        this.physics.add.overlap(roquetteLanceRoquette,player)
-
-
+    
+        this.physics.add.collider(roquetteLanceRoquette, this.platform, this.explodeRoquetteLanceRoquette,null,this);
+        this.physics.add.collider(roquetteLanceRoquette, player, this.explodeRoquetteLanceRoquette, null ,this);
        
 
         if(player.x<lanceRoquette.x){
@@ -200,18 +199,28 @@ activateLaserHorizontal(){
     }
 }
 
-explodeGrenadeLanceGrenade(grenadeLanceGrenade, player){
+explodeGrenadeLanceGrenade(grenadeLanceGrenade){
     grenadeLanceGrenade.destroy();
-    this.explosionShuriken = this.physics.add.sprite(grenadeLanceGrenade.x, grenadeLanceGrenade.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
-    this.physics.add.collider(this.explosionShuriken, player, this.death, null, this)
-    this.time.delayedCall(1000, this.destroyExplosion, [this.explosionShuriken], this);
+    var explosion = this.physics.add.sprite(grenadeLanceGrenade.x, grenadeLanceGrenade.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
+    this.colliderExplosion = this.physics.add.overlap(explosion, player, this.killPlayerExplosion, null, this)
+    this.time.delayedCall(200, this.destroyColliderFunction, [this.colliderExplosion], this);
+    this.time.delayedCall(1000, this.destroyExplosion, [explosion], this);
 }
 
-explodeRoquetteLanceRoquette(roquetteLanceRoquette,player){
-    player.destroy();
-    var explosionShuriken = this.physics.add.sprite(roquetteLanceRoquette.x, roquetteLanceRoquette.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
-    this.physics.add.collider(explosionShuriken, player, this.death, null, this)
-    this.time.delayedCall(1000, this.destroyExplosion, [explosionShuriken], this);
+explodeRoquetteLanceRoquette(roquetteLanceRoquette){
+    roquetteLanceRoquette.destroy();
+    var explosion = this.physics.add.sprite(roquetteLanceRoquette.x, roquetteLanceRoquette.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
+    this.colliderExplosion = this.physics.add.overlap(explosion, player, this.killPlayerExplosion, null, this)
+    this.time.delayedCall(200, this.destroyColliderFunction, [this.colliderExplosion], this);
+    this.time.delayedCall(1000, this.destroyExplosion, [explosion], this);
+}
+
+destroyColliderFunction(){
+    this.physics.world.removeCollider(this.colliderExplosion);
+}
+
+killPlayerExplosion(){
+    this.death();
 }
 
 destroyExplosion(explosionShuriken){
@@ -287,6 +296,11 @@ killYeti(yeti, shuriken){
 
 killLanceGrenade(lanceGrenade, shuriken){
     lanceGrenade.destroy();
+    shuriken.destroy();
+}   
+
+killLanceRoquettes(lanceRoquettes, shuriken){
+    lanceRoquettes.destroy();
     shuriken.destroy();
 }   
 
@@ -1514,7 +1528,6 @@ for (const drone of droneObjects) {
     this.drones.create(drone.x+drone.width/2, drone.y-drone.height/2, 'drone')
       .setOrigin(0.5,0.5)
       .setDepth(1)
-
 }
 
 
@@ -1625,6 +1638,7 @@ this.physics.add.collider(this.platform, this.drones)
   ////////////LanceursGrenades////////////////////
   this.grenadesLanceGrenade = this.physics.add.group({
  });
+
  
  const lanceGrenadesObjects = this.map.getObjectLayer('lanceGrenade').objects;
  this.lanceGrenades = this.physics.add.group({
@@ -1654,8 +1668,7 @@ this.physics.add.collider(this.lanceGrenades, this.platform);
   ////////////LanceursRoquettes////////////////////
   this.roquettesLanceRoquettes = this.physics.add.group({
 });
-this.physics.add.collider(this.roquettesLanceRoquettes, this.platform, this.explodeRoquetteLanceRoquette,null,this);
-this.physics.add.collider(this.roquettesLanceRoquettes, player, this.explodeRoquetteLanceRoquette,null,this);
+
 
 const lanceRoquettesObjects = this.map.getObjectLayer('lanceRoquette').objects;
 this.lanceRoquettes = this.physics.add.group({
@@ -2035,7 +2048,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.overlap(this.yetis, shurikens, this.killYeti, null, this);
   
 
-  
+  this.physics.add.overlap(this.lanceRoquettes, shurikens, this.killLanceRoquette, null, this);
   this.physics.add.overlap(this.lanceGrenades, shurikens, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.machineGunnerEnnemis, shurikens, this.killMachineGunner, null, this);
   this.physics.add.overlap(this.sniperEnnemis, shurikens, this.killSniperEnnemi, null, this);

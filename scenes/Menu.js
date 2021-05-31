@@ -22,8 +22,7 @@ class Menu extends Phaser.Scene {
     create() {
        
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
-        var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
-        var menuTutorialButton = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
+        var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive();
         var patchNoteButton = this.add.image((this.cameras.main.centerX*2)*0.0234, (this.cameras.main.centerY*2)*0.06, 'patchNoteButton').setScale(0.7).setInteractive();
         var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
@@ -38,9 +37,7 @@ class Menu extends Phaser.Scene {
       this.choixMenuStartButton();
         }) 
         
-    menuTutorialButton.on('pointerdown', () => {
-      this.choixMenuTutorialButton();
-        }) 
+
    
     skinsButton.on('pointerdown', () => {
         clicksDoneForEasterEggAchievement +=1;
@@ -71,10 +68,7 @@ class Menu extends Phaser.Scene {
       this.scene.start('LevelMenu');
     }
 
-    choixMenuTutorialButton(){
-        level="tutoriel"
-      this.scene.start('Jeu');
-    }
+
 
     
     popupAchievement(){
