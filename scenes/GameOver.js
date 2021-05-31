@@ -24,30 +24,28 @@ class GameOver extends Phaser.Scene {
         
  level="level1";
 
- cooldownFireball = 120;
+ cooldownShuriken = 120;
  onPlatform ="";
- bomb;
+ shuriken;
  snowball;
  runSpeed = 1;
  player;
  healthAmount = 100;
  health;
- bombs;
+ shurikens;
  snowballs;
  platforms;
  cursors;
  snowman;
- fireball;
- roquette;
+ shuriken;
  scoreText;
- roquettes;
  viesRestantes=3;
  jumpingPlayer = true
  gravity=1000;
- fireballPowerUpActive = false
- fireballPlayer = true
+ shurikenPowerUpActive = false
+ shurikenPlayer = true
  cooldownTirSoldatEnnemi
- delaiFireballPlayer = 120;
+ delaiShurikenPlayer = 120;
  standing;
  keyA;
  keyZ;

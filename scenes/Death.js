@@ -22,14 +22,14 @@ class Death extends Phaser.Scene {
     
 
 
- cooldownFireball = 120;
+ cooldownShuriken = 120;
  onPlatform ="";
  runSpeed = 1;
 
  jumpingPlayer = true
  gravity=1000;
- fireballPowerUpActive = false
- fireballPlayer = true
+ shurikenPowerUpActive = false
+ shurikenPlayer = true
  cooldownTirSoldatEnnemi
  delaiFireballPlayer = 120;
  playerInvincible=false;
