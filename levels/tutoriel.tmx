@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="47" nextobjectid="1609">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="133" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="48" nextobjectid="1610">
  <editorsettings>
   <export target="tutoriel.json" format="json"/>
  </editorsettings>
@@ -133,4 +133,7 @@
  <objectgroup id="42" name="lanceGrenade"/>
  <objectgroup id="46" name="lanceRoquette"/>
  <objectgroup id="44" name="drone"/>
+ <objectgroup id="47" name="boss">
+  <object id="1609" gid="505" x="336" y="704" width="16" height="16"/>
+ </objectgroup>
 </map>

@@ -9,6 +9,7 @@ class Death extends Phaser.Scene {
         }
     create() {
         morts+=1
+        
         var gameOverScreen = this.add.image(640, 360, 'deathScreen').setScale(2.2);
       this.time.delayedCall(1500, this.switchDeathToLevel, null, this);
     }
@@ -31,7 +32,7 @@ class Death extends Phaser.Scene {
  shurikenPowerUpActive = false
  shurikenPlayer = true
  cooldownTirSoldatEnnemi
- delaiFireballPlayer = 120;
+ delaiShurikenPlayer = 120;
  playerInvincible=false;
  playerCanResetVelocity=true; 
  playerInWater = false;

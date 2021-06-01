@@ -49,6 +49,19 @@
 
 };
 
+var runSpeed;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 var level="level1";
@@ -60,37 +73,54 @@ var cooldownShuriken = 120;
 var onPlatform ="";
 var shuriken;
 var snowball;
-var runSpeed = 1;
 var platform;
 var pageLevelMenu = 1;
 
 ///////////////ACHIEVEMENTS////////////////////
-var morts = 0
+var morts = 0;
+var localDataMorts = "morts";
+morts = Number(localStorage.getItem(localDataMorts))
+localStorage.getItem(localDataMorts);
 var mortsForAchievement = 100
 var popupMortAchievementShown = false
 
-var totalCoins=1000;
+var totalCoins = 1000;
+var localDataTotalCoins = "totalCoins";
+localStorage.getItem(localDataTotalCoins);
+totalCoins = Number(localStorage.getItem(localDataTotalCoins))
 var totalCoinsAchievement = 10000
 var popupCoinsAchievementShown = false
 
 
 var achievementsCompleted = 0;
+var localDataAchievementsCompleted = "achievementsCompleted";
+localStorage.getItem(localDataAchievementsCompleted);
+achievementsCompleted = Number(localStorage.getItem(localDataAchievementsCompleted))
 var achievementsAmount= 6;
 var popupAchievementsCompletedAchievementShown = false
 
 
 var shotsDone = 0
+var localDataShotsDone = "shotsDone";
+localStorage.getItem(localDataShotsDone);
+shotsDone = Number(localStorage.getItem(localDataShotsDone))
 var shotsDoneForAchievement = 1000;
 var popupShotsAchievementShown = false
 
 
 var clicksDoneForEasterEggAchievement = 0;
+var localDataClicksDoneForEasterEggAchievement = "clicksDoneForEasterEggAchievement";
+localStorage.getItem(localDataClicksDoneForEasterEggAchievement);
+clicksDoneForEasterEggAchievement = Number(localStorage.getItem(localDataClicksDoneForEasterEggAchievement));
 var clicksForEasterEggAchievement = 100;
 var easterEggClicksCompleted = false;
 var popupMEasterEggN1AchievementShown = false
 
 
 var skinsPossessed = 0;
+var localDataSkinsPossessed = "skinsPossessed";
+localStorage.getItem(localDataSkinsPossessed);
+skinsPossessed = Number(localStorage.getItem(localDataSkinsPossessed));
 var skinAmount = 2;
 var popupSkinAchievementShown = false
 
@@ -216,17 +246,41 @@ var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
 var laserVertical;
 var laserVerticalActivated = true;
 
-
 var cooldownActivationLaserHorizontal = 300
 var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
 var laserHorizontal;
 var laserHorizontalActivated = true;
-
+////////////BOSS//////////
+var pvBoss = 5
+var bossInvincible = false
+var vitesseBalleSoldatBoss=400
+var cooldownTirSoldatBoss=120
+var cooldownTirSoldatBossBeforeShoot =cooldownTirSoldatBoss
+var ballesSoldatBoss;
+var vitesseBalleSniperBoss=700
+var cooldownTirSniperBoss=300
+var cooldownTirSniperBossBeforeShoot =cooldownTirSniperBoss
+var ballesSniperBoss;
+var vitesseBalleMachineGunnerBoss=200
+var cooldownTirMachineGunnerBoss=60
+var cooldownTirMachineGunnerBossBeforeShoot =cooldownTirMachineGunnerBoss
+var ballesMachineGunners;
+var vitesseGrenadeLanceGrenadeBoss=600
+var cooldownTirLanceGrenadeBoss=300
+var cooldownTirLanceGrenadeBossBeforeShoot =cooldownTirLanceGrenadeBoss
+var ballesLanceGrenades;
+var vitesseRoquetteLanceRoquetteBoss=150
+var cooldownTirLanceRoquetteBoss=30
+var cooldownTirLanceRoquetteBossBeforeShoot =cooldownTirLanceRoquetteBoss
+var ballesLanceRoquettesBoss;
+var cooldownRecalculationRoquetteDirectionBoss = 120
+var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoquetteDirectionBoss
 /////////////////////////////////
 
 //////////VALEURS/////////////
 var gravity=1000;
 var healthAmount = 100;
+var pvJoueur = 100
 
 var line
 var graphics

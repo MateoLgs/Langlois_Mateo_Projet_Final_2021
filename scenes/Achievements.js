@@ -30,10 +30,11 @@ class Achievements extends Phaser.Scene {
 
 
         var achievementsDeath = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.3,  "Persistant (Die a total of " + mortsForAchievement + " times)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
-        if(morts < mortsForAchievement){
+        if(morts  < mortsForAchievement){
             var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  morts + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
         }
         else if(morts > mortsForAchievement-1){
+
             achievementsCompleted+=1;
             var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  mortsForAchievement + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }

@@ -4,6 +4,131 @@ class Jeu extends Phaser.Scene{
       super('Jeu');
     }
 
+
+/////////////////BOSS///////////////
+tirSoldatBoss(boss){
+    for (const boss of this.bosses.children.entries) {
+        var ballesSoldatBoss = this.ballesSoldats.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
+        this.physics.moveTo(ballesSoldatBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSoldatEnnemi);
+
+        ballesSoldatBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        this.physics.add.overlap(player, ballesSoldatBoss,  this.degatBalleSoldat,null,this)
+        ballesSoldatBoss.body.setAllowGravity(false);
+        if(player.x<boss.x){
+            boss.play('soldierShoot', true).setFlipX(false);
+            ballesSoldatBoss.setGravityY(1000);
+        }
+        else if(player.x>boss.x){
+            boss.play('soldierShoot', true).setFlipX(true);
+        }
+    }
+}
+
+tirSniperBoss(boss){ 
+    for (const boss of this.bosses.children.entries) {
+        var ballesSniperBoss = this.ballesSnipers.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
+        this.physics.moveTo(ballesSniperBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSniperEnnemi);
+        ballesSniperBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        this.physics.add.overlap(player, ballesSniperBoss,  this.degatBalleSniper,null,this)
+        ballesSniperBoss.body.setAllowGravity(false);
+        if(player.x<boss.x){
+            boss.play('soldierShoot', true).setFlipX(false);
+            ballesSniperBoss.setGravityY(1000);
+        }
+        else if(player.x>boss.x){
+            boss.play('soldierShoot', true).setFlipX(true);
+        }
+    }
+}
+
+tirMachineGunnerBoss(boss){
+    for (const boss of this.bosses.children.entries) {
+        var ballesMachineGunnerBoss = this.ballesMachineGunners.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
+        this.physics.moveTo(ballesMachineGunnerBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
+        var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
+        ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleSniper,null,this)
+        ballesMachineGunnerBoss.body.setAllowGravity(false);
+        if(player.x<boss.x){
+            boss.play('soldierShoot', true).setFlipX(false);
+            ballesMachineGunnerBoss.setGravityY(1000);
+        }
+        else if(player.x>boss.x){
+            boss.play('soldierShoot', true).setFlipX(true);
+        }
+    }
+}
+
+tirLanceGrenadeBoss(){
+    for (const boss of this.bosses.children.entries) {
+        var grenadeLanceGrenadeBoss = this.grenadesLanceGrenade.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        var randomBallesLanceGrenades = Phaser.Math.Between(-250, 250);
+        this.physics.moveTo(grenadeLanceGrenadeBoss, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
+        var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
+        this.physics.add.collider(grenadeLanceGrenadeBoss, this.platform);
+        grenadeLanceGrenadeBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        grenadeLanceGrenadeBoss.body.setGravityY(700)
+        grenadeLanceGrenadeBoss.body.setBounce(0.5)
+        this.time.delayedCall(3000, this.explodeGrenadeLanceGrenade, [grenadeLanceGrenadeBoss], this);
+        if(player.x<boss.x){
+            boss.play('soldierShoot', true).setFlipX(false);
+            grenadeLanceGrenadeBoss.setGravityY(1000);
+        }
+        else if(player.x>boss.x){
+            boss.play('soldierShoot', true).setFlipX(true);
+        }
+    }
+}
+
+tirLanceRoquetteBoss(){
+          
+    for (const boss of this.bosses.children.entries) {
+        var roquetteLanceRoquetteBoss = this.roquettesLanceRoquettes.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        this.physics.moveTo(roquetteLanceRoquetteBoss, player.x, player.y, vitesseRoquetteLanceRoquetteEnnemi);
+        var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
+
+        roquetteLanceRoquetteBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+
+    
+        this.physics.add.collider(roquetteLanceRoquetteBoss, this.platform, this.explodeRoquetteLanceRoquette,null,this);
+        this.physics.add.collider(roquetteLanceRoquetteBoss, player, this.explodeRoquetteLanceRoquette, null ,this);
+       
+
+        if(player.x<boss.x){
+
+            boss.play('soldierShoot', true).setFlipX(false);
+        }
+        else if(player.x>boss.x){
+
+            boss.play('soldierShoot', true).setFlipX(true);
+
+        }
+    }
+}
+
+damageBoss(boss, shuriken){
+    shuriken.destroy();
+    if(bossInvincible==false){
+        pvBoss-=1
+        if(pvBoss>0){
+            bossInvincible=true
+            this.time.delayedCall(2000, this.bossStopInvincible, null, this);
+        }
+        else if(pvBoss==0){
+            boss.destroy()
+        }
+    }
+    console.log(pvBoss)
+}
+
+bossStopInvincible(){
+    bossInvincible=false
+}
+////////////////////////////////////
+
 updateFroid(){
       if(froid==3){
 
@@ -97,26 +222,18 @@ tirMachineGunnerEnnemi(machineGunnerEnnemi){
     }
 }
 
-tirLanceGrenadeEnnemi(){
-          
+tirLanceGrenadeEnnemi(){  
     for (const lanceGrenade of this.lanceGrenades.children.entries) {
         var grenadeLanceGrenade = this.grenadesLanceGrenade.create(lanceGrenade.x, lanceGrenade.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesLanceGrenades = Phaser.Math.Between(-250, 250);
         this.physics.moveTo(grenadeLanceGrenade, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
         var angleBalle = (Math.atan2(player.y - lanceGrenade.y, player.x - lanceGrenade.x) * 180 / Math.PI);
-        // snowball.angleBalle -= 90;
-
         this.physics.add.collider(grenadeLanceGrenade, this.platform);
-
         grenadeLanceGrenade.rotation = Phaser.Math.Angle.BetweenPoints(player, lanceGrenade);
         grenadeLanceGrenade.body.setGravityY(700)
         grenadeLanceGrenade.body.setBounce(0.5)
- 
-
         this.time.delayedCall(3000, this.explodeGrenadeLanceGrenade, [grenadeLanceGrenade], this);
-
         if(player.x<lanceGrenade.x){
-
             lanceGrenade.play('soldierShoot', true).setFlipX(false);
             grenadeLanceGrenade.setGravityY(1000);
         }
@@ -153,8 +270,6 @@ tirLanceRoquetteEnnemi(){
         }
     }
 }
-
-
 
 activateLaserVertical(){
     if(laserVerticalActivated==true){
@@ -217,6 +332,7 @@ explodeRoquetteLanceRoquette(roquetteLanceRoquette){
 
 destroyColliderFunction(){
     this.physics.world.removeCollider(this.colliderExplosion);
+    this.physics.world.removeCollider(this.colliderBoss);
 }
 
 killPlayerExplosion(){
@@ -228,10 +344,10 @@ destroyExplosion(explosionShuriken){
 }
 
 destroyBalle(platform, balle){
-    balle.destroy();
+    platform.destroy();
 }
 
-lancerSnowballYeti(yeti){
+tirSoldatEnnemi(yeti){
     
     if(hardcoreMode=="off"){
     
@@ -880,7 +996,7 @@ destroyShurikenSnowball(shuriken, snowball){
 }
    
 death(){
-   // if(level!="tutoriel"){
+    //if(level!="tutoriel"){
 
 console.log("death")
     this.input.keyboard.shutdown();
@@ -892,14 +1008,16 @@ console.log("death")
       keyQ.reset();
       keyZ.reset(); 
 
+
+
     this.time.delayedCall(1000, this.mort, null, this);
-    }
-//  }
+   // }
+}
 
 mort(){
        
   viesRestantes-=1;
- 
+
 
   if(viesRestantes>0){
  player.setVelocityX(0);
@@ -988,9 +1106,6 @@ delayStart(){
   player.body.setOffset(150,0);
 
 }
-
-
-
 
 preload (){
 
@@ -1354,6 +1469,31 @@ this.anims.create({
 });
 
 
+
+  ///////////////////////////////////////
+  ////////////SniperEnnemi////////////////////
+
+ const bossObjects = this.map.getObjectLayer('boss').objects;
+ this.bosses = this.physics.add.group({
+    immovable: true,
+ });
+
+for (const boss of bossObjects) {
+this.bosses.create(boss.x, boss.y-20, 'soldatEnnemi')
+    .setOrigin(0.5,0.5)
+    .setDepth(-1)
+    .setGravityY(1000)
+    .setOffset(0,0)
+    .setScale(0.2)
+}
+  
+for (const boss of this.bosses.children.entries) {
+    boss.direction = 'RIGHT';
+}  
+this.physics.add.collider(this.bosses, this.platform);
+
+
+
   /////////////////////////////////////////
   //////////////teleportItems//////////////////
     
@@ -1702,21 +1842,12 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       immovable: true,
    });
 
-  /* for (const ballesSniper of this.ballesSnipers.children.entries) {
-   this.physics.add.overlap( player,ballesSniper, this.degatSnowballJoueur, [ballesSniper, 50], this);
-   }*/
-  //this.physics.add.overlap(player,this.ballesSoldats, this.degatSnowballJoueur, [ballesSoldat, snowball, 20], this);
-   
-
-
-
   this.anims.create({
   key: 'soldierShoot',
   frames: this.anims.generateFrameNumbers('spritesheetSoldatennemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
 });
-
 
    const sniperEnnemiObjects = this.map.getObjectLayer('sniperEnnemi').objects;
    this.sniperEnnemis = this.physics.add.group({
@@ -1733,9 +1864,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       .setScale(0.2)
 }
     
-  
-
-  
   for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
       //sniperEnnemi.collider = this.physics.add.overlap(sniperEnnemi, player, this.contactYetiJoueur, null, this);
       sniperEnnemi.direction = 'RIGHT';
@@ -2008,7 +2136,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   //this.physics.add.collider(healthPowerUp, platform);
   
   this.physics.add.collider(teleportations, this.platform);
-
+  this.physics.add.collider(this.bosses, shurikens, this.damageBoss, null, this);
   this.physics.add.collider(shurikens, this.platform, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, platformIce, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, platformSnow, this.destroyShuriken, null, this);
@@ -2028,8 +2156,10 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.collider(player, this.goomba, this.death, null, this);
 
 
-  this.physics.add.collider(this.platform, ballesSoldat,  this.destroyBalle,null,this)
-  this.physics.add.collider(this.platform, ballesSniper,  this.destroyBalle,null,this)
+  this.physics.add.collider(this.platform, this.ballesSoldats,  this.destroyBalle,null,this)
+  this.physics.add.collider(this.platform, this.ballesSnipers,  this.destroyBalle,null,this)
+  this.physics.add.collider(this.platform, this.ballesMachineGunners,  this.destroyBalle,null,this)
+
     
  // this.physics.add.collider(snowballs, platform, this.destroySnowball, null, this);
 
@@ -2113,16 +2243,7 @@ update (){
         gravity=1000
        player.setGravityY(1000)
     }
-
-/*
-if(player.body.blocked.down==true){
-
-    if(player.velocityY >100){
-      console.log("ebkebnrb")
-    }
-  }*/
-    
-    
+   
     
 for (const platformFalling of this.platformsFalling.children.entries) {    
 if(player.x>platformFalling.x && player.x<platformFalling.x+35 && player.y>platformFalling.y){
@@ -2130,9 +2251,38 @@ if(player.x>platformFalling.x && player.x<platformFalling.x+35 && player.y>platf
 }   
 
 }
-    
-    
-    
+
+///////////////////////////////////////////////////////
+//////////////////////////BOSS/////////////////////////
+cooldownTirSoldatBossBeforeShoot--
+if(cooldownTirSoldatBossBeforeShoot<=0){
+  cooldownTirSoldatBossBeforeShoot=cooldownTirSoldatBoss
+    this.tirSoldatBoss();
+}
+
+cooldownTirSniperBossBeforeShoot--
+if(cooldownTirSniperBossBeforeShoot<=0){
+  cooldownTirSniperBossBeforeShoot=cooldownTirSniperBoss
+    this.tirSniperBoss();  
+}
+
+cooldownTirMachineGunnerBossBeforeShoot--
+if(cooldownTirMachineGunnerBossBeforeShoot<=0){
+  cooldownTirMachineGunnerBossBeforeShoot=cooldownTirMachineGunnerBoss
+    this.tirMachineGunnerBoss();  
+}
+
+cooldownTirLanceGrenadeBossBeforeShoot--
+if(cooldownTirLanceGrenadeBossBeforeShoot<=0){
+    cooldownTirLanceGrenadeBossBeforeShoot=cooldownTirLanceGrenadeBoss
+    this.tirLanceGrenadeBoss();  
+}
+
+cooldownTirLanceRoquetteBossBeforeShoot--
+if(cooldownTirLanceRoquetteBossBeforeShoot<=0){
+    cooldownTirLanceRoquetteBossBeforeShoot=cooldownTirLanceRoquetteBoss
+    this.tirLanceRoquetteBoss();  
+}
     
 /////////////////Bouger goomba//////////////////////
 for (const goomba of this.goombas.children.entries) {
@@ -2198,7 +2348,7 @@ for (const platformMoving of this.platformsMoving.children.entries) {
     cooldownTirSoldatEnnemiBeforeShoot--
     if(cooldownTirSoldatEnnemiBeforeShoot<=0){
       cooldownTirSoldatEnnemiBeforeShoot=cooldownTirSoldatEnnemi
-        this.lancerSnowballYeti();
+        this.tirSoldatEnnemi();
     }
 
     cooldownTirSniperEnnemiBeforeShoot--

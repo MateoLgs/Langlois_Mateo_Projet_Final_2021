@@ -9,6 +9,10 @@ class GameOver extends Phaser.Scene {
         }
     create() {
         morts+=1
+        localStorage.setItem(localDataMorts, morts);
+
+
+
 
         var gameOverScreen = this.add.image(640, 360, 'gameOverScreen').setScale(2.1);
         this.add.text(10, 10, 'Morts : ')
@@ -39,7 +43,7 @@ class GameOver extends Phaser.Scene {
  snowman;
  shuriken;
  scoreText;
- viesRestantes=3;
+ viesRestantes=1;
  jumpingPlayer = true
  gravity=1000;
  shurikenPowerUpActive = false
