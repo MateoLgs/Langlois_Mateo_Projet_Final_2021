@@ -82,12 +82,13 @@ console.log("capasse")
     
     popupAchievement(){
         var popUpAchievementInProgress = false
-        if((morts > mortsForAchievement-1) && popupMortAchievementShown==false && popUpAchievementInProgress == false){
+        if((morts === mortsForAchievement) && popupMortAchievementShown===false && popUpAchievementInProgress === false){
+            console.log("treeeee")
             popupMortAchievementShown = true
             popUpAchievementInProgress = true
             var achievementMortsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
             var achievementMortsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
-            var achievementMortsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.20,  "PERSISTANT").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
+            var achievementMortsPopupText2 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.20,  "PERSISTENT").setFontSize(20).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             var achievementMortsPopupText3 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.26,  "(Die " + mortsForAchievement + " times)").setFontSize(12).setScrollFactor(1).setTint(0xffffff).setOrigin(0.5,0.5).setAlpha(0);  
             this.tweens.add({
                 targets: achievementMortsPopup,

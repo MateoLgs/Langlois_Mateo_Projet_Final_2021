@@ -45,6 +45,8 @@ class ShopSkin extends Phaser.Scene {
         randomButton.on('pointerdown', () => {
             if(totalCoins>=50){
                 totalCoins-=50
+                localStorage.setItem(localDataTotalCoins, totalCoins);
+
                 priceToPaySkin.destroy();
                 buyASkinText.destroy();
                 exitButton.destroy();
@@ -97,8 +99,9 @@ class ShopSkin extends Phaser.Scene {
            
         if(skinAfficheRandomUnlockSkin < probaDropSkinGreenNinja && ninjaGreenSkinUnlocked==false){
             if(ninjaGreenSkinUnlocked==false){
-                
                 ninjaGreenSkinUnlocked=true
+                localStorage.setItem(localDataNinjaGreenSkinUnlocked, ninjaGreenSkinUnlocked);
+
                 var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
                 animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                 totalCoinsTextBuySkin.destroy();
@@ -121,6 +124,8 @@ class ShopSkin extends Phaser.Scene {
                         animUnlock.destroy()
                         shareButton.destroy();
                         skinsPossessed +=1
+                        localStorage.setItem(localDataSkinsPossessed, skinsPossessed);
+
                         shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
                         shareButton.on('pointerdown', () => {
                         this.shareSkin("I just unlocked the Green Ninja !");
@@ -144,6 +149,8 @@ class ShopSkin extends Phaser.Scene {
             if(skinAfficheRandomUnlockSkin < probaDropSkinRedNinja && ninjaRougeSkinUnlocked==false){            
                 if(ninjaRougeSkinUnlocked==false){
                     ninjaRougeSkinUnlocked=true
+                    localStorage.setItem(localDataNinjaRougeSkinUnlocked, ninjaRougeSkinUnlocked);
+
 
                     var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
                     animUnlock.anims.play('unlockCoins',true).setFlipX(false);
@@ -166,6 +173,8 @@ class ShopSkin extends Phaser.Scene {
                             animUnlock.destroy()
                             shareButton.destroy();
                             skinsPossessed +=1
+                            localStorage.setItem(localDataSkinsPossessed, skinsPossessed);
+
                             shareButton = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.6, 'shareButton').setScale(0.3).setInteractive().setOrigin(0.5,0.5);
                             shareButton.on('pointerdown', () => {
                             this.shareSkin("I just unlocked the Red Ninja !");
@@ -193,6 +202,8 @@ class ShopSkin extends Phaser.Scene {
                 totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
                 
                 totalCoins+=10
+                localStorage.setItem(localDataTotalCoins, totalCoins);
+
 
 
                 this.time.addEvent({

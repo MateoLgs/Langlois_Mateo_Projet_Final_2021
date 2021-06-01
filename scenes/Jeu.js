@@ -428,6 +428,7 @@ killMachineGunner(machineGunner, shuriken){
 lancershuriken(player){
     if(shurikenLeft>0){
         shotsDone+=1; 
+        localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
        var shuriken = shurikens.create(player.x, player.y-5, 'shuriken');
   this.physics.moveTo(shuriken, pointer.worldX, pointer.worldY, 700);
@@ -525,7 +526,6 @@ collectCoin(coin){
   totalCoins+=1;
   textPieces.destroy();
   textPieces = this.add.text(280, 200,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
-    // (totalCoins);
 
 }    
 

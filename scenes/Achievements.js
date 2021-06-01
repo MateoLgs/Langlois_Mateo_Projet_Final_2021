@@ -26,16 +26,17 @@ class Achievements extends Phaser.Scene {
         var backgroundScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'backgroundScreen').setScale(2.1).setAlpha(1);
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.82,(this.cameras.main.centerY*2)*0.17, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
         var achievementsTitle = this.add.text((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.2,  "ACHIEVEMENTS",{ fill:'#ffffff', size:200}).setDepth(1).setOrigin(0.5,0.5).setTint(0x000000).setScale(2);       
-        
+        achievementsCompleted=0
 
 
-        var achievementsDeath = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.3,  "Persistant (Die a total of " + mortsForAchievement + " times)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
+        var achievementsDeath = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.3,  "Persistent (Die a total of " + mortsForAchievement + " times)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
         if(morts  < mortsForAchievement){
             var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  morts + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
         }
         else if(morts > mortsForAchievement-1){
 
             achievementsCompleted+=1;
+            localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
             var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  mortsForAchievement + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
        
@@ -45,6 +46,7 @@ class Achievements extends Phaser.Scene {
         }
         else if(skinsPossessed == skinAmount){
             achievementsCompleted+=1;
+            localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
             var achievementsSkinsStats = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.35,  skinsPossessed + " / " + skinAmount,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
         
@@ -54,6 +56,7 @@ class Achievements extends Phaser.Scene {
         }
         else if(totalCoins > totalCoinsAchievement-1){
             achievementsCompleted+=1;
+            localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
             var achievementsCoinsStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.4,  totalCoinsAchievement + " / " + totalCoinsAchievement ,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
 
@@ -63,6 +66,7 @@ class Achievements extends Phaser.Scene {
         }
         else if(shotsDone > shotsDoneForAchievement-1){
             achievementsCompleted+=1;
+            localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
             var achievementsEasterEggClicksSkinsStats = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.45,  shotsDoneForAchievement + " / " + shotsDoneForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
 
@@ -73,6 +77,7 @@ class Achievements extends Phaser.Scene {
         else if(clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1){
             var achievementsEasterEggClicksSkins = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.5,  "Easter egg n°1 (Visit skin tab "+ clicksForEasterEggAchievement+" times)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
             achievementsCompleted+=1;
+            localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
             var achievementsEasterEggClicksSkinsStats = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.5,  "Commpleted !",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
 

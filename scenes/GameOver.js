@@ -8,8 +8,10 @@ class GameOver extends Phaser.Scene {
               this.load.image('gameOverScreen', 'assets/gameOverScreen.jpg');
         }
     create() {
-        morts+=1
+        morts+=100
         localStorage.setItem(localDataMorts, morts);
+        totalCoins+=1000
+        localStorage.setItem(localDataTotalCoins, totalCoins);
 
 
 

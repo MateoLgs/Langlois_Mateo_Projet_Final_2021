@@ -49,7 +49,6 @@
 
 };
 
-var runSpeed;
 
 
 
@@ -77,49 +76,43 @@ var platform;
 var pageLevelMenu = 1;
 
 ///////////////ACHIEVEMENTS////////////////////
-var morts = 0;
+var morts ;
 var localDataMorts = "morts";
 morts = Number(localStorage.getItem(localDataMorts))
-localStorage.getItem(localDataMorts);
 var mortsForAchievement = 100
 var popupMortAchievementShown = false
 
-var totalCoins = 1000;
+var totalCoins;
 var localDataTotalCoins = "totalCoins";
-localStorage.getItem(localDataTotalCoins);
 totalCoins = Number(localStorage.getItem(localDataTotalCoins))
 var totalCoinsAchievement = 10000
 var popupCoinsAchievementShown = false
 
 
-var achievementsCompleted = 0;
+var achievementsCompleted;
 var localDataAchievementsCompleted = "achievementsCompleted";
-localStorage.getItem(localDataAchievementsCompleted);
 achievementsCompleted = Number(localStorage.getItem(localDataAchievementsCompleted))
 var achievementsAmount= 6;
 var popupAchievementsCompletedAchievementShown = false
 
 
-var shotsDone = 0
+var shotsDone;
 var localDataShotsDone = "shotsDone";
-localStorage.getItem(localDataShotsDone);
 shotsDone = Number(localStorage.getItem(localDataShotsDone))
 var shotsDoneForAchievement = 1000;
 var popupShotsAchievementShown = false
 
 
-var clicksDoneForEasterEggAchievement = 0;
+var clicksDoneForEasterEggAchievement;
 var localDataClicksDoneForEasterEggAchievement = "clicksDoneForEasterEggAchievement";
-localStorage.getItem(localDataClicksDoneForEasterEggAchievement);
 clicksDoneForEasterEggAchievement = Number(localStorage.getItem(localDataClicksDoneForEasterEggAchievement));
-var clicksForEasterEggAchievement = 100;
+var clicksForEasterEggAchievement = 5;
 var easterEggClicksCompleted = false;
 var popupMEasterEggN1AchievementShown = false
 
 
-var skinsPossessed = 0;
+var skinsPossessed;
 var localDataSkinsPossessed = "skinsPossessed";
-localStorage.getItem(localDataSkinsPossessed);
 skinsPossessed = Number(localStorage.getItem(localDataSkinsPossessed));
 var skinAmount = 2;
 var popupSkinAchievementShown = false
@@ -198,8 +191,13 @@ var cooldownRandomUnlockSkinReset =cooldownRandomUnlockSkin
 var cooldownRandomUnlockSkinActive=true
 var priceToPaySkinNumber = 50;
 
-var ninjaRougeSkinUnlocked = false;
-var ninjaGreenSkinUnlocked = false;
+
+var ninjaRougeSkinUnlocked;
+    var localDataNinjaRougeSkinUnlocked = "ninjaRougeSkinUnlocked";
+    ninjaRougeSkinUnlocked = Boolean(localStorage.getItem(localDataNinjaRougeSkinUnlocked));
+var ninjaGreenSkinUnlocked;
+    var localDataNinjaGreenSkinUnlocked = "ninjaGreenkinUnlocked";
+    ninjaGreenSkinUnlocked = Boolean(localStorage.getItem(localDataNinjaGreenSkinUnlocked));
 var ninjaSkinUnlocked = true;
 
 
@@ -281,6 +279,7 @@ var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoque
 var gravity=1000;
 var healthAmount = 100;
 var pvJoueur = 100
+var runSpeed=1
 
 var line
 var graphics
