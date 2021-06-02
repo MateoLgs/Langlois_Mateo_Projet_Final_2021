@@ -9,9 +9,8 @@ class Victoire extends Phaser.Scene {
         }
     create() {
         
-        var gameOverScreen = this.add.image(600, 400, 'VictoireScreen').setScale(2.5);
-		this.add.text(0.5, 0.5, 'Victoire')
-      this.time.delayedCall(3000, this.switchToWin, null, this);
+        var victoireScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'VictoireScreen').setScale(2.5);
+        this.time.delayedCall(3000, this.switchToWin, null, this);
     }
     
     switchToWin(){
@@ -20,52 +19,13 @@ class Victoire extends Phaser.Scene {
         keyQ.reset();
         keyZ.reset(); 
 
-            
- level="level1";
-
- cooldownShuriken = 120;
- onPlatform ="";
- shuriken;
- snowball;
- runSpeed = 1;
- totalCoins=0;
- player;
- healthAmount = 100;
- health;
- shurikens;
- snowballs;
- platforms;
- cursors;
- snowman;
- shuriken;
- 
- scoreText;
- viesRestantes=3;
- jumpingPlayer = true
- gravity=1000;
- shurikenPowerUpActive = false
- shurikenPlayer = true
- cooldownTirSoldatEnnemi
- delaiShurikenPlayer = 120;
- standing;
- keyA
- keyZ;
- keyS;
- keyD;
- keyQ;
- coins;
- playerInvincible=false;
- playerCanResetVelocity=true;
- hardcoreMode="off";  
- playerInWater = false;
- playerDirection ="right"
- textPieces;
- froid1;
- froid2;
- froid3;
- froid = 0;
- padConnected;
- paddle;
+        pvPlayer=100
+        cooldownShuriken = 120;
+        viesRestantes=5;
+        gravity=1000;
+        playerInvincible=false;
+        shurikenLeft =5;
+        pageLevelMenu = 1;
 
           this.scene.start('Menu');
         

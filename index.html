@@ -15,7 +15,14 @@
     <script src="./scenes/GameOver.js"></script>
     <script src="./scenes/Victoire.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/phaser-raycaster@0.9.2/dist/phaser-raycaster.min.js"></script>
-    <style type="text/css">* { padding: 0; margin: 0; }</style>
+    <style type="text/css">
+
+    canvas {
+display : block;   
+margin : auto;
+padding: 0;
+}
+</style>
 
 </head>
  <body>
@@ -30,15 +37,16 @@
     var config = {
 
     type: Phaser.AUTO,
+    
     width: 896,
     height: 448,
     backgroundColor: '#538192',
-    pixelArt: true,
+   // pixelArt: true,
     physics: {
         default: 'arcade',
         arcade: {
             //gravity: { y: 1000 },
-            debug: false,
+            debug: true,
             fps: 90
         },
     },
@@ -120,23 +128,59 @@ var popupSkinAchievementShown = false
 ///////////////LEVELS////////////////////////////////
 
 var level1Unlocked = true;
+    var localDataLevel1Unlocked = "level1";
+    level1Unlocked = Boolean(localStorage.getItem(localDataLevel1Unlocked));
 var level2Unlocked = false;
+    var localDataLevel2Unlocked = "level2";
+    level2Unlocked = Boolean(localStorage.getItem(localDataLevel2Unlocked));
 var level3Unlocked = false;
+    var localDataLevel3Unlocked = "level3";
+    level3Unlocked = Boolean(localStorage.getItem(localDataLevel3Unlocked));
 var level4Unlocked = false;
+    var localDataLevel4Unlocked = "level4";
+    level4Unlocked = Boolean(localStorage.getItem(localDataLevel4Unlocked));
 var level5Unlocked = false;
+    var localDataLevel5Unlocked = "level5";
+    level5Unlocked = Boolean(localStorage.getItem(localDataLevel5Unlocked));
 var level6Unlocked = false;
+    var localDataLevel6Unlocked = "level6";
+    level6Unlocked = Boolean(localStorage.getItem(localDataLevel6Unlocked));
 var level7Unlocked = false;
+    var localDataLevel7Unlocked = "level7";
+    level7Unlocked = Boolean(localStorage.getItem(localDataLevel7Unlocked));
 var level8Unlocked = false;
+    var localDataLevel8Unlocked = "level8";
+    level8Unlocked = Boolean(localStorage.getItem(localDataLevel8Unlocked));
 var level9Unlocked = false;
+    var localDataLevel9Unlocked = "level9";
+    level9Unlocked = Boolean(localStorage.getItem(localDataLevel9Unlocked));
 var level10Unlocked = false;
+    var localDataLevel10Unlocked = "level10";
+    level10Unlocked = Boolean(localStorage.getItem(localDataLevel10Unlocked));
 var level11Unlocked = false;
+    var localDataLevel11Unlocked = "level11";
+    level11Unlocked = Boolean(localStorage.getItem(localDataLevel11Unlocked));
 var level12Unlocked = false;
+    var localDataLevel12Unlocked = "level12";
+    level12Unlocked = Boolean(localStorage.getItem(localDataLevel12Unlocked));
 var level13Unlocked = false;
+    var localDataLevel13Unlocked = "level13";
+    level13Unlocked = Boolean(localStorage.getItem(localDataLevel13Unlocked));
 var level14Unlocked = false;
+    var localDataLevel14Unlocked = "level14";
+    level14Unlocked = Boolean(localStorage.getItem(localDataLevel14Unlocked));
 var level15Unlocked = false;
+    var localDataLevel15Unlocked = "level15";
+    level15Unlocked = Boolean(localStorage.getItem(localDataLevel15Unlocked));
 var level16Unlocked = false;
+    var localDataLevel16Unlocked = "level16";
+    level16Unlocked = Boolean(localStorage.getItem(localDataLevel16Unlocked));
 var level17Unlocked = false;
+    var localDataLevel17Unlocked = "level17";
+    level17Unlocked = Boolean(localStorage.getItem(localDataLevel17Unlocked));
 var level18Unlocked = false;
+    var localDataLevel18Unlocked = "level18";
+    level18Unlocked = Boolean(localStorage.getItem(localDataLevel18Unlocked));
 
 /////////////////////////////////////////////////////////////
 var platform;
@@ -150,7 +194,7 @@ var cursors;
 var snowman;
 var shuriken;
 var scoreText;
-var viesRestantes=1;
+var viesRestantes=5;
 var jumpingPlayer = true
 var shurikenPowerUpActive = true
 var shurikenPlayer = true
@@ -186,9 +230,6 @@ var viesRestantesText
 //////////SKINS/////////////////
 var playerSkin="ninja";
 var skinAfficheRandomUnlockSkinImage;
-var cooldownRandomUnlockSkin=600
-var cooldownRandomUnlockSkinReset =cooldownRandomUnlockSkin
-var cooldownRandomUnlockSkinActive=true
 var priceToPaySkinNumber = 50;
 
 
@@ -201,8 +242,8 @@ var ninjaGreenSkinUnlocked;
 var ninjaSkinUnlocked = true;
 
 
-var probaDropSkinGreenNinja = 70
-var probaDropSkinRedNinja = 50
+var probaDropSkinGreenNinja = 10
+var probaDropSkinRedNinja = 5
 var probaDropCoins = 100-probaDropSkinGreenNinja-probaDropSkinRedNinja
 
 ////////////////////////////////
@@ -277,7 +318,6 @@ var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoque
 
 //////////VALEURS/////////////
 var gravity=1000;
-var healthAmount = 100;
 var pvJoueur = 100
 var runSpeed=1
 

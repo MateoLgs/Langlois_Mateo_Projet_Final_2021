@@ -809,7 +809,19 @@
          "draworder":"topdown",
          "id":20,
          "name":"yeti",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1610,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":304,
+                 "y":720
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -990,19 +1002,7 @@
          "draworder":"topdown",
          "id":47,
          "name":"boss",
-         "objects":[
-                {
-                 "gid":505,
-                 "height":16,
-                 "id":1609,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":336,
-                 "y":704
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1010,7 +1010,7 @@
          "y":0
         }],
  "nextlayerid":48,
- "nextobjectid":1610,
+ "nextobjectid":1611,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

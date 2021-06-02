@@ -10,7 +10,7 @@ class Death extends Phaser.Scene {
     create() {
         morts+=1
         
-        var gameOverScreen = this.add.image(640, 360, 'deathScreen').setScale(2.2);
+        var deathScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'deathScreen').setScale(2.2);
       this.time.delayedCall(1500, this.switchDeathToLevel, null, this);
     }
     
@@ -20,24 +20,12 @@ class Death extends Phaser.Scene {
         keyQ.reset();
         keyZ.reset();        
         
-    
-
-
- cooldownShuriken = 120;
- onPlatform ="";
- runSpeed = 1;
-
- jumpingPlayer = true
- gravity=1000;
- shurikenPowerUpActive = false
- shurikenPlayer = true
- cooldownTirSoldatEnnemi
- delaiShurikenPlayer = 120;
- playerInvincible=false;
- playerCanResetVelocity=true; 
- playerInWater = false;
- playerDirection ="right"
- froid = 0
+        pvPlayer=100
+        cooldownShuriken = 120;
+        gravity=1000;
+        playerInvincible=false;
+        shurikenLeft =5;
+        pageLevelMenu = 1;
 
    
 

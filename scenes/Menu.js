@@ -6,11 +6,9 @@ class Menu extends Phaser.Scene {
     }
 
         preload(){
-            
 
 
 
-console.log("capasse")
               this.load.image('Menu', 'assets/menuScreen.png');
               this.load.image('startButton', 'assets/startButton.png');
               this.load.image('tutorialButton', 'assets/tutorialButton.png');
@@ -26,8 +24,6 @@ console.log("capasse")
               this.load.image('blackRectangle', 'assets/blackRectangle.png');        
             }
     create() {
-       console.log(morts)
-       viesRestantes=1;
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive();

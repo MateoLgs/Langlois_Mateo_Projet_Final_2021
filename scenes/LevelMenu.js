@@ -8,6 +8,8 @@ class LevelMenu extends Phaser.Scene {
             this.load.image('backButton', 'assets/backButton.png');    
         }
     create() {
+        var level1Unlocked = true;
+
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var backButton = this.add.image((this.cameras.main.centerX*2)*0.04,(this.cameras.main.centerY*2)*0.075, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5);
 

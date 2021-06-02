@@ -50,7 +50,7 @@ tirMachineGunnerBoss(boss){
         this.physics.moveTo(ballesMachineGunnerBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
         var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
         ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
-        this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleSniper,null,this)
+        this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleMachineGunner,null,this)
         ballesMachineGunnerBoss.body.setAllowGravity(false);
         if(player.x<boss.x){
             boss.play('soldierShoot', true).setFlipX(false);
@@ -166,9 +166,9 @@ updateFroid(){
 
 joueurPrendDegats(degat){
      pvPlayer-=degat
-    /* if(pvPlayer<0.1){
+    if(pvPlayer<0.1){
          this.death();
-     }*/
+    }
      console.log(pvPlayer)
  }
 
@@ -347,51 +347,23 @@ destroyBalle(platform, balle){
     platform.destroy();
 }
 
-tirSoldatEnnemi(yeti){
-    
-    if(hardcoreMode=="off"){
-    
-      
-          for (const yeti of this.yetis.children.entries) {
-          var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball').setFlipX(true).setScale(0.80);
-          this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
-          var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
-          //var angleBalle = (Math.atan2(player.y - yeti.y, player.x - yeti.x) * 180 / Math.PI);
-         // snowball.angleBalle -= 90;
-         ballesSoldat.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti);
-         this.physics.add.overlap(player, ballesSoldat,  this.degatBalleSoldat,null,this)
-
-         ballesSoldat.body.setAllowGravity(false);
-      if(player.x<yeti.x){
-
-      yeti.play('soldierShoot', true).setFlipX(false);
-      ballesSoldat.setGravityY(1000);
-      }
-      else if(player.x>yeti.x){
-
-      yeti.play('soldierShoot', true).setFlipX(true);
-
-      }
-    }
-    }
-    
-      if(hardcoreMode=="on"){
-                 
+tirSoldatEnnemi(yeti){               
     for (const yeti of this.yetis.children.entries) {
-      yeti.play('yetiThrow', true);
+            yeti.play('soldierShoot', true);
             var snowball = snowballs.create(yeti.x, yeti.y, 'snowball');
+            this.physics.moveTo(snowball, player.x, player.y, vitesseBalleSoldatEnnemi);
 
-      if(player.x<yeti.x){
-      snowball.setVelocity(Phaser.Math.FloatBetween(-200, -400), Phaser.Math.FloatBetween(-200, -400));
-      yeti.anims.play('yetiThrow',true).setFlipX(false);
-      snowball.setGravityY(1000);
-      }
-      else if(player.x>yeti.x){
-      snowball.setVelocity(Phaser.Math.FloatBetween(200, 400), Phaser.Math.FloatBetween(-200, -400));
-      yeti.anims.play('yetiThrow',true).setFlipX(true)
-      snowball.setGravityY(1000);
-      }
-    }
+
+            snowball.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti)-135;
+            this.physics.add.overlap(player, snowball,  this.degatBalleSoldat,null,this)
+
+
+        if(player.x<yeti.x){
+            yeti.anims.play('soldierShoot',true).setFlipX(false);
+        }
+        else if(player.x>yeti.x){
+            yeti.anims.play('soldierShoot',true).setFlipX(true)
+        }
     }
 }
   
@@ -511,19 +483,17 @@ collectHealthPlayer(powerUpHealth){
   powerUpHealth.destroy();
 
   //  Add and update the score
-  if(froid>0){
-  froid -= 1;
+  if(pvJoueur>0){
+    pvJoueur += 25;
   }
   this.updateFroid();
 
 }
   
 collectCoin(coin){
- /* healthAmount-=10
-   Health.innerHTML=healthAmount*/
 
   coin.destroy();
-  totalCoins+=1;
+  totalCoins+=5;
   textPieces.destroy();
   textPieces = this.add.text(280, 200,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
 
@@ -542,7 +512,7 @@ pickUpTeleport(player,teleport){
 
 changeShuriken(){
   shurikenLeftText.destroy();
-  shurikenLeftText = this.add.text(1170, 50,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);       
+  shurikenLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.075,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }
  
 collectPowerUpShuriken(powerUpShuriken){
@@ -553,77 +523,104 @@ collectPowerUpShuriken(powerUpShuriken){
 }
   
 contactDrapeau(){
+
+    if(level=="level1"){
+        totalCoins+=100
+        level2Unlocked = true
+        localStorage.setItem(localDataLevel2Unlocked, level2Unlocked);        
+    }    
+    else if(level=="level2"){
+        totalCoins+=150
+        level3Unlocked = true
+        localStorage.setItem(localDataLevel3Unlocked, level3Unlocked);        
+    }
+    else if(level=="level3"){
+        totalCoins+=200
+        level4Unlocked = true
+        localStorage.setItem(localDataLevel4Unlocked, level4Unlocked);        
+    }    
+    else if(level=="level4"){
+        totalCoins+=250
+        level5Unlocked = true
+        localStorage.setItem(localDataLevel5Unlocked, level5Unlocked);        
+    }      
+    else if(level=="level5"){
+        totalCoins+=300
+        level6Unlocked = true
+        localStorage.setItem(localDataLevel6Unlocked, level6Unlocked);        
+    }      
+    else if(level=="level6"){
+        totalCoins+=350
+        level7Unlocked = true
+        localStorage.setItem(localDataLevel7Unlocked, level7Unlocked);        
+    }      
+    else if(level=="level7"){
+        totalCoins+=400
+        level8Unlocked = true
+        localStorage.setItem(localDataLevel8Unlocked, level8Unlocked);        
+    }           
+    else if(level=="level8"){
+        totalCoins+=450
+        level9Unlocked = true
+        localStorage.setItem(localDataLevel9Unlocked, level9Unlocked);        
+    }      
+    else if(level=="level9"){
+        totalCoins+=500
+        level10Unlocked = true
+        localStorage.setItem(localDataLevel10Unlocked, level10Unlocked);        
+    }      
+    else if(level=="level10"){
+        totalCoins+=550
+        level11Unlocked = true
+        localStorage.setItem(localDataLevel11Unlocked, level11Unlocked);        
+    }        
+    else if(level=="level11"){
+        totalCoins+=600
+        level12Unlocked = true
+        localStorage.setItem(localDataLevel12Unlocked, level12Unlocked);        
+    }      
+    else if(level=="level12"){
+        totalCoins+=650
+        level13Unlocked = true
+        localStorage.setItem(localDataLevel13Unlocked, level13Unlocked);        
+    }     
+    else if(level=="level13"){
+        totalCoins+=700
+        level14Unlocked = true
+        localStorage.setItem(localDataLevel14Unlocked, level14Unlocked);        
+    }     
+    else if(level=="level14"){
+        totalCoins+=750
+        level15Unlocked = true
+        localStorage.setItem(localDataLevel15Unlocked, level15Unlocked);        
+    }     
+    else if(level=="level15"){
+        totalCoins+=800
+        level16Unlocked = true
+        localStorage.setItem(localDataLevel16Unlocked, level16Unlocked);        
+    }     
+    else if(level=="level16"){
+        totalCoins+=850
+        level17Unlocked = true
+        localStorage.setItem(localDataLevel17Unlocked, level17Unlocked);        
+    }        
+    else if(level=="level17"){
+        totalCoins+=900
+        level18Unlocked = true
+        localStorage.setItem(localDataLevel18Unlocked, level18Unlocked);        
+    }   
+    else if(level=="level18"){
+        totalCoins+=1000       
+    }   
+
   
-  if(totalCoins>14){
-   (level)   
-  totalCoins=0;
-
-  if(level=="level4"){
-      this.scene.start("Victoire");
-  } 
-  if(level=="level3"){
-      level="level4"
-
-      this.scene.restart();
-  } 
-  if(level=="level2"){
-      level="level3"
-
-      this.scene.restart();
-  }  
-  if(level=="level1"){
-      level="level2"
-         
-      this.scene.restart();
-  }    
-
-  }
-  else {
-      console.log('Vous n\'avez que ' + totalCoins +' pièces')
-  }
+    this.scene.start("Victoire");
 }    
 
 degatSnowmanJoueur(snowman){
  // snowman.destroy();
-  var explosionShuriken = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScrollFactor(0).setScale(0.5).setDepth(-1).setOrigin(0.5,1);
-
-        this.death();    
-}
-  
-contactYetiJoueur(yeti){
-  this.bounce();
-     yeti.destroy();
-
-     if(hardcoreMode=="on"){
-        this.death();
-    }
-    if(playerInvincible==false && hardcoreMode=="off"){
-      froid+=1;
-      this.updateFroid();
-    }
-
-}
-  
-bounce(){
-   playerCanResetVelocity=false
-      this.input.enabled = false;
-
-      keyD.reset();
-      keyQ.reset();
-      keyZ.reset();  
-    this.playerGoInvincible();
-          if(player.body.touching.right){
-         player.setVelocityX(-250);
-    }
-    else if(player.body.touching.down){
-         player.setVelocityY(-250);
-    }
-    else if(player.body.touching.left){
-         player.setVelocityX(+250);
-    }
-
-   
-      this.time.delayedCall(400, this.inputEnabled, null, this);   
+    var explosionShuriken = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScrollFactor(0).setScale(0.5).setDepth(-1).setOrigin(0.5,1);
+    this.death();    
 }
   
 bouncePlatformMontagne(){
@@ -668,32 +665,27 @@ canResetVelocity(){
   playerCanResetVelocity=true
 }
 
-degatBalleSniper(player,ballesSniper, degats){
-
-  ballesSniper.destroy();
-    if(hardcoreMode=="on" ){
-        this.death();
+degatBalleMachineGunner(player,ballesSniper){
+    ballesSniper.destroy();
+    if(playerInvincible==false){
+          this.joueurPrendDegats(40);
+          this.playerGoInvincible();
     }
-  if(playerInvincible==false && hardcoreMode=="off"){
-   froid+=1;
-  this.joueurPrendDegats(40);
-  this.playerGoInvincible();
+  }
+
+degatBalleSniper(player,ballesSniper){
+  ballesSniper.destroy();
+  if(playerInvincible==false){
+        this.joueurPrendDegats(5);
+        this.playerGoInvincible();
   }
 }
   
-degatBalleSoldat(player,ballesSoldat, degats){
-
-  ballesSoldat.destroy();
-if(hardcoreMode=="on" ){
-    this.death();
-}
-if(playerInvincible==false && hardcoreMode=="off"){
-froid+=1;
-this.joueurPrendDegats(15);
-this.playerGoInvincible();
-}
-
-
+degatBalleSoldat(player,ballesSoldat){
+    ballesSoldat.destroy();
+    if(playerInvincible==false){
+        this.joueurPrendDegats(15);
+    }
 }
 
 hitShuriken (player, shuriken){
@@ -1102,12 +1094,14 @@ playerEscalierGauche(){
 
 delayStart(){
 
-  player.body.setSize(230, 480, true);
-  player.body.setOffset(150,0);
+
 
 }
 
 preload (){
+    this.load.image("bg_1", "assets/bg-1.png");
+    this.load.image("bg_2", "assets/bg-2.png");
+
 
 
   this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
@@ -1118,13 +1112,11 @@ preload (){
   this.load.image('picsInvisible', 'assets/picsInvisible.png');
   this.load.image('laserHorizontal', 'assets/laserHorizontal.png');
   this.load.image('laserVertical', 'assets/laserVertical.png');
-
   this.load.image('drone', 'assets/drone.png');
-
   this.load.image('blackSquare', 'assets/blackSquare.png');
   this.load.image('shuriken', 'assets/shuriken.png');
-  this.load.image('coin', 'assets/cles.png');
-  this.load.image('snowball', 'assets/snowball.png');
+  this.load.image('coin', 'assets/coin.png');
+  this.load.image('snowball', 'assets/mediumBullet.png');
   this.load.image('soldatEnnemi', 'assets/soldatEnnemi.png');
   //this.load.image('sky', 'assets/sky.png');
   this.load.image('flag', 'assets/igloo.png');
@@ -1140,7 +1132,7 @@ preload (){
   this.load.image('player1Ninja', 'assets/playerNinjaIdle1.png');
   this.load.image('teleport', 'assets/teleporter.png');
   //this.load.spritesheet('dude1', 'assets/dude1.png', { frameWidth: 32, frameHeight: 48 });    
-  this.load.spritesheet('spritesheetSoldatennemi', 'assets/spritesheetSoldatennemi.png', { frameWidth: 325, frameHeight: 591 });
+  this.load.spritesheet('spritesheetSoldatEnnemi', 'assets/spritesheetSoldatEnnemi.png', { frameWidth: 325, frameHeight: 591 });
   
   
 
@@ -1187,7 +1179,15 @@ create (){
        this.map = this.make.tilemap({ key: 'level4' });
     }
 
+  this.bg_1 = this.add.tileSprite(0, 0, 10000, 10000, "bg_1").setDepth(-10).setScale(2.6);
+  this.bg_1.setOrigin(0, 0);
+  this.bg_1.setScrollFactor(0.25);
   
+  this.bg_2 = this.add.tileSprite(0, 0, 10000, 10000, "bg_2").setDepth(-10).setScale(2.6);
+  this.bg_2.setOrigin(0, 0);
+  this.bg_2.setScrollFactor(0.5);
+
+
   this.tileset = this.map.addTilesetImage('tileset', 'tiles');
   var background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
   this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
@@ -1220,25 +1220,26 @@ create (){
 
     /////////////////////////////////////////
     /////////////PLAYER//////////////////////
-  var blackScreen = this.physics.add.sprite(1210, 50, 'blackSquare').setScrollFactor(0).setScale(0.15).setDepth(1);
-  shurikenLeftText = this.add.text(1170, 50,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1);  
-  var shurikenLeftImage = this.physics.add.sprite(1220, 65, 'shuriken').setScrollFactor(0).setScale(1.5).setDepth(1);
+  //var blackScreen = this.physics.add.sprite(1210, 50, 'blackSquare').setScrollFactor(0).setScale(0.15).setDepth(1);
+  shurikenLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.075,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+  var shurikenLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.075, 'shuriken').setScrollFactor(0).setScale(1.5).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
     
-  viesRestantesText = this.add.text(280, 170,  viesRestantes,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
-  var life = this.physics.add.sprite(320, 180, 'life').setScrollFactor(0).setScale(0.05).setDepth(1);
+  viesRestantesText = this.add.text((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.05,  viesRestantes,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+  var life = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05, 'life').setScrollFactor(0).setScale(0.05).setDepth(1).setOrigin(0.5,0.5);
     
-  textPieces = this.add.text(280, 200,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
-  var pieces = this.physics.add.sprite(320, 210, 'coin').setScrollFactor(0).setScale(0.08).setDepth(1);
-  if(hardcoreMode=="off"){    
-  froid1 = this.physics.add.sprite(500, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-  froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-  froid3 = this.physics.add.sprite(700, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-  }
-  player = this.physics.add.sprite(60, 500, 'spritesheetPlayerNinja');
+  textPieces = this.add.text((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.1,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+  var pieces = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.1, 'coin').setScrollFactor(0).setScale(0.025).setDepth(1).setOrigin(0.5,0.5);
+
+  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1,(this.cameras.main.centerY*2)*1, 'spritesheetPlayerNinja');
   player.setGravityY(1000)
 
+  player.body.setSize(230, 480, true);
+  player.body.setOffset(150,0);
   player.setCollideWorldBounds(false).setScale(0.2);
   this.time.delayedCall(100, this.delayStart, null, this);
+
+
+
   
 /*  this.anims.create({
       key: 'run',
@@ -1427,23 +1428,13 @@ if(playerSkin=="ninjaGreen"){
     
     
     
- /*   
-  var snowstorm = this.physics.add.sprite(-900, 0, 'snowstorm').setOrigin(0, 0);
-    if(hardcoreMode=="off"){
-      snowstorm.body.velocity.x=10;
-    }
-    if(hardcoreMode=="on"){
-      snowstorm.body.velocity.x=17;
-    }
 
-  snowstorm.body.allowGravity = false*/
 
  
     
     
     
- // this.cameras.main.zoom = 1.75;
-  this.cameras.main.zoom = 1;
+  this.camera = this.cameras.main.zoom = 1;
 
   this.cursors = this.input.keyboard.createCursorKeys();
   
@@ -1799,7 +1790,6 @@ this.lanceGrenades.create(lanceGrenade.x, lanceGrenade.y-20, 'soldatEnnemi')
 
 
 for (const lanceGrenade of this.lanceGrenades.children.entries) {
-    //sniperEnnemi.collider = this.physics.add.overlap(sniperEnnemi, player, this.contactYetiJoueur, null, this);
     lanceGrenade.direction = 'RIGHT';
 }  
 this.physics.add.collider(this.lanceGrenades, this.platform);
@@ -1844,7 +1834,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 
   this.anims.create({
   key: 'soldierShoot',
-  frames: this.anims.generateFrameNumbers('spritesheetSoldatennemi', { start: 0, end: 1 }),
+  frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
 });
@@ -1865,7 +1855,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 }
     
   for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
-      //sniperEnnemi.collider = this.physics.add.overlap(sniperEnnemi, player, this.contactYetiJoueur, null, this);
       sniperEnnemi.direction = 'RIGHT';
 }  
  this.physics.add.collider(this.sniperEnnemis, this.platform);
@@ -1878,7 +1867,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   ////////////MachineGunnerennemi////////////////////
   this.ballesMachineGunners = this.physics.add.group({
       immovable: true,
-      degats : 50,
    });
   /* for (const ballesSniper of this.ballesSnipers.children.entries) {
    this.physics.add.overlap( player,ballesSniper, this.degatSnowballJoueur, [ballesSniper, 50], this);
@@ -1960,7 +1948,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 
   
   for (const yeti of this.yetis.children.entries) {
-  yeti.collider = this.physics.add.overlap(yeti, player, this.contactYetiJoueur, null, this);
   yeti.direction = 'RIGHT';
 }  
  this.physics.add.collider(this.yetis, this.platform);
@@ -2021,12 +2008,12 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   
    ///////////////////////////////////////
   ////////////PowerUpHealth////////////
-  if(hardcoreMode=="off"){
+
   const powerUpHealthObjects = this.map.getObjectLayer('powerUpHealth').objects;
    this.powerUpHealth = this.physics.add.group({
           immovable: true,
           allowGravity: false
-      });
+   });
 
   for (const powerUpHealth of powerUpHealthObjects) {
   this.powerUpHealth.create(powerUpHealth.x+8, powerUpHealth.y-10,'powerUpHealth')
@@ -2040,7 +2027,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   for (const powerUpHealth of this.powerUpHealth.children.entries) {
   powerUpHealth.collider = this.physics.add.overlap(powerUpHealth, player, this.collectHealthPlayer, null, this);
 }
-  }
+  
   
       ///////////////////////////////////////
       ////////////arrivée////////////////////
@@ -2106,19 +2093,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   //  Input Events
   cursors = this.input.keyboard.createCursorKeys();
 
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-/*  healthPowerUp = this.physics.add.group({
-      key: 'health',
-      repeat: 0,
-      setXY: { x: Phaser.Math.FloatBetween(4, 1000), y: 0, stepX: Phaser.Math.FloatBetween(4, 1000) }
-  });*/
 
- /* healthPowerUp.children.iterate(  (child) {
-
-      //  Give each star a slightly different bounce
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-
-  });*/
 
   shurikens = this.physics.add.group();
   
@@ -2147,12 +2122,12 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.colliderShurikenLaserVertical = this.physics.add.collider(shurikens, this.lasersVertical, this.killShuriken, null, this);
 
 
- // this.physics.add.collider(snowballs, platform, this.destroyShuriken, null, this);
-  this.physics.add.collider(snowballs, platformIce, this.destroyShuriken, null, this);
-  this.physics.add.collider(snowballs, platformSnow, this.destroyShuriken, null, this);
-  this.physics.add.collider(snowballs, this.platformFake, this.destroyShuriken, null, this);
-  this.physics.add.collider(snowballs, snowballs, this.destroyShurikenSnowball, null, this);
-  this.physics.add.collider(snowballs, pics, this.destroyShurikenPics, null, this);
+  this.physics.add.collider(snowballs, this.platform, this.destroyBalle, null, this);
+  this.physics.add.collider(snowballs, platformIce, this.destroyBalle, null, this);
+  this.physics.add.collider(snowballs, platformSnow, this.destroyBalle, null, this);
+  this.physics.add.collider(snowballs, this.platformFake, this.destroyBalle, null, this);
+  this.physics.add.collider(snowballs, snowballs, this.destroyBalle, null, this);
+  this.physics.add.collider(snowballs, pics, this.destroyBalle, null, this);
   this.physics.add.collider(player, this.goomba, this.death, null, this);
 
 
@@ -2161,7 +2136,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.collider(this.platform, this.ballesMachineGunners,  this.destroyBalle,null,this)
 
     
- // this.physics.add.collider(snowballs, platform, this.destroySnowball, null, this);
 
 
 //   this.physics.add.collider(shuriken, platform);
@@ -2204,6 +2178,9 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 }
 
 update (){    
+
+
+
 
     for (const drone of this.drones.children.entries) {    
         this.physics.moveTo(drone, player.x,player.y-300, vitesseDeplacementDrone);
@@ -2515,16 +2492,7 @@ if(playerSkin=="ninjaGreen"){
 }
 
 
-/*   
-  if(keyZ.isDown && player.body.blocked.down==false && player.body.blocked.right==true){
-      this.jump();
-      this.bouncePlatformMontagne();
-  }
 
-  if(keyZ.isDown && player.body.blocked.down==false && player.body.blocked.left==true){
-      this.jump();
-      this.bouncePlatformMontagne();
-  }*/
 
   
   if (player.body.blocked.down || playerInWater)
