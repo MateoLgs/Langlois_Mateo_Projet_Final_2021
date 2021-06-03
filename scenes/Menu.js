@@ -24,6 +24,13 @@ class Menu extends Phaser.Scene {
               this.load.image('blackRectangle', 'assets/blackRectangle.png');        
             }
     create() {
+        
+        pvPlayer=100
+        cooldownShuriken = 120;
+        gravity=1000;
+        playerInvincible=false;
+        shurikenLeft =5;
+        pageLevelMenu = 1;
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive();
@@ -45,14 +52,17 @@ class Menu extends Phaser.Scene {
    
     skinsButton.on('pointerdown', () => {
         clicksDoneForEasterEggAchievement +=1;
+        this.scene.stop("Menu");
         this.scene.start('Skins');
     }) 
 
     shopButton.on('pointerdown', () => {
+        this.scene.stop("Menu");
       this.scene.start('Shop');
   }) 
 
   achievementsButton.on('pointerdown', () => {
+    this.scene.stop("Menu");
     this.scene.start('Achievements');
 }) 
 
@@ -67,9 +77,8 @@ class Menu extends Phaser.Scene {
         patchNote.setAlpha(0)
         }) 
     }
-
     choixMenuStartButton(){
-
+        this.scene.stop("Menu");
       this.scene.start('LevelMenu');
     }
 

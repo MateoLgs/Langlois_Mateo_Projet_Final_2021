@@ -5,10 +5,11 @@ class LevelMenu extends Phaser.Scene {
         super('LevelMenu');
     }
         preload(){     
+            
             this.load.image('backButton', 'assets/backButton.png');    
         }
     create() {
-        var level1Unlocked = true;
+        level1Unlocked = true;
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var backButton = this.add.image((this.cameras.main.centerX*2)*0.04,(this.cameras.main.centerY*2)*0.075, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5);
@@ -58,16 +59,16 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         })    
         menuLevel1Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         })      
         menuLevel2Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level2");
         }) 
         menuLevel3Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level3");
             })    
         menuLevel4Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level4");
         }) 
         menuLevel5Button.on('pointerdown', () => {
             this.choixMenuLevelButton("level1");
@@ -125,19 +126,19 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         }) 
         menuLevel7Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         })      
         menuLevel8Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         }) 
         menuLevel9Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
             })    
         menuLevel10Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         }) 
         menuLevel11Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
             }) 
         menuLevel12Button.on('pointerdown', () => {
             this.choixMenuLevelButton("level1");
@@ -186,19 +187,19 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         })    
         menuLevel13Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         })      
         menuLevel14Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         }) 
         menuLevel15Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
             })    
         menuLevel16Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
         }) 
         menuLevel17Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("tutoriel");
+            this.choixMenuLevelButton("level1");
             }) 
         menuLevel18Button.on('pointerdown', () => {
             this.choixMenuLevelButton("level1");
@@ -206,11 +207,13 @@ class LevelMenu extends Phaser.Scene {
     }
 
     backButton.on('pointerdown', () => {
+        this.scene.stop("LevelMenu");
         this.scene.start('Menu');
     }) 
 }
     choixMenuLevelButton(varLevel){
               level=varLevel
+             // this.scene.stop("LevelMenu");
       this.scene.start('Jeu');
     }
 
@@ -426,7 +429,6 @@ class LevelMenu extends Phaser.Scene {
     }
 
     destroyPopup(element){
-      //  while(element.alpha>0){
           
         this.tweens.add({
             targets: element,
@@ -435,9 +437,7 @@ class LevelMenu extends Phaser.Scene {
         });
 
 
-        //element.destroy();
-        //console.log("étezogv")
-       // }
+
     }
 
 

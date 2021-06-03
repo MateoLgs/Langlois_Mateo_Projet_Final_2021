@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>MARIOOOO</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@azerion/phaser-ads@latest/build/phaser-ads.min.js"></script>
+
     <script src="./scenes/Menu.js"></script>
     <script src="./scenes/LevelMenu.js"></script>
     <script src="./scenes/Achievements.js"></script>
@@ -11,10 +13,7 @@
     <script src="./scenes/ShopSkin.js"></script>
     <script src="./scenes/Shop.js"></script>
     <script src="./scenes/Jeu.js"></script>
-    <script src="./scenes/Death.js"></script>
-    <script src="./scenes/GameOver.js"></script>
-    <script src="./scenes/Victoire.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/phaser-raycaster@0.9.2/dist/phaser-raycaster.min.js"></script>
+    <script src="./scenes/PostGame.js"></script>
     <style type="text/css">
 
     canvas {
@@ -53,7 +52,7 @@ padding: 0;
         input: {
             gamepad: true
         },
-    scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, Death, GameOver, Victoire]
+    scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, PostGame]
 
 };
 
@@ -72,7 +71,9 @@ padding: 0;
 
 
 var level="level1";
-var teleportationsLeft = 10;
+var teleportationsLeft = 3;
+var teleportationsLeftText;
+
 var shurikenLeft =5;
 var shurikenLeftText;
 
@@ -82,6 +83,7 @@ var shuriken;
 var snowball;
 var platform;
 var pageLevelMenu = 1;
+var levelCompleted = false;
 
 ///////////////ACHIEVEMENTS////////////////////
 var morts ;
@@ -183,6 +185,7 @@ var level18Unlocked = false;
     level18Unlocked = Boolean(localStorage.getItem(localDataLevel18Unlocked));
 
 /////////////////////////////////////////////////////////////
+
 var platform;
 var player;
 var health;
@@ -194,7 +197,6 @@ var cursors;
 var snowman;
 var shuriken;
 var scoreText;
-var viesRestantes=5;
 var jumpingPlayer = true
 var shurikenPowerUpActive = true
 var shurikenPlayer = true
@@ -223,7 +225,6 @@ var gamepadStart=true
 var patchNote;
 var exitButton;
 var canResetIceVelocity=true
-var viesRestantesText 
 
 
 

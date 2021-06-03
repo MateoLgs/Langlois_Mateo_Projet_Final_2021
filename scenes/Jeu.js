@@ -119,6 +119,9 @@ damageBoss(boss, shuriken){
         }
         else if(pvBoss==0){
             boss.destroy()
+            totalCoins+=50;
+            textPieces.destroy();
+            textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
         }
     }
     console.log(pvBoss)
@@ -130,42 +133,20 @@ bossStopInvincible(){
 ////////////////////////////////////
 
 updateFroid(){
-      if(froid==3){
 
-          froid1.destroy();
-          froid2.destroy();
-          froid3.destroy();
-
-     }
-     if(froid==2){
-
-          froid1.destroy();
-          froid2.destroy();
-          froid3.destroy();
-          froid1 = this.physics.add.sprite(500, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-     }
-      if(froid==1){
-
-          froid1.destroy();
-          froid2.destroy();
-          froid3.destroy();
-          froid1 = this.physics.add.sprite(500, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-          froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-     }
-     if(froid==0){
-
-      froid1.destroy();
-      froid2.destroy();
-      froid3.destroy();
-      froid1 = this.physics.add.sprite(500, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-      froid2 = this.physics.add.sprite(600, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-      froid3 = this.physics.add.sprite(700, 180, 'froid').setScrollFactor(0).setScale(0.1).setDepth(1);
-}
 
  }
 
 joueurPrendDegats(degat){
      pvPlayer-=degat
+     this.greenBarHealth.destroy();
+     this.pvPlayerText.destroy();
+
+     if(pvPlayer>0.1){
+     this.greenBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.425,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)*pvPlayer/100,(this.cameras.main.centerY*2)/2,'healthBarGreen').setScrollFactor(0).setScale(0.2).setDepth(1).setAlpha(1).setOrigin(0,0.5);
+     this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
+
+    }
     if(pvPlayer<0.1){
          this.death();
     }
@@ -206,7 +187,7 @@ tirMachineGunnerEnnemi(machineGunnerEnnemi){
           var angleBalle = (Math.atan2(player.y - machineGunnerEnnemi.y, player.x - machineGunnerEnnemi.x) * 180 / Math.PI);
          // snowball.angleBalle -= 90;
          ballesMachineGunner.rotation = Phaser.Math.Angle.BetweenPoints(player, machineGunnerEnnemi);
-         this.physics.add.overlap(player, ballesMachineGunner,  this.degatBalleSniper,null,this)
+         this.physics.add.overlap(player, ballesMachineGunner,  this.degatBalleMachineGunner,null,this)
 
          ballesMachineGunner.body.setAllowGravity(false);
       if(player.x<machineGunnerEnnemi.x){
@@ -375,37 +356,55 @@ killSnowman(snowman, shuriken){
 killSniperEnnemi(sniperEnnemi, shuriken){
   sniperEnnemi.destroy();
   shuriken.destroy();
+  totalCoins+=10;
+  textPieces.destroy();
+  textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }     
 
 killYeti(yeti, shuriken){
     yeti.destroy();
     shuriken.destroy();
+    totalCoins+=6;
+    textPieces.destroy();
+    textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }     
 
 killLanceGrenade(lanceGrenade, shuriken){
     lanceGrenade.destroy();
     shuriken.destroy();
+    totalCoins+=12;
+    textPieces.destroy();
+    textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }   
 
 killLanceRoquettes(lanceRoquettes, shuriken){
     lanceRoquettes.destroy();
     shuriken.destroy();
+    totalCoins+=15;
+    textPieces.destroy();
+    textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }   
 
 killMachineGunner(machineGunner, shuriken){
       machineGunner.destroy();
       shuriken.destroy();
-}   
+      totalCoins+=3;
+      textPieces.destroy();
+      textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+    }   
  
 lancershuriken(player){
     if(shurikenLeft>0){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken');
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
+       
+       shuriken.body.setSize(180, 180, true);
+       shuriken.body.setOffset(-70,-70);
   this.physics.moveTo(shuriken, pointer.worldX, pointer.worldY, 700);
   shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
-  shuriken.play('shurikenSpin', true).setFlipX(false).setScale(0.1);
+  shuriken.play('shurikenSpin', true).setFlipX(false);
   shuriken.setGravityY(500)
     shurikenLeft -=1;
     this.changeShuriken();
@@ -419,7 +418,11 @@ lancerTeleport(player){
   this.physics.moveTo(teleport, pointer.worldX, pointer.worldY, 300);
   teleport.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
     teleportationsLeft -=1;
-    this.time.delayedCall(1500, this.teleportToTeleporter, [teleport], this);  
+    
+    teleportationsLeftText.destroy()
+    teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+
+    this.time.delayedCall(1250, this.teleportToTeleporter, [teleport], this);  
     }
 }
 
@@ -431,7 +434,7 @@ teleportToTeleporter(teleport){
 }
 
 destroyShuriken(shuriken){
-  this.shurikensItems.create(shuriken.x+8, shuriken.y-3, 'shuriken').setScale(1)
+  this.shurikensItems.create(shuriken.x, shuriken.y, 'shuriken').setScale(1)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
       .setSize(20,20)
@@ -482,7 +485,6 @@ showPicsInvisible(PicsInvisible){
 collectHealthPlayer(powerUpHealth){
   powerUpHealth.destroy();
 
-  //  Add and update the score
   if(pvJoueur>0){
     pvJoueur += 25;
   }
@@ -493,9 +495,9 @@ collectHealthPlayer(powerUpHealth){
 collectCoin(coin){
 
   coin.destroy();
-  totalCoins+=5;
+  totalCoins+=10;
   textPieces.destroy();
-  textPieces = this.add.text(280, 200,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1);  
+  textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 
 }    
 
@@ -523,7 +525,7 @@ collectPowerUpShuriken(powerUpShuriken){
 }
   
 contactDrapeau(){
-
+console.log(level)
     if(level=="level1"){
         totalCoins+=100
         level2Unlocked = true
@@ -613,8 +615,11 @@ contactDrapeau(){
         totalCoins+=1000       
     }   
 
-  
-    this.scene.start("Victoire");
+    this.scene.stop("Jeu");
+    levelCompleted = true;
+
+    this.scene.start("PostGame");
+
 }    
 
 degatSnowmanJoueur(snowman){
@@ -668,7 +673,7 @@ canResetVelocity(){
 degatBalleMachineGunner(player,ballesSniper){
     ballesSniper.destroy();
     if(playerInvincible==false){
-          this.joueurPrendDegats(40);
+          this.joueurPrendDegats(8);
           this.playerGoInvincible();
     }
   }
@@ -676,7 +681,7 @@ degatBalleMachineGunner(player,ballesSniper){
 degatBalleSniper(player,ballesSniper){
   ballesSniper.destroy();
   if(playerInvincible==false){
-        this.joueurPrendDegats(5);
+        this.joueurPrendDegats(40);
         this.playerGoInvincible();
   }
 }
@@ -684,7 +689,7 @@ degatBalleSniper(player,ballesSniper){
 degatBalleSoldat(player,ballesSoldat){
     ballesSoldat.destroy();
     if(playerInvincible==false){
-        this.joueurPrendDegats(15);
+        this.joueurPrendDegats(13);
     }
 }
 
@@ -988,7 +993,6 @@ destroyShurikenSnowball(shuriken, snowball){
 }
    
 death(){
-    //if(level!="tutoriel"){
 
 console.log("death")
     this.input.keyboard.shutdown();
@@ -1008,16 +1012,14 @@ console.log("death")
 
 mort(){
        
-  viesRestantes-=1;
 
+    morts+=1
+    levelCompleted = false;
 
-  if(viesRestantes>0){
  player.setVelocityX(0);
-   this.scene.start('Death');
-  }
-  if(viesRestantes==0){
-  this.scene.start('GameOver');
-  } 
+ this.scene.stop("Jeu");
+   this.scene.start('PostGame');
+
 }
   
 playerEscalierDroit(){
@@ -1104,6 +1106,8 @@ preload (){
 
 
 
+  this.load.image('backgroundBarHealth', 'assets/backgroundBarHealth.png');
+  this.load.image('healthBarGreen', 'assets/healthBarGreen.png');
   this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
   this.load.image('platformFake', 'assets/platformFake.png');
   this.load.image('platformFalling', 'assets/platformFake.png');
@@ -1152,7 +1156,6 @@ preload (){
 
     
 
-   this.load.tilemapTiledJSON('tutoriel', './levels/tutoriel.json');
    this.load.tilemapTiledJSON('level1', './levels/level1.json');
    this.load.tilemapTiledJSON('level2', './levels/level2.json');
    this.load.tilemapTiledJSON('level3', './levels/level3.json');
@@ -1163,9 +1166,7 @@ preload (){
 
 create (){
 
- if(level=="tutoriel"){
-         this.map = this.make.tilemap({ key: 'tutoriel' });
-    }
+
    if(level=="level1"){
          this.map = this.make.tilemap({ key: 'level1' });
     }
@@ -1197,7 +1198,6 @@ create (){
   var platformSnow = this.map.createDynamicLayer('platformSnow', this.tileset, 0, 0);
   var platformIce = this.map.createDynamicLayer('platformIce', this.tileset, 0, 0);
   var pics = this.map.createDynamicLayer('pics', this.tileset, 0, 0);
-  //const texteTuto = this.map.getObjectLayer('tutoTexte').objects;
   
     
  this.platform.setCollisionByExclusion(-1, true);
@@ -1220,15 +1220,17 @@ create (){
 
     /////////////////////////////////////////
     /////////////PLAYER//////////////////////
-  //var blackScreen = this.physics.add.sprite(1210, 50, 'blackSquare').setScrollFactor(0).setScale(0.15).setDepth(1);
+  teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+  var teleportationsLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.15, 'teleport').setScrollFactor(0).setScale(0.04).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
   shurikenLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.075,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
   var shurikenLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.075, 'shuriken').setScrollFactor(0).setScale(1.5).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
-    
-  viesRestantesText = this.add.text((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.05,  viesRestantes,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
-  var life = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05, 'life').setScrollFactor(0).setScale(0.05).setDepth(1).setOrigin(0.5,0.5);
-    
-  textPieces = this.add.text((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.1,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
-  var pieces = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.1, 'coin').setScrollFactor(0).setScale(0.025).setDepth(1).setOrigin(0.5,0.5);
+  textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+  var pieces = this.physics.add.sprite((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.05, 'coin').setScrollFactor(0).setScale(0.025).setDepth(1).setOrigin(0.5,0.5);
+
+  this.greenBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.425,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)*pvPlayer/100,(this.cameras.main.centerY*2)/2,'healthBarGreen').setScrollFactor(0).setScale(0.2).setDepth(1).setAlpha(1).setOrigin(0,0.5);
+  this.backgroundBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2),(this.cameras.main.centerY*2)/2, 'backgroundBarHealth').setScrollFactor(0).setScale(0.25).setDepth(2).setOrigin(0.5,0.5);
+  this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
+
 
   player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1,(this.cameras.main.centerY*2)*1, 'spritesheetPlayerNinja');
   player.setGravityY(1000)
@@ -1682,9 +1684,10 @@ this.physics.add.collider(this.platform, this.drones)
 
     for (const platformMoving of this.platformsMoving.children.entries) {
         this.physics.add.collider(player, platformMoving, this.playerPlatformMoving, null, this)
-        this.physics.add.collider(platformMoving, platform);
+        this.physics.add.collider(platformMoving, this.platform);
     }    
-    
+    this.physics.add.collider(this.platformsMoving, this.platformsMoving)
+
 
   ///////////////////////////////////////
   ////////////platformFalling////////////////////
@@ -2090,7 +2093,6 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   //  Our player animations, turning, walking left and walking right.
 
 
-  //  Input Events
   cursors = this.input.keyboard.createCursorKeys();
 
 
@@ -2400,14 +2402,17 @@ if (delaiShurikenPlayer <= 0 && shurikenPlayer == false) {
 
 this.input.on('pointerdown', function (pointer) {
     if(shurikenPlayer == true && shurikenPowerUpActive==true ){
-        if(keyA.isDown){
-          keyA.reset();
+        if(keyA.isDown && teleportationsLeft>0){
+            shurikenPlayer = false;
+
           this.lancerTeleport(player);
         }
         else if(keyA.isUp){
             shurikenPlayer = false;
             this.lancershuriken(player);
         }
+        keyA.reset();
+
     }
 }, this);
 

@@ -92,6 +92,7 @@ class Achievements extends Phaser.Scene {
         
 
         exitButton.on('pointerdown', () => {
+            this.scene.stop("Achievements");
             this.scene.start('Menu');
         }) 
     } 

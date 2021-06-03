@@ -176,7 +176,6 @@ class Skins extends Phaser.Scene {
         }
     }
     destroyPopup(element){
-        //  while(element.alpha>0){
             
           this.tweens.add({
               targets: element,
@@ -185,9 +184,7 @@ class Skins extends Phaser.Scene {
           });
   
   
-          //element.destroy();
-          //console.log("étezogv")
-         // }
+
       }
     }
     
