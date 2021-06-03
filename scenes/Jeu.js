@@ -516,7 +516,6 @@ pickUpShuriken(player,shuriken){
 pickUpTeleport(player,teleport){
     teleport.destroy();
     teleportationsLeft+=1;
-
 }
 
 changeShuriken(){
@@ -2117,7 +2116,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   //  Collide the player and the stars with the platforms
 
   //this.physics.add.collider(healthPowerUp, platform);
-  
+  this.physics.add.collider(teleportations, platformMontagne);
   this.physics.add.collider(teleportations, this.platform);
   this.physics.add.collider(this.bosses, shurikens, this.damageBoss, null, this);
   this.physics.add.collider(shurikens, this.platform, this.destroyShuriken, null, this);
