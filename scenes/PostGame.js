@@ -10,6 +10,7 @@ class PostGame extends Phaser.Scene {
             this.load.image('replayLevelButton', 'assets/replayLevelButton.jpg');
             this.load.image('homeButton', 'assets/homeButton.jpg');
             this.load.image('adForReward', 'assets/adForReward.png');
+            this.load.image('crossRed', 'assets/crossRed.png');
             this.load.image('blackSquare', 'assets/blackSquare.png');
 
 
@@ -88,9 +89,19 @@ class PostGame extends Phaser.Scene {
         totalCoins+=this.rewardCoinsPostGameRandom
         localStorage.setItem(localDataTotalCoins, totalCoins);
         this.reward =  this.add.text((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2,  this.rewardCoinsPostGameRandom,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);
+        this.crossRed = this.add.image((this.cameras.main.centerX*2)*0.615,(this.cameras.main.centerY*2)*0.285, 'crossRed').setScale(0.10).setInteractive().setOrigin(0.5,0.5);
+
 
         this.screenEnd.on('pointerdown', () => {
             this.blackScreen.destroy()
+            this.crossRed.destroy()
+            this.reward.destroy()
+            this.homeButton.setInteractive()
+            this.replayLevelButton.setInteractive()
+        }) 
+        this.crossRed.on('pointerdown', () => {
+            this.blackScreen.destroy()
+            this.crossRed.destroy()
             this.reward.destroy()
             this.homeButton.setInteractive()
             this.replayLevelButton.setInteractive()

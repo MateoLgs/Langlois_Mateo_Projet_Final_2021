@@ -31,8 +31,9 @@ class Shop extends Phaser.Scene {
         var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
-        
-        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1);
+        var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setInteractive();
+
+        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setInteractive();
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.83,(this.cameras.main.centerY*2)*0.14, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
         var shopPack1 = this.add.image((this.cameras.main.centerX*2)*0.27,(this.cameras.main.centerY*2)*0.32, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
         var shopPack2 = this.add.image((this.cameras.main.centerX*2)*0.47,(this.cameras.main.centerY*2)*0.32, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
@@ -42,8 +43,12 @@ class Shop extends Phaser.Scene {
         var shopPack6 = this.add.image((this.cameras.main.centerX*2)*0.67,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1);
         
         
-        
+        menuBackgroundEscape.on('pointerdown', () => {
+            this.scene.stop("Shop");
+            this.scene.start('Menu');
+        })
         exitButton.on('pointerdown', () => {
+            this.scene.stop("Shop");
             this.scene.start('Menu');
         }) 
     

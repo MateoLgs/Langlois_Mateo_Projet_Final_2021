@@ -1135,7 +1135,6 @@ preload (){
  // this.load.image('ground', 'assets/platform.png');
   this.load.image('life', 'assets/life.png')
   this.load.image('explosion', 'assets/explosion.png')
-  this.load.image('froid', 'assets/froid.png')
  // this.load.image('health', 'assets/star.png', { width: 10,  height: 20,});
   this.load.image('snowstorm', 'assets/snowstorm.png');
   this.load.image('water', 'assets/water.png');

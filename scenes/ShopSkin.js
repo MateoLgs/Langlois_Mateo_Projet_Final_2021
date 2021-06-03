@@ -19,9 +19,10 @@ class ShopSkin extends Phaser.Scene {
         var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
+        var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setInteractive();
 
         
-        var screenShopSkinBackground = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.6, 'choixSkinScreen').setScale(1.8).setOrigin(0.5,0.5);
+        var screenShopSkinBackground = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.6, 'choixSkinScreen').setScale(1.8).setOrigin(0.5,0.5).setInteractive();
         var randomButton = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.65, 'randomButton').setScale(0.75).setOrigin(0.5,0.5).setInteractive();
         var buyASkinText = this.add.text((this.cameras.main.centerX*2)*0.25, (this.cameras.main.centerY*2)*0.30,  "Buy a Skin",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(75);  
         var coinsAmountBackground = this.add.image((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.14, 'choixSkinScreen').setScale(0.5).setOrigin(0.5,0.5);
@@ -62,8 +63,12 @@ class ShopSkin extends Phaser.Scene {
         }) 
 
         exitButton.on('pointerdown', () => {
-            console.log("button")
+            this.scene.stop("ShopSkin");
             this.scene.start('Skins');
+        }) 
+        menuBackgroundEscape.on('pointerdown', () => {
+            this.scene.stop("ShopSkin");
+            this.scene.start('Menu');
         }) 
 
 
@@ -243,6 +248,7 @@ class ShopSkin extends Phaser.Scene {
             var popUpAchievementInProgress = false    
             if((skinsPossessed == skinAmount) && popupSkinAchievementShown==false && popUpAchievementInProgress == false){
                 popupSkinAchievementShown = true
+                localStorage.setItem(localDataPopupSkinAchievementShown, popupSkinAchievementShown);  
                 popUpAchievementInProgress = true
                 var achievementSkinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
                  var achievementSkinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
@@ -277,6 +283,7 @@ class ShopSkin extends Phaser.Scene {
     
             else if((totalCoins > totalCoinsAchievement-1) && popupCoinsAchievementShown==false && popUpAchievementInProgress == false){
                 popupCoinsAchievementShown = true
+                localStorage.setItem(localDataPopupCoinsAchievementShown, popupCoinsAchievementShown);  
                 popUpAchievementInProgress = true
                 var achievementCoinsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
                 var achievementCoinsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
@@ -311,6 +318,7 @@ class ShopSkin extends Phaser.Scene {
     
             else if((achievementsCompleted > achievementsAmount-2) && popupAchievementsCompletedAchievementShown==false && popUpAchievementInProgress == false){
                 popupAchievementsCompletedAchievementShown = true
+                localStorage.setItem(localDataPopupAchievementsCompletedAchievementShown, popupAchievementsCompletedAchievementShown);  
                 popUpAchievementInProgress = true
                 var achievementCompletedAchievementsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
                 var achievementCompletedAchievementsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  

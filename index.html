@@ -69,12 +69,17 @@ var localDataMorts = "morts";
 morts = Number(localStorage.getItem(localDataMorts))
 var mortsForAchievement = 100
 var popupMortAchievementShown = false
+var localDataPopupMortAchievementShown = "popupMortAchievementShown";
+popupMortAchievementShown = Boolean(localStorage.getItem(localDataPopupMortAchievementShown));
+
 
 var totalCoins;
 var localDataTotalCoins = "totalCoins";
 totalCoins = Number(localStorage.getItem(localDataTotalCoins))
 var totalCoinsAchievement = 10000
 var popupCoinsAchievementShown = false
+var localDataPopupCoinsAchievementShown = "popupCoinsAchievementShown";
+popupCoinsAchievementShown = Boolean(localStorage.getItem(localDataPopupCoinsAchievementShown));
 
 
 var achievementsCompleted;
@@ -82,6 +87,8 @@ var localDataAchievementsCompleted = "achievementsCompleted";
 achievementsCompleted = Number(localStorage.getItem(localDataAchievementsCompleted))
 var achievementsAmount= 6;
 var popupAchievementsCompletedAchievementShown = false
+var localDataPopupAchievementsCompletedAchievementShown = "popupAchievementsCompletedAchievementShown";
+popupAchievementsCompletedAchievementShown = Boolean(localStorage.getItem(localDataPopupAchievementsCompletedAchievementShown));
 
 
 var shotsDone;
@@ -89,6 +96,8 @@ var localDataShotsDone = "shotsDone";
 shotsDone = Number(localStorage.getItem(localDataShotsDone))
 var shotsDoneForAchievement = 1000;
 var popupShotsAchievementShown = false
+var localDataPopupShotsAchievementShown = "popupShotsAchievementShown";
+popupShotsAchievementShown = Boolean(localStorage.getItem(localDataPopupShotsAchievementShown));
 
 
 var clicksDoneForEasterEggAchievement;
@@ -96,7 +105,10 @@ var localDataClicksDoneForEasterEggAchievement = "clicksDoneForEasterEggAchievem
 clicksDoneForEasterEggAchievement = Number(localStorage.getItem(localDataClicksDoneForEasterEggAchievement));
 var clicksForEasterEggAchievement = 5;
 var easterEggClicksCompleted = false;
-var popupMEasterEggN1AchievementShown = false
+var popupEasterEggN1AchievementShown = false
+var localDataPopupEasterEggN1AchievementShown = "popupEasterEggN1AchievementShown";
+popupEasterEggN1AchievementShown = Boolean(localStorage.getItem(localDataPopupEasterEggN1AchievementShown));
+
 
 
 var skinsPossessed;
@@ -104,6 +116,8 @@ var localDataSkinsPossessed = "skinsPossessed";
 skinsPossessed = Number(localStorage.getItem(localDataSkinsPossessed));
 var skinAmount = 2;
 var popupSkinAchievementShown = false
+var localDataPopupSkinAchievementShown = "popupSkinAchievementShown";
+popupSkinAchievementShown = Boolean(localStorage.getItem(localDataPopupSkinAchievementShown));
 
 ///////////////LEVELS////////////////////////////////
 

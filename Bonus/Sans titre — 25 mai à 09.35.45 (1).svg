@@ -2,7 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_1);
+        clip-path: url(#clip-Menu);
       }
 
       .cls-2, .cls-20, .cls-3 {
@@ -31,7 +31,7 @@
       }
 
       .cls-7 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_2);
+        clip-path: url(#clip-Skin);
       }
 
       .cls-18, .cls-8 {
@@ -39,11 +39,11 @@
       }
 
       .cls-9 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_3);
+        clip-path: url(#clip-ShopSkin);
       }
 
       .cls-10 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_4);
+        clip-path: url(#clip-Shop-2);
       }
 
       .cls-11 {
@@ -59,15 +59,15 @@
       }
 
       .cls-13 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_5);
+        clip-path: url(#clip-In-Game);
       }
 
       .cls-14 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_7);
+        clip-path: url(#clip-Infos-2);
       }
 
       .cls-16 {
-        clip-path: url(#clip-SPRK_default_preset_name_custom_8);
+        clip-path: url(#clip-Achievements);
       }
 
       .cls-17, .cls-19 {
@@ -78,32 +78,32 @@
         fill: #707070;
       }
     </style>
-    <clipPath id="clip-SPRK_default_preset_name_custom_1">
+    <clipPath id="clip-Menu">
       <rect x="650" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_2">
+    <clipPath id="clip-Skin">
       <rect y="-810" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_3">
+    <clipPath id="clip-ShopSkin">
       <rect y="-1620" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_4">
+    <clipPath id="clip-Shop-2">
       <rect x="1350" y="-810" width="1280" height="720"/>
     </clipPath>
     <clipPath id="clip-SPRK_default_preset_name_custom_6">
       <rect x="1350" y="-1620" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_5">
+    <clipPath id="clip-In-Game">
       <rect x="2700" y="-810" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_7">
+    <clipPath id="clip-Infos-2">
       <rect x="-1350" y="-810" width="1280" height="720"/>
     </clipPath>
-    <clipPath id="clip-SPRK_default_preset_name_custom_8">
+    <clipPath id="clip-Achievements">
       <rect x="-2700" y="-810" width="1280" height="720"/>
     </clipPath>
   </defs>
-  <g id="SPRK_default_preset_name_custom_1" data-name="SPRK_default_preset_name_custom – 1" class="cls-1">
+  <g id="Menu" class="cls-1">
     <rect class="cls-20" x="650" width="1280" height="720"/>
     <g id="Groupe_2" data-name="Groupe 2" transform="translate(650)">
       <g id="Ellipse_1" data-name="Ellipse 1" class="cls-2" transform="translate(6 542)">
@@ -137,13 +137,13 @@
     </g>
     <text id="Infos" class="cls-4" transform="matrix(1, -0.017, 0.017, 1, 672.08, 26.61)"><tspan x="0" y="43">Infos</tspan></text>
   </g>
-  <g id="SPRK_default_preset_name_custom_2" data-name="SPRK_default_preset_name_custom – 2" class="cls-7">
+  <g id="Skin" class="cls-7">
     <rect class="cls-20" y="-810" width="1280" height="720"/>
     <g id="Rectangle_2" data-name="Rectangle 2" class="cls-2" transform="translate(288 -696)">
       <rect class="cls-17" width="666" height="466" rx="76"/>
       <rect class="cls-18" x="0.5" y="0.5" width="665" height="465" rx="75.5"/>
     </g>
-    <g id="Rectangle_3" data-name="Rectangle 3" class="cls-2" transform="translate(954 -398)">
+    <g id="Rectangle_3" data-name="Rectangle 3" class="cls-2" transform="translate(954 -450)">
       <rect class="cls-17" width="173" height="168"/>
       <rect class="cls-18" x="0.5" y="0.5" width="172" height="167"/>
     </g>
@@ -192,9 +192,9 @@
       <rect class="cls-18" x="0.5" y="0.5" width="96" height="24"/>
     </g>
     <line id="Ligne_3" data-name="Ligne 3" class="cls-8" x2="41" y2="51" transform="translate(913.5 -695.5)"/>
-    <line id="Ligne_4" data-name="Ligne 4" class="cls-8" y1="26" x2="41" transform="translate(913.5 -695.5)"/>
+    <line id="Ligne_4" data-name="Ligne 4" class="cls-8" y1="26" x2="41" transform="translate(913 -683)"/>
   </g>
-  <g id="SPRK_default_preset_name_custom_3" data-name="SPRK_default_preset_name_custom – 3" class="cls-9">
+  <g id="ShopSkin" class="cls-9">
     <rect class="cls-20" y="-1620" width="1280" height="720"/>
     <g id="Rectangle_5" data-name="Rectangle 5" class="cls-2" transform="translate(436 -1472)">
       <rect class="cls-17" width="452" height="424"/>
@@ -207,7 +207,7 @@
     <line id="Ligne_1" data-name="Ligne 1" class="cls-8" x2="47" y2="38" transform="translate(841.5 -1461.5)"/>
     <line id="Ligne_2" data-name="Ligne 2" class="cls-8" x1="47" y2="38" transform="translate(841.5 -1461.5)"/>
   </g>
-  <g id="SPRK_default_preset_name_custom_4" data-name="SPRK_default_preset_name_custom – 4" class="cls-10">
+  <g id="Shop-2" data-name="Shop" class="cls-10">
     <rect class="cls-20" x="1350" y="-810" width="1280" height="720"/>
     <g id="Rectangle_20" data-name="Rectangle 20" class="cls-2" transform="translate(1610 -640)">
       <rect class="cls-17" width="841" height="410" rx="66"/>
@@ -243,7 +243,7 @@
     <line id="Ligne_7" data-name="Ligne 7" class="cls-8" x2="58" y2="58" transform="translate(2316.5 -1517.5)"/>
     <line id="Ligne_8" data-name="Ligne 8" class="cls-8" x1="58" y2="58" transform="translate(2316.5 -1517.5)"/>
   </g>
-  <g id="SPRK_default_preset_name_custom_5" data-name="SPRK_default_preset_name_custom – 5" class="cls-13">
+  <g id="In-Game" class="cls-13">
     <rect class="cls-20" x="2700" y="-810" width="1280" height="720"/>
     <g id="Rectangle_26" data-name="Rectangle 26" class="cls-2" transform="translate(2700 -184)">
       <rect class="cls-17" width="1280" height="94"/>
@@ -276,17 +276,17 @@
     <line id="Ligne_9" data-name="Ligne 9" class="cls-8" y1="51" x2="51" transform="translate(2922.5 -722.5)"/>
     <line id="Ligne_10" data-name="Ligne 10" class="cls-8" y1="159" transform="translate(2973.5 -722.5)"/>
   </g>
-  <g id="SPRK_default_preset_name_custom_7" data-name="SPRK_default_preset_name_custom – 7" class="cls-14">
+  <g id="Infos-2" data-name="Infos" class="cls-14">
     <rect class="cls-20" x="-1350" y="-810" width="1280" height="720"/>
     <g id="Rectangle_31" data-name="Rectangle 31" class="cls-2" transform="translate(-959 -657)">
       <rect class="cls-17" width="499" height="414" rx="109"/>
       <rect class="cls-18" x="0.5" y="0.5" width="498" height="413" rx="108.5"/>
     </g>
-    <text id="INFOS-2" data-name="INFOS" class="cls-15" transform="translate(-822 -512)"><tspan x="0" y="76">INFOS</tspan></text>
+    <text id="INFOS-3" data-name="INFOS" class="cls-15" transform="translate(-822 -512)"><tspan x="0" y="76">INFOS</tspan></text>
     <line id="Ligne_11" data-name="Ligne 11" class="cls-8" x2="52" y2="52" transform="translate(-563.5 -622.5)"/>
     <line id="Ligne_12" data-name="Ligne 12" class="cls-8" x1="42" y2="42" transform="translate(-553.5 -612.5)"/>
   </g>
-  <g id="SPRK_default_preset_name_custom_8" data-name="SPRK_default_preset_name_custom – 8" class="cls-16">
+  <g id="Achievements" class="cls-16">
     <rect class="cls-20" x="-2700" y="-810" width="1280" height="720"/>
     <g id="Rectangle_32" data-name="Rectangle 32" class="cls-2" transform="translate(-2474 -730)">
       <rect class="cls-17" width="856" height="544" rx="126"/>

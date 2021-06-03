@@ -30,8 +30,9 @@ class Skins extends Phaser.Scene {
         var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
-        
-        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setOrigin(0.5,0.5);
+        var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setInteractive();
+
+        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setOrigin(0.5,0.5).setInteractive();
         var buySkin = this.add.image((this.cameras.main.centerX*2)*0.80, (this.cameras.main.centerY*2)*0.76, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.83, (this.cameras.main.centerY*2)*0.15, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
 
@@ -73,6 +74,10 @@ class Skins extends Phaser.Scene {
     buySkin.on('pointerdown', () => {
         this.scene.start('ShopSkin');
     }) 
+    menuBackgroundEscape.on('pointerdown', () => {
+        this.scene.stop("Skin");
+        this.scene.start('Menu');
+    }) 
     
     ninjaRougeSkin.on('pointerdown', () => {
             if(ninjaRougeSkinUnlocked==true){
@@ -107,8 +112,9 @@ class Skins extends Phaser.Scene {
 
     popupAchievement(){
         var popUpAchievementInProgress = false
-        if((clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1) && popupMEasterEggN1AchievementShown==false && popUpAchievementInProgress == false){
-            popupMEasterEggN1AchievementShown = true
+        if((clicksDoneForEasterEggAchievement > clicksForEasterEggAchievement-1) && popupEasterEggN1AchievementShown==false && popUpAchievementInProgress == false){
+            popupEasterEggN1AchievementShown = true
+            localStorage.setItem(localDataPopupEasterEggN1AchievementShown, popupEasterEggN1AchievementShown);  
             popUpAchievementInProgress = true
             var achievementEEN1Popup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
             var achievementEEN1PopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  
@@ -142,6 +148,7 @@ class Skins extends Phaser.Scene {
         }
         else if((achievementsCompleted > achievementsAmount-2) && popupAchievementsCompletedAchievementShown==false && popUpAchievementInProgress == false){
             popupAchievementsCompletedAchievementShown = true
+            localStorage.setItem(localDataPopupAchievementsCompletedAchievementShown, popupAchievementsCompletedAchievementShown);  
             popUpAchievementInProgress = true
             var achievementCompletedAchievementsPopup = this.physics.add.sprite((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.2, 'blackRectangle').setScrollFactor(1).setScale(0.5).setAlpha(0)
             var achievementCompletedAchievementsPopupText1 = this.add.text((this.cameras.main.centerX*2)*0.12, (this.cameras.main.centerY*2)*0.12,  "Achievement Completed !").setFontSize(15).setScrollFactor(1).setTint(0x00ff00).setAlpha(0).setOrigin(0.5,0.5);  

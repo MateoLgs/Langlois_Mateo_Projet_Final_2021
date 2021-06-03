@@ -23,9 +23,13 @@ class Achievements extends Phaser.Scene {
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
         var patchNote = this.add.image((this.cameras.main.centerX),(this.cameras.main.centerY), 'patchNote').setAlpha(0).setScale(0.7);
-        var backgroundScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'backgroundScreen').setScale(2.1).setAlpha(1);
+        var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setAlpha(1).setInteractive();
+
+        var backgroundScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'backgroundScreen').setScale(2.1).setAlpha(1).setInteractive();
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.82,(this.cameras.main.centerY*2)*0.17, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
-        var achievementsTitle = this.add.text((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.2,  "ACHIEVEMENTS",{ fill:'#ffffff', size:200}).setDepth(1).setOrigin(0.5,0.5).setTint(0x000000).setScale(2);       
+
+        var achievementsTitle = this.add.text((this.cameras.main.centerX*2)*0.5, (this.cameras.main.centerY*2)*0.2,  "ACHIEVEMENTS",{ fill:'#ffffff', size:200}).setDepth(1).setOrigin(0.5,0.5).setTint(0x000000).setScale(2);      
+ 
         achievementsCompleted=0
 
 
@@ -95,6 +99,11 @@ class Achievements extends Phaser.Scene {
             this.scene.stop("Achievements");
             this.scene.start('Menu');
         }) 
+        
+        menuBackgroundEscape.on('pointerdown', () => {
+            this.scene.stop("Achievements");
+            this.scene.start('Menu');
+        })
     } 
 
 
