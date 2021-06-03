@@ -120,6 +120,7 @@ damageBoss(boss, shuriken){
         else if(pvBoss==0){
             boss.destroy()
             totalCoins+=50;
+            rewardCoinsPostGame+=50
             textPieces.destroy();
             textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
         }
@@ -357,6 +358,7 @@ killSniperEnnemi(sniperEnnemi, shuriken){
   sniperEnnemi.destroy();
   shuriken.destroy();
   totalCoins+=10;
+  rewardCoinsPostGame+=10
   textPieces.destroy();
   textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }     
@@ -365,6 +367,7 @@ killYeti(yeti, shuriken){
     yeti.destroy();
     shuriken.destroy();
     totalCoins+=6;
+    rewardCoinsPostGame+=6
     textPieces.destroy();
     textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }     
@@ -373,6 +376,7 @@ killLanceGrenade(lanceGrenade, shuriken){
     lanceGrenade.destroy();
     shuriken.destroy();
     totalCoins+=12;
+    rewardCoinsPostGame+=12
     textPieces.destroy();
     textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }   
@@ -381,6 +385,7 @@ killLanceRoquettes(lanceRoquettes, shuriken){
     lanceRoquettes.destroy();
     shuriken.destroy();
     totalCoins+=15;
+    rewardCoinsPostGame+=15
     textPieces.destroy();
     textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }   
@@ -389,6 +394,7 @@ killMachineGunner(machineGunner, shuriken){
       machineGunner.destroy();
       shuriken.destroy();
       totalCoins+=3;
+      rewardCoinsPostGame+=3
       textPieces.destroy();
       textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
     }   
@@ -496,6 +502,7 @@ collectCoin(coin){
 
   coin.destroy();
   totalCoins+=10;
+  rewardCoinsPostGame+=10
   textPieces.destroy();
   textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 

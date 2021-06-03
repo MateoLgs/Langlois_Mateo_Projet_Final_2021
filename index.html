@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>MARIOOOO</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@azerion/phaser-ads@latest/build/phaser-ads.min.js"></script>
 
     <script src="./scenes/Menu.js"></script>
     <script src="./scenes/LevelMenu.js"></script>
@@ -33,28 +32,7 @@ padding: 0;
   
     
     
-    var config = {
 
-    type: Phaser.AUTO,
-    
-    width: 896,
-    height: 448,
-    backgroundColor: '#538192',
-   // pixelArt: true,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            //gravity: { y: 1000 },
-            debug: true,
-            fps: 90
-        },
-    },
-        input: {
-            gamepad: true
-        },
-    scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, PostGame]
-
-};
 
 
 
@@ -321,6 +299,7 @@ var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoque
 var gravity=1000;
 var pvJoueur = 100
 var runSpeed=1
+var rewardCoinsPostGame = 1;
 
 var line
 var graphics
@@ -329,7 +308,39 @@ var graphics
 
 var velociteChute = 0;
 var pvPlayer = 100;
-var game = new Phaser.Game(config);
+
+
+
+
+
+
+
+var config = {
+
+type: Phaser.AUTO,
+
+width: 896,
+height: 448,
+backgroundColor: '#538192',
+// pixelArt: true,
+physics: {
+    default: 'arcade',
+    arcade: {
+        //gravity: { y: 1000 },
+        debug: true,
+        fps: 60
+    },
+},
+    input: {
+        gamepad: true
+    },
+scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, PostGame]
+
+};
+
+var game 
+game = new Phaser.Game(config);
+
 
         </script>
 
