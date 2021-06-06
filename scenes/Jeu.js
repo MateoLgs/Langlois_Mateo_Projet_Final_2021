@@ -332,12 +332,12 @@ destroyBalle(platform, balle){
 tirSoldatEnnemi(yeti){               
     for (const yeti of this.yetis.children.entries) {
             yeti.play('soldierShoot', true);
-            var snowball = snowballs.create(yeti.x, yeti.y, 'snowball');
-            this.physics.moveTo(snowball, player.x, player.y, vitesseBalleSoldatEnnemi);
+            var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball');
+            this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
 
 
-            snowball.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti)-135;
-            this.physics.add.overlap(player, snowball,  this.degatBalleSoldat,null,this)
+            ballesSoldat.rotation = Phaser.Math.Angle.BetweenPoints(player, yeti)-135;
+            this.physics.add.overlap(player, ballesSoldat,  this.degatBalleSoldat,null,this)
 
 
         if(player.x<yeti.x){
@@ -629,8 +629,8 @@ console.log(level)
 }    
 
 degatSnowmanJoueur(snowman){
- // snowman.destroy();
-    var explosionShuriken = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScrollFactor(0).setScale(0.5).setDepth(-1).setOrigin(0.5,1);
+  snowman.destroy();
+    var explosionShuriken = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScrollFactor(0).setScale(0.2).setDepth(1).setOrigin(0.5,0.5);
     this.death();    
 }
   
@@ -679,7 +679,7 @@ canResetVelocity(){
 degatBalleMachineGunner(player,ballesSniper){
     ballesSniper.destroy();
     if(playerInvincible==false){
-          this.joueurPrendDegats(8);
+          this.joueurPrendDegats(15);
           this.playerGoInvincible();
     }
   }
@@ -687,7 +687,7 @@ degatBalleMachineGunner(player,ballesSniper){
 degatBalleSniper(player,ballesSniper){
   ballesSniper.destroy();
   if(playerInvincible==false){
-        this.joueurPrendDegats(40);
+        this.joueurPrendDegats(60);
         this.playerGoInvincible();
   }
 }
@@ -695,7 +695,7 @@ degatBalleSniper(player,ballesSniper){
 degatBalleSoldat(player,ballesSoldat){
     ballesSoldat.destroy();
     if(playerInvincible==false){
-        this.joueurPrendDegats(13);
+        this.joueurPrendDegats(25);
     }
 }
 
@@ -1100,11 +1100,7 @@ playerEscalierGauche(){
     }
 }
 
-delayStart(){
 
-
-
-}
 
 preload (){
     this.load.image("bg_1", "assets/bg-1.png");
@@ -1145,7 +1141,7 @@ preload (){
   
   
 
-     this.load.spritesheet('spritesheetPlayerNinja', 'assets/spritesheetPlayerNinja.png', { frameWidth: 520, frameHeight: 480 });
+     this.load.spritesheet('spritesheetPlayerNinja', 'assets/spritesheetPlayerNinja.png', { frameWidth: 80, frameHeight: 96 });
      this.load.spritesheet('spritesheetPlayerNinjaRed', 'assets/spritesheetPlayerNinjaRed.png', { frameWidth: 520, frameHeight: 480 });
      this.load.spritesheet('spritesheetPlayerNinjaGreen', 'assets/spritesheetPlayerNinjaGreen.png', { frameWidth: 520, frameHeight: 480 });    
   
@@ -1237,13 +1233,12 @@ create (){
   this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
 
 
-  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.1,(this.cameras.main.centerY*2)*1, 'spritesheetPlayerNinja');
+  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinja');
   player.setGravityY(1000)
 
-  player.body.setSize(230, 480, true);
-  player.body.setOffset(150,0);
-  player.setCollideWorldBounds(false).setScale(0.2);
-  this.time.delayedCall(100, this.delayStart, null, this);
+  player.body.setSize(45, 90, false).setOffset(20, 0)
+  player.body.setOffset(0,0);
+  player.setCollideWorldBounds(false)
 
 
 
@@ -1502,7 +1497,7 @@ this.physics.add.collider(this.bosses, this.platform);
       });
 
   for (const teleportItem of teleportItemObjects) {
-  this.teleportItems.create(teleportItem.x+8, teleportItem.y-3, 'shuriken').setScale(1.5)
+  this.teleportItems.create(teleportItem.x+8, teleportItem.y-3, 'shuriken').setScale(0.75)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -1521,7 +1516,7 @@ this.physics.add.collider(this.bosses, this.platform);
       });
 
   for (const shurikensItem of shurikensItemObjects) {
-  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(1.5)
+  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(0.75)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -1791,7 +1786,7 @@ this.lanceGrenades.create(lanceGrenade.x, lanceGrenade.y-20, 'soldatEnnemi')
     .setGravityY(1000)
     //.setSize(50, 55, true)
     .setOffset(0,0)
-    .setScale(0.2)
+    .setScale(0.15)
 }
   
 
@@ -1818,7 +1813,7 @@ this.lanceRoquettes.create(lanceRoquette.x, lanceRoquette.y-20, 'soldatEnnemi')
    .setOrigin(0.5,0.5)
    .setDepth(-1)
    .setOffset(0,0)
-   .setScale(0.2)
+   .setScale(0.15)
    .setGravityY(1000)
 }
  
@@ -1859,8 +1854,8 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       .setGravityY(1000)
       //.setSize(50, 55, true)
       .setOffset(0,0)
-      .setScale(0.2)
-}
+      .setScale(0.15)
+    }
     
   for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
       sniperEnnemi.direction = 'RIGHT';
@@ -1876,10 +1871,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.ballesMachineGunners = this.physics.add.group({
       immovable: true,
    });
-  /* for (const ballesSniper of this.ballesSnipers.children.entries) {
-   this.physics.add.overlap( player,ballesSniper, this.degatSnowballJoueur, [ballesSniper, 50], this);
-   }*/
-  //this.physics.add.overlap(player,this.ballesSoldats, this.degatSnowballJoueur, [ballesSoldat, snowball, 20], this);
+
    
 
 
@@ -1904,8 +1896,8 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       .setGravityY(1000)
       //.setSize(50, 55, true)
       .setOffset(0,0)
-      .setScale(0.2)
-}
+      .setScale(0.15)
+    }
     
   
 
@@ -1949,8 +1941,8 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       .setGravityY(1000)
       //.setSize(50, 55, true)
       .setOffset(0,0)
-      .setScale(0.2)
-}
+      .setScale(0.15)
+    }
     
   
 
@@ -1971,7 +1963,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
    this.snowmen = this.physics.add.group();
 
   for (const snowman of snowmanObjects) {
-  this.snowmen.create(snowman.x+snowman.width/2, snowman.y-snowman.height/2, 'snowman').setScale(0.03)
+  this.snowmen.create(snowman.x+snowman.width/2, snowman.y-snowman.height/2, 'snowman').setScale(0.01)
       .setOrigin(0.5,0.5)
       .setGravityY(1000)
 }
@@ -1999,7 +1991,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       });
 
   for (const coin of coinObjects) {
-  this.coins.create(coin.x+8, coin.y-9, 'coin').setScale(0.0625)
+  this.coins.create(coin.x+8, coin.y-9, 'coin').setScale(0.03)
       .setOrigin(0.5,0.5)
       .setDepth(-1);
 }
@@ -2268,28 +2260,49 @@ if(cooldownTirLanceRoquetteBossBeforeShoot<=0){
     this.tirLanceRoquetteBoss();  
 }
     
-/////////////////Bouger goomba//////////////////////
-for (const goomba of this.goombas.children.entries) {
+/////////////////Bouger boss//////////////////////
+for (const boss of this.bosses.children.entries) {
 
-      if (goomba.body.blocked.right) {
-          goomba.direction = 'LEFT';
-          goomba.play('castorRun', true).setFlipX(false);
+      if (boss.body.blocked.right) {
+        boss.direction = 'LEFT';
+          boss.play('castorRun', true).setFlipX(false);
       }
 
-      if (goomba.body.blocked.left) {
-          goomba.direction = 'RIGHT';
-          goomba.play('castorRun', true).setFlipX(true);
+      if (boss.body.blocked.left) {
+        boss.direction = 'RIGHT';
+          boss.play('castorRun', true).setFlipX(true);
       }
 
-      if (goomba.direction === 'RIGHT') {
-          goomba.setVelocityX(300);
+      if (boss.direction === 'RIGHT') {
+        boss.setVelocityX(100);
       } else {
-          goomba.setVelocityX(-300);
+        boss.setVelocityX(-100);
       }
 
 
   }
     
+
+  for (const goomba of this.goombas.children.entries) {
+
+    if (goomba.body.blocked.right) {
+        goomba.direction = 'LEFT';
+        goomba.play('castorRun', true).setFlipX(false);
+    }
+
+    if (goomba.body.blocked.left) {
+        goomba.direction = 'RIGHT';
+        goomba.play('castorRun', true).setFlipX(true);
+    }
+
+    if (goomba.direction === 'RIGHT') {
+        goomba.setVelocityX(300);
+    } else {
+        goomba.setVelocityX(-300);
+    }
+
+
+}
 /*for (const yeti of this.yetis.children.entries) {
       if (yeti.body.blocked.right) {
           yeti.direction = 'LEFT';
@@ -2462,8 +2475,8 @@ this.input.on('pointerdown', function (pointer) {
   
   if (keyS.isDown && (standing == true || playerInWater==true))
   {   
-      player.body.setSize(230, 340, true);
-      player.body.setOffset(150,140);
+      player.body.setSize(45, 45, true);
+      player.body.setOffset(20,45);
       if(playerSkin=="ninja"){
       player.anims.play('crouchDownNinja');            
       } 
@@ -2474,11 +2487,7 @@ this.input.on('pointerdown', function (pointer) {
       player.anims.play('crouchDownNinjaGreen');            
       } 
   }
- /* else{
-      
-      player.body.setSize(230, 480, true);
-      player.body.setOffset(150,0); 
-}*/
+
   if (keyZ.isDown && (standing == true || playerInWater==true))
   {   
       this.jump();
@@ -2486,7 +2495,7 @@ this.input.on('pointerdown', function (pointer) {
 
   if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
-          player.body.setSize(230, 480, false).setOffset(150, 0);
+          player.body.setSize(45, 90, false).setOffset(20, 0);
   }
   if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
 
