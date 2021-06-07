@@ -117,7 +117,26 @@ damageBoss(boss, shuriken){
             bossInvincible=true
             this.time.delayedCall(2000, this.bossStopInvincible, null, this);
         }
-        else if(pvBoss==0){
+        else if(pvBoss<0.1){
+            boss.destroy()
+            totalCoins+=50;
+            rewardCoinsPostGame+=50
+            textPieces.destroy();
+            textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+        }
+    }
+    console.log(pvBoss)
+}
+
+damageBossCac(boss, shuriken){
+    shuriken.destroy();
+    if(bossInvincible==false){
+        pvBoss-=0.1
+        if(pvBoss>0.09){
+            bossInvincible=true
+            this.time.delayedCall(2000, this.bossStopInvincible, null, this);
+        }
+        else if(pvBoss<0.1){
             boss.destroy()
             totalCoins+=50;
             rewardCoinsPostGame+=50
@@ -300,6 +319,8 @@ explodeGrenadeLanceGrenade(grenadeLanceGrenade){
     grenadeLanceGrenade.destroy();
     var explosion = this.physics.add.sprite(grenadeLanceGrenade.x, grenadeLanceGrenade.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
     this.colliderExplosion = this.physics.add.overlap(explosion, player, this.killPlayerExplosion, null, this)
+    this.physics.add.collider(this.caisses, explosion, this.breakCaisse, null, this);
+
     this.time.delayedCall(200, this.destroyColliderFunction, [this.colliderExplosion], this);
     this.time.delayedCall(1000, this.destroyExplosion, [explosion], this);
 }
@@ -308,6 +329,8 @@ explodeRoquetteLanceRoquette(roquetteLanceRoquette){
     roquetteLanceRoquette.destroy();
     var explosion = this.physics.add.sprite(roquetteLanceRoquette.x, roquetteLanceRoquette.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
     this.colliderExplosion = this.physics.add.overlap(explosion, player, this.killPlayerExplosion, null, this)
+    this.physics.add.collider(this.caisses, explosion, this.breakCaisse, null, this);
+
     this.time.delayedCall(200, this.destroyColliderFunction, [this.colliderExplosion], this);
     this.time.delayedCall(1000, this.destroyExplosion, [explosion], this);
 }
@@ -630,8 +653,8 @@ console.log(level)
 
 degatSnowmanJoueur(snowman){
   snowman.destroy();
-    var explosionShuriken = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScrollFactor(0).setScale(0.2).setDepth(1).setOrigin(0.5,0.5);
-    this.death();    
+  var explosion = this.physics.add.sprite(snowman.x, snowman.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
+  this.death();    
 }
   
 bouncePlatformMontagne(){
@@ -1100,6 +1123,29 @@ playerEscalierGauche(){
     }
 }
 
+breakCaisse(caisse, shuriken){
+
+    shuriken.destroy()
+    if(caisse.pv==2){
+        caisse.destroy()
+        caisse = this.caisses.create(caisse.x, caisse.y, 'caisseBroken').setScale(0.06)
+        .setOrigin(0.5,0.5)
+        .setDepth(2)
+        caisse.pv=1
+
+        console.log("uzebv")
+    }
+
+    else if(caisse.pv==1){
+        caisse.destroy()
+        console.log("222")
+
+    }
+}
+stopSlash(cacAttaque){
+    cacAttaque.destroy()
+}
+
 
 
 preload (){
@@ -1136,6 +1182,10 @@ preload (){
   this.load.image('castor', 'assets/castor.png');
   this.load.image('player1Ninja', 'assets/playerNinjaIdle1.png');
   this.load.image('teleport', 'assets/teleporter.png');
+  this.load.image('caisse', 'assets/caisse.png');
+  this.load.image('caisseBroken', 'assets/caisseBroken.jpg');
+  this.load.image('cacAttaque', 'assets/slash.png');
+
   //this.load.spritesheet('dude1', 'assets/dude1.png', { frameWidth: 32, frameHeight: 48 });    
   this.load.spritesheet('spritesheetSoldatEnnemi', 'assets/spritesheetSoldatEnnemi.png', { frameWidth: 325, frameHeight: 591 });
   
@@ -1233,7 +1283,7 @@ create (){
   this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
 
 
-  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinja');
+  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.063,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinja');
   player.setGravityY(1000)
 
   player.body.setSize(45, 90, false).setOffset(20, 0)
@@ -1462,6 +1512,29 @@ this.anims.create({
 });
 
 
+  /////////////////////////////////////////
+  //////////////Caisses//////////////////
+    
+  const caisseObjects = this.map.getObjectLayer('caisseDestructible').objects;
+  this.caisses = this.physics.add.group({
+          immovable: true,
+          allowGravity: true
+      });
+
+  for (const caisse of caisseObjects) {
+  this.caisses.create(caisse.x+caisse.width/2, caisse.y-caisse.height/2, 'caisse').setScale(0.075)
+      .setOrigin(0.5,0.5)
+      .setDepth(-1)
+  }
+  for (const caisse of this.caisses.children.entries) {
+    caisse.pv=2
+}  
+
+  this.physics.add.collider(this.caisses, player);
+  this.physics.add.collider(this.caisses, this.platform);
+  this.physics.add.collider(this.caisses, this.caisses);
+
+
 
   ///////////////////////////////////////
   ////////////SniperEnnemi////////////////////
@@ -1497,7 +1570,7 @@ this.physics.add.collider(this.bosses, this.platform);
       });
 
   for (const teleportItem of teleportItemObjects) {
-  this.teleportItems.create(teleportItem.x+8, teleportItem.y-3, 'shuriken').setScale(0.75)
+  this.teleportItems.create(teleportItem.x+teleportItem.width/2, teleportItem.y-teleportItem.height/2-4, 'teleport').setScale(0.025)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -2064,6 +2137,8 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
   keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
   keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+  spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
   //  A simple background for our game
  // this.add.image(400, 300, 'sky');
 
@@ -2093,6 +2168,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   cursors = this.input.keyboard.createCursorKeys();
 
 
+  this.cacAttaques = this.physics.add.group();
 
   shurikens = this.physics.add.group();
   
@@ -2111,6 +2187,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.collider(teleportations, platformMontagne);
   this.physics.add.collider(teleportations, this.platform);
   this.physics.add.collider(this.bosses, shurikens, this.damageBoss, null, this);
+
   this.physics.add.collider(shurikens, this.platform, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, platformIce, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, platformSnow, this.destroyShuriken, null, this);
@@ -2134,7 +2211,10 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.collider(this.platform, this.ballesSnipers,  this.destroyBalle,null,this)
   this.physics.add.collider(this.platform, this.ballesMachineGunners,  this.destroyBalle,null,this)
 
-    
+  this.physics.add.collider(this.caisses, this.ballesSoldats, this.breakCaisse, null, this);
+  this.physics.add.collider(this.caisses, this.ballesSnipers, this.breakCaisse, null, this);
+  this.physics.add.collider(this.caisses, this.ballesMachineGunners, this.breakCaisse, null, this);
+
 
 
 //   this.physics.add.collider(shuriken, platform);
@@ -2147,16 +2227,22 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 
   
   
-  
+this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this);
   this.physics.add.overlap(this.yetis, shurikens, this.killYeti, null, this);
-  
-
   this.physics.add.overlap(this.lanceRoquettes, shurikens, this.killLanceRoquette, null, this);
   this.physics.add.overlap(this.lanceGrenades, shurikens, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.machineGunnerEnnemis, shurikens, this.killMachineGunner, null, this);
   this.physics.add.overlap(this.sniperEnnemis, shurikens, this.killSniperEnnemi, null, this);
   this.physics.add.overlap(this.snowmen, shurikens, this.killSnowman, null, this);
   
+
+  this.physics.add.collider(this.bosses, this.cacAttaques, this.damageBoss, null, this);
+  this.physics.add.overlap(this.yetis, this.cacAttaques, this.killYeti, null, this);
+  this.physics.add.overlap(this.lanceRoquettes, this.cacAttaques, this.killLanceRoquette, null, this);
+  this.physics.add.overlap(this.lanceGrenades, this.cacAttaques, this.killLanceGrenade, null, this);
+  this.physics.add.overlap(this.machineGunnerEnnemis, this.cacAttaques, this.killMachineGunner, null, this);
+  this.physics.add.overlap(this.sniperEnnemis, this.cacAttaques, this.killSniperEnnemi, null, this);
+  this.physics.add.overlap(this.snowmen, this.cacAttaques, this.killSnowman, null, this);
   
   this.physics.add.collider(player, this.platform, this.setSpeedPlatform, null, this);
     
@@ -2434,20 +2520,39 @@ this.input.on('pointerdown', function (pointer) {
     }
 }, this);
 
+if(spaceBar.isDown){
+    if(playerDirection=='right'){
+        var cacAttaque = this.cacAttaques.create(player.x+40, player.y-3, 'cacAttaque').setScale(0.1)
+        .setOrigin(0.5,0.5)
+        .setDepth(-1)
+    }
+    if(playerDirection=='left'){
+        var cacAttaque = this.cacAttaques.create(player.x-40, player.y-3, 'cacAttaque').setScale(0.1)
+        .setOrigin(0.5,0.5)
+        .setDepth(-1)
+        .setFlipX(true)
+    }
+    this.time.delayedCall(50, this.stopSlash, [cacAttaque], this);
+    spaceBar.reset()
+    console.log("tes")
+}
+
   
 
 
 
+
+
   
 
   
-  
-  
-  
-  if(player.body.blocked.down==false ){
+if(player.body.blocked.down || player.body.touching.down){
+    standing=true
+}
+  if(player.body.blocked.down==false && player.body.touching.down== false && playerContactCaisse==false){
       standing=false
   }
-  
+  playerContactCaisse= false
   
   
   if (keyQ.isDown)
@@ -2493,11 +2598,11 @@ this.input.on('pointerdown', function (pointer) {
       this.jump();
   }
 
-  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
+  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20) )) {
 
           player.body.setSize(45, 90, false).setOffset(20, 0);
   }
-  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
+  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
 
 if(playerSkin=="ninja"){
   player.anims.play('crouchDownNinja');            
@@ -2529,7 +2634,7 @@ if(playerSkin=="ninjaGreen"){
       player.setVelocityX(0);
 
       if(keyS.isUp){
-          if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
+          if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20)|| this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
       if(playerSkin=="ninja"){
       player.anims.play('idleNinja',true).setFlipX(false);           
       } 
@@ -2545,7 +2650,7 @@ if(playerSkin=="ninjaGreen"){
   {
 
       player.setAccelerationX(0);
-      if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20))) {
+      if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20)|| this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
       if(playerSkin=="ninja"){
       player.anims.play('idle');            
       } 

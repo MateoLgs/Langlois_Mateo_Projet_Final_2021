@@ -193,13 +193,14 @@ var jumpingPlayer = true
 var shurikenPowerUpActive = true
 var shurikenPlayer = true
 var cooldownTirSoldatEnnemi
-var delaiShurikenPlayer = 120;
+var delaiShurikenPlayer = 20;
 var standing;
 var keyA
 var keyZ;
 var keyS;
 var keyD;
 var keyQ;
+var spaceBar
 var coins;
 var playerInvincible=false;
 var playerCanResetVelocity=true;
@@ -217,7 +218,7 @@ var gamepadStart=true
 var patchNote;
 var exitButton;
 var canResetIceVelocity=true
-
+var playerContactCaisse = false
 
 
 //////////SKINS/////////////////
@@ -283,7 +284,7 @@ var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
 var laserHorizontal;
 var laserHorizontalActivated = true;
 ////////////BOSS//////////
-var pvBoss = 5
+var pvBoss = 1
 var bossInvincible = false
 var vitesseBalleSoldatBoss=400
 var cooldownTirSoldatBoss=120
