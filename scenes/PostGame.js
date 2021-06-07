@@ -13,11 +13,11 @@ class PostGame extends Phaser.Scene {
         keyZ.reset(); 
 
         pvPlayer=100
-        cooldownShuriken = 120;
+        cooldownShuriken = 20;
         gravity=1000;
         playerInvincible=false;
         shurikenLeft =5;
-        teleportationsLeft = 3;
+        teleportationsLeft = 0;
 
         pageLevelMenu = 1;
 
@@ -28,15 +28,17 @@ class PostGame extends Phaser.Scene {
             this.screenEnd = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'victoireScreen').setScale(1.8).setInteractive();
         }
         this.homeButton = this.add.image((this.cameras.main.centerX*2)*0.25,(this.cameras.main.centerY*2)*0.75, 'homeButton').setScale(1.7).setInteractive().setOrigin(0.5,0.5);
-        this.replayLevelButton = this.add.image((this.cameras.main.centerX*2)*0.5,(this.cameras.main.centerY*2)*0.75, 'replayLevelButton').setScale(1.7).setInteractive().setOrigin(0.5,0.5);
         this.adForReward = this.add.image((this.cameras.main.centerX*2)*0.75,(this.cameras.main.centerY*2)*0.75, 'adForReward').setScale(0.15).setInteractive().setOrigin(0.5,0.5);
 
+this.replayLevelButton = this.add.image((this.cameras.main.centerX*2)*0.5,(this.cameras.main.centerY*2)*0.75, 'replayLevelButton').setScale(1.7).setInteractive().setOrigin(0.5,0.5);
+
         this.homeButton.on('pointerdown', () => {
-            this.scene.stop("PostGame");
-            this.scene.start('Menu');
+            this.scene.destroy("PostGame");
+           // this.scene.start('Menu');
         }) 
         this.replayLevelButton.on('pointerdown', () => {
             this.scene.stop("PostGame");
+
             this.scene.start('Jeu');
         }) 
         this.adForReward.on('pointerdown', () => {
@@ -54,9 +56,6 @@ class PostGame extends Phaser.Scene {
             this.time.delayedCall(9000, this.cooldown, ["1"], this);
             this.time.delayedCall(10000, this.cooldown, ["0"], this);
             this.time.delayedCall(11000, this.backToReward, null, this);
-
-
-               
         }) 
 
     }

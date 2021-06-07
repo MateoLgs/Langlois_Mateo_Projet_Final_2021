@@ -134,7 +134,7 @@ damageBossCac(boss, shuriken){
         pvBoss-=0.1
         if(pvBoss>0.09){
             bossInvincible=true
-            this.time.delayedCall(2000, this.bossStopInvincible, null, this);
+            this.time.delayedCall(1000, this.bossStopInvincible, null, this);
         }
         else if(pvBoss<0.1){
             boss.destroy()
@@ -1152,6 +1152,7 @@ stopSlash(cacAttaque){
 
 
 preload (){
+    
     this.load.image("bg_1", "assets/bg-1.png");
     this.load.image("bg_2", "assets/bg-2.png");
 
@@ -1244,7 +1245,7 @@ create (){
 
 
   this.tileset = this.map.addTilesetImage('tileset', 'tiles');
-  var background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
+  this.background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
   this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
   var platformEscalierDroit = this.map.createDynamicLayer('platformEscalierDroit', this.tileset, 0, 0);
   var platformEscalierGauche = this.map.createDynamicLayer('platformEscalierGauche', this.tileset, 0, 0);
@@ -1462,7 +1463,6 @@ if(playerSkin=="ninjaGreen"){
       repeat: -1
   });
 }
-
 
 
 
@@ -2232,20 +2232,18 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   
 this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this);
   this.physics.add.overlap(this.yetis, shurikens, this.killYeti, null, this);
-  this.physics.add.overlap(this.lanceRoquettes, shurikens, this.killLanceRoquette, null, this);
+  this.physics.add.overlap(this.lanceRoquettes, shurikens, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.lanceGrenades, shurikens, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.machineGunnerEnnemis, shurikens, this.killMachineGunner, null, this);
   this.physics.add.overlap(this.sniperEnnemis, shurikens, this.killSniperEnnemi, null, this);
-  this.physics.add.overlap(this.snowmen, shurikens, this.killSnowman, null, this);
   
 
   this.physics.add.collider(this.bosses, this.cacAttaques, this.damageBoss, null, this);
   this.physics.add.overlap(this.yetis, this.cacAttaques, this.killYeti, null, this);
-  this.physics.add.overlap(this.lanceRoquettes, this.cacAttaques, this.killLanceRoquette, null, this);
+  this.physics.add.overlap(this.lanceRoquettes, this.cacAttaques, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.lanceGrenades, this.cacAttaques, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.machineGunnerEnnemis, this.cacAttaques, this.killMachineGunner, null, this);
   this.physics.add.overlap(this.sniperEnnemis, this.cacAttaques, this.killSniperEnnemi, null, this);
-  this.physics.add.overlap(this.snowmen, this.cacAttaques, this.killSnowman, null, this);
   
   this.physics.add.collider(player, this.platform, this.setSpeedPlatform, null, this);
     

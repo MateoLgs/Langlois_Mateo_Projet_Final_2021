@@ -30,10 +30,10 @@ class Menu extends Phaser.Scene {
     create() {
         
         pvPlayer=100
-        cooldownShuriken = 120;
+        cooldownShuriken = 20;
         gravity=1000;
         playerInvincible=false;
-        shurikenLeft =5;
+        shurikenLeft =10;
         pageLevelMenu = 1;
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
