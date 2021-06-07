@@ -1043,10 +1043,13 @@ mort(){
        
 
     morts+=1
+    localStorage.setItem(localDataMorts, morts);
+
     levelCompleted = false;
 
  player.setVelocityX(0);
  this.scene.stop("Jeu");
+ 
    this.scene.start('PostGame');
 
 }
@@ -2598,11 +2601,11 @@ if(player.body.blocked.down || player.body.touching.down){
       this.jump();
   }
 
-  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20) )) {
+  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
 
           player.body.setSize(45, 90, false).setOffset(20, 0);
   }
-  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
+  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
 
 if(playerSkin=="ninja"){
   player.anims.play('crouchDownNinja');            

@@ -6,7 +6,13 @@ class Menu extends Phaser.Scene {
     }
 
         preload(){
-
+            this.load.image('deathScreen', 'assets/deathScreen.png');
+            this.load.image('victoireScreen', 'assets/victoireScreen.jpg');
+            this.load.image('replayLevelButton', 'assets/replayLevelButton.jpg');
+            this.load.image('homeButton', 'assets/homeButton.jpg');
+            this.load.image('adForReward', 'assets/adForReward.png');
+            this.load.image('crossRed', 'assets/crossRed.png');
+            this.load.image('blackSquare', 'assets/blackSquare.png');
 
 
               this.load.image('Menu', 'assets/menuScreen.png');

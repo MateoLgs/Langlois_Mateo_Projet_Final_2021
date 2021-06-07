@@ -5,16 +5,6 @@ class PostGame extends Phaser.Scene {
         super('PostGame');
     }
         preload(){
-            this.load.image('deathScreen', 'assets/deathScreen.png');
-            this.load.image('victoireScreen', 'assets/victoireScreen.jpg');
-            this.load.image('replayLevelButton', 'assets/replayLevelButton.jpg');
-            this.load.image('homeButton', 'assets/homeButton.jpg');
-            this.load.image('adForReward', 'assets/adForReward.png');
-            this.load.image('crossRed', 'assets/crossRed.png');
-            this.load.image('blackSquare', 'assets/blackSquare.png');
-
-
-
         }
     create() {
         keyS.reset();
