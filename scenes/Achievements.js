@@ -38,10 +38,9 @@ class Achievements extends Phaser.Scene {
             var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  morts + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       
         }
         else if(morts > mortsForAchievement-1){
-
             achievementsCompleted+=1;
             localStorage.setItem(localDataAchievementsCompleted, achievementsCompleted);
-            var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  mortsForAchievement + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
+            var achievementsDeathStat = this.add.text((this.cameras.main.centerX*2)*0.7, (this.cameras.main.centerY*2)*0.3,  morts + " / " + mortsForAchievement,{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x00ff00);       
         }
        
         var achievementsSkins = this.add.text((this.cameras.main.centerX*2)*0.2, (this.cameras.main.centerY*2)*0.35,  "Collector (Possess all skins)",{ fill:'#ffffff', size:200}).setDepth(1).setTint(0x000000);       

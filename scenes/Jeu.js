@@ -4,7 +4,11 @@ class Jeu extends Phaser.Scene{
       super('Jeu');
     }
 
-
+    uncrouchDisabled(){
+        uncrouchPossible = false;
+        console.log(uncrouchPossible)
+      }
+    
 /////////////////BOSS///////////////
 tirSoldatBoss(boss){
     for (const boss of this.bosses.children.entries) {
@@ -17,7 +21,7 @@ tirSoldatBoss(boss){
         ballesSoldatBoss.body.setAllowGravity(false);
         if(player.x<boss.x){
             boss.play('soldierShoot', true).setFlipX(false);
-            ballesSoldatBoss.setGravityY(1000);
+           // ballesSoldatBoss.setGravityY(1000);
         }
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
@@ -35,7 +39,7 @@ tirSniperBoss(boss){
         ballesSniperBoss.body.setAllowGravity(false);
         if(player.x<boss.x){
             boss.play('soldierShoot', true).setFlipX(false);
-            ballesSniperBoss.setGravityY(1000);
+           // ballesSniperBoss.setGravityY(1000);
         }
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
@@ -51,10 +55,11 @@ tirMachineGunnerBoss(boss){
         var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
         ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
         this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleMachineGunner,null,this)
+
         ballesMachineGunnerBoss.body.setAllowGravity(false);
         if(player.x<boss.x){
             boss.play('soldierShoot', true).setFlipX(false);
-            ballesMachineGunnerBoss.setGravityY(1000);
+            //ballesMachineGunnerBoss.setGravityY(1000);
         }
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
@@ -69,6 +74,8 @@ tirLanceGrenadeBoss(){
         this.physics.moveTo(grenadeLanceGrenadeBoss, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
         var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
         this.physics.add.collider(grenadeLanceGrenadeBoss, this.platform);
+        this.physics.add.collider(grenadeLanceGrenadeBoss, this.caisses);
+
         grenadeLanceGrenadeBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
         grenadeLanceGrenadeBoss.body.setGravityY(700)
         grenadeLanceGrenadeBoss.body.setBounce(0.5)
@@ -95,7 +102,8 @@ tirLanceRoquetteBoss(){
     
         this.physics.add.collider(roquetteLanceRoquetteBoss, this.platform, this.explodeRoquetteLanceRoquette,null,this);
         this.physics.add.collider(roquetteLanceRoquetteBoss, player, this.explodeRoquetteLanceRoquette, null ,this);
-       
+        this.physics.add.collider(roquetteLanceRoquetteBoss, this.caisses, this.explodeRoquetteLanceRoquette,null,this);
+
 
         if(player.x<boss.x){
 
@@ -115,7 +123,7 @@ damageBoss(boss, shuriken){
         pvBoss-=1
         if(pvBoss>0){
             bossInvincible=true
-            this.time.delayedCall(2000, this.bossStopInvincible, null, this);
+            this.time.delayedCall(1000, this.bossStopInvincible, null, this);
         }
         else if(pvBoss<0.1){
             boss.destroy()
@@ -131,10 +139,9 @@ damageBoss(boss, shuriken){
 damageBossCac(boss, shuriken){
     shuriken.destroy();
     if(bossInvincible==false){
+        console.log("ozevb")
         pvBoss-=0.1
         if(pvBoss>0.09){
-            bossInvincible=true
-            this.time.delayedCall(1000, this.bossStopInvincible, null, this);
         }
         else if(pvBoss<0.1){
             boss.destroy()
@@ -230,6 +237,9 @@ tirLanceGrenadeEnnemi(){
         this.physics.moveTo(grenadeLanceGrenade, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
         var angleBalle = (Math.atan2(player.y - lanceGrenade.y, player.x - lanceGrenade.x) * 180 / Math.PI);
         this.physics.add.collider(grenadeLanceGrenade, this.platform);
+        this.physics.add.collider(grenadeLanceGrenade, this.caisses);
+        this.physics.add.collider(grenadeLanceGrenade, this.platformMontagne);
+
         grenadeLanceGrenade.rotation = Phaser.Math.Angle.BetweenPoints(player, lanceGrenade);
         grenadeLanceGrenade.body.setGravityY(700)
         grenadeLanceGrenade.body.setBounce(0.5)
@@ -258,7 +268,8 @@ tirLanceRoquetteEnnemi(){
     
         this.physics.add.collider(roquetteLanceRoquette, this.platform, this.explodeRoquetteLanceRoquette,null,this);
         this.physics.add.collider(roquetteLanceRoquette, player, this.explodeRoquetteLanceRoquette, null ,this);
-       
+        this.physics.add.collider(roquetteLanceRoquette, this.caisses, this.explodeRoquetteLanceRoquette,null,this);
+        this.physics.add.collider(roquetteLanceRoquette, this.platformMontagne, this.explodeRoquetteLanceRoquette,null,this);
 
         if(player.x<lanceRoquette.x){
 
@@ -448,8 +459,7 @@ lancerTeleport(player){
   teleport.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
     teleportationsLeft -=1;
     
-    teleportationsLeftText.destroy()
-    teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
+   this.changeTeleport();
 
     this.time.delayedCall(1250, this.teleportToTeleporter, [teleport], this);  
     }
@@ -539,12 +549,19 @@ pickUpShuriken(player,shuriken){
 pickUpTeleport(player,teleport){
     teleport.destroy();
     teleportationsLeft+=1;
+    teleportationsLeftText.destroy()
+    teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }
 
 changeShuriken(){
   shurikenLeftText.destroy();
   shurikenLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.075,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 }
+
+changeTeleport(){
+    teleportationsLeftText.destroy()
+    teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5); 
+  }
  
 collectPowerUpShuriken(powerUpShuriken){
    ("pickupshuriken")
@@ -1026,7 +1043,7 @@ death(){
 console.log("death")
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
-      player.anims.play('die');
+      //player.anims.play('die');
       player.setTint(0xff0000)
       this.physics.pause();
       keyD.reset();
@@ -1149,10 +1166,56 @@ stopSlash(cacAttaque){
     cacAttaque.destroy()
 }
 
+declareVariables(){
+    var vitesseBalleSoldatEnnemi=400
+var cooldownTirSoldatEnnemi=120
+var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
+var ballesSoldat;
 
+var vitesseBalleSniperEnnemi=700
+var cooldownTirSniperEnnemi=300
+var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
+var ballesSniper;
+
+var vitesseBalleMachineGunnerEnnemi=200
+var cooldownTirMachineGunnerEnnemi=60
+var cooldownTirMachineGunnerEnnemiBeforeShoot =cooldownTirMachineGunnerEnnemi
+var ballesMachineGunners;
+
+var vitesseGrenadeLanceGrenadeEnnemi=600
+var cooldownTirLanceGrenadeEnnemi=100
+var cooldownTirLanceGrenadeEnnemiBeforeShoot =cooldownTirLanceGrenadeEnnemi
+var ballesLanceGrenades;
+
+var vitesseRoquetteLanceRoquetteEnnemi=150
+var cooldownTirLanceRoquetteEnnemi=200
+var cooldownTirLanceRoquetteEnnemiBeforeShoot =cooldownTirLanceRoquetteEnnemi
+var ballesLanceRoquettes;
+var cooldownRecalculationRoquetteDirection = 60
+var cooldownRecalculationRoquetteDirectionReset = cooldownRecalculationRoquetteDirection
+
+var vitesseDeplacementDrone = 50
+var cooldownTirDrone = 300
+var cooldownTirDroneReset = cooldownTirDrone
+
+var cooldownActivationLaserVertical = 120
+var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
+var laserVertical;
+var laserVerticalActivated = true;
+
+var cooldownActivationLaserHorizontal = 120
+var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
+var laserHorizontal;
+var laserHorizontalActivated = true;
+
+}
 
 preload (){
-    
+
+
+this.declareVariables()
+
+
     this.load.image("bg_1", "assets/bg-1.png");
     this.load.image("bg_2", "assets/bg-2.png");
 
@@ -1249,7 +1312,7 @@ create (){
   this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
   var platformEscalierDroit = this.map.createDynamicLayer('platformEscalierDroit', this.tileset, 0, 0);
   var platformEscalierGauche = this.map.createDynamicLayer('platformEscalierGauche', this.tileset, 0, 0);
-  var platformMontagne = this.map.createDynamicLayer('platformMontagne', this.tileset, 0, 0);
+  this.platformMontagne = this.map.createDynamicLayer('platformMontagne', this.tileset, 0, 0);
   var platformSnow = this.map.createDynamicLayer('platformSnow', this.tileset, 0, 0);
   var platformIce = this.map.createDynamicLayer('platformIce', this.tileset, 0, 0);
   var pics = this.map.createDynamicLayer('pics', this.tileset, 0, 0);
@@ -1259,7 +1322,7 @@ create (){
  pics.setCollisionByExclusion(-1, true);
  platformEscalierDroit.setCollisionByExclusion(-1, true);
  platformEscalierGauche.setCollisionByExclusion(-1, true);
- platformMontagne.setCollisionByExclusion(-1, true);
+ this.platformMontagne.setCollisionByExclusion(-1, true);
  platformSnow.setCollisionByExclusion(-1, true);
  platformIce.setCollisionByExclusion(-1, true);
 
@@ -1557,9 +1620,11 @@ this.bosses.create(boss.x, boss.y-20, 'soldatEnnemi')
 }
   
 for (const boss of this.bosses.children.entries) {
-    boss.direction = 'RIGHT';
+    boss.direction = 'LEFT';
 }  
 this.physics.add.collider(this.bosses, this.platform);
+this.physics.add.collider(this.bosses, this.platformMontagne);
+this.physics.add.collider(this.bosses, this.caisses);
 
 
 
@@ -1640,7 +1705,7 @@ this.physics.add.collider(this.bosses, this.platform);
 
  this.physics.add.collider(this.goombas, platformIce);
  this.physics.add.collider(this.goombas, platformSnow);
- this.physics.add.collider(this.goombas, platformMontagne);
+ this.physics.add.collider(this.goombas, this.platformMontagne);
  this.physics.add.collider(this.goombas, this.goombas);
  
   ///////////////////////////////////////
@@ -1954,7 +2019,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 
   this.anims.create({
   key: 'soldierShoot',
-  frames: this.anims.generateFrameNumbers('spritesheetSoldatennemi', { start: 0, end: 1 }),
+  frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
 });
@@ -1984,7 +2049,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
  this.physics.add.collider(this.machineGunnerEnnemis, this.platform);
  this.physics.add.collider(this.machineGunnerEnnemis, platformIce);
  this.physics.add.collider(this.machineGunnerEnnemis, platformSnow);
- this.physics.add.collider(this.machineGunnerEnnemis, platformMontagne);
+ this.physics.add.collider(this.machineGunnerEnnemis, this.platformMontagne);
     
     
 
@@ -1999,7 +2064,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
 
   this.anims.create({
   key: 'soldierShoot',
-  frames: this.anims.generateFrameNumbers('spritesheetSoldatennemi', { start: 0, end: 1 }),
+  frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
 });
@@ -2029,7 +2094,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
  this.physics.add.collider(this.yetis, this.platform);
  this.physics.add.collider(this.yetis, platformIce);
  this.physics.add.collider(this.yetis, platformSnow);
- this.physics.add.collider(this.yetis, platformMontagne);
+ this.physics.add.collider(this.yetis, this.platformMontagne);
     
     
    ///////////////////////////////////////
@@ -2187,7 +2252,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   //  Collide the player and the stars with the platforms
 
   //this.physics.add.collider(healthPowerUp, platform);
-  this.physics.add.collider(teleportations, platformMontagne);
+  this.physics.add.collider(teleportations, this.platformMontagne);
   this.physics.add.collider(teleportations, this.platform);
   this.physics.add.collider(this.bosses, shurikens, this.damageBoss, null, this);
 
@@ -2238,7 +2303,7 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
   this.physics.add.overlap(this.sniperEnnemis, shurikens, this.killSniperEnnemi, null, this);
   
 
-  this.physics.add.collider(this.bosses, this.cacAttaques, this.damageBoss, null, this);
+  this.physics.add.overlap(this.bosses, this.cacAttaques, this.damageBossCac, null, this);
   this.physics.add.overlap(this.yetis, this.cacAttaques, this.killYeti, null, this);
   this.physics.add.overlap(this.lanceRoquettes, this.cacAttaques, this.killLanceGrenade, null, this);
   this.physics.add.overlap(this.lanceGrenades, this.cacAttaques, this.killLanceGrenade, null, this);
@@ -2247,7 +2312,7 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
   
   this.physics.add.collider(player, this.platform, this.setSpeedPlatform, null, this);
     
-  this.physics.add.collider(player, platformMontagne, this.bouncePlatformMontagne, null, this);
+  this.physics.add.collider(player, this.platformMontagne, this.bouncePlatformMontagne, null, this);
         
   this.physics.add.collider(player, platformSnow, this.setSpeedPlatformSnow, null, this);
   this.physics.add.collider(player, platformIce, this.setSpeedPlatformIce, null, this);
@@ -2258,20 +2323,23 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
   /////////////////
 
 
-  graphics = this.add.graphics();
+ rectCrouchPlayer = this.physics.add.sprite(0,0, 'spritesheetPlayerNinja').setAlpha(0.2);
 
 
 }
 
 update (){    
+rectCrouchPlayer.destroy()
+rectCrouchPlayer = this.physics.add.sprite(player.x,player.y, 'spritesheetPlayerNinja').setAlpha(0.2);
+rectCrouchPlayer.body.setSize(45, 90, false).setOffset(20, 0)
+this.physics.add.overlap(rectCrouchPlayer, this.caisses, this.uncrouchDisabled, null, this);
+uncrouchPossible=true
 
-
-
-
-    for (const drone of this.drones.children.entries) {    
+    
+for (const drone of this.drones.children.entries) {    
         this.physics.moveTo(drone, player.x,player.y-300, vitesseDeplacementDrone);
     }
-    
+
 
 
 
@@ -2347,17 +2415,23 @@ if(cooldownTirLanceRoquetteBossBeforeShoot<=0){
     this.tirLanceRoquetteBoss();  
 }
     
+cooldownRecalculationRoquetteDirectionBoss--
+if(cooldownRecalculationRoquetteDirectionBoss<=0){
+    cooldownRecalculationRoquetteDirectionBoss=cooldownRecalculationRoquetteDirectionResetBoss
+    for (const roquetteLanceRoquette of this.roquettesLanceRoquettes.children.entries) {    
+        this.physics.moveTo(roquetteLanceRoquette, player.x,player.y, vitesseRoquetteLanceRoquetteEnnemi);
+        roquetteLanceRoquette.rotation = Phaser.Math.Angle.BetweenPoints(player, roquetteLanceRoquette);
+    }  
+}
 /////////////////Bouger boss//////////////////////
 for (const boss of this.bosses.children.entries) {
 
       if (boss.body.blocked.right) {
         boss.direction = 'LEFT';
-          boss.play('castorRun', true).setFlipX(false);
       }
 
       if (boss.body.blocked.left) {
         boss.direction = 'RIGHT';
-          boss.play('castorRun', true).setFlipX(true);
       }
 
       if (boss.direction === 'RIGHT') {
@@ -2535,7 +2609,6 @@ if(spaceBar.isDown){
     }
     this.time.delayedCall(50, this.stopSlash, [cacAttaque], this);
     spaceBar.reset()
-    console.log("tes")
 }
 
   
@@ -2599,11 +2672,13 @@ if(player.body.blocked.down || player.body.touching.down){
       this.jump();
   }
 
-  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
-
+  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
+    if(uncrouchPossible==true){
           player.body.setSize(45, 90, false).setOffset(20, 0);
-  }
-  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
+        }
+    }
+
+  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
 
 if(playerSkin=="ninja"){
   player.anims.play('crouchDownNinja');            
@@ -2746,7 +2821,6 @@ if(playerSkin=="ninjaGreen"){
 
 
   }
-
 
 
 

@@ -2,8 +2,8 @@
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
-    <title>MARIOOOO</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <title>ETS</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 
     <script src="./scenes/Menu.js"></script>
     <script src="./scenes/LevelMenu.js"></script>
@@ -49,13 +49,13 @@ padding: 0;
 
 
 var level="level1";
-var teleportationsLeft = 3;
+var teleportationsLeft = 1;
 var teleportationsLeftText;
 
-var shurikenLeft =10;
+var shurikenLeft =5;
 var shurikenLeftText;
 
-var cooldownShuriken = 20;
+var cooldownShuriken = 120;
 var onPlatform ="";
 var shuriken;
 var snowball;
@@ -193,7 +193,7 @@ var jumpingPlayer = true
 var shurikenPowerUpActive = true
 var shurikenPlayer = true
 var cooldownTirSoldatEnnemi
-var delaiShurikenPlayer = 20;
+var delaiShurikenPlayer = 120;
 var standing;
 var keyA
 var keyZ;
@@ -217,6 +217,8 @@ var paddle;
 var gamepadStart=true
 var patchNote;
 var exitButton;
+var rectCrouchPlayer
+var uncrouchPossible = true
 var canResetIceVelocity=true
 var playerContactCaisse = false
 
@@ -341,7 +343,6 @@ backgroundColor: '#538192',
 physics: {
     default: 'arcade',
     arcade: {
-        //gravity: { y: 1000 },
         debug: true,
         fps: 60
     },

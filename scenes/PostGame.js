@@ -33,8 +33,8 @@ class PostGame extends Phaser.Scene {
 this.replayLevelButton = this.add.image((this.cameras.main.centerX*2)*0.5,(this.cameras.main.centerY*2)*0.75, 'replayLevelButton').setScale(1.7).setInteractive().setOrigin(0.5,0.5);
 
         this.homeButton.on('pointerdown', () => {
-            this.scene.destroy("PostGame");
-           // this.scene.start('Menu');
+            this.scene.stop("PostGame");
+            this.scene.start('Menu');
         }) 
         this.replayLevelButton.on('pointerdown', () => {
             this.scene.stop("PostGame");
