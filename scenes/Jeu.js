@@ -5,8 +5,7 @@ class Jeu extends Phaser.Scene{
     }
 
     uncrouchDisabled(){
-        uncrouchPossible = false;
-        console.log(uncrouchPossible)
+        //uncrouchPossible = false;
       }
     
 /////////////////BOSS///////////////
@@ -324,6 +323,13 @@ activateLaserHorizontal(){
         }  
         laserHorizontalActivated=true; 
     }
+}
+
+tirDrones(){
+    console.log("Tir Drones")
+    for (const drone of this.drones.children.entries) {
+        laserHorizontal.setAlpha(0);
+    }   
 }
 
 explodeGrenadeLanceGrenade(grenadeLanceGrenade){
@@ -2333,13 +2339,16 @@ rectCrouchPlayer.destroy()
 rectCrouchPlayer = this.physics.add.sprite(player.x,player.y, 'spritesheetPlayerNinja').setAlpha(0.2);
 rectCrouchPlayer.body.setSize(45, 90, false).setOffset(20, 0)
 this.physics.add.overlap(rectCrouchPlayer, this.caisses, this.uncrouchDisabled, null, this);
-uncrouchPossible=true
 
     
 for (const drone of this.drones.children.entries) {    
-        this.physics.moveTo(drone, player.x,player.y-300, vitesseDeplacementDrone);
+        this.physics.moveTo(drone, player.x,player.y-200, vitesseDeplacementDrone);
     }
-
+    cooldownTirDrone--
+    if(cooldownTirDrone<=0){
+        cooldownTirDrone=cooldownTirDroneReset
+        this.tirDrones();
+    }
 
 
 
@@ -2676,6 +2685,7 @@ if(player.body.blocked.down || player.body.touching.down){
     if(uncrouchPossible==true){
           player.body.setSize(45, 90, false).setOffset(20, 0);
         }
+
     }
 
   if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {

@@ -368,7 +368,19 @@
          "draworder":"topdown",
          "id":44,
          "name":"drone",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1728,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":240,
+                 "y":352
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -390,19 +402,7 @@
          "draworder":"topdown",
          "id":48,
          "name":"caisseDestructible",
-         "objects":[
-                {
-                 "gid":734,
-                 "height":16,
-                 "id":1710,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":178.5,
-                 "x":192,
-                 "y":416
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -410,10 +410,10 @@
          "y":0
         }],
  "nextlayerid":49,
- "nextobjectid":1728,
+ "nextobjectid":1729,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.4.2",
+ "tiledversion":"1.4.3",
  "tileheight":16,
  "tilesets":[
         {
