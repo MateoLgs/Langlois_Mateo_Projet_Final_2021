@@ -825,41 +825,6 @@ setSpeedPlatformIce (player, platform) {
 }
   
 goRight(){
-
-  if(onPlatform!="ice"){
-      if(padConnected){
-  if((paddle.left) && onPlatform != "ice"){
-      player.setVelocityX(0);
-      player.anims.play('idleNinja',true).setFlipX(false);
-  }
-    else if(standing==true){    
-      if(playerSkin=="ninja"){
-          player.play('run', true).setFlipX(false);           
-      } 
-      if(playerSkin=="ninjaRouge"){
-          player.play('runNinjaRouge', true).setFlipX(false);            
-      } 
-      if(playerSkin=="ninjaGreen"){
-          player.play('runNinjaGreen', true).setFlipX(false);            
-      } 
-
-    player.setVelocityX(250*runSpeed);
-    playerDirection="right"
-    }
-    else if(standing==false){
-      if(playerSkin=="ninja"){
-          player.play('run', true).setFlipX(false);           
-      } 
-      if(playerSkin=="ninjaRouge"){
-          player.play('runNinjaRouge', true).setFlipX(false);            
-      } 
-      if(playerSkin=="ninjaGreen"){
-          player.play('runNinjaGreen', true).setFlipX(false);            
-      } 
-    player.setVelocityX(250*runSpeed);
-    playerDirection="right"
-    }
-      }
    if((keyQ.isDown) && onPlatform != "ice"){
       player.setVelocityX(0);
 
@@ -893,7 +858,7 @@ goRight(){
     player.setVelocityX(250*runSpeed);
     playerDirection="right"
     }
-  }
+  
 
         if(onPlatform=="ice"){
  
@@ -910,9 +875,63 @@ goRight(){
              
               playerDirection="right"
       }
- 
+    
 }
 
+goRightGamepad(){
+    if((keyQ.isDown) && onPlatform != "ice"){
+       player.setVelocityX(0);
+ 
+       player.anims.play('idleNinja',true).setFlipX(false);
+   }
+     else if(standing==true){    
+       if(playerSkin=="ninja"){
+           player.play('run', true).setFlipX(false);           
+       } 
+       if(playerSkin=="ninjaRouge"){
+           player.play('runNinjaRouge', true).setFlipX(false);            
+       } 
+       if(playerSkin=="ninjaGreen"){
+           player.play('runNinjaGreen', true).setFlipX(false);            
+       } 
+ 
+     player.setVelocityX(250*runSpeed*axisWidth);
+     playerDirection="right"
+     }
+     else if(standing==false){
+       if(playerSkin=="ninja"){
+           player.anims.play('jumpUpNinja',true).setFlipX(false);      
+       } 
+       if(playerSkin=="ninjaRouge"){
+           player.play('jumpUpRouge', true).setFlipX(false);        
+       } 
+       if(playerSkin=="ninjaGreen"){
+           player.play('jumpUpNinjaGreen', true).setFlipX(false);            
+       } 
+     
+     player.setVelocityX(250*runSpeed*axisWidth);
+     playerDirection="right"
+     console.log(axisWidth)
+     }
+   
+ 
+         if(onPlatform=="ice"){
+  
+               player.setAccelerationX(200)
+               if(playerSkin=="ninja"){
+                   player.play('run', true).setFlipX(false);     
+       } 
+       if(playerSkin=="ninjaRouge"){
+           player.play('runNinjaRouge', true).setFlipX(false);  
+       } 
+       if(playerSkin=="ninjaGreen"){
+           player.play('runNinjaGreen', true).setFlipX(false);            
+       } 
+              
+               playerDirection="right"
+       }
+     
+ }
 goLeft(){
     if(onPlatform!="ice"){
     if(standing==true){   
@@ -959,6 +978,52 @@ goLeft(){
       }
 }
 
+goLeftGamepad(){
+    if(onPlatform!="ice"){
+    if(standing==true){   
+      if(playerSkin=="ninja"){
+          player.play('run', true).setFlipX(true); 
+      } 
+      if(playerSkin=="ninjaRouge"){
+          player.play('runNinjaRouge', true).setFlipX(true);
+      }  
+      if(playerSkin=="ninjaGreen"){
+          player.play('runNinjaGreen', true).setFlipX(true);
+      }  
+
+    playerDirection="left"
+        player.setVelocityX(-250*runSpeed*axisWidth*-1);
+    }
+    else if(standing==false){
+      if(playerSkin=="ninja"){
+          player.play('run', true).setFlipX(true); 
+      } 
+      if(playerSkin=="ninjaRouge"){
+          player.play('runNinjaRouge', true).setFlipX(true);
+      } 
+      if(playerSkin=="ninjaGreen"){
+          player.play('runNinjaGreen', true).setFlipX(true);
+      } 
+          playerDirection="left"
+        player.setVelocityX(-250*runSpeed*axisWidth);
+    }
+  }
+  if(onPlatform=="ice"){
+              player.setAccelerationX(-200)
+              if(playerSkin=="ninja"){
+                  player.play('run', true).setFlipX(true);
+      } 
+      if(playerSkin=="ninjaRouge"){
+          player.play('runNinjaRouge', true).setFlipX(true);
+      } 
+      if(playerSkin=="ninjaGreen"){
+          player.play('runNinjaGreen', true).setFlipX(true);
+      } 
+            
+              playerDirection="left"
+      }
+}
+
 jump(){
 
     
@@ -975,12 +1040,8 @@ jump(){
           player.play('jumpUpNinjaGreen', true);        
       } 
 
-      if(padConnected){
-      if( paddle.right && paddle.left && onPlatform !="ice"){
-          player.setVelocityX(0)
-      }
-  }
-      if( keyQ.isUp && keyD.isUp && onPlatform !="ice"){
+
+      if( keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1){
           player.setVelocityX(0)
       }
   }
@@ -996,14 +1057,10 @@ jump(){
           player.play('jumpNinjaGreen', true);        
       }  
 
-      if(keyQ.isUp && keyD.isUp && onPlatform !="ice"){
+      if(keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1){
           player.setVelocityX(0)
       }
-      if(padConnected){
-      if( paddle.right && paddle.left && onPlatform !="ice"){
-          player.setVelocityX(0)
-      }
-      }
+   
   }
   
 }
@@ -1369,7 +1426,6 @@ create (){
   player.setGravityY(1000)
 
   player.body.setSize(45, 90, false).setOffset(20, 0)
-  player.body.setOffset(0,0);
   player.setCollideWorldBounds(false)
 
 
@@ -2347,6 +2403,32 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 }
 
 update (){    
+  
+    if (this.input.gamepad.total === 0)
+    {
+        return;
+    }
+    pad = this.input.gamepad.getPad(0);
+
+    if (pad.axes.length)
+    {
+        axisWidth = pad.axes[0].getValue(); 
+        axisHeight = pad.axes[1].getValue(); 
+        
+      
+
+
+
+        if(axisWidth >=0.1){
+            this.goRightGamepad()
+        }
+        else if(axisWidth <=-0.1){
+            this.goLeftGamepad()
+        }
+
+    }
+
+
 rectCrouchPlayer.destroy()
 rectCrouchPlayer = this.physics.add.sprite(player.x,player.y, 'spritesheetPlayerNinja').setAlpha(0).setOffset(20, 0);
 rectCrouchPlayer.body.setSize(45, 90, true)
@@ -2380,11 +2462,7 @@ for (const drone of this.drones.children.entries) {
   velociteChute=player.body.velocity.y;
 
   /////////////
-  this.input.gamepad.once('connected', function (pad) {
-  //   'pad' is a reference to the gamepad that was just connected
-      paddle = pad;
-      padConnected = true;
-  });
+
     
     if(playerInWater==true){
 
@@ -2505,23 +2583,20 @@ for (const boss of this.bosses.children.entries) {
 
 
 for (const platformMoving of this.platformsMoving.children.entries) {
-      if (platformMoving.body.blocked.right) {
-          platformMoving.direction = 'LEFT';
-      }
+    if (platformMoving.body.blocked.right) {
+        platformMoving.direction = 'LEFT';
+    }
 
-      if (platformMoving.body.blocked.left) {
-          platformMoving.direction = 'RIGHT';
-      }
+    if (platformMoving.body.blocked.left) {
+        platformMoving.direction = 'RIGHT';
+    }
 
-      if (platformMoving.direction === 'RIGHT') {
-          platformMoving.setVelocityX(100);
-      } else {
-          platformMoving.setVelocityX(-100);
-      }
-
-    
-
-  }
+    if (platformMoving.direction === 'RIGHT') {
+        platformMoving.setVelocityX(100);
+    } else {
+        platformMoving.setVelocityX(-100);
+    }
+}
 
 
     cooldownTirSoldatEnnemiBeforeShoot--
@@ -2581,10 +2656,7 @@ for (const platformMoving of this.platformsMoving.children.entries) {
 
 
 
-  // définie le contact du joueur avec un sol
-   //standing = player.body.blocked.down || player.body.touching.down;
-  
-  
+
   
 
   
@@ -2615,6 +2687,9 @@ this.input.on('pointerdown', function (pointer) {
 
     }
 }, this);
+
+
+
 
 if(spaceBar.isDown){
     if(playerDirection=='right'){
@@ -2728,7 +2803,7 @@ if(playerSkin=="ninjaGreen"){
 
   
   
-  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true )
+  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1)
   {
       
       player.setAccelerationX(0);
@@ -2798,51 +2873,7 @@ if(playerSkin=="ninjaGreen"){
       this.death();
   }
  
-  if(padConnected){
-      if(paddle.B){
-          if(shurikenPlayer == true && shurikenPowerUpActive==true){
-              shurikenPlayer = false;
-              this.lancershuriken(player);
-          } 
-      }
-      if(paddle.left){
-          this.goLeft();
-      }
-      if(paddle.right){
-          this.goRight();
-      }
-      if(paddle.A && standing == true){
-          this.jump();    
-      }
 
-      if (paddle.left==false && paddle.right==false &&  playerCanResetVelocity==false )
-  {
-          
-
-      player.setAccelerationX(0);
-
-      if(playerSkin=="ninja"){
-      player.anims.play('idle');            
-      } 
-      if(playerSkin=="ninjaRouge"){
-      player.anims.play('idleNinjaRouge');            
-      } 
-          
-  }
-      if (paddle.left==false && paddle.right==false &&  playerCanResetVelocity==true )
-      {
-          
-          player.setVelocityX(0);
-
-          if(playerSkin=="ninja"){
-      player.anims.play('idle');            
-      } 
-      if(playerSkin=="ninjaRouge"){
-      player.anims.play('idleNinjaRouge');            
-      } 
-          
-      }
-  }
 
 
   }

@@ -20,8 +20,6 @@ class Menu extends Phaser.Scene {
               this.load.image('tutorialButton', 'assets/tutorialButton.png');
               this.load.image('skinsButton', 'assets/skinsButton.png');
               this.load.image('shopButton', 'assets/shopButton.png');
-              this.load.image('patchNoteButton', 'assets/patchNoteButton.png');
-              this.load.image('patchNote', 'assets/patchNote.png');
               this.load.image('achievementsButton', 'assets/achievements.png');
               this.load.image('exitButton', 'assets/exitButton.png');
               this.load.image('blackSquare', 'assets/blackSquare.png');       
@@ -36,101 +34,130 @@ class Menu extends Phaser.Scene {
                 paddle = pad;
                 padConnected = true;
             });
+        mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.75, 'mouseCursor').setScale(0.025).setDepth(5).setAlpha(1);
+        mouseCursor.setCollideWorldBounds(true)
+        mouseCursor.setSize(20, 20, false)
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
-        var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive();
-        var patchNoteButton = this.add.image((this.cameras.main.centerX*2)*0.0234, (this.cameras.main.centerY*2)*0.06, 'patchNoteButton').setScale(0.7).setInteractive();
-        var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
-        var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
-        var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
-        var patchNote = this.add.image((this.cameras.main.centerX),(this.cameras.main.centerY), 'patchNote').setAlpha(0).setScale(0.7);
-        var exitButtonPatchNote = this.add.image((this.cameras.main.centerX*2)*0.703,(this.cameras.main.centerY*2)*0.07, 'exitButton').setScale(0.1).setInteractive().setAlpha(0);
-     //  if(padConnected){
-        mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)*0.25,(this.cameras.main.centerY*2)/2, 'mouseCursor').setScale(0.025);
-      // }
+        this.choixLevelStartButton = this.physics.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive().setImmovable(true);
+        this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive().setImmovable(true);     
+        this.shopButton = this.physics.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive().setImmovable(true);
+        this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive().setImmovable(true);
 
-        this.physics.add.collider(mouseCursor,choixMenuStartButton,this.choixMenuStartButtonGamepad,null,this)
+
+        this.physics.add.overlap(mouseCursor,this.choixLevelStartButton,this.choixMenuStartButtonGamepad,null,this)
+        this.physics.add.overlap(mouseCursor,this.skinsButton,this.openSkins,null,this)
+        this.physics.add.overlap(mouseCursor,this.shopButton,this.openShop,null,this)
+        this.physics.add.overlap(mouseCursor,this.achievementsButton,this.achievementButtonGamepad,null,this)
 
         this.popupAchievement();
 
-  
         
-        choixMenuStartButton.on('pointerdown', () => {
+        
+        this.choixLevelStartButton.on('pointerdown', () => {
       this.choixMenuStartButton();
         }) 
         
 
    
-    skinsButton.on('pointerdown', () => {
+        this.skinsButton.on('pointerdown', () => {
         clicksDoneForEasterEggAchievement +=1;
         this.scene.stop("Menu");
         this.scene.start('Skins');
     }) 
 
 
-    shopButton.on('pointerdown', () => {
+    this.shopButton.on('pointerdown', () => {
         this.scene.stop("Menu");
       this.scene.start('Shop');
   }) 
 
-  achievementsButton.on('pointerdown', () => {
+  this.achievementsButton.on('pointerdown', () => {
     this.scene.stop("Menu");
     this.scene.start('Achievements');
 }) 
 
 
-    patchNoteButton.on('pointerdown', () => {
-        patchNote.setAlpha(1)
-        exitButtonPatchNote.setAlpha(1)
-        }) 
+
         
-    exitButtonPatchNote.on('pointerdown', () => {
-        exitButtonPatchNote.setAlpha(0)
-        patchNote.setAlpha(0)
-        }) 
     }
     update(){
 
 
-        if(padConnected){
+        if (this.input.gamepad.total === 0)
+        {
+            return;
+        }
+        pad = this.input.gamepad.getPad(0);
+    
+        if (pad.axes.length)
+        {
+            axisWidth = pad.axes[0].getValue(); 
+            axisHeight = pad.axes[1].getValue(); 
+            
+        
+            if(axisWidth >=0.1){
+                mouseCursor.setVelocityX(350)
+            }
+            if(axisWidth <=-0.1){
+                mouseCursor.setVelocityX(-350)
+            }
+            if(axisHeight >=0.1){
+                mouseCursor.setVelocityY(350)
+            }
+            if(axisHeight <=-0.1){
+                mouseCursor.setVelocityY(-350)
+            }
 
-            if(paddle.left){
-                mouseCursor.setVelocityX(-750)
-            }
-            else if(paddle.right){
-                mouseCursor.setVelocityX(750)
-            }
-            else if(paddle.up){
-                mouseCursor.setVelocityY(-750)
-            }
-            else if(paddle.down){
-                mouseCursor.setVelocityY(750)
-            }
-            else{
+            if(axisHeight<0.1 && axisHeight>-0.1 && axisWidth>-0.1 && axisWidth<0.1){
                 mouseCursor.setVelocity(0)
             }
+        }
+    }
 
+
+
+    choixMenuStartButton(){
+        this.scene.stop("Menu");
+      this.scene.start('LevelMenu');
+    }
+
+
+    choixMenuStartButtonGamepad(){
+        if(padConnected){
             if(paddle.A){
-
+                this.scene.stop("Menu");
+                this.scene.start('LevelMenu');
             }
         }
     }
-    choixMenuStartButton(){
-        console.log("   azertyu")
-        //this.scene.stop("Menu");
-      //this.scene.start('LevelMenu');
-    }
-
-    choixMenuStartButtonGamepad(){
-        if(paddle.A){
-
-            this.scene.stop("Menu");
-            this.scene.start('LevelMenu');
+    achievementButtonGamepad(){
+        if(padConnected){
+            if(paddle.A){
+                this.scene.stop("Menu");
+                this.scene.start('Achievements');
+            }
         }
-        console.log("test")
+    }
+    openSkins(){
+        if(padConnected){
+            if(paddle.A){
+                this.scene.stop("Menu");
+                this.scene.start('Skins');
+            }
+        }
+    }    
+    openShop(){
+        if(padConnected){
+            if(paddle.A){
+                this.scene.stop("Menu");
+                this.scene.start('Shop');
+            }
+        }
     }
 
 
+   
     
     popupAchievement(){
         var popUpAchievementInProgress = false
