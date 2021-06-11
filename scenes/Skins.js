@@ -11,7 +11,6 @@ class Skins extends Phaser.Scene {
         this.load.image('skinsButton', 'assets/skinsButton.png');
         this.load.image('patchNoteButton', 'assets/patchNoteButton.png');
         this.load.image('easy', 'assets/easy.png');
-        this.load.image('hard', 'assets/hard.png');
         this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
     
         this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');

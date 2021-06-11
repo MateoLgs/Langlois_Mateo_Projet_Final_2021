@@ -5,7 +5,7 @@ class Jeu extends Phaser.Scene{
     }
 
     uncrouchDisabled(){
-        //uncrouchPossible = false;
+        uncrouchPossible = false;
       }
     
 /////////////////BOSS///////////////
@@ -112,6 +112,26 @@ tirLanceRoquetteBoss(){
 
             boss.play('soldierShoot', true).setFlipX(true);
 
+        }
+    }
+}
+
+tirDrones(){
+    for (const boss of this.drones.children.entries) {
+        var ballesMachineGunnerBoss = this.ballesMachineGunners.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+        var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
+        this.physics.moveTo(ballesMachineGunnerBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleDrone);
+        var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
+        ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleMachineGunner,null,this)
+
+        ballesMachineGunnerBoss.body.setAllowGravity(false);
+        if(player.x<boss.x){
+            //boss.play('soldierShoot', true).setFlipX(false);
+            //ballesMachineGunnerBoss.setGravityY(1000);
+        }
+        else if(player.x>boss.x){
+           // boss.play('soldierShoot', true).setFlipX(true);
         }
     }
 }
@@ -325,12 +345,7 @@ activateLaserHorizontal(){
     }
 }
 
-tirDrones(){
-    console.log("Tir Drones")
-    for (const drone of this.drones.children.entries) {
-        laserHorizontal.setAlpha(0);
-    }   
-}
+
 
 explodeGrenadeLanceGrenade(grenadeLanceGrenade){
     grenadeLanceGrenade.destroy();
@@ -1333,13 +1348,7 @@ create (){
  platformIce.setCollisionByExclusion(-1, true);
 
 
- /*this.input.gamepad.once('down', function (pad, button, index) {
-          gamepad = pad;
-      }); */
-    
-  /*  this.input.gamepad.on('down', function (pad, button, index) {
-      return;
-  }),*/
+
 
 
     /////////////////////////////////////////
@@ -1797,6 +1806,9 @@ this.colliderLasersVertical = this.physics.add.overlap(player, this.lasersVertic
 
   //////////////////////////////////////
   ////////////Drones////////////////////
+  this.laserDrones = this.physics.add.group({
+    immovable: true,
+ });
 
 const droneObjects = this.map.getObjectLayer('drone').objects;
     this.drones = this.physics.add.group({
@@ -2336,8 +2348,8 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 
 update (){    
 rectCrouchPlayer.destroy()
-rectCrouchPlayer = this.physics.add.sprite(player.x,player.y, 'spritesheetPlayerNinja').setAlpha(0.2);
-rectCrouchPlayer.body.setSize(45, 90, false).setOffset(20, 0)
+rectCrouchPlayer = this.physics.add.sprite(player.x,player.y, 'spritesheetPlayerNinja').setAlpha(0).setOffset(20, 0);
+rectCrouchPlayer.body.setSize(45, 90, true)
 this.physics.add.overlap(rectCrouchPlayer, this.caisses, this.uncrouchDisabled, null, this);
 
     
@@ -2684,6 +2696,9 @@ if(player.body.blocked.down || player.body.touching.down){
   if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
     if(uncrouchPossible==true){
           player.body.setSize(45, 90, false).setOffset(20, 0);
+        }
+        else{
+            uncrouchPossible = true;
         }
 
     }

@@ -26,10 +26,16 @@ class Menu extends Phaser.Scene {
               this.load.image('exitButton', 'assets/exitButton.png');
               this.load.image('blackSquare', 'assets/blackSquare.png');       
               this.load.image('blackRectangle', 'assets/blackRectangle.png');        
+              this.load.image('mouseCursor', 'assets/mouseCursor.png');        
+
             }
     create() {
         
-
+        this.input.gamepad.once('connected', function (pad) {
+            //   'pad' is a reference to the gamepad that was just connected
+                paddle = pad;
+                padConnected = true;
+            });
 
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var choixMenuStartButton = this.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive();
@@ -39,9 +45,15 @@ class Menu extends Phaser.Scene {
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
         var patchNote = this.add.image((this.cameras.main.centerX),(this.cameras.main.centerY), 'patchNote').setAlpha(0).setScale(0.7);
         var exitButtonPatchNote = this.add.image((this.cameras.main.centerX*2)*0.703,(this.cameras.main.centerY*2)*0.07, 'exitButton').setScale(0.1).setInteractive().setAlpha(0);
+     //  if(padConnected){
+        mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)*0.25,(this.cameras.main.centerY*2)/2, 'mouseCursor').setScale(0.025);
+      // }
+
+        this.physics.add.collider(mouseCursor,choixMenuStartButton,this.choixMenuStartButtonGamepad,null,this)
 
         this.popupAchievement();
 
+  
         
         choixMenuStartButton.on('pointerdown', () => {
       this.choixMenuStartButton();
@@ -54,6 +66,7 @@ class Menu extends Phaser.Scene {
         this.scene.stop("Menu");
         this.scene.start('Skins');
     }) 
+
 
     shopButton.on('pointerdown', () => {
         this.scene.stop("Menu");
@@ -76,11 +89,46 @@ class Menu extends Phaser.Scene {
         patchNote.setAlpha(0)
         }) 
     }
+    update(){
+
+
+        if(padConnected){
+
+            if(paddle.left){
+                mouseCursor.setVelocityX(-750)
+            }
+            else if(paddle.right){
+                mouseCursor.setVelocityX(750)
+            }
+            else if(paddle.up){
+                mouseCursor.setVelocityY(-750)
+            }
+            else if(paddle.down){
+                mouseCursor.setVelocityY(750)
+            }
+            else{
+                mouseCursor.setVelocity(0)
+            }
+
+            if(paddle.A){
+
+            }
+        }
+    }
     choixMenuStartButton(){
-        this.scene.stop("Menu");
-      this.scene.start('LevelMenu');
+        console.log("   azertyu")
+        //this.scene.stop("Menu");
+      //this.scene.start('LevelMenu');
     }
 
+    choixMenuStartButtonGamepad(){
+        if(paddle.A){
+
+            this.scene.stop("Menu");
+            this.scene.start('LevelMenu');
+        }
+        console.log("test")
+    }
 
 
     

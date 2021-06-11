@@ -180,6 +180,7 @@ var level18Unlocked = false;
 
 var platform;
 var player;
+var mouseCursor
 var health;
 var shurikens;
 var teleportations;
@@ -217,11 +218,12 @@ var paddle;
 var gamepadStart=true
 var patchNote;
 var exitButton;
-var rectCrouchPlayer
+var rectCrouchPlayer;
 var uncrouchPossible = true
 var canResetIceVelocity=true
 var playerContactCaisse = false
-
+var graphics;
+var laserDrones
 
 //////////SKINS/////////////////
 var playerSkin="ninja";
@@ -272,8 +274,9 @@ var ballesLanceRoquettes;
 var cooldownRecalculationRoquetteDirection = 60
 var cooldownRecalculationRoquetteDirectionReset = cooldownRecalculationRoquetteDirection
 
+var vitesseBalleDrone = 50
 var vitesseDeplacementDrone = 50
-var cooldownTirDrone = 300
+var cooldownTirDrone = 30
 var cooldownTirDroneReset = cooldownTirDrone
 
 var cooldownActivationLaserVertical = 120
