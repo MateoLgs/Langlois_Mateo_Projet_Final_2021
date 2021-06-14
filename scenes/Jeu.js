@@ -418,7 +418,6 @@ killSniperEnnemi(sniperEnnemi, shuriken){
 }     
 
 killYeti(yeti, shuriken){
-    console.log("testy")
     yeti.destroy();
     shuriken.destroy();
     totalCoins+=6;
@@ -482,11 +481,9 @@ lancershurikenGamepad(player){
        shuriken.body.setOffset(-70,-70);
        if(axisWidthR>0){
             shuriken.setVelocity(700,700*axisHeightR)
-            console.log("right")
        }
        if(axisWidthR<0){
         shuriken.setVelocity(-700,700*axisHeightR)
-        console.log("left")
    }
   shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
   shuriken.play('shurikenSpin', true).setFlipX(false);
@@ -571,7 +568,6 @@ teleportToTeleporter(teleport){
     player.x=teleport.x
     player.y=teleport.y-32
     teleport.destroy();
-    console.log(teleportationsLeft)
 }
 
 destroyShuriken(shuriken){
@@ -674,6 +670,7 @@ collectPowerUpShuriken(powerUpShuriken){
   
 contactDrapeau(){
 console.log(level)
+//this.flag.destroy()
     if(level=="level1"){
         totalCoins+=100
         level2Unlocked = true
@@ -1200,7 +1197,6 @@ destroyShurikenSnowball(shuriken, snowball){
    
 death(){
 
-console.log("death")
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
       //player.anims.play('die');
@@ -1217,7 +1213,7 @@ console.log("death")
 }
 
 mort(){
-       
+
 
     morts+=1
     localStorage.setItem(localDataMorts, morts);
@@ -1225,6 +1221,7 @@ mort(){
     levelCompleted = false;
 
  player.setVelocityX(0);
+
  this.scene.stop("Jeu");
  
    this.scene.start('PostGame');
@@ -1426,8 +1423,11 @@ this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
     this.crouchButton.on('pointerdown', () => {
         player.body.setSize(45, 45, true);
         player.body.setOffset(20,45);
+        currentlyCrouching=true
     })
-
+    this.crouchButton.on('pointerup', () => {
+        currentlyCrouching=false
+    })
 
     }
 }
@@ -1460,7 +1460,8 @@ this.load.plugin('rexvirtualjoystickplugin', pluginUrl, true);
   this.load.image('nextShotTeleportation', 'assets/nextShotTeleportation.png');
   this.load.image('nextShotShuriken', 'assets/nextShotShuriken.png');
   this.load.image('mobileGameModeButton', 'assets/mobileGameModeButton.jpg');
-  this.load.image('notMobileGameModeButton', 'assets/notMobileGameModeButton.jpg');
+  this.load.image('keyboardGameModeButton', 'assets/keyboardGameModeButton.png');
+  this.load.image('controllerGameModeButton', 'assets/controllerGameModeButton.png');
   this.load.image('crouchButton', 'assets/crouchButton.png');
   this.load.image('jumpButton', 'assets/jumpButton.png');
   this.load.image('backgroundBarHealth', 'assets/backgroundBarHealth.png');
@@ -1543,21 +1544,29 @@ create (){
     this.declareVariables()
 
 
-    this.mobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'mobileGameModeButton').setScrollFactor(0).setScale(0.05).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
-    this.notMobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'notMobileGameModeButton').setScrollFactor(0).setScale(0.05).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+    this.keyboardGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'keyboardGameModeButton').setScrollFactor(0).setScale(0.2).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+    this.mobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'mobileGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
+    this.controllerGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'controllerGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
 
-    this.mobileGameModeButton.on('pointerdown', () => {
-            this.notMobileGameModeButton.setAlpha(1)
-            this.mobileGameModeButton.setAlpha(0)
-            gameSupport = "notMobile"
-            this.destroyMobileUi()
-    });
-    this.notMobileGameModeButton.on('pointerdown', () => {
-            this.notMobileGameModeButton.setAlpha(0)
-            this.mobileGameModeButton.setAlpha(1)   
-            gameSupport = "mobile"
-            this.createMobileUi()
-    });
+
+this.mobileGameModeButton.on('pointerdown', () => {
+    this.keyboardGameModeButton.setAlpha(1)
+    this.mobileGameModeButton.setAlpha(0)
+    gameSupport = "keyboard"
+    this.destroyMobileUi()
+});
+this.keyboardGameModeButton.on('pointerdown', () => {
+    this.keyboardGameModeButton.setAlpha(0)
+    this.controllerGameModeButton.setAlpha(1)   
+    gameSupport = "controller"
+});
+this.controllerGameModeButton.on('pointerdown', () => {
+    this.controllerGameModeButton.setAlpha(0)
+    this.mobileGameModeButton.setAlpha(1)   
+    gameSupport = "mobile"
+    this.createMobileUi()
+});
+
 
 
 
@@ -2587,20 +2596,14 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 }
 
 update (){    
-  console.log(laserVerticalActivated)
 
 
-/*
-if(axisWidth >=0.2){
-    this.goRightMobile()
-}*/
+
 if(gameSupport=="mobile"){
     if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<180 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-100)) && (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
         this.goLeft()
-        console.log("left")
     }
     if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<90 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>10) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-90  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-10))&& (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
-        console.log("right")
         this.goRight()
     }
     if((Math.floor(this.joyStickMovement.force * 100) / 100)<20){
@@ -2616,7 +2619,6 @@ if(gameSupport=="mobile"){
         this.nextShotTeleportation.setAlpha(0)
         this.nextShotShuriken.setAlpha(1)   
         nextShotMobile = "shuriken"
-
     });
 
     if((Math.floor(this.joyStickShoot.force * 100) / 100)>20)  {
@@ -2652,77 +2654,24 @@ if(nextReleaseShot==true && (Math.floor(this.joyStickShoot.force * 100) / 100)<2
     }
     nextReleaseShot=false
 }
+if(currentlyCrouching==false){
+    console.log("uncrouch")
 
-
-}
-
-/*if((Math.floor(this.joyStickMovement.force * 100) / 100 )>100){
-    console.log("force")
-*/
-    if (this.input.gamepad.total === 0)
-    { 
-        return;
-    }
-
-    pad = this.input.gamepad.getPad(0);
-    if (pad.axes.length)
-    {
-        axisWidth = pad.axes[0].getValue(); 
-        axisHeight = pad.axes[1].getValue(); 
-       
-        axisWidthR = pad.axes[2].getValue(); 
-        axisHeightR = pad.axes[3].getValue(); 
-        
-      
-
-
-
-        if(axisWidth >=0.2){
-            this.goRightGamepad()
+    if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
+        if(uncrouchPossible==true){
+            player.body.setSize(45, 90, false).setOffset(20, 0);
         }
-        else if(axisWidth <=-0.2){
-            this.goLeftGamepad()
-        }
-
-    }
-
-        if(pad.A && (standing == true || playerInWater==true) ){
-            this.jump();
-    }
-
-    if(pad.R2){
-        if(playerDirection=='right'){
-            var cacAttaque = this.cacAttaques.create(player.x+40, player.y-3, 'cacAttaque').setScale(0.1)
-            .setOrigin(0.5,0.5)
-            .setDepth(-1)
-        }
-        if(playerDirection=='left'){
-            var cacAttaque = this.cacAttaques.create(player.x-40, player.y-3, 'cacAttaque').setScale(0.1)
-            .setOrigin(0.5,0.5)
-            .setDepth(-1)
-            .setFlipX(true)
-        }
-        this.time.delayedCall(10, this.stopSlash, [cacAttaque], this);
-        
-    }
-
-
-if(axisWidthR > 0.5 || axisWidthR<-0.5)  {
-
-      if(shurikenPlayer == "true" && shurikenPowerUpActive==true ){
-            if(pad.L2 && teleportationsLeft>0){
-                shurikenPlayer = "false";
-    
-              this.lancerTeleportGamepad(player);
+            else{
+                uncrouchPossible = true;
             }
-             if(!pad.L2){
-                shurikenPlayer = "false";
-                this.lancershurikenGamepad(player);
-             }
-    
-        }
+    }
+}
+
+
 
 }
+
+
 
    
 
@@ -2948,11 +2897,34 @@ for (const platformMoving of this.platformsMoving.children.entries) {
         }  
     }
      
-
+    if(shurikenPlayer == "false"){
+       delaiShurikenPlayer --
+    }
+    if (delaiShurikenPlayer <= 0 && shurikenPlayer == "false") {
+      delaiShurikenPlayer = cooldownShuriken;
+    
+      shurikenPlayer = "true";
+    }
      
 
 
-
+    if(gameSupport=="keyboard"){
+        this.input.on('pointerdown', function (pointer) {
+            if(shurikenPlayer == "true" && shurikenPowerUpActive==true && gameSupport=="keyboard"){
+                if(keyA.isDown && teleportationsLeft>0){
+                    shurikenPlayer = "false";
+        
+                  this.lancerTeleport(player);
+                }
+                else if(keyA.isUp){
+                    shurikenPlayer = "false";
+                    this.lancershuriken(player);
+                }
+                keyA.reset();
+        
+            }
+        }, this);
+        
 
 
   
@@ -2960,34 +2932,8 @@ for (const platformMoving of this.platformsMoving.children.entries) {
   
   
 
-if(shurikenPlayer == "false"){
-   delaiShurikenPlayer --
-}
-if (delaiShurikenPlayer <= 0 && shurikenPlayer == "false") {
-  delaiShurikenPlayer = cooldownShuriken;
 
-  shurikenPlayer = "true";
-}
   
-       
-if(gameSupport!="mobile"){
-this.input.on('pointerdown', function (pointer) {
-    if(shurikenPlayer == "true" && shurikenPowerUpActive==true ){
-        if(keyA.isDown && teleportationsLeft>0){
-            shurikenPlayer = "false";
-
-          this.lancerTeleport(player);
-        }
-        else if(keyA.isUp){
-            shurikenPlayer = "false";
-            this.lancershuriken(player);
-        }
-        keyA.reset();
-
-    }
-}, this);
-}
-
 
 
 if(spaceBar.isDown){
@@ -3051,7 +2997,7 @@ if(player.body.blocked.down || player.body.touching.down){
   }
 
 
-  if ((keyS.isDown || pad.B) && (standing == true || playerInWater==true) )
+  if ((keyS.isDown) && (standing == true || playerInWater==true) )
   {   
       player.body.setSize(45, 45, true);
       player.body.setOffset(20,45);
@@ -3069,7 +3015,7 @@ if(player.body.blocked.down || player.body.touching.down){
 
 
 
-  if((keyS.isUp  && !pad.B) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
+  if((keyS.isUp) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
     if(uncrouchPossible==true){
           player.body.setSize(45, 90, false).setOffset(20, 0);
         }
@@ -3078,7 +3024,7 @@ if(player.body.blocked.down || player.body.touching.down){
         }
     }
 
-  if((keyS.isUp  && !pad.B) && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
+  if((keyS.isUp) && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
 
 if(playerSkin=="ninja"){
   player.anims.play('crouchDownNinja');            
@@ -3103,7 +3049,7 @@ if(playerSkin=="ninjaGreen"){
 
   
   
-  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2)
+  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true )
   {
       
       player.setAccelerationX(0);
@@ -3166,6 +3112,7 @@ if(playerSkin=="ninjaGreen"){
       } 
       }
   }
+    }
   
   
   
@@ -3174,8 +3121,116 @@ if(playerSkin=="ninjaGreen"){
   }
  
 
+if(gameSupport=="controller"){
+  if (this.input.gamepad.total === 0)
+  { 
+      return;
+  }
+
+  pad = this.input.gamepad.getPad(0);
+  if (pad.axes.length)
+  {
+      axisWidth = pad.axes[0].getValue(); 
+      axisHeight = pad.axes[1].getValue(); 
+     
+      axisWidthR = pad.axes[2].getValue(); 
+      axisHeightR = pad.axes[3].getValue(); 
+      
+    
 
 
+
+      if(axisWidth >=0.2){
+          this.goRightGamepad()
+      }
+      else if(axisWidth <=-0.2){
+          this.goLeftGamepad()
+      }
+      if(axisWidth<0.2 && axisWidth>-0.2){
+      player.setAccelerationX(0);
+      player.setVelocityX(0);
+      }
+  }
+
+      if(pad.A && (standing == true || playerInWater==true) ){
+          this.jump();
+  }
+
+  if(pad.R2){
+      if(playerDirection=='right'){
+          var cacAttaque = this.cacAttaques.create(player.x+40, player.y-3, 'cacAttaque').setScale(0.1)
+          .setOrigin(0.5,0.5)
+          .setDepth(-1)
+      }
+      if(playerDirection=='left'){
+          var cacAttaque = this.cacAttaques.create(player.x-40, player.y-3, 'cacAttaque').setScale(0.1)
+          .setOrigin(0.5,0.5)
+          .setDepth(-1)
+          .setFlipX(true)
+      }
+      this.time.delayedCall(10, this.stopSlash, [cacAttaque], this);
+      
+  }
+
+
+if(axisWidthR > 0.5 || axisWidthR<-0.5)  {
+
+    if(shurikenPlayer == "true" && shurikenPowerUpActive==true ){
+
+          if(pad.L2 && teleportationsLeft>0){
+              shurikenPlayer = "false";
+  
+            this.lancerTeleportGamepad(player);
+          }
+           if(!pad.L2){
+              shurikenPlayer = "false";
+              this.lancershurikenGamepad(player);
+           }
+  
+      }
+
+}
+
+if (pad.B && (standing == true || playerInWater==true) )
+{   
+    player.body.setSize(45, 45, true);
+    player.body.setOffset(20,45);
+    if(playerSkin=="ninja"){
+    player.anims.play('crouchDownNinja');            
+    } 
+    if(playerSkin=="ninjaRouge"){
+    player.anims.play('crouchDownNinjaRouge');            
+    } 
+    if(playerSkin=="ninjaGreen"){
+    player.anims.play('crouchDownNinjaGreen');            
+    } 
+}
+
+
+
+
+if(!pad.B && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
+  if(uncrouchPossible==true){
+        player.body.setSize(45, 90, false).setOffset(20, 0);
+      }
+      else{
+          uncrouchPossible = true;
+      }
+  }
+
+if(!pad.B && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
+
+if(playerSkin=="ninja"){
+player.anims.play('crouchDownNinja');            
+} 
+if(playerSkin=="ninjaRouge"){
+player.anims.play('crouchDownNinjaRouge');            
+} 
+if(playerSkin=="ninjaGreen"){
+player.anims.play('crouchDownNinjaGreen');            
+}
+}
+}
   }
 
 
