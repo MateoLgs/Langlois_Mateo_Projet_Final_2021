@@ -395,10 +395,10 @@ tirSoldatEnnemi(yeti){
 
 
         if(player.x<yeti.x){
-            yeti.anims.play('soldierShoot',true).setFlipX(false);
+         //   yeti.anims.play('soldierShoot',true).setFlipX(false);
         }
         else if(player.x>yeti.x){
-            yeti.anims.play('soldierShoot',true).setFlipX(true)
+         //   yeti.anims.play('soldierShoot',true).setFlipX(true)
         }
     }
 }
@@ -458,10 +458,8 @@ lancershuriken(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
-       
-       shuriken.body.setSize(180, 180, true);
-       shuriken.body.setOffset(-70,-70);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
+       shuriken.body.setSize(18, 18, true);
   this.physics.moveTo(shuriken, pointer.worldX, pointer.worldY, 700);
   shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
   shuriken.play('shurikenSpin', true).setFlipX(false);
@@ -475,10 +473,10 @@ lancershurikenGamepad(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
        
-       shuriken.body.setSize(180, 180, true);
-       shuriken.body.setOffset(-70,-70);
+       shuriken.body.setSize(18, 18, true);
+
        if(axisWidthR>0){
             shuriken.setVelocity(700,700*axisHeightR)
        }
@@ -497,10 +495,10 @@ lancerShurikenMobile(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
        
-       shuriken.body.setSize(180, 180, true);
-       shuriken.body.setOffset(-70,-70);
+       shuriken.body.setSize(18, 18, true);
+
        if(nextShotMobileDirection=="right"){
         shuriken.setVelocity(700,700*nextShotOrientation)
    }
@@ -906,17 +904,17 @@ goRight(){
    if((keyQ.isDown) && onPlatform != "ice"){
       player.setVelocityX(0);
 
-      player.anims.play('idleNinja',true).setFlipX(false);
+     // player.anims.play('idleNinja',true).setFlipX(false);
   }
     else if(standing==true){    
       if(playerSkin=="ninja"){
-          player.play('run', true).setFlipX(false);           
+        //  player.play('run', true).setFlipX(false);           
       } 
       if(playerSkin=="ninjaRouge"){
-          player.play('runNinjaRouge', true).setFlipX(false);            
+        //  player.play('runNinjaRouge', true).setFlipX(false);            
       } 
       if(playerSkin=="ninjaGreen"){
-          player.play('runNinjaGreen', true).setFlipX(false);            
+        //  player.play('runNinjaGreen', true).setFlipX(false);            
       } 
 
     player.setVelocityX(250*runSpeed);
@@ -924,13 +922,13 @@ goRight(){
     }
     else if(standing==false){
       if(playerSkin=="ninja"){
-          player.anims.play('jumpUpNinja',true).setFlipX(false);      
+        //  player.anims.play('jumpUpNinja',true).setFlipX(false);      
       } 
       if(playerSkin=="ninjaRouge"){
-          player.play('jumpUpRouge', true).setFlipX(false);        
+        //  player.play('jumpUpRouge', true).setFlipX(false);        
       } 
       if(playerSkin=="ninjaGreen"){
-          player.play('jumpUpNinjaGreen', true).setFlipX(false);            
+         // player.play('jumpUpNinjaGreen', true).setFlipX(false);            
       } 
     
     player.setVelocityX(250*runSpeed);
@@ -942,13 +940,13 @@ goRight(){
  
               player.setAccelerationX(200)
               if(playerSkin=="ninja"){
-                  player.play('run', true).setFlipX(false);     
+                 // player.play('run', true).setFlipX(false);     
       } 
       if(playerSkin=="ninjaRouge"){
-          player.play('runNinjaRouge', true).setFlipX(false);  
+     //     player.play('runNinjaRouge', true).setFlipX(false);  
       } 
       if(playerSkin=="ninjaGreen"){
-          player.play('runNinjaGreen', true).setFlipX(false);            
+        //  player.play('runNinjaGreen', true).setFlipX(false);            
       } 
              
               playerDirection="right"
@@ -960,17 +958,17 @@ goRightGamepad(){
     if((keyQ.isDown) && onPlatform != "ice"){
        player.setVelocityX(0);
  
-       player.anims.play('idleNinja',true).setFlipX(false);
+       //player.anims.play('idleNinja',true).setFlipX(false);
    }
      else if(standing==true){    
        if(playerSkin=="ninja"){
-           player.play('run', true).setFlipX(false);           
+         //  player.play('run', true).setFlipX(false);           
        } 
        if(playerSkin=="ninjaRouge"){
-           player.play('runNinjaRouge', true).setFlipX(false);            
+         //  player.play('runNinjaRouge', true).setFlipX(false);            
        } 
        if(playerSkin=="ninjaGreen"){
-           player.play('runNinjaGreen', true).setFlipX(false);            
+          // player.play('runNinjaGreen', true).setFlipX(false);            
        } 
  
      player.setVelocityX(250*runSpeed*axisWidth);
@@ -978,13 +976,13 @@ goRightGamepad(){
      }
      else if(standing==false){
        if(playerSkin=="ninja"){
-           player.anims.play('jumpUpNinja',true).setFlipX(false);      
+          // player.anims.play('jumpUpNinja',true).setFlipX(false);      
        } 
        if(playerSkin=="ninjaRouge"){
-           player.play('jumpUpRouge', true).setFlipX(false);        
+           //player.play('jumpUpRouge', true).setFlipX(false);        
        } 
        if(playerSkin=="ninjaGreen"){
-           player.play('jumpUpNinjaGreen', true).setFlipX(false);            
+           //player.play('jumpUpNinjaGreen', true).setFlipX(false);            
        } 
      
      player.setVelocityX(250*runSpeed*axisWidth);
@@ -996,13 +994,13 @@ goRightGamepad(){
   
                player.setAccelerationX(200)
                if(playerSkin=="ninja"){
-                   player.play('run', true).setFlipX(false);     
+                 //  player.play('run', true).setFlipX(false);     
        } 
        if(playerSkin=="ninjaRouge"){
-           player.play('runNinjaRouge', true).setFlipX(false);  
+          // player.play('runNinjaRouge', true).setFlipX(false);  
        } 
        if(playerSkin=="ninjaGreen"){
-           player.play('runNinjaGreen', true).setFlipX(false);            
+          // player.play('runNinjaGreen', true).setFlipX(false);            
        } 
               
                playerDirection="right"
@@ -1214,7 +1212,6 @@ death(){
 
 mort(){
 
-
     morts+=1
     localStorage.setItem(localDataMorts, morts);
 
@@ -1222,8 +1219,7 @@ mort(){
 
  player.setVelocityX(0);
 
- this.scene.stop("Jeu");
- 
+
    this.scene.start('PostGame');
 
 }
@@ -1317,6 +1313,7 @@ breakCaisse(caisse, shuriken){
 
     }
 }
+
 stopSlash(cacAttaque){
     cacAttaque.destroy()
 }
@@ -1372,15 +1369,13 @@ var delaiShurikenPlayer = 120;
 var shurikenPlayer = "true"
 }
 
-
-
 createMobileUi(){
 
     if(gameSupport=='mobile'){
-        this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.35, 'jumpButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive();
-        this.crouchButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.5, 'crouchButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive();
+        this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.35, 'jumpButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0.8);;
+        this.crouchButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.5, 'crouchButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0.8);;
         this.nextShotTeleportation = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotTeleportation').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
-        this.nextShotShuriken = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotShuriken').setScrollFactor(0).setScale(0.20).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+        this.nextShotShuriken = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotShuriken').setScrollFactor(0).setScale(0.20).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0.8);
 
         this.joyStickMovement = this.plugins.get('rexvirtualjoystickplugin').add(this, {
             x: (this.cameras.main.centerX*2)*0.15,
@@ -1412,7 +1407,6 @@ this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
 
 
 
-    this.text = this.add.text(0, 0);
     
     
     this.jumpButton.on('pointerdown', () => {
@@ -1429,6 +1423,17 @@ this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
         currentlyCrouching=false
     })
 
+    this.nextShotShuriken.on('pointerdown', () => {
+        this.nextShotTeleportation.setAlpha(0.8);
+        this.nextShotShuriken.setAlpha(0)
+        nextShotMobile = "teleport"
+    });
+    this.nextShotTeleportation.on('pointerdown', () => {
+        this.nextShotTeleportation.setAlpha(0)
+        this.nextShotShuriken.setAlpha(0.8);
+        nextShotMobile = "shuriken"
+    });
+
     }
 }
 
@@ -1442,6 +1447,14 @@ destroyMobileUi(){
     this.nextShotShuriken.destroy()
     this.nextShotTeleportation.destroy()
     
+}
+
+damageDrone(shuriken, drone){
+    shuriken.destroy()
+    drone.pv-=1
+    if(drone.pv==0){
+        drone.destroy()
+    }
 }
 
 preload (){
@@ -1655,7 +1668,7 @@ this.controllerGameModeButton.on('pointerdown', () => {
   });*/
 
 
-
+/*
 if(playerSkin=="ninja"){
   this.anims.create({
       key: 'runNinja',
@@ -1791,7 +1804,7 @@ if(playerSkin=="ninjaGreen"){
       repeat: -1
   });
 }
-
+*/
 
 
 
@@ -1834,13 +1847,13 @@ if(playerSkin=="ninjaGreen"){
 
 
 
-
+/*
 this.anims.create({
   key: 'shurikenSpin',
   frames: this.anims.generateFrameNumbers('spritesheetShuriken',  {start: 0, end: 1 }),
   frameRate: 10,
   repeat: -1
-});
+});*/
 
 
   /////////////////////////////////////////
@@ -1933,13 +1946,13 @@ this.physics.add.collider(this.bosses, this.caisses);
 
   ///////////////////////////////////////
   ////////////Goomba////////////////////
-  
+  /*
   this.anims.create({
   key: 'castorRun',
   frames: this.anims.generateFrameNumbers('spritesheetCastor', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: -1
-});
+});*/
     
 
    this.goombas = this.physics.add.group({
@@ -2071,7 +2084,9 @@ for (const drone of droneObjects) {
       .setOrigin(0.5,0.5)
       .setDepth(1)
 }
-
+for (const drone of this.drones.children.entries) {
+    drone.pv=3
+}    
 
 this.physics.add.collider(player, this.drones, this.death, null, this)
 this.physics.add.collider(this.platform, this.drones)
@@ -2243,13 +2258,13 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.ballesSnipers = this.physics.add.group({
       immovable: true,
    });
-
+/*
   this.anims.create({
   key: 'soldierShoot',
   frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
-});
+});*/
 
    const sniperEnnemiObjects = this.map.getObjectLayer('sniperEnnemi').objects;
    this.sniperEnnemis = this.physics.add.group({
@@ -2284,13 +2299,13 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
    
 
 
-
+/*
   this.anims.create({
   key: 'soldierShoot',
   frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
-});
+});*/
 
 
    const machineGunnerEnnemiObjects = this.map.getObjectLayer('machineGunnerEnnemi').objects;
@@ -2329,13 +2344,13 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
       immovable: true,
    });
 
-
+/*
   this.anims.create({
   key: 'soldierShoot',
   frames: this.anims.generateFrameNumbers('spritesheetSoldatEnnemi', { start: 0, end: 1 }),
   frameRate: 5,
   repeat: 0
-});
+});*/
 
 
    const yetiObjects = this.map.getObjectLayer('yeti').objects;
@@ -2529,7 +2544,9 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
   this.physics.add.collider(shurikens, platformSnow, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, this.platformFake, this.destroyShuriken, null, this);
   this.physics.add.collider(shurikens, snowballs, this.destroyShurikenSnowball, null, this);
-  this.physics.add.collider(shurikens, pics, this.destroyShurikenPics, null, this);4
+  this.physics.add.collider(shurikens, pics, this.destroyShurikenPics, null, this);
+  this.physics.add.collider(shurikens, this.drones, this.damageDrone, null, this)
+
   this.colliderShurikenLaserHorizontal = this.physics.add.collider(shurikens, this.lasersHorizontal, this.killShuriken, null, this);
   this.colliderShurikenLaserVertical = this.physics.add.collider(shurikens, this.lasersVertical, this.killShuriken, null, this);
 
@@ -2610,16 +2627,7 @@ if(gameSupport=="mobile"){
         player.setVelocityX(0)
     }
 
-    this.nextShotShuriken.on('pointerdown', () => {
-        this.nextShotTeleportation.setAlpha(1)
-        this.nextShotShuriken.setAlpha(0)
-        nextShotMobile = "teleport"
-    });
-    this.nextShotTeleportation.on('pointerdown', () => {
-        this.nextShotTeleportation.setAlpha(0)
-        this.nextShotShuriken.setAlpha(1)   
-        nextShotMobile = "shuriken"
-    });
+
 
     if((Math.floor(this.joyStickShoot.force * 100) / 100)>20)  {
          nextReleaseShot=true
@@ -3002,13 +3010,13 @@ if(player.body.blocked.down || player.body.touching.down){
       player.body.setSize(45, 45, true);
       player.body.setOffset(20,45);
       if(playerSkin=="ninja"){
-      player.anims.play('crouchDownNinja');            
+  //    player.anims.play('crouchDownNinja');            
       } 
       if(playerSkin=="ninjaRouge"){
-      player.anims.play('crouchDownNinjaRouge');            
+    //  player.anims.play('crouchDownNinjaRouge');            
       } 
       if(playerSkin=="ninjaGreen"){
-      player.anims.play('crouchDownNinjaGreen');            
+     // player.anims.play('crouchDownNinjaGreen');            
       } 
   }
 
@@ -3027,13 +3035,13 @@ if(player.body.blocked.down || player.body.touching.down){
   if((keyS.isUp) && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
 
 if(playerSkin=="ninja"){
-  player.anims.play('crouchDownNinja');            
+ // player.anims.play('crouchDownNinja');            
 } 
 if(playerSkin=="ninjaRouge"){
-  player.anims.play('crouchDownNinjaRouge');            
+  //player.anims.play('crouchDownNinjaRouge');            
 } 
 if(playerSkin=="ninjaGreen"){
-  player.anims.play('crouchDownNinjaGreen');            
+ // player.anims.play('crouchDownNinjaGreen');            
 }
 }
 
@@ -3058,13 +3066,13 @@ if(playerSkin=="ninjaGreen"){
       if(keyS.isUp){
           if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20)|| this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
       if(playerSkin=="ninja"){
-      player.anims.play('idleNinja',true).setFlipX(false);           
+     // player.anims.play('idleNinja',true).setFlipX(false);           
       } 
       if(playerSkin=="ninjaRouge"){
-          player.anims.play('idleNinjaRouge',true).setFlipX(false);         
+       //   player.anims.play('idleNinjaRouge',true).setFlipX(false);         
       } 
       if(playerSkin=="ninjaGreen"){
-          player.anims.play('idleNinjaGreen',true).setFlipX(false);           
+      //    player.anims.play('idleNinjaGreen',true).setFlipX(false);           
       } }
   }
 }
@@ -3077,10 +3085,10 @@ if(playerSkin=="ninjaGreen"){
     //  player.anims.play('idle');            
       } 
       if(playerSkin=="ninjaRouge"){
-      player.anims.play('idleNinjaRouge');            
+    //  player.anims.play('idleNinjaRouge');            
       } 
       if(playerSkin=="ninjaGreen"){
-      player.anims.play('idleNinjaGreen');            
+     // player.anims.play('idleNinjaGreen');            
       } 
       }
   }
@@ -3093,22 +3101,22 @@ if(playerSkin=="ninjaGreen"){
      // player.anims.play('jumpUp');            
       } 
       if(playerSkin=="ninjaRouge"){
-      player.anims.play('jumpUpNinjaRouge');            
+    //  player.anims.play('jumpUpNinjaRouge');            
       } 
       if(playerSkin=="ninjaGreen"){
-      player.anims.play('idleNinjaGreen');            
+   //   player.anims.play('idleNinjaGreen');            
       } 
       }
       if(player.body.velocity.y>0){
 
       if(playerSkin=="ninja"){
-      player.anims.play('jumpDownNinja');            
+     // player.anims.play('jumpDownNinja');            
       } 
       if(playerSkin=="ninjaRouge"){
-      player.anims.play('jumpDownNinjaRouge');            
+    //  player.anims.play('jumpDownNinjaRouge');            
       } 
       if(playerSkin=="ninjaGreen"){
-      player.anims.play('jumpDownNinjaGreen');            
+    //  player.anims.play('jumpDownNinjaGreen');            
       } 
       }
   }
@@ -3196,13 +3204,13 @@ if (pad.B && (standing == true || playerInWater==true) )
     player.body.setSize(45, 45, true);
     player.body.setOffset(20,45);
     if(playerSkin=="ninja"){
-    player.anims.play('crouchDownNinja');            
+    //player.anims.play('crouchDownNinja');            
     } 
     if(playerSkin=="ninjaRouge"){
-    player.anims.play('crouchDownNinjaRouge');            
+    //player.anims.play('crouchDownNinjaRouge');            
     } 
     if(playerSkin=="ninjaGreen"){
-    player.anims.play('crouchDownNinjaGreen');            
+  //  player.anims.play('crouchDownNinjaGreen');            
     } 
 }
 
@@ -3221,13 +3229,13 @@ if(!pad.B && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.bod
 if(!pad.B && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
 
 if(playerSkin=="ninja"){
-player.anims.play('crouchDownNinja');            
+//player.anims.play('crouchDownNinja');            
 } 
 if(playerSkin=="ninjaRouge"){
-player.anims.play('crouchDownNinjaRouge');            
+//player.anims.play('crouchDownNinjaRouge');            
 } 
 if(playerSkin=="ninjaGreen"){
-player.anims.play('crouchDownNinjaGreen');            
+//player.anims.play('crouchDownNinjaGreen');            
 }
 }
 }
