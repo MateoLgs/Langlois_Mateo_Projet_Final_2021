@@ -418,6 +418,7 @@ killSniperEnnemi(sniperEnnemi, shuriken){
 }     
 
 killYeti(yeti, shuriken){
+    console.log("testy")
     yeti.destroy();
     shuriken.destroy();
     totalCoins+=6;
@@ -494,12 +495,69 @@ lancershurikenGamepad(player){
     this.changeShuriken();
     }
 }
+lancerShurikenMobile(player){
+    if(shurikenLeft>0){
+        shotsDone+=1; 
+        localStorage.setItem(localDataShotsDone, shotsDone);
+  let pointer = this.input.activePointer;
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
+       
+       shuriken.body.setSize(180, 180, true);
+       shuriken.body.setOffset(-70,-70);
+       if(nextShotMobileDirection=="right"){
+        shuriken.setVelocity(700,700*nextShotOrientation)
+   }
+   if(nextShotMobileDirection=="left"){
+    shuriken.setVelocity(-700,700*nextShotOrientation/2)
+}
+  shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
+  shuriken.play('shurikenSpin', true).setFlipX(false);
+  shuriken.setGravityY(500)
+    shurikenLeft -=1;
+    this.changeShuriken();
+    }
+}
 lancerTeleport(player){
     if(teleportationsLeft>0){
   let pointer = this.input.activePointer;
        var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
        teleport.setBounce(1)
   this.physics.moveTo(teleport, pointer.worldX, pointer.worldY, 300);
+  teleport.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
+    teleportationsLeft -=1;
+    
+   this.changeTeleport();
+
+    this.time.delayedCall(1250, this.teleportToTeleporter, [teleport], this);  
+    }
+}
+
+lancerTeleportGamepad(player){
+    if(teleportationsLeft>0){
+  let pointer = this.input.activePointer;
+       var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
+       teleport.setBounce(1)
+       teleport.setVelocity(300,300*axisHeightR)
+  teleport.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
+    teleportationsLeft -=1;
+    
+   this.changeTeleport();
+
+    this.time.delayedCall(1250, this.teleportToTeleporter, [teleport], this);  
+    }
+}
+
+lancerTeleportMobile(player){
+    if(teleportationsLeft>0){
+  let pointer = this.input.activePointer;
+       var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
+       teleport.setBounce(1)
+       if(nextShotMobileDirection=="right"){
+            teleport.setVelocity(300,300*nextShotOrientation)
+       }
+       if(nextShotMobileDirection=="left"){
+        teleport.setVelocity(-300,300*nextShotOrientation/2)
+   }
   teleport.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
     teleportationsLeft -=1;
     
@@ -1141,7 +1199,7 @@ destroyShurikenSnowball(shuriken, snowball){
 }
    
 death(){
-/*
+
 console.log("death")
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
@@ -1155,7 +1213,7 @@ console.log("death")
 
 
     this.time.delayedCall(1000, this.mort, null, this);
-   */
+   
 }
 
 mort(){
@@ -1308,6 +1366,13 @@ var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
 var laserHorizontal;
 var laserHorizontalActivated = true;
 
+var gameSupport = "notMobile"
+var nextShotMobile = "shuriken"
+var nextReleaseShot = false
+var nextShotOrientation = 0
+var nextShotMobileDirection = ""
+var delaiShurikenPlayer = 120;
+var shurikenPlayer = "true"
 }
 
 
@@ -1315,7 +1380,8 @@ var laserHorizontalActivated = true;
 createMobileUi(){
 
     if(gameSupport=='mobile'){
-        this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.9,(this.cameras.main.centerY*2)*0.5, 'jumpButton').setScrollFactor(0).setScale(0.45).setDepth(10).setOrigin(0.5,0.5).setInteractive();
+        this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.35, 'jumpButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive();
+        this.crouchButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.5, 'crouchButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive();
         this.nextShotTeleportation = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotTeleportation').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
         this.nextShotShuriken = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotShuriken').setScrollFactor(0).setScale(0.20).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
 
@@ -1357,11 +1423,18 @@ this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
             this.jump()     
         } 
     }) 
+    this.crouchButton.on('pointerdown', () => {
+        player.body.setSize(45, 45, true);
+        player.body.setOffset(20,45);
+    })
+
+
     }
 }
 
 destroyMobileUi(){
     this.jumpButton.destroy();
+    this.crouchButton.destroy();
     this.joyStickMovement.thumb.setAlpha(0)
     this.joyStickMovement.base.setAlpha(0)
     this.joyStickShoot.thumb.setAlpha(0)
@@ -1373,8 +1446,8 @@ destroyMobileUi(){
 
 preload (){
 
+    this.declareVariables()
 
-this.declareVariables()
 
 var pluginUrl = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
 this.load.plugin('rexvirtualjoystickplugin', pluginUrl, true);
@@ -1388,6 +1461,7 @@ this.load.plugin('rexvirtualjoystickplugin', pluginUrl, true);
   this.load.image('nextShotShuriken', 'assets/nextShotShuriken.png');
   this.load.image('mobileGameModeButton', 'assets/mobileGameModeButton.jpg');
   this.load.image('notMobileGameModeButton', 'assets/notMobileGameModeButton.jpg');
+  this.load.image('crouchButton', 'assets/crouchButton.png');
   this.load.image('jumpButton', 'assets/jumpButton.png');
   this.load.image('backgroundBarHealth', 'assets/backgroundBarHealth.png');
   this.load.image('healthBarGreen', 'assets/healthBarGreen.png');
@@ -1466,8 +1540,11 @@ create (){
        this.map = this.make.tilemap({ key: 'level4' });
     }
 
-    this.mobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.75,(this.cameras.main.centerY*2)*0.1, 'mobileGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
-    this.notMobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.75,(this.cameras.main.centerY*2)*0.1, 'notMobileGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+    this.declareVariables()
+
+
+    this.mobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'mobileGameModeButton').setScrollFactor(0).setScale(0.05).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
+    this.notMobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.85,(this.cameras.main.centerY*2)*0.05, 'notMobileGameModeButton').setScrollFactor(0).setScale(0.05).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
 
     this.mobileGameModeButton.on('pointerdown', () => {
             this.notMobileGameModeButton.setAlpha(1)
@@ -2507,12 +2584,10 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 
  rectCrouchPlayer = this.physics.add.sprite(0,0, 'spritesheetPlayerNinja').setAlpha(0.2);
 
-
 }
 
 update (){    
-  
-
+  console.log(laserVerticalActivated)
 
 
 /*
@@ -2520,41 +2595,76 @@ if(axisWidth >=0.2){
     this.goRightMobile()
 }*/
 if(gameSupport=="mobile"){
-if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<180 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-100)) && (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
-    this.goLeft()
-    console.log("left")
-}
-if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<90 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>10) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-90  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-10))&& (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
-    console.log("right")
-    this.goRight()
-}
-if((Math.floor(this.joyStickMovement.force * 100) / 100)<20){
-    player.setVelocityX(0)
+    if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<180 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-100)) && (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
+        this.goLeft()
+        console.log("left")
+    }
+    if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<90 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>10) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-90  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-10))&& (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
+        console.log("right")
+        this.goRight()
+    }
+    if((Math.floor(this.joyStickMovement.force * 100) / 100)<20){
+        player.setVelocityX(0)
+    }
+
+    this.nextShotShuriken.on('pointerdown', () => {
+        this.nextShotTeleportation.setAlpha(1)
+        this.nextShotShuriken.setAlpha(0)
+        nextShotMobile = "teleport"
+    });
+    this.nextShotTeleportation.on('pointerdown', () => {
+        this.nextShotTeleportation.setAlpha(0)
+        this.nextShotShuriken.setAlpha(1)   
+        nextShotMobile = "shuriken"
+
+    });
+
+    if((Math.floor(this.joyStickShoot.force * 100) / 100)>20)  {
+         nextReleaseShot=true
+         nextShotOrientation = (Math.floor(this.joyStickShoot.angle * 100) / 100 ) /90
+         if(((Math.floor(this.joyStickShoot.angle * 100) / 100 )<180 && (Math.floor(this.joyStickShoot.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickShoot.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickShoot.angle * 100) / 100 )<-100))
+            {
+                nextShotMobileDirection="left"
+            }
+            if(((Math.floor(this.joyStickShoot.angle * 100) / 100 )<90 && (Math.floor(this.joyStickShoot.angle * 100) / 100 )>10) || ((Math.floor(this.joyStickShoot.angle * 100) / 100 )>-90  && (Math.floor(this.joyStickShoot.angle * 100) / 100 )<-10)){
+                nextShotMobileDirection="right"
+            }
+        }
+
+if(nextReleaseShot==true && (Math.floor(this.joyStickShoot.force * 100) / 100)<20){
+
+    if(shurikenPlayer == "true"){
+
+        if(nextReleaseShot=true && nextShotMobile=="teleport" && teleportationsLeft>0){
+            shurikenPlayer = "false";
+            nextReleaseShot=false
+            console.log("teleport")
+        this.lancerTeleportMobile(player);
+
+        }
+        if(nextShotMobile =="shuriken"){
+
+            shurikenPlayer = "false";
+            nextReleaseShot=false
+            this.lancerShurikenMobile(player);
+        }
+
+    }
+    nextReleaseShot=false
 }
 
-this.nextShotShuriken.on('pointerdown', () => {
-    this.nextShotTeleportation.setAlpha(1)
-    this.nextShotShuriken.setAlpha(0)
-    nextShotMobile = "teleport"
-});
-this.nextShotTeleportation.on('pointerdown', () => {
-    this.nextShotTeleportation.setAlpha(0)
-    this.nextShotShuriken.setAlpha(1)   
-    nextShotMobile = "shuriken"
-});
 
 }
+
 /*if((Math.floor(this.joyStickMovement.force * 100) / 100 )>100){
     console.log("force")
-}*/
-
-
+*/
     if (this.input.gamepad.total === 0)
-    {
+    { 
         return;
     }
+
     pad = this.input.gamepad.getPad(0);
-   
     if (pad.axes.length)
     {
         axisWidth = pad.axes[0].getValue(); 
@@ -2592,21 +2702,21 @@ this.nextShotTeleportation.on('pointerdown', () => {
             .setDepth(-1)
             .setFlipX(true)
         }
-        this.time.delayedCall(1, this.stopSlash, [cacAttaque], this);
+        this.time.delayedCall(10, this.stopSlash, [cacAttaque], this);
         
     }
 
 
 if(axisWidthR > 0.5 || axisWidthR<-0.5)  {
 
-      if(shurikenPlayer == true && shurikenPowerUpActive==true ){
+      if(shurikenPlayer == "true" && shurikenPowerUpActive==true ){
             if(pad.L2 && teleportationsLeft>0){
-                shurikenPlayer = false;
+                shurikenPlayer = "false";
     
-              this.lancerTeleport(player);
+              this.lancerTeleportGamepad(player);
             }
              if(!pad.L2){
-                shurikenPlayer = false;
+                shurikenPlayer = "false";
                 this.lancershurikenGamepad(player);
              }
     
@@ -2849,33 +2959,34 @@ for (const platformMoving of this.platformsMoving.children.entries) {
 
   
   
-  
-if(shurikenPlayer == false){
+
+if(shurikenPlayer == "false"){
    delaiShurikenPlayer --
 }
-if (delaiShurikenPlayer <= 0 && shurikenPlayer == false) {
+if (delaiShurikenPlayer <= 0 && shurikenPlayer == "false") {
   delaiShurikenPlayer = cooldownShuriken;
-  shurikenPlayer = true;
+
+  shurikenPlayer = "true";
 }
   
        
-
+if(gameSupport!="mobile"){
 this.input.on('pointerdown', function (pointer) {
-    if(shurikenPlayer == true && shurikenPowerUpActive==true ){
+    if(shurikenPlayer == "true" && shurikenPowerUpActive==true ){
         if(keyA.isDown && teleportationsLeft>0){
-            shurikenPlayer = false;
+            shurikenPlayer = "false";
 
           this.lancerTeleport(player);
         }
         else if(keyA.isUp){
-            shurikenPlayer = false;
+            shurikenPlayer = "false";
             this.lancershuriken(player);
         }
         keyA.reset();
 
     }
 }, this);
-
+}
 
 
 
@@ -2922,8 +3033,11 @@ if(player.body.blocked.down || player.body.touching.down){
   {
       this.goRight();
   }
-  
-  
+  if(keyZ.isDown){
+    if(standing == true || playerInWater==true){
+        this.jump()     
+    } 
+  }
   
   
 
@@ -2936,7 +3050,7 @@ if(player.body.blocked.down || player.body.touching.down){
       jumpingPlayer=false
   }
 
-  
+
   if ((keyS.isDown || pad.B) && (standing == true || playerInWater==true) )
   {   
       player.body.setSize(45, 45, true);
@@ -2962,7 +3076,6 @@ if(player.body.blocked.down || player.body.touching.down){
         else{
             uncrouchPossible = true;
         }
-
     }
 
   if((keyS.isUp  && !pad.B) && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {

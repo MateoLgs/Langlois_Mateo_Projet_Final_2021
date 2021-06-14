@@ -20,8 +20,9 @@ class PostGame extends Phaser.Scene {
         teleportationsLeft = 0;
 
         pageLevelMenu = 1;
-
+console.log(rewardCoinsPostGame)
         totalCoins+=rewardCoinsPostGame
+        rewardCoinsPostGame=0
         localStorage.setItem(localDataTotalCoins, totalCoins);
 
         if(levelCompleted == false){

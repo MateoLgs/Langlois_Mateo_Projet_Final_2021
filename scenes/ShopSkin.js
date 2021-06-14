@@ -101,7 +101,7 @@ class ShopSkin extends Phaser.Scene {
         var skinAfficheRandomUnlockSkin = Phaser.Math.Between(1, 100);
         console.log(skinAfficheRandomUnlockSkin)
            
-        if(skinAfficheRandomUnlockSkin < probaDropSkinGreenNinja && ninjaGreenSkinUnlocked==false){
+        if(skinAfficheRandomUnlockSkin <= probaDropSkinGreenNinja && ninjaGreenSkinUnlocked==false){
             if(ninjaGreenSkinUnlocked==false){
                 ninjaGreenSkinUnlocked=true
                 localStorage.setItem(localDataNinjaGreenSkinUnlocked, ninjaGreenSkinUnlocked);
@@ -150,7 +150,7 @@ class ShopSkin extends Phaser.Scene {
         else{
             skinAfficheRandomUnlockSkin = Phaser.Math.Between(1, 100);
             console.log("2ème :" +skinAfficheRandomUnlockSkin)
-            if(skinAfficheRandomUnlockSkin < probaDropSkinRedNinja && ninjaRougeSkinUnlocked==false){            
+            if(skinAfficheRandomUnlockSkin <= probaDropSkinRedNinja && ninjaRougeSkinUnlocked==false){            
                 if(ninjaRougeSkinUnlocked==false){
                     ninjaRougeSkinUnlocked=true
                     localStorage.setItem(localDataNinjaRougeSkinUnlocked, ninjaRougeSkinUnlocked);

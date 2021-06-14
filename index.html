@@ -64,6 +64,9 @@ var pageLevelMenu = 1;
 var levelCompleted = false;
 var gameSupport = "notMobile"
 var nextShotMobile = "shuriken"
+var nextReleaseShot = false
+var nextShotOrientation = 0
+var nextShotMobileDirection = ""
 
 ///////////////ACHIEVEMENTS////////////////////
 var morts ;
@@ -105,7 +108,7 @@ popupShotsAchievementShown = Boolean(localStorage.getItem(localDataPopupShotsAch
 var clicksDoneForEasterEggAchievement;
 var localDataClicksDoneForEasterEggAchievement = "clicksDoneForEasterEggAchievement";
 clicksDoneForEasterEggAchievement = Number(localStorage.getItem(localDataClicksDoneForEasterEggAchievement));
-var clicksForEasterEggAchievement = 5;
+var clicksForEasterEggAchievement = 50;
 var easterEggClicksCompleted = false;
 var popupEasterEggN1AchievementShown = false
 var localDataPopupEasterEggN1AchievementShown = "popupEasterEggN1AchievementShown";
@@ -194,7 +197,7 @@ var shuriken;
 var scoreText;
 var jumpingPlayer = true
 var shurikenPowerUpActive = true
-var shurikenPlayer = true
+var shurikenPlayer = "true"
 var cooldownTirSoldatEnnemi
 var delaiShurikenPlayer = 120;
 var standing;
@@ -248,8 +251,8 @@ var ninjaGreenSkinUnlocked;
 var ninjaSkinUnlocked = true;
 
 
-var probaDropSkinGreenNinja = 10
-var probaDropSkinRedNinja = 5
+var probaDropSkinGreenNinja = 3
+var probaDropSkinRedNinja = 1
 var probaDropCoins = 100-probaDropSkinGreenNinja-probaDropSkinRedNinja
 
 ////////////////////////////////
@@ -327,7 +330,7 @@ var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoque
 var gravity=1000;
 var pvJoueur = 100
 var runSpeed=1
-var rewardCoinsPostGame = 1;
+var rewardCoinsPostGame = 0;
 
 var line
 var graphics
