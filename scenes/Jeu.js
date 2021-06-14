@@ -196,7 +196,6 @@ joueurPrendDegats(degat){
     if(pvPlayer<0.1){
          this.death();
     }
-     console.log(pvPlayer)
  }
 
 tirSniperEnnemi(sniperEnnemi){ 
@@ -471,6 +470,30 @@ lancershuriken(player){
     this.changeShuriken();
     }
 }
+lancershurikenGamepad(player){
+    if(shurikenLeft>0){
+        shotsDone+=1; 
+        localStorage.setItem(localDataShotsDone, shotsDone);
+  let pointer = this.input.activePointer;
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.1);
+       
+       shuriken.body.setSize(180, 180, true);
+       shuriken.body.setOffset(-70,-70);
+       if(axisWidthR>0){
+            shuriken.setVelocity(700,700*axisHeightR)
+            console.log("right")
+       }
+       if(axisWidthR<0){
+        shuriken.setVelocity(-700,700*axisHeightR)
+        console.log("left")
+   }
+  shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
+  shuriken.play('shurikenSpin', true).setFlipX(false);
+  shuriken.setGravityY(500)
+    shurikenLeft -=1;
+    this.changeShuriken();
+    }
+}
 lancerTeleport(player){
     if(teleportationsLeft>0){
   let pointer = this.input.activePointer;
@@ -706,7 +729,6 @@ bouncePlatformMontagne(){
       }
   }
       if(keyZ.isDown ){
-          console.log("test")
          player.setVelocityY(-150);
       }
 
@@ -825,6 +847,7 @@ setSpeedPlatformIce (player, platform) {
 }
   
 goRight(){
+
    if((keyQ.isDown) && onPlatform != "ice"){
       player.setVelocityX(0);
 
@@ -911,7 +934,6 @@ goRightGamepad(){
      
      player.setVelocityX(250*runSpeed*axisWidth);
      playerDirection="right"
-     console.log(axisWidth)
      }
    
  
@@ -979,6 +1001,7 @@ goLeft(){
 }
 
 goLeftGamepad(){
+
     if(onPlatform!="ice"){
     if(standing==true){   
       if(playerSkin=="ninja"){
@@ -1005,7 +1028,7 @@ goLeftGamepad(){
           player.play('runNinjaGreen', true).setFlipX(true);
       } 
           playerDirection="left"
-        player.setVelocityX(-250*runSpeed*axisWidth);
+        player.setVelocityX(-250*runSpeed*axisWidth*-1);
     }
   }
   if(onPlatform=="ice"){
@@ -1024,6 +1047,7 @@ goLeftGamepad(){
       }
 }
 
+
 jump(){
 
     
@@ -1041,7 +1065,7 @@ jump(){
       } 
 
 
-      if( keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1){
+      if( keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2){
           player.setVelocityX(0)
       }
   }
@@ -1057,7 +1081,7 @@ jump(){
           player.play('jumpNinjaGreen', true);        
       }  
 
-      if(keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1){
+      if(keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2){
           player.setVelocityX(0)
       }
    
@@ -1117,7 +1141,7 @@ destroyShurikenSnowball(shuriken, snowball){
 }
    
 death(){
-
+/*
 console.log("death")
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
@@ -1131,7 +1155,7 @@ console.log("death")
 
 
     this.time.delayedCall(1000, this.mort, null, this);
-   // }
+   */
 }
 
 mort(){
@@ -1231,12 +1255,10 @@ breakCaisse(caisse, shuriken){
         .setDepth(2)
         caisse.pv=1
 
-        console.log("uzebv")
     }
 
     else if(caisse.pv==1){
         caisse.destroy()
-        console.log("222")
 
     }
 }
@@ -1288,17 +1310,85 @@ var laserHorizontalActivated = true;
 
 }
 
+
+
+createMobileUi(){
+
+    if(gameSupport=='mobile'){
+        this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.9,(this.cameras.main.centerY*2)*0.5, 'jumpButton').setScrollFactor(0).setScale(0.45).setDepth(10).setOrigin(0.5,0.5).setInteractive();
+        this.nextShotTeleportation = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotTeleportation').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
+        this.nextShotShuriken = this.physics.add.sprite((this.cameras.main.centerX*2)*0.7,(this.cameras.main.centerY*2)*0.75, 'nextShotShuriken').setScrollFactor(0).setScale(0.20).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+
+        this.joyStickMovement = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+            x: (this.cameras.main.centerX*2)*0.15,
+            y: (this.cameras.main.centerY*2)*0.75,
+            radius: 100,
+            base: this.add.circle(0, 0, 75, 0x888888),
+            thumb: this.add.circle(0, 0, 35, 0xcccccc),
+            // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+            // forceMin: 16,
+            // enable: true
+        })
+    this.joyStickMovement.base.setAlpha(0.5).setDepth(10)
+    this.joyStickMovement.thumb.setAlpha(0.5).setDepth(10)
+    
+
+
+    this.joyStickShoot = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+        x: (this.cameras.main.centerX*2)*0.85,
+        y: (this.cameras.main.centerY*2)*0.75,
+        radius: 100,
+        base: this.add.circle(0, 0, 75, 0x888888),
+        thumb: this.add.circle(0, 0, 35, 0xcccccc),
+        // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+        // forceMin: 16,
+        // enable: true
+    })
+this.joyStickShoot.base.setAlpha(0.5).setDepth(10)
+this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
+
+
+
+    this.text = this.add.text(0, 0);
+    
+    
+    this.jumpButton.on('pointerdown', () => {
+        if(standing == true || playerInWater==true){
+            this.jump()     
+        } 
+    }) 
+    }
+}
+
+destroyMobileUi(){
+    this.jumpButton.destroy();
+    this.joyStickMovement.thumb.setAlpha(0)
+    this.joyStickMovement.base.setAlpha(0)
+    this.joyStickShoot.thumb.setAlpha(0)
+    this.joyStickShoot.base.setAlpha(0)
+    this.nextShotShuriken.destroy()
+    this.nextShotTeleportation.destroy()
+    
+}
+
 preload (){
 
 
 this.declareVariables()
 
+var pluginUrl = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
+this.load.plugin('rexvirtualjoystickplugin', pluginUrl, true);
+
+
 
     this.load.image("bg_1", "assets/bg-1.png");
     this.load.image("bg_2", "assets/bg-2.png");
 
-
-
+  this.load.image('nextShotTeleportation', 'assets/nextShotTeleportation.png');
+  this.load.image('nextShotShuriken', 'assets/nextShotShuriken.png');
+  this.load.image('mobileGameModeButton', 'assets/mobileGameModeButton.jpg');
+  this.load.image('notMobileGameModeButton', 'assets/notMobileGameModeButton.jpg');
+  this.load.image('jumpButton', 'assets/jumpButton.png');
   this.load.image('backgroundBarHealth', 'assets/backgroundBarHealth.png');
   this.load.image('healthBarGreen', 'assets/healthBarGreen.png');
   this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
@@ -1375,6 +1465,24 @@ create (){
     if(level=="level4"){
        this.map = this.make.tilemap({ key: 'level4' });
     }
+
+    this.mobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.75,(this.cameras.main.centerY*2)*0.1, 'mobileGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0);
+    this.notMobileGameModeButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.75,(this.cameras.main.centerY*2)*0.1, 'notMobileGameModeButton').setScrollFactor(0).setScale(0.1).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(1);
+
+    this.mobileGameModeButton.on('pointerdown', () => {
+            this.notMobileGameModeButton.setAlpha(1)
+            this.mobileGameModeButton.setAlpha(0)
+            gameSupport = "notMobile"
+            this.destroyMobileUi()
+    });
+    this.notMobileGameModeButton.on('pointerdown', () => {
+            this.notMobileGameModeButton.setAlpha(0)
+            this.mobileGameModeButton.setAlpha(1)   
+            gameSupport = "mobile"
+            this.createMobileUi()
+    });
+
+
 
   this.bg_1 = this.add.tileSprite(0, 0, 10000, 10000, "bg_1").setDepth(-10).setScale(2.6);
   this.bg_1.setOrigin(0, 0);
@@ -2404,29 +2512,109 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 
 update (){    
   
+
+
+
+/*
+if(axisWidth >=0.2){
+    this.goRightMobile()
+}*/
+if(gameSupport=="mobile"){
+if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<180 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-100)) && (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
+    this.goLeft()
+    console.log("left")
+}
+if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<90 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>10) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-90  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-10))&& (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
+    console.log("right")
+    this.goRight()
+}
+if((Math.floor(this.joyStickMovement.force * 100) / 100)<20){
+    player.setVelocityX(0)
+}
+
+this.nextShotShuriken.on('pointerdown', () => {
+    this.nextShotTeleportation.setAlpha(1)
+    this.nextShotShuriken.setAlpha(0)
+    nextShotMobile = "teleport"
+});
+this.nextShotTeleportation.on('pointerdown', () => {
+    this.nextShotTeleportation.setAlpha(0)
+    this.nextShotShuriken.setAlpha(1)   
+    nextShotMobile = "shuriken"
+});
+
+}
+/*if((Math.floor(this.joyStickMovement.force * 100) / 100 )>100){
+    console.log("force")
+}*/
+
+
     if (this.input.gamepad.total === 0)
     {
         return;
     }
     pad = this.input.gamepad.getPad(0);
-
+   
     if (pad.axes.length)
     {
         axisWidth = pad.axes[0].getValue(); 
         axisHeight = pad.axes[1].getValue(); 
+       
+        axisWidthR = pad.axes[2].getValue(); 
+        axisHeightR = pad.axes[3].getValue(); 
         
       
 
 
 
-        if(axisWidth >=0.1){
+        if(axisWidth >=0.2){
             this.goRightGamepad()
         }
-        else if(axisWidth <=-0.1){
+        else if(axisWidth <=-0.2){
             this.goLeftGamepad()
         }
 
     }
+
+        if(pad.A && (standing == true || playerInWater==true) ){
+            this.jump();
+    }
+
+    if(pad.R2){
+        if(playerDirection=='right'){
+            var cacAttaque = this.cacAttaques.create(player.x+40, player.y-3, 'cacAttaque').setScale(0.1)
+            .setOrigin(0.5,0.5)
+            .setDepth(-1)
+        }
+        if(playerDirection=='left'){
+            var cacAttaque = this.cacAttaques.create(player.x-40, player.y-3, 'cacAttaque').setScale(0.1)
+            .setOrigin(0.5,0.5)
+            .setDepth(-1)
+            .setFlipX(true)
+        }
+        this.time.delayedCall(1, this.stopSlash, [cacAttaque], this);
+        
+    }
+
+
+if(axisWidthR > 0.5 || axisWidthR<-0.5)  {
+
+      if(shurikenPlayer == true && shurikenPowerUpActive==true ){
+            if(pad.L2 && teleportationsLeft>0){
+                shurikenPlayer = false;
+    
+              this.lancerTeleport(player);
+            }
+             if(!pad.L2){
+                shurikenPlayer = false;
+                this.lancershurikenGamepad(player);
+             }
+    
+        }
+
+}
+
+   
 
 
 rectCrouchPlayer.destroy()
@@ -2707,6 +2895,7 @@ if(spaceBar.isDown){
     spaceBar.reset()
 }
 
+
   
 
 
@@ -2748,7 +2937,7 @@ if(player.body.blocked.down || player.body.touching.down){
   }
 
   
-  if (keyS.isDown && (standing == true || playerInWater==true))
+  if ((keyS.isDown || pad.B) && (standing == true || playerInWater==true) )
   {   
       player.body.setSize(45, 45, true);
       player.body.setOffset(20,45);
@@ -2763,12 +2952,10 @@ if(player.body.blocked.down || player.body.touching.down){
       } 
   }
 
-  if (keyZ.isDown && (standing == true || playerInWater==true))
-  {   
-      this.jump();
-  }
 
-  if(keyS.isUp && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
+
+
+  if((keyS.isUp  && !pad.B) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
     if(uncrouchPossible==true){
           player.body.setSize(45, 90, false).setOffset(20, 0);
         }
@@ -2778,7 +2965,7 @@ if(player.body.blocked.down || player.body.touching.down){
 
     }
 
-  if(keyS.isUp && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
+  if((keyS.isUp  && !pad.B) && (this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45))) {
 
 if(playerSkin=="ninja"){
   player.anims.play('crouchDownNinja');            
@@ -2803,7 +2990,7 @@ if(playerSkin=="ninjaGreen"){
 
   
   
-  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true && axisWidth <=0.1 && axisHeight <=0.1 && axisWidth >=-0.1 && axisHeight >=-0.1)
+  if (keyD.isUp && keyQ.isUp && playerCanResetVelocity==true && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2)
   {
       
       player.setAccelerationX(0);
@@ -2828,7 +3015,7 @@ if(playerSkin=="ninjaGreen"){
       player.setAccelerationX(0);
       if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20)|| this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
       if(playerSkin=="ninja"){
-      player.anims.play('idle');            
+    //  player.anims.play('idle');            
       } 
       if(playerSkin=="ninjaRouge"){
       player.anims.play('idleNinjaRouge');            
@@ -2844,7 +3031,7 @@ if(playerSkin=="ninjaGreen"){
       if(player.body.velocity.y<0){
 
           if(playerSkin=="ninja"){
-      player.anims.play('jumpUp');            
+     // player.anims.play('jumpUp');            
       } 
       if(playerSkin=="ninjaRouge"){
       player.anims.play('jumpUpNinjaRouge');            

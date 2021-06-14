@@ -24,7 +24,7 @@ class Achievements extends Phaser.Scene {
         var backgroundScreen = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'backgroundScreen').setScale(2.1).setAlpha(1).setInteractive();
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.82,(this.cameras.main.centerY*2)*0.17, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
 
-        mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)*0.25,(this.cameras.main.centerY*2)/2, 'mouseCursor').setScale(0.025).setDepth(5);
+     //   mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)*0.25,(this.cameras.main.centerY*2)/2, 'mouseCursor').setScale(0.025).setDepth(5);
 
 
 
@@ -106,7 +106,7 @@ class Achievements extends Phaser.Scene {
         })
     } 
     update(){
-        if(padConnected){
+   /*     if(padConnected){
 
             if(paddle.left){
                 mouseCursor.setVelocityX(-750)
@@ -125,7 +125,7 @@ class Achievements extends Phaser.Scene {
             }
 
 
-        }
+        }*/
     }
 
     

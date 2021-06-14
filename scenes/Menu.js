@@ -29,7 +29,7 @@ class Menu extends Phaser.Scene {
             }
     create() {
         
-        this.input.gamepad.once('connected', function (pad) {
+       /* this.input.gamepad.once('connected', function (pad) {
             //   'pad' is a reference to the gamepad that was just connected
                 paddle = pad;
                 padConnected = true;
@@ -37,18 +37,19 @@ class Menu extends Phaser.Scene {
         mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.75, 'mouseCursor').setScale(0.025).setDepth(5).setAlpha(1);
         mouseCursor.setCollideWorldBounds(true)
         mouseCursor.setSize(20, 20, false)
-
+*/
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         this.choixLevelStartButton = this.physics.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive().setImmovable(true);
         this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive().setImmovable(true);     
         this.shopButton = this.physics.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive().setImmovable(true);
         this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive().setImmovable(true);
 
-
+/*
         this.physics.add.overlap(mouseCursor,this.choixLevelStartButton,this.choixMenuStartButtonGamepad,null,this)
         this.physics.add.overlap(mouseCursor,this.skinsButton,this.openSkins,null,this)
         this.physics.add.overlap(mouseCursor,this.shopButton,this.openShop,null,this)
         this.physics.add.overlap(mouseCursor,this.achievementsButton,this.achievementButtonGamepad,null,this)
+*/
 
         this.popupAchievement();
 
@@ -83,7 +84,7 @@ class Menu extends Phaser.Scene {
     }
     update(){
 
-
+/*
         if (this.input.gamepad.total === 0)
         {
             return;
@@ -96,23 +97,23 @@ class Menu extends Phaser.Scene {
             axisHeight = pad.axes[1].getValue(); 
             
         
-            if(axisWidth >=0.1){
+            if(axisWidth >=0.2){
                 mouseCursor.setVelocityX(350)
             }
-            if(axisWidth <=-0.1){
+            if(axisWidth <=-0.2){
                 mouseCursor.setVelocityX(-350)
             }
-            if(axisHeight >=0.1){
+            if(axisHeight >=0.2){
                 mouseCursor.setVelocityY(350)
             }
-            if(axisHeight <=-0.1){
+            if(axisHeight <=-0.2){
                 mouseCursor.setVelocityY(-350)
             }
 
-            if(axisHeight<0.1 && axisHeight>-0.1 && axisWidth>-0.1 && axisWidth<0.1){
+            if(axisHeight<0.2 && axisHeight>-0.2 && axisWidth>-0.2 && axisWidth<0.2){
                 mouseCursor.setVelocity(0)
             }
-        }
+        }*/
     }
 
 
@@ -122,7 +123,7 @@ class Menu extends Phaser.Scene {
       this.scene.start('LevelMenu');
     }
 
-
+/*
     choixMenuStartButtonGamepad(){
         if(padConnected){
             if(paddle.A){
@@ -154,7 +155,7 @@ class Menu extends Phaser.Scene {
                 this.scene.start('Shop');
             }
         }
-    }
+    }*/
 
 
    

@@ -21,6 +21,9 @@ class PostGame extends Phaser.Scene {
 
         pageLevelMenu = 1;
 
+        totalCoins+=rewardCoinsPostGame
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+
         if(levelCompleted == false){
             this.screenEnd = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)/2, 'deathScreen').setScale(2.2).setInteractive();
         }

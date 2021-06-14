@@ -19,7 +19,7 @@ class Shop extends Phaser.Scene {
         this.load.image('ninjaSkinGreen', 'assets/playerNinjaGreenIdle1.png');
     }
     create() {
-        this.input.gamepad.once('connected', function (pad) {
+     /*   this.input.gamepad.once('connected', function (pad) {
             //   'pad' is a reference to the gamepad that was just connected
                 paddle = pad;
                 padConnected = true;
@@ -27,7 +27,7 @@ class Shop extends Phaser.Scene {
         mouseCursor = this.physics.add.sprite((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.90, 'mouseCursor').setScale(0.025).setDepth(5).setAlpha(1);
         mouseCursor.setCollideWorldBounds(true)
         mouseCursor.setSize(20, 20, false)
-
+*/
         var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
         var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
         var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
@@ -45,14 +45,14 @@ class Shop extends Phaser.Scene {
         var shopPack5 = this.physics.add.image((this.cameras.main.centerX*2)*0.47,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1).setImmovable(true);
         var shopPack6 = this.physics.add.image((this.cameras.main.centerX*2)*0.67,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1).setImmovable(true);
         
-        this.physics.add.overlap(mouseCursor,exitButton,this.exitShop,null,this)
+      /*  this.physics.add.overlap(mouseCursor,exitButton,this.exitShop,null,this)
         this.physics.add.overlap(mouseCursor,shopPack1,this.openShopPack1Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack2,this.openShopPack2Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack3,this.openShopPack3Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack4,this.openShopPack4Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack5,this.openShopPack5Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack6,this.openShopPack6Gamepad,null,this)
-
+*/
         
         menuBackgroundEscape.on('pointerdown', () => {
             this.scene.stop("Shop");
@@ -85,7 +85,7 @@ class Shop extends Phaser.Scene {
 
     } 
     update(){
-        if (this.input.gamepad.total === 0)
+    /*    if (this.input.gamepad.total === 0)
         {
             return;
         }
@@ -97,32 +97,30 @@ class Shop extends Phaser.Scene {
             axisHeight = pad.axes[1].getValue(); 
             
         
-            if(axisWidth >=0.1){
+            if(axisWidth >=0.2){
                 mouseCursor.setVelocityX(350)
             }
-            if(axisWidth <=-0.1){
+            if(axisWidth <=-0.2){
                 mouseCursor.setVelocityX(-350)
             }
-            if(axisHeight >=0.1){
+            if(axisHeight >=0.2){
                 mouseCursor.setVelocityY(350)
             }
-            if(axisHeight <=-0.1){
+            if(axisHeight <=-0.2){
                 mouseCursor.setVelocityY(-350)
             }
 
-            if(axisHeight<0.1 && axisHeight>-0.1 && axisWidth>-0.1 && axisWidth<0.1){
+            if(axisHeight<0.2 && axisHeight>-0.2 && axisWidth>-0.2 && axisWidth<0.2){
                 mouseCursor.setVelocity(0)
             }
-        }
+        }*/
     }
-    exitShop(){
-        if(padConnected){
-            if(paddle.A){
-                this.scene.stop("Shop");
-                this.scene.start('Menu');
-            }
-        }
-    }
+  /*  exitShop(){
+        if(paddle.A){
+            this.scene.stop("Shop");
+            this.scene.start('Menu');
+        }  
+    }*/
     openShopPack1 ()
     {
         var shopPack1Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -136,13 +134,12 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack1Lien;
         }
     }
-    openShopPack1Gamepad(){
-        if(padConnected){
+   /* openShopPack1Gamepad(){
             if(paddle.A){
                 this.openShopPack1()
             }
-        }
-    }
+        
+    }*/
     openShopPack2 ()
     {
         var shopPack2Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -156,13 +153,12 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack2Lien;
         }
     }
-    openShopPack2Gamepad(){
-        if(padConnected){
+   /* openShopPack2Gamepad(){
             if(paddle.A){
                 this.openShopPack2()
             }
-        }
-    }
+        
+    }*/
     openShopPack3 ()
     {
         var shopPack3Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -176,13 +172,12 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack3Lien;
         }
     }
-    openShopPack3Gamepad(){
-        if(padConnected){
+ /*   openShopPack3Gamepad(){
             if(paddle.A){
                 this.openShopPack3()
             }
-        }
-    }
+        
+    }*/
     openShopPack4 ()
     {
         var shopPack4Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -196,13 +191,12 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack4Lien;
         }
     }
-    openShopPack4Gamepad(){
-        if(padConnected){
+ /*   openShopPack4Gamepad(){
             if(paddle.A){
                 this.openShopPack4()
             }
-        }
-    }
+        
+    }*/
     openShopPack5 ()
     {
         var shopPack5Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -216,13 +210,12 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack5Lien;
         }
     }
-    openShopPack5Gamepad(){
-        //if(padConnected){
+ /*   openShopPack5Gamepad(){
             if(paddle.A){
                 this.openShopPack5()
             }
-       // }
-    }
+       
+    }*/
     openShopPack6 ()
     {
         var shopPack6Lien = 'https://www.paypal.com/fr/webapps/mpp/home'
@@ -236,12 +229,11 @@ class Shop extends Phaser.Scene {
             window.location.href = shopPack6Lien;
         }
     }
-    openShopPack6Gamepad(){
-        if(padConnected){
+   /* openShopPack6Gamepad(){
             if(paddle.A){
                 this.openShopPack6()
             }
-        }
-    }
+        
+    }*/
 }
     
