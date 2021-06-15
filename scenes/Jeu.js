@@ -1205,6 +1205,7 @@ death(){
       keyZ.reset(); 
 
 
+      console.log(laserVerticalActivated)
 
     this.time.delayedCall(1000, this.mort, null, this);
    
@@ -1319,54 +1320,306 @@ stopSlash(cacAttaque){
 }
 
 declareVariables(){
+    this.physics.world.removeCollider(this.colliderLasersVertical);
+    this.physics.world.removeCollider(this.colliderShurikenLaserVertical);
+    this.physics.world.removeCollider(this.colliderLasersHorizontal);
+    this.physics.world.removeCollider(this.colliderShurikenLaserHorizontal);
+    
+    var level="level1";
+    var teleportationsLeft = 1;
+    var teleportationsLeftText;
+    
+    var shurikenLeft =5;
+    var shurikenLeftText;
+    
+    var cooldownShuriken = 120;
+    var onPlatform ="";
+    var shuriken;
+    var snowball;
+    var platform;
+    var pageLevelMenu = 1;
+    var levelCompleted = false;
+    var gameSupport = "keyboard"
+    var nextShotMobile = "shuriken"
+    var nextReleaseShot = false
+    var nextShotOrientation = 0
+    var nextShotMobileDirection = ""
+    var currentlyCrouching = false
+    
+    ///////////////ACHIEVEMENTS////////////////////
+    var morts ;
+    var localDataMorts = "morts";
+    morts = Number(localStorage.getItem(localDataMorts))
+    var mortsForAchievement = 100
+    var popupMortAchievementShown = false
+    var localDataPopupMortAchievementShown = "popupMortAchievementShown";
+    popupMortAchievementShown = Boolean(localStorage.getItem(localDataPopupMortAchievementShown));
+    
+    
+    var totalCoins;
+    var localDataTotalCoins = "totalCoins";
+    totalCoins = Number(localStorage.getItem(localDataTotalCoins))
+    var totalCoinsAchievement = 10000
+    var popupCoinsAchievementShown = false
+    var localDataPopupCoinsAchievementShown = "popupCoinsAchievementShown";
+    popupCoinsAchievementShown = Boolean(localStorage.getItem(localDataPopupCoinsAchievementShown));
+    
+    
+    var achievementsCompleted;
+    var localDataAchievementsCompleted = "achievementsCompleted";
+    achievementsCompleted = Number(localStorage.getItem(localDataAchievementsCompleted))
+    var achievementsAmount= 6;
+    var popupAchievementsCompletedAchievementShown = false
+    var localDataPopupAchievementsCompletedAchievementShown = "popupAchievementsCompletedAchievementShown";
+    popupAchievementsCompletedAchievementShown = Boolean(localStorage.getItem(localDataPopupAchievementsCompletedAchievementShown));
+    
+    
+    var shotsDone;
+    var localDataShotsDone = "shotsDone";
+    shotsDone = Number(localStorage.getItem(localDataShotsDone))
+    var shotsDoneForAchievement = 1000;
+    var popupShotsAchievementShown = false
+    var localDataPopupShotsAchievementShown = "popupShotsAchievementShown";
+    popupShotsAchievementShown = Boolean(localStorage.getItem(localDataPopupShotsAchievementShown));
+    
+    
+    var clicksDoneForEasterEggAchievement;
+    var localDataClicksDoneForEasterEggAchievement = "clicksDoneForEasterEggAchievement";
+    clicksDoneForEasterEggAchievement = Number(localStorage.getItem(localDataClicksDoneForEasterEggAchievement));
+    var clicksForEasterEggAchievement = 50;
+    var easterEggClicksCompleted = false;
+    var popupEasterEggN1AchievementShown = false
+    var localDataPopupEasterEggN1AchievementShown = "popupEasterEggN1AchievementShown";
+    popupEasterEggN1AchievementShown = Boolean(localStorage.getItem(localDataPopupEasterEggN1AchievementShown));
+    
+    
+    
+    var skinsPossessed;
+    var localDataSkinsPossessed = "skinsPossessed";
+    skinsPossessed = Number(localStorage.getItem(localDataSkinsPossessed));
+    var skinAmount = 2;
+    var popupSkinAchievementShown = false
+    var localDataPopupSkinAchievementShown = "popupSkinAchievementShown";
+    popupSkinAchievementShown = Boolean(localStorage.getItem(localDataPopupSkinAchievementShown));
+    
+    ///////////////LEVELS////////////////////////////////
+    
+    var level1Unlocked = true;
+        var localDataLevel1Unlocked = "level1";
+        level1Unlocked = Boolean(localStorage.getItem(localDataLevel1Unlocked));
+    var level2Unlocked = false;
+        var localDataLevel2Unlocked = "level2";
+        level2Unlocked = Boolean(localStorage.getItem(localDataLevel2Unlocked));
+    var level3Unlocked = false;
+        var localDataLevel3Unlocked = "level3";
+        level3Unlocked = Boolean(localStorage.getItem(localDataLevel3Unlocked));
+    var level4Unlocked = false;
+        var localDataLevel4Unlocked = "level4";
+        level4Unlocked = Boolean(localStorage.getItem(localDataLevel4Unlocked));
+    var level5Unlocked = false;
+        var localDataLevel5Unlocked = "level5";
+        level5Unlocked = Boolean(localStorage.getItem(localDataLevel5Unlocked));
+    var level6Unlocked = false;
+        var localDataLevel6Unlocked = "level6";
+        level6Unlocked = Boolean(localStorage.getItem(localDataLevel6Unlocked));
+    var level7Unlocked = false;
+        var localDataLevel7Unlocked = "level7";
+        level7Unlocked = Boolean(localStorage.getItem(localDataLevel7Unlocked));
+    var level8Unlocked = false;
+        var localDataLevel8Unlocked = "level8";
+        level8Unlocked = Boolean(localStorage.getItem(localDataLevel8Unlocked));
+    var level9Unlocked = false;
+        var localDataLevel9Unlocked = "level9";
+        level9Unlocked = Boolean(localStorage.getItem(localDataLevel9Unlocked));
+    var level10Unlocked = false;
+        var localDataLevel10Unlocked = "level10";
+        level10Unlocked = Boolean(localStorage.getItem(localDataLevel10Unlocked));
+    var level11Unlocked = false;
+        var localDataLevel11Unlocked = "level11";
+        level11Unlocked = Boolean(localStorage.getItem(localDataLevel11Unlocked));
+    var level12Unlocked = false;
+        var localDataLevel12Unlocked = "level12";
+        level12Unlocked = Boolean(localStorage.getItem(localDataLevel12Unlocked));
+    var level13Unlocked = false;
+        var localDataLevel13Unlocked = "level13";
+        level13Unlocked = Boolean(localStorage.getItem(localDataLevel13Unlocked));
+    var level14Unlocked = false;
+        var localDataLevel14Unlocked = "level14";
+        level14Unlocked = Boolean(localStorage.getItem(localDataLevel14Unlocked));
+    var level15Unlocked = false;
+        var localDataLevel15Unlocked = "level15";
+        level15Unlocked = Boolean(localStorage.getItem(localDataLevel15Unlocked));
+    var level16Unlocked = false;
+        var localDataLevel16Unlocked = "level16";
+        level16Unlocked = Boolean(localStorage.getItem(localDataLevel16Unlocked));
+    var level17Unlocked = false;
+        var localDataLevel17Unlocked = "level17";
+        level17Unlocked = Boolean(localStorage.getItem(localDataLevel17Unlocked));
+    var level18Unlocked = false;
+        var localDataLevel18Unlocked = "level18";
+        level18Unlocked = Boolean(localStorage.getItem(localDataLevel18Unlocked));
+    
+    /////////////////////////////////////////////////////////////
+    
+    var platform;
+    var player;
+    var mouseCursor
+    var health;
+    var shurikens;
+    var teleportations;
+    var snowballs;
+    var platforms;
+    var cursors;
+    var snowman;
+    var shuriken;
+    var scoreText;
+    var jumpingPlayer = true
+    var shurikenPowerUpActive = true
+    var shurikenPlayer = "true"
+    var cooldownTirSoldatEnnemi
+    var delaiShurikenPlayer = 120;
+    var standing;
+    var keyA
+    var keyZ;
+    var keyS;
+    var keyD;
+    var keyQ;
+    var spaceBar
+    var coins;
+    var playerInvincible=false;
+    var playerCanResetVelocity=true;
+    var hardcoreMode="off";  
+    var playerInWater = false;
+    var playerDirection ="right"
+    var textPieces;
+    var froid1;
+    var froid2;
+    var froid3;
+    var froid = 0;
+    var axisWidth = 0
+    var axisHeight = 0
+    var axisWidthR = 0
+    var axisHeightR = 0
+    var padConnected;
+    var pad;
+    var pad1;
+    var paddle;
+    var gamepadStart=true
+    var patchNote;
+    var exitButton;
+    var rectCrouchPlayer;
+    var uncrouchPossible = true
+    var canResetIceVelocity=true
+    var playerContactCaisse = false
+    var graphics;
+    var laserDrones
+    
+    //////////SKINS/////////////////
+    var playerSkin="ninja";
+    var skinAfficheRandomUnlockSkinImage;
+    var priceToPaySkinNumber = 50;
+    
+    
+    var ninjaRougeSkinUnlocked;
+        var localDataNinjaRougeSkinUnlocked = "ninjaRougeSkinUnlocked";
+        ninjaRougeSkinUnlocked = Boolean(localStorage.getItem(localDataNinjaRougeSkinUnlocked));
+    var ninjaGreenSkinUnlocked;
+        var localDataNinjaGreenSkinUnlocked = "ninjaGreenkinUnlocked";
+        ninjaGreenSkinUnlocked = Boolean(localStorage.getItem(localDataNinjaGreenSkinUnlocked));
+    var ninjaSkinUnlocked = true;
+    
+    
+    var probaDropSkinGreenNinja = 3
+    var probaDropSkinRedNinja = 1
+    var probaDropCoins = 100-probaDropSkinGreenNinja-probaDropSkinRedNinja
+    
+    ////////////////////////////////
+    
+    //////////////ENNEMIS//////////////
     var vitesseBalleSoldatEnnemi=400
-var cooldownTirSoldatEnnemi=120
-var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
-var ballesSoldat;
-
-var vitesseBalleSniperEnnemi=700
-var cooldownTirSniperEnnemi=300
-var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
-var ballesSniper;
-
-var vitesseBalleMachineGunnerEnnemi=200
-var cooldownTirMachineGunnerEnnemi=60
-var cooldownTirMachineGunnerEnnemiBeforeShoot =cooldownTirMachineGunnerEnnemi
-var ballesMachineGunners;
-
-var vitesseGrenadeLanceGrenadeEnnemi=600
-var cooldownTirLanceGrenadeEnnemi=100
-var cooldownTirLanceGrenadeEnnemiBeforeShoot =cooldownTirLanceGrenadeEnnemi
-var ballesLanceGrenades;
-
-var vitesseRoquetteLanceRoquetteEnnemi=150
-var cooldownTirLanceRoquetteEnnemi=200
-var cooldownTirLanceRoquetteEnnemiBeforeShoot =cooldownTirLanceRoquetteEnnemi
-var ballesLanceRoquettes;
-var cooldownRecalculationRoquetteDirection = 60
-var cooldownRecalculationRoquetteDirectionReset = cooldownRecalculationRoquetteDirection
-
-var vitesseDeplacementDrone = 50
-var cooldownTirDrone = 300
-var cooldownTirDroneReset = cooldownTirDrone
-
-var cooldownActivationLaserVertical = 120
-var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
-var laserVertical;
-var laserVerticalActivated = true;
-
-var cooldownActivationLaserHorizontal = 120
-var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
-var laserHorizontal;
-var laserHorizontalActivated = true;
-
-var gameSupport = "notMobile"
-var nextShotMobile = "shuriken"
-var nextReleaseShot = false
-var nextShotOrientation = 0
-var nextShotMobileDirection = ""
-var delaiShurikenPlayer = 120;
-var shurikenPlayer = "true"
+    var cooldownTirSoldatEnnemi=120
+    var cooldownTirSoldatEnnemiBeforeShoot =cooldownTirSoldatEnnemi
+    var ballesSoldat;
+    
+    var vitesseBalleSniperEnnemi=700
+    var cooldownTirSniperEnnemi=300
+    var cooldownTirSniperEnnemiBeforeShoot =cooldownTirSniperEnnemi
+    var ballesSniper;
+    
+    var vitesseBalleMachineGunnerEnnemi=200
+    var cooldownTirMachineGunnerEnnemi=60
+    var cooldownTirMachineGunnerEnnemiBeforeShoot =cooldownTirMachineGunnerEnnemi
+    var ballesMachineGunners;
+    
+    var vitesseGrenadeLanceGrenadeEnnemi=600
+    var cooldownTirLanceGrenadeEnnemi=100
+    var cooldownTirLanceGrenadeEnnemiBeforeShoot =cooldownTirLanceGrenadeEnnemi
+    var ballesLanceGrenades;
+    
+    var vitesseRoquetteLanceRoquetteEnnemi=150
+    var cooldownTirLanceRoquetteEnnemi=200
+    var cooldownTirLanceRoquetteEnnemiBeforeShoot =cooldownTirLanceRoquetteEnnemi
+    var ballesLanceRoquettes;
+    var cooldownRecalculationRoquetteDirection = 60
+    var cooldownRecalculationRoquetteDirectionReset = cooldownRecalculationRoquetteDirection
+    
+    var vitesseBalleDrone = 50
+    var vitesseDeplacementDrone = 50
+    var cooldownTirDrone = 30
+    var cooldownTirDroneReset = cooldownTirDrone
+    
+    var cooldownActivationLaserVertical = 120
+    var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
+    var laserVertical;
+    var laserVerticalActivated = true;
+    
+    var cooldownActivationLaserHorizontal = 120
+    var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
+    var laserHorizontal;
+    var laserHorizontalActivated = true;
+    ////////////BOSS//////////
+    var pvBoss = 5
+    var bossInvincible = false
+    var vitesseBalleSoldatBoss=400
+    var cooldownTirSoldatBoss=240
+    var cooldownTirSoldatBossBeforeShoot =cooldownTirSoldatBoss
+    var ballesSoldatBoss;
+    var vitesseBalleSniperBoss=700
+    var cooldownTirSniperBoss=600
+    var cooldownTirSniperBossBeforeShoot =cooldownTirSniperBoss
+    var ballesSniperBoss;
+    var vitesseBalleMachineGunnerBoss=400
+    var cooldownTirMachineGunnerBoss=120
+    var cooldownTirMachineGunnerBossBeforeShoot =cooldownTirMachineGunnerBoss
+    var ballesMachineGunners;
+    var vitesseGrenadeLanceGrenadeBoss=600
+    var cooldownTirLanceGrenadeBoss=600
+    var cooldownTirLanceGrenadeBossBeforeShoot =cooldownTirLanceGrenadeBoss
+    var ballesLanceGrenades;
+    var vitesseRoquetteLanceRoquetteBoss=150
+    var cooldownTirLanceRoquetteBoss=600
+    var cooldownTirLanceRoquetteBossBeforeShoot =cooldownTirLanceRoquetteBoss
+    var ballesLanceRoquettesBoss;
+    var cooldownRecalculationRoquetteDirectionBoss = 120
+    var cooldownRecalculationRoquetteDirectionResetBoss = cooldownRecalculationRoquetteDirectionBoss
+    /////////////////////////////////
+    
+    //////////VALEURS/////////////
+    var gravity=1000;
+    var pvJoueur = 100
+    var runSpeed=1
+    var rewardCoinsPostGame = 0;
+    
+    var line
+    var graphics
+    
+    
+    
+    var velociteChute = 0;
+    var pvPlayer = 100;
+    
+    
+    
 }
 
 createMobileUi(){
@@ -1459,7 +1712,6 @@ damageDrone(shuriken, drone){
 
 preload (){
 
-    this.declareVariables()
 
 
 var pluginUrl = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
@@ -2613,7 +2865,6 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 }
 
 update (){    
-
 
 
 if(gameSupport=="mobile"){
