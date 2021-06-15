@@ -178,10 +178,7 @@ bossStopInvincible(){
 }
 ////////////////////////////////////
 
-updateFroid(){
 
-
- }
 
 joueurPrendDegats(degat){
      pvPlayer-=degat
@@ -458,8 +455,8 @@ lancershuriken(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
-       shuriken.body.setSize(18, 18, true);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.75);
+       shuriken.body.setSize(35, 35, true);
   this.physics.moveTo(shuriken, pointer.worldX, pointer.worldY, 700);
   shuriken.rotation = Phaser.Math.Angle.BetweenPoints(pointer, player);
   shuriken.play('shurikenSpin', true).setFlipX(false);
@@ -473,9 +470,9 @@ lancershurikenGamepad(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.75);
        
-       shuriken.body.setSize(18, 18, true);
+       shuriken.body.setSize(35,35, true);
 
        if(axisWidthR>0){
             shuriken.setVelocity(700,700*axisHeightR)
@@ -495,9 +492,9 @@ lancerShurikenMobile(player){
         shotsDone+=1; 
         localStorage.setItem(localDataShotsDone, shotsDone);
   let pointer = this.input.activePointer;
-       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(1);
+       var shuriken = shurikens.create(player.x, player.y-5, 'shuriken').setScale(0.75);
        
-       shuriken.body.setSize(18, 18, true);
+       shuriken.body.setSize(35,35, true);
 
        if(nextShotMobileDirection=="right"){
         shuriken.setVelocity(700,700*nextShotOrientation)
@@ -569,10 +566,10 @@ teleportToTeleporter(teleport){
 }
 
 destroyShuriken(shuriken){
-  this.shurikensItems.create(shuriken.x, shuriken.y, 'shuriken').setScale(1)
+  this.shurikensItems.create(shuriken.x, shuriken.y, 'shuriken').setScale(0.75)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
-      .setSize(20,20)
+      .setSize(35,35)
       shuriken.destroy();    
 }  
 
@@ -620,10 +617,9 @@ showPicsInvisible(PicsInvisible){
 collectHealthPlayer(powerUpHealth){
   powerUpHealth.destroy();
 
-  if(pvJoueur>0){
-    pvJoueur += 25;
-  }
-  this.updateFroid();
+
+  console.log(pvJoueur)
+  this.joueurPrendDegats(-25);
 
 }
   
@@ -1320,10 +1316,7 @@ stopSlash(cacAttaque){
 }
 
 declareVariables(){
-    this.physics.world.removeCollider(this.colliderLasersVertical);
-    this.physics.world.removeCollider(this.colliderShurikenLaserVertical);
-    this.physics.world.removeCollider(this.colliderLasersHorizontal);
-    this.physics.world.removeCollider(this.colliderShurikenLaserHorizontal);
+
     
     var level="level1";
     var teleportationsLeft = 1;
@@ -1571,12 +1564,12 @@ declareVariables(){
     var cooldownActivationLaserVertical = 120
     var cooldownActivationLaserVerticalReset = cooldownActivationLaserVertical;
     var laserVertical;
-    var laserVerticalActivated = true;
+    var laserVerticalActivated = false;
     
     var cooldownActivationLaserHorizontal = 120
     var cooldownActivationLaserHorizontalReset = cooldownActivationLaserHorizontal;
     var laserHorizontal;
-    var laserHorizontalActivated = true;
+    var laserHorizontalActivated = false;
     ////////////BOSS//////////
     var pvBoss = 5
     var bossInvincible = false
@@ -1872,7 +1865,7 @@ this.controllerGameModeButton.on('pointerdown', () => {
   teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
   var teleportationsLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.15, 'teleport').setScrollFactor(0).setScale(0.04).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
   shurikenLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.075,  shurikenLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
-  var shurikenLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.075, 'shuriken').setScrollFactor(0).setScale(1.5).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
+  var shurikenLeftImage = this.physics.add.sprite((this.cameras.main.centerX*2)*0.975,(this.cameras.main.centerY*2)*0.075, 'shuriken').setScrollFactor(0).setScale(1).setDepth(1).setRotation(0.9).setOrigin(0.5,0.5);
   textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
   var pieces = this.physics.add.sprite((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.05, 'coin').setScrollFactor(0).setScale(0.025).setDepth(1).setOrigin(0.5,0.5);
 
@@ -2187,7 +2180,7 @@ this.physics.add.collider(this.bosses, this.caisses);
       });
 
   for (const shurikensItem of shurikensItemObjects) {
-  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(0.75)
+  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(0.35)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
