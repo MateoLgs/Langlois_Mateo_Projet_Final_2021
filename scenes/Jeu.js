@@ -1190,7 +1190,8 @@ destroyShurikenSnowball(shuriken, snowball){
 }
    
 death(){
-
+    if(this.deathCalled == false){
+        this.deathCalled = true
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
       //player.anims.play('die');
@@ -1204,7 +1205,8 @@ death(){
       console.log(laserVerticalActivated)
 
     this.time.delayedCall(1000, this.mort, null, this);
-   
+    }
+    else{}
 }
 
 mort(){
@@ -1317,7 +1319,7 @@ stopSlash(cacAttaque){
 
 declareVariables(){
 
-    
+    this.deathCalled = false
     var level="level1";
     var teleportationsLeft = 1;
     var teleportationsLeftText;
@@ -1811,7 +1813,7 @@ this.mobileGameModeButton.on('pointerdown', () => {
     this.keyboardGameModeButton.setAlpha(1)
     this.mobileGameModeButton.setAlpha(0)
     gameSupport = "keyboard"
-    this.destroyMobileUi()
+   // this.destroyMobileUi()
 });
 this.keyboardGameModeButton.on('pointerdown', () => {
     this.keyboardGameModeButton.setAlpha(0)
@@ -1822,7 +1824,7 @@ this.controllerGameModeButton.on('pointerdown', () => {
     this.controllerGameModeButton.setAlpha(0)
     this.mobileGameModeButton.setAlpha(1)   
     gameSupport = "mobile"
-    this.createMobileUi()
+    //this.createMobileUi()
 });
 
 
@@ -2180,7 +2182,7 @@ this.physics.add.collider(this.bosses, this.caisses);
       });
 
   for (const shurikensItem of shurikensItemObjects) {
-  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(0.35)
+  this.shurikensItems.create(shurikensItem.x+8, shurikensItem.y-3, 'shuriken').setScale(0.75)
       .setOrigin(0.5,0.5)
       .setDepth(-1)
   }
@@ -2859,7 +2861,7 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 
 update (){    
 
-
+/*
 if(gameSupport=="mobile"){
     if((((Math.floor(this.joyStickMovement.angle * 100) / 100 )<180 && (Math.floor(this.joyStickMovement.angle * 100) / 100 )>100) || ((Math.floor(this.joyStickMovement.angle * 100) / 100 )>-180  && (Math.floor(this.joyStickMovement.angle * 100) / 100 )<-100)) && (Math.floor(this.joyStickMovement.force * 100) / 100 )>20){
         this.goLeft()
@@ -2907,7 +2909,6 @@ if(nextReleaseShot==true && (Math.floor(this.joyStickShoot.force * 100) / 100)<2
     nextReleaseShot=false
 }
 if(currentlyCrouching==false){
-    console.log("uncrouch")
 
     if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-45) || this.platform.hasTileAtWorldXY(player.body.position.x+45, player.body.position.y-45 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-45) ) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-20 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20)) &&  !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-10) || this.platform.hasTileAtWorldXY(player.body.position.x+20, player.body.position.y-10 ) || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10)  || this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-10))  ) {
         if(uncrouchPossible==true){
@@ -2921,7 +2922,7 @@ if(currentlyCrouching==false){
 
 
 
-}
+}*/
 
 
 

@@ -22,8 +22,7 @@ class PostGame extends Phaser.Scene {
 
         pageLevelMenu = 1;
 console.log(rewardCoinsPostGame)
-        totalCoins+=rewardCoinsPostGame
-        rewardCoinsPostGame=0
+       // totalCoins+=rewardCoinsPostGame
         localStorage.setItem(localDataTotalCoins, totalCoins);
 
         if(levelCompleted == false){
@@ -39,10 +38,13 @@ this.replayLevelButton = this.add.image((this.cameras.main.centerX*2)*0.5,(this.
 
        this.homeButton.on('pointerdown', () => {
             this.scene.stop("PostGame");
+            rewardCoinsPostGame=0
+
             this.scene.start('Menu');
         }) 
         this.replayLevelButton.on('pointerdown', () => {
             this.scene.stop("PostGame");
+            rewardCoinsPostGame=0
 
             this.scene.start('Jeu');
         }) 
