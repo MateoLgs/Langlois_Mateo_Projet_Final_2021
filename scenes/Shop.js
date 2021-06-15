@@ -44,7 +44,10 @@ class Shop extends Phaser.Scene {
         var shopPack4 = this.physics.add.image((this.cameras.main.centerX*2)*0.27,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1).setImmovable(true);
         var shopPack5 = this.physics.add.image((this.cameras.main.centerX*2)*0.47,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1).setImmovable(true);
         var shopPack6 = this.physics.add.image((this.cameras.main.centerX*2)*0.67,(this.cameras.main.centerY*2)*0.70, 'blackSquare').setScale(0.07).setInteractive().setAlpha(1).setImmovable(true);
-        
+        var coinsAmountBackground = this.add.image((this.cameras.main.centerX*2)*0.233, (this.cameras.main.centerY*2)*0.14, 'choixSkinScreen').setScale(0.5).setOrigin(0.5,0.5);
+        var totalCoinsText = this.add.text((this.cameras.main.centerX*2)*0.25, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
+        this.totalCoinsTextNumber = this.add.text((this.cameras.main.centerX*2)*0.233, (this.cameras.main.centerY*2)*0.17,  totalCoins,{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);  
+
       /*  this.physics.add.overlap(mouseCursor,exitButton,this.exitShop,null,this)
         this.physics.add.overlap(mouseCursor,shopPack1,this.openShopPack1Gamepad,null,this)
         this.physics.add.overlap(mouseCursor,shopPack2,this.openShopPack2Gamepad,null,this)
@@ -133,6 +136,9 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack1Lien;
         }
+        totalCoins+=100
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)
     }
    /* openShopPack1Gamepad(){
             if(paddle.A){
@@ -152,6 +158,10 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack2Lien;
         }
+        totalCoins+=500
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)
+
     }
    /* openShopPack2Gamepad(){
             if(paddle.A){
@@ -171,6 +181,11 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack3Lien;
         }
+        
+        totalCoins+=1000
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)
+
     }
  /*   openShopPack3Gamepad(){
             if(paddle.A){
@@ -190,6 +205,11 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack4Lien;
         }
+        
+        totalCoins+=3000
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)
+
     }
  /*   openShopPack4Gamepad(){
             if(paddle.A){
@@ -209,6 +229,9 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack5Lien;
         }
+        totalCoins+=10000
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)    
     }
  /*   openShopPack5Gamepad(){
             if(paddle.A){
@@ -228,6 +251,10 @@ class Shop extends Phaser.Scene {
         {
             window.location.href = shopPack6Lien;
         }
+        
+        totalCoins+=50000
+        localStorage.setItem(localDataTotalCoins, totalCoins);
+        this.totalCoinsTextNumber.setText(totalCoins)
     }
    /* openShopPack6Gamepad(){
             if(paddle.A){

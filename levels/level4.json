@@ -183,19 +183,7 @@
         {
          "draworder":"topdown",
          "name":"snowman",
-         "objects":[
-                {
-                 "gid":541,
-                 "height":16,
-                 "id":1853,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":144,
-                 "y":512
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -275,7 +263,19 @@
         {
          "draworder":"topdown",
          "name":"machineGunnerEnnemi",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":467,
+                 "height":16,
+                 "id":1869,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":304,
+                 "y":448
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -325,115 +325,7 @@
         {
          "draworder":"topdown",
          "name":"laserHorizontal",
-         "objects":[
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1856,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":144,
-                 "y":480
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1857,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":144,
-                 "y":480
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1858,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":128,
-                 "y":480
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1859,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":160,
-                 "y":480
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1860,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":112,
-                 "y":480
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1861,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":112,
-                 "y":464
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1862,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":128,
-                 "y":464
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1863,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":144,
-                 "y":464
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1864,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":160,
-                 "y":464
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -443,19 +335,7 @@
         {
          "draworder":"topdown",
          "name":"lanceGrenade",
-         "objects":[
-                {
-                 "gid":541,
-                 "height":16,
-                 "id":1866,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":320,
-                 "y":464
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -502,7 +382,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1867,
+ "nextobjectid":1870,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.1",

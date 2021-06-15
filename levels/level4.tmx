@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="133" height="34" tilewidth="16" tileheight="16" nextobjectid="1867">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="133" height="34" tilewidth="16" tileheight="16" nextobjectid="1870">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1147" columns="37">
   <image source="../assets/tileset.png" trans="003039" width="594" height="504"/>
  </tileset>
@@ -52,9 +52,7 @@
  <objectgroup name="waterTop"/>
  <objectgroup name="powerUpFireball"/>
  <objectgroup name="powerUpHealth"/>
- <objectgroup name="snowman">
-  <object id="1853" gid="541" x="144" y="512" width="16" height="16"/>
- </objectgroup>
+ <objectgroup name="snowman"/>
  <objectgroup name="coin"/>
  <objectgroup name="platformFake"/>
  <objectgroup name="platformInvisible"/>
@@ -62,25 +60,15 @@
  <objectgroup name="picsInvisible"/>
  <objectgroup name="sniperEnnemi"/>
  <objectgroup name="yeti"/>
- <objectgroup name="machineGunnerEnnemi"/>
+ <objectgroup name="machineGunnerEnnemi">
+  <object id="1869" gid="467" x="304" y="448" width="16" height="16"/>
+ </objectgroup>
  <objectgroup name="teleportItem"/>
  <objectgroup name="platformFalling"/>
  <objectgroup name="laserVertical"/>
  <objectgroup name="platformMoving"/>
- <objectgroup name="laserHorizontal">
-  <object id="1856" gid="687" x="144" y="480" width="16" height="16"/>
-  <object id="1857" gid="687" x="144" y="480" width="16" height="16"/>
-  <object id="1858" gid="687" x="128" y="480" width="16" height="16"/>
-  <object id="1859" gid="687" x="160" y="480" width="16" height="16"/>
-  <object id="1860" gid="687" x="112" y="480" width="16" height="16"/>
-  <object id="1861" gid="687" x="112" y="464" width="16" height="16"/>
-  <object id="1862" gid="687" x="128" y="464" width="16" height="16"/>
-  <object id="1863" gid="687" x="144" y="464" width="16" height="16"/>
-  <object id="1864" gid="687" x="160" y="464" width="16" height="16"/>
- </objectgroup>
- <objectgroup name="lanceGrenade">
-  <object id="1866" gid="541" x="320" y="464" width="16" height="16"/>
- </objectgroup>
+ <objectgroup name="laserHorizontal"/>
+ <objectgroup name="lanceGrenade"/>
  <objectgroup name="lanceRoquette"/>
  <objectgroup name="drone"/>
  <objectgroup name="boss"/>
