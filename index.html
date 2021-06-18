@@ -3,8 +3,8 @@
 <head> 
     <meta charset="UTF-8" />
     <title>ETS</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.0/dist/phaser.js"></script>
+    <script src="./scenes/LoadingScreen.js"></script>
     <script src="./scenes/Menu.js"></script>
     <script src="./scenes/LevelMenu.js"></script>
     <script src="./scenes/Achievements.js"></script>
@@ -365,7 +365,7 @@ physics: {
     input: {
         gamepad: true
     },
-scene: [Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, PostGame]
+scene: [LoadingScreen, Menu, LevelMenu, Jeu, Achievements, Skins, ShopSkin, Shop, PostGame]
 
 };
 

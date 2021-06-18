@@ -22,9 +22,10 @@ class Menu extends Phaser.Scene {
               this.load.image('shopButton', 'assets/shopButton.png');
               this.load.image('achievementsButton', 'assets/achievements.png');
               this.load.image('exitButton', 'assets/exitButton.png');
-              this.load.image('blackSquare', 'assets/blackSquare.png');       
               this.load.image('blackRectangle', 'assets/blackRectangle.png');        
               this.load.image('mouseCursor', 'assets/mouseCursor.png');        
+
+                this.load.spritesheet('skinsButtonOpenSpritesheet', 'assets/skinsButtonOpenSpritesheet.png', { frameWidth: 64, frameHeight: 120 });
 
             }
     create() {
@@ -38,11 +39,21 @@ class Menu extends Phaser.Scene {
         mouseCursor.setCollideWorldBounds(true)
         mouseCursor.setSize(20, 20, false)
 */
-        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
+        this.menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1);
         this.choixLevelStartButton = this.physics.add.image((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'startButton').setScale(0.7).setInteractive().setImmovable(true);
-        this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive().setImmovable(true);     
+        this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.84, 'skinsButton').setScale(1).setInteractive().setImmovable(true).setOrigin(0.5,0.5);    
+        this.skinsButtonAnim = this.add.sprite((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.865, 'skinsButton').setScale(1).setOrigin(0.5,0.5).setAlpha(0);    
+
+        this.anims.create({
+            key: 'skinsButtonOpenSpritesheet',
+            frames: this.anims.generateFrameNumbers('skinsButtonOpenSpritesheet',  {start: 0, end: 3 }),
+            frameRate: 6,
+            repeat: 0
+        });
+
         this.shopButton = this.physics.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive().setImmovable(true);
         this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive().setImmovable(true);
+        this.camera = this.cameras.main;       
 
 /*
         this.physics.add.overlap(mouseCursor,this.choixLevelStartButton,this.choixMenuStartButtonGamepad,null,this)
@@ -61,11 +72,14 @@ class Menu extends Phaser.Scene {
         
 
    
-        this.skinsButton.on('pointerdown', () => {
+    this.skinsButton.on('pointerdown', () => {
         clicksDoneForEasterEggAchievement +=1;
-        this.scene.stop("Menu");
-        this.scene.start('Skins');
+        this.skinsButtonAnim.setAlpha(1)
+        this.skinsButtonAnim.anims.play('skinsButtonOpenSpritesheet',true).setFlipX(false);  
+        this.time.delayedCall(700, this.goToSkinAnimation, null, this);
+        this.skinsButton.destroy()
     }) 
+    
 
 
     this.shopButton.on('pointerdown', () => {
@@ -116,6 +130,21 @@ class Menu extends Phaser.Scene {
         }*/
     }
 
+    goToSkinAnimation(){
+        this.camera.pan((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.84, 2000, 'Power2');
+        this.camera.zoomTo(10, 3000);
+        this.time.delayedCall(3000, this.goToSkinAnimation2, null, this);
+
+    }
+    goToSkinAnimation2(){
+        this.camera.zoomTo(20, 1000);
+        this.time.delayedCall(1000, this.goToSkinAnimation3, null, this);
+
+    }
+    goToSkinAnimation3(){
+        this.scene.stop("Menu");
+        this.scene.start('Skins');
+    }
 
 
     choixMenuStartButton(){

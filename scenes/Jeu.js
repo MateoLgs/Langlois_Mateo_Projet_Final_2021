@@ -81,11 +81,11 @@ tirLanceGrenadeBoss(){
         grenadeLanceGrenadeBoss.body.setBounce(0.5)
         this.time.delayedCall(3000, this.explodeGrenadeLanceGrenade, [grenadeLanceGrenadeBoss], this);
         if(player.x<boss.x){
-            boss.play('soldierShoot', true).setFlipX(false);
+         //   boss.play('soldierShoot', true).setFlipX(false);
             grenadeLanceGrenadeBoss.setGravityY(1000);
         }
         else if(player.x>boss.x){
-            boss.play('soldierShoot', true).setFlipX(true);
+            //boss.play('soldierShoot', true).setFlipX(true);
         }
     }
 }
@@ -107,11 +107,11 @@ tirLanceRoquetteBoss(){
 
         if(player.x<boss.x){
 
-            boss.play('soldierShoot', true).setFlipX(false);
+          //  boss.play('soldierShoot', true).setFlipX(false);
         }
         else if(player.x>boss.x){
 
-            boss.play('soldierShoot', true).setFlipX(true);
+         //   boss.play('soldierShoot', true).setFlipX(true);
 
         }
     }
@@ -179,8 +179,6 @@ bossStopInvincible(){
 }
 ////////////////////////////////////
 
-
-
 joueurPrendDegats(degat){
      pvPlayer-=degat
      this.greenBarHealth.destroy();
@@ -190,10 +188,23 @@ joueurPrendDegats(degat){
         
         this.death();
    }
+   
      else if(pvPlayer>0.1){
         this.greenBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.4,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)*pvPlayer/100/4.5,(this.cameras.main.centerY*2)/7.5,'healthBarGreen').setScrollFactor(0).setScale(1).setDepth(1).setAlpha(1).setOrigin(0,0.5);
         this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
 
+        if(pvPlayer > 50 && pvPlayer < 75){
+            this.katanaHealth.destroy();
+            this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.1,'katanaHealthImage2').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
+        }
+        else if(pvPlayer > 25 && pvPlayer < 51){
+            this.katanaHealth.destroy();
+            this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.08,'katanaHealthImage3').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
+        }
+        else if(pvPlayer > 0 && pvPlayer < 26){
+            this.katanaHealth.destroy();
+            this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.06,'katanaHealthImage4').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
+        }
     }
 
  }
@@ -212,12 +223,12 @@ tirSniperEnnemi(sniperEnnemi){
          ballesSniper.body.setAllowGravity(false);
       if(player.x<sniperEnnemi.x){
 
-          sniperEnnemi.play('soldierShoot', true).setFlipX(false);
+          //sniperEnnemi.play('soldierShoot', true).setFlipX(false);
           ballesSniper.setGravityY(1000);
       }
       else if(player.x>sniperEnnemi.x){
 
-          sniperEnnemi.play('soldierShoot', true).setFlipX(true);
+          //sniperEnnemi.play('soldierShoot', true).setFlipX(true);
 
       }
     }
@@ -227,7 +238,7 @@ tirMachineGunnerEnnemi(machineGunnerEnnemi){
           
           for (const machineGunnerEnnemi of this.machineGunnerEnnemis.children.entries) {
           var ballesMachineGunner = this.ballesMachineGunners.create(machineGunnerEnnemi.x, machineGunnerEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
-          var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
+          var randomBallesMachineGunners = Phaser.Math.Between(-100, 100);
           this.physics.moveTo(ballesMachineGunner, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
           var angleBalle = (Math.atan2(player.y - machineGunnerEnnemi.y, player.x - machineGunnerEnnemi.x) * 180 / Math.PI);
          // snowball.angleBalle -= 90;
@@ -237,12 +248,12 @@ tirMachineGunnerEnnemi(machineGunnerEnnemi){
          ballesMachineGunner.body.setAllowGravity(false);
       if(player.x<machineGunnerEnnemi.x){
 
-          machineGunnerEnnemi.play('soldierShoot', true).setFlipX(false);
+          //machineGunnerEnnemi.play('soldierShoot', true).setFlipX(false);
           ballesMachineGunner.setGravityY(1000);
       }
       else if(player.x>machineGunnerEnnemi.x){
 
-          machineGunnerEnnemi.play('soldierShoot', true).setFlipX(true);
+         // machineGunnerEnnemi.play('soldierShoot', true).setFlipX(true);
 
       }
     }
@@ -344,8 +355,6 @@ activateLaserHorizontal(){
     }
 }
 
-
-
 explodeGrenadeLanceGrenade(grenadeLanceGrenade){
     grenadeLanceGrenade.destroy();
     var explosion = this.physics.add.sprite(grenadeLanceGrenade.x, grenadeLanceGrenade.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
@@ -385,7 +394,7 @@ destroyBalle(platform, balle){
 
 tirSoldatEnnemi(yeti){               
     for (const yeti of this.yetis.children.entries) {
-            yeti.play('soldierShoot', true);
+           // yeti.play('soldierShoot', true);
             var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball');
             this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
 
@@ -451,7 +460,7 @@ killMachineGunner(machineGunner, shuriken){
       rewardCoinsPostGame+=3
       textPieces.destroy();
       textPieces = this.add.text((this.cameras.main.centerX*2)*0.05,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
-    }   
+}   
  
 lancershuriken(player){
     if(shurikenLeft>0){
@@ -469,6 +478,7 @@ lancershuriken(player){
     this.changeShuriken();
     }
 }
+
 lancershurikenGamepad(player){
     if(shurikenLeft>0){
         shotsDone+=1; 
@@ -491,6 +501,7 @@ lancershurikenGamepad(player){
     this.changeShuriken();
     }
 }
+
 lancerShurikenMobile(player){
     if(shurikenLeft>0){
         shotsDone+=1; 
@@ -512,11 +523,12 @@ lancerShurikenMobile(player){
     this.changeShuriken();
     }
 }
+
 lancerTeleport(player){
     if(teleportationsLeft>0){
   let pointer = this.input.activePointer;
        var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
-       teleport.anims.play('teleporter',true).setFlipX(false);
+     //  teleport.anims.play('teleporter',true).setFlipX(false);
 
        teleport.setBounce(1)
   this.physics.moveTo(teleport, pointer.worldX, pointer.worldY, 300);
@@ -533,7 +545,7 @@ lancerTeleportGamepad(player){
     if(teleportationsLeft>0){
   let pointer = this.input.activePointer;
        var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
-       teleport.anims.play('teleporter',true).setFlipX(false);
+     //  teleport.anims.play('teleporter',true).setFlipX(false);
 
        teleport.setBounce(1)
        teleport.setVelocity(300,300*axisHeightR)
@@ -550,7 +562,7 @@ lancerTeleportMobile(player){
     if(teleportationsLeft>0){
   let pointer = this.input.activePointer;
        var teleport = teleportations.create(player.x, player.y-5, 'teleport').setScale(0.05);
-       teleport.anims.play('teleporter',true).setFlipX(false);
+      // teleport.anims.play('teleporter',true).setFlipX(false);
        teleport.setBounce(1)
        if(nextShotMobileDirection=="right"){
             teleport.setVelocity(300,300*nextShotOrientation)
@@ -626,7 +638,6 @@ collectHealthPlayer(powerUpHealth){
   powerUpHealth.destroy();
 
 
-  console.log(pvJoueur)
   this.joueurPrendDegats(-25);
 
 }
@@ -646,6 +657,7 @@ pickUpShuriken(player,shuriken){
     shurikenLeft+=1;
     this.changeShuriken();
 }
+
 pickUpTeleport(player,teleport){
     teleport.destroy();
     teleportationsLeft+=1;
@@ -661,7 +673,7 @@ changeShuriken(){
 changeTeleport(){
     teleportationsLeftText.destroy()
     teleportationsLeftText = this.add.text((this.cameras.main.centerX*2)*0.925,(this.cameras.main.centerY*2)*0.15,  teleportationsLeft,{ fill:'#fff', size:200}).setScale(2).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5); 
-  }
+}
  
 collectPowerUpShuriken(powerUpShuriken){
    ("pickupshuriken")
@@ -822,7 +834,7 @@ degatBalleMachineGunner(player,ballesSniper){
           this.joueurPrendDegats(15);
           this.playerGoInvincible();
     }
-  }
+}
 
 degatBalleSniper(player,ballesSniper){
   ballesSniper.destroy();
@@ -1010,7 +1022,8 @@ goRightGamepad(){
                playerDirection="right"
        }
      
- }
+}
+
 goLeft(){
     if(onPlatform!="ice"){
     if(standing==true){   
@@ -1103,7 +1116,6 @@ goLeftGamepad(){
               playerDirection="left"
       }
 }
-
 
 jump(){
 
@@ -1211,6 +1223,9 @@ death(){
 
 
       console.log(laserVerticalActivated)
+      
+      this.katanaHealth.destroy();
+      this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.05,'katanaHealthImage5').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
 
     this.time.delayedCall(1000, this.mort, null, this);
     }
@@ -1219,6 +1234,7 @@ death(){
 
 mort(){
 
+    console.log(this.scene)
     morts+=1
     localStorage.setItem(localDataMorts, morts);
 
@@ -1226,9 +1242,11 @@ mort(){
 
  //player.setVelocityX(0);
 
-//this.scene.stop("Jeu")
-  this.scene.restart()
+this.scene.stop("Jeu")
+console.log('stop')
+this.scene.start("PostGame")
 
+console.log('stop')
 }
   
 playerEscalierDroit(){
@@ -1609,7 +1627,6 @@ declareVariables(){
     
     //////////VALEURS/////////////
     var gravity=1000;
-    var pvJoueur = 100
     var runSpeed=1
     var rewardCoinsPostGame = 0;
     
@@ -1653,9 +1670,8 @@ dumpJoyStickStateShoot() {
     this.textShoot.setText(s);
 }
 
-
 createMobileUi(){
-
+/*
     if(gameSupport=='mobile'){
         this.jumpButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.35, 'jumpButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0.8);;
         this.crouchButton = this.physics.add.sprite((this.cameras.main.centerX*2)*0.95,(this.cameras.main.centerY*2)*0.5, 'crouchButton').setScrollFactor(0).setScale(0.35).setDepth(10).setOrigin(0.5,0.5).setInteractive().setAlpha(0.8);;
@@ -1726,11 +1742,14 @@ this.joyStickShoot.thumb.setAlpha(0.5).setDepth(10)
     });
 
     }
+*/
+    
 }
 
 destroyMobileUi(){
-  this.jumpButton.destroy();
-    this.crouchButton.destroy();
+    /*
+ this.jumpButton.destroy();
+   this.crouchButton.destroy();
 
 this.joyStickMovement.base.setAlpha(0)
 this.joyStickMovement.thumb.setAlpha(0)
@@ -1749,7 +1768,7 @@ damageDrone(shuriken, drone){
     drone.pv-=1
     if(drone.pv==0){
         drone.destroy()
-    }
+    }*/
 }
 
 loadAnimations(){
@@ -1798,7 +1817,6 @@ preload (){
   this.load.image('laserHorizontal', 'assets/laserHorizontal.png');
   this.load.image('laserVertical', 'assets/laserVertical.png');
   this.load.image('drone', 'assets/drone.png');
-  this.load.image('blackSquare', 'assets/blackSquare.png');
   this.load.image('shuriken', 'assets/shuriken.png');
   this.load.image('coin', 'assets/coin.png');
   this.load.image('snowball', 'assets/mediumBullet.png');
@@ -1923,14 +1941,14 @@ this.loadAnimations()
 
 
   this.tileset = this.map.addTilesetImage('tileset', 'tiles');
-  this.background = this.map.createLayer('background', this.tileset, 0, 0);
-  this.platform = this.map.createLayer('platform', this.tileset, 0, 0);
-  var platformEscalierDroit = this.map.createLayer('platformEscalierDroit', this.tileset, 0, 0);
-  var platformEscalierGauche = this.map.createLayer('platformEscalierGauche', this.tileset, 0, 0);
-  this.platformMontagne = this.map.createLayer('platformMontagne', this.tileset, 0, 0);
-  var platformSnow = this.map.createLayer('platformSnow', this.tileset, 0, 0);
-  var platformIce = this.map.createLayer('platformIce', this.tileset, 0, 0);
-  var pics = this.map.createLayer('pics', this.tileset, 0, 0);
+  this.background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
+  this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
+  var platformEscalierDroit = this.map.createDynamicLayer('platformEscalierDroit', this.tileset, 0, 0);
+  var platformEscalierGauche = this.map.createDynamicLayer('platformEscalierGauche', this.tileset, 0, 0);
+  this.platformMontagne = this.map.createDynamicLayer('platformMontagne', this.tileset, 0, 0);
+  var platformSnow = this.map.createDynamicLayer('platformSnow', this.tileset, 0, 0);
+  var platformIce = this.map.createDynamicLayer('platformIce', this.tileset, 0, 0);
+  var pics = this.map.createDynamicLayer('pics', this.tileset, 0, 0);
   
     
  this.platform.setCollisionByExclusion(-1, true);
@@ -1954,9 +1972,11 @@ this.loadAnimations()
   textPieces = this.add.text((this.cameras.main.centerX*2)*0.075,(this.cameras.main.centerY*2)*0.05,  totalCoins,{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
   var pieces = this.physics.add.sprite((this.cameras.main.centerX*2)*0.025,(this.cameras.main.centerY*2)*0.05, 'coin').setScrollFactor(0).setScale(0.025).setDepth(1).setOrigin(0.5,0.5);
 
-  this.backgroundBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.4,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)*pvPlayer/100/4.5,(this.cameras.main.centerY*2)/7.5,'backgroundBarHealth').setScrollFactor(0).setScale(1).setDepth(1).setAlpha(1).setOrigin(0,0.5);
+  console.log(pvPlayer)
+  this.backgroundBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.4,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)/4.5,(this.cameras.main.centerY*2)/7.5,'backgroundBarHealth').setScrollFactor(0).setScale(1).setDepth(1).setAlpha(1).setOrigin(0,0.5);
   this.pvPlayerText = this.add.text((this.cameras.main.centerX*2)*0.4125,(this.cameras.main.centerY*2)*0.1,  pvPlayer,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(2).setOrigin(0.5,0.5);  
   this.greenBarHealth = this.add.tileSprite((this.cameras.main.centerX*2)*0.4,(this.cameras.main.centerY*2)*0.1,(this.cameras.main.centerX*2)*pvPlayer/100/4.5,(this.cameras.main.centerY*2)/7.5,'healthBarGreen').setScrollFactor(0).setScale(1).setDepth(1).setAlpha(1).setOrigin(0,0.5);
+  this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.1,'katanaHealthImage1').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
 
 
   player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.063,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinja');
@@ -2943,6 +2963,7 @@ this.physics.add.collider(this.caisses, shurikens, this.breakCaisse, null, this)
 }
 
 update (){    
+    if(pvPlayer>0){
 
 /*
 if(gameSupport=="mobile"){
@@ -3568,9 +3589,9 @@ if(playerSkin=="ninjaGreen"){
 }
 }
 }
-  }
+}
 
 
 
-
+}
 }

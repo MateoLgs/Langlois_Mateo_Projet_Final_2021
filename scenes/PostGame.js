@@ -4,8 +4,7 @@ class PostGame extends Phaser.Scene {
     constructor () {
         super('PostGame');
     }
-        preload(){
-        }
+
     create() {
 
         keyS.reset();

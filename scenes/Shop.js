@@ -12,7 +12,6 @@ class Shop extends Phaser.Scene {
         this.load.image('easy', 'assets/easy.png');
         this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
     
-        this.load.image('blackSquare', 'assets/blackSquare.png');
         this.load.image('exitButton', 'assets/exitButton.png');
         this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
         this.load.image('ninjaSkin', 'assets/playerNinjaIdle1.png');
@@ -28,10 +27,10 @@ class Shop extends Phaser.Scene {
         mouseCursor.setCollideWorldBounds(true)
         mouseCursor.setSize(20, 20, false)
 */
-        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7);
+        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1);
         var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.3125, (this.cameras.main.centerY*2)*0.833, 'startButton').setScale(0.7).setInteractive();
         var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.625, (this.cameras.main.centerY*2)*0.833, 'tutorialButton').setScale(0.7).setInteractive();
-        var skinsButton = this.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.9, 'skinsButton').setScale(0.5).setInteractive();     
+        this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.84, 'skinsButton').setScale(1).setInteractive().setImmovable(true).setOrigin(0.5,0.5);     
         var shopButton = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.14).setInteractive();
         var achievementsButton = this.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(1.4).setInteractive();
         var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setInteractive();
