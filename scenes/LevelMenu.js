@@ -5,7 +5,25 @@ class LevelMenu extends Phaser.Scene {
         super('LevelMenu');
     }
         preload(){     
-            
+            this.load.image('levelButton_1', 'assets/levelButton_1.png');    
+            this.load.image('levelButton_2', 'assets/levelButton_2.png');    
+            this.load.image('levelButton_3', 'assets/levelButton_3.png');    
+            this.load.image('levelButton_4', 'assets/levelButton_4.png');    
+            this.load.image('levelButton_5', 'assets/levelButton_5.png');    
+            this.load.image('levelButton_6', 'assets/levelButton_6.png');    
+            this.load.image('levelButton_7', 'assets/levelButton_7.png');    
+            this.load.image('levelButton_8', 'assets/levelButton_8.png');    
+            this.load.image('levelButton_9', 'assets/levelButton_9.png');    
+            this.load.image('levelButton_10', 'assets/levelButton_10.png');    
+            this.load.image('levelButton_11', 'assets/levelButton_11.png');    
+            this.load.image('levelButton_12', 'assets/levelButton_12.png');    
+            this.load.image('levelButton_13', 'assets/levelButton_13.png');    
+            this.load.image('levelButton_14', 'assets/levelButton_14.png');    
+            this.load.image('levelButton_15', 'assets/levelButton_15.png');    
+            this.load.image('levelButton_16', 'assets/levelButton_16.png');    
+            this.load.image('levelButton_17', 'assets/levelButton_17.png');    
+            this.load.image('levelButton_18', 'assets/levelButton_18.png');    
+
             this.load.image('backButton', 'assets/backButton.png');    
         }
     create() {
@@ -17,40 +35,40 @@ class LevelMenu extends Phaser.Scene {
             var nextPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.9, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(4.7);
 
             if(level1Unlocked == true){
-                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_1').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level1Unlocked == false){
-                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel1Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_1').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
             if(level2Unlocked == true){
-                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_2').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level2Unlocked == false){
-                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel2Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_2').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
             if(level3Unlocked == true){
-                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_3').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level3Unlocked == false){
-                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel3Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_3').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
             if(level4Unlocked == true){
-                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_4').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level4Unlocked == false){
-                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel4Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_4').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
             if(level5Unlocked == true){
-                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_5').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level5Unlocked == false){
-                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel5Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_5').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
             if(level6Unlocked == true){
-                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_6').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
             }
             else if(level6Unlocked == false){
-                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+                var menuLevel6Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_6').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
             } 
 
         nextPageButton.on('pointerdown', () => {
@@ -70,10 +88,10 @@ class LevelMenu extends Phaser.Scene {
             this.choixMenuLevelButton("level4");
         }) 
         menuLevel5Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level5");
             }) 
         menuLevel6Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level6");
         }) 
     }
 
@@ -81,40 +99,40 @@ class LevelMenu extends Phaser.Scene {
         var nextPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.9, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(4.7);
         var previousPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.1, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(1.6);
         if(level7Unlocked == true){
-            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_7').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level7Unlocked == false){
-            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel7Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_7').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level8Unlocked == true){
-            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_8').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level8Unlocked == false){
-            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel8Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_8').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level9Unlocked == true){
-            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_9').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level9Unlocked == false){
-            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel9Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_9').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level10Unlocked == true){
-            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_10').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level10Unlocked == false){
-            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel10Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_10').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level11Unlocked == true){
-            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_11').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level11Unlocked == false){
-            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel11Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_11').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level12Unlocked == true){
-            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_12').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level12Unlocked == false){
-            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel12Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_12').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         previousPageButton.on('pointerdown', () => {
             pageLevelMenu-=1;
@@ -125,83 +143,83 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         }) 
         menuLevel7Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level7");
         })      
         menuLevel8Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level8");
         }) 
         menuLevel9Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level9");
             })    
         menuLevel10Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level10");
         }) 
         menuLevel11Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level11");
             }) 
         menuLevel12Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level12");
         }) 
     }
     if(pageLevelMenu==3){
         var previousPageButton = this.add.image((this.cameras.main.centerX*2)/2,(this.cameras.main.centerY*2)*0.1, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5).setRotation(1.6);
         if(level13Unlocked == true){
-            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_13').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level13Unlocked == false){
-            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel13Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.3, 'levelButton_13').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level14Unlocked == true){
-            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_14').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level14Unlocked == false){
-            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel14Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.3, 'levelButton_14').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level15Unlocked == true){
-            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_15').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level15Unlocked == false){
-            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel15Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.5, 'levelButton_15').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level16Unlocked == true){
-            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_16').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level16Unlocked == false){
-            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel16Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.5, 'levelButton_16').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level17Unlocked == true){
-            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_17').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level17Unlocked == false){
-            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'tutorialButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel17Button = this.add.image((this.cameras.main.centerX*2)*0.35, (this.cameras.main.centerY*2)*0.7, 'levelButton_17').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         if(level18Unlocked == true){
-            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
+            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_18').setScale(0.7).setInteractive().setOrigin(0.5,0.5);
         }
         else if(level18Unlocked == false){
-            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'startButton').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
+            var menuLevel18Button = this.add.image((this.cameras.main.centerX*2)*0.65, (this.cameras.main.centerY*2)*0.7, 'levelButton_18').setScale(0.7).setOrigin(0.5,0.5).setTint(0x222222);
         } 
         previousPageButton.on('pointerdown', () => {
             pageLevelMenu-=1;
             this.scene.restart();
         })    
         menuLevel13Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level13");
         })      
         menuLevel14Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level14");
         }) 
         menuLevel15Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level15");
             })    
         menuLevel16Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level16");
         }) 
         menuLevel17Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level17");
             }) 
         menuLevel18Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level1");
+            this.choixMenuLevelButton("level18");
         }) 
     }
 

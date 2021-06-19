@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="133" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="34" nextobjectid="1873">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="133" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="34" nextobjectid="1881">
+ <editorsettings>
+  <export target="level4.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1147" columns="37">
   <image source="../assets/tileset.png" trans="003039" width="594" height="504"/>
  </tileset>
@@ -44,10 +47,7 @@
   </data>
  </layer>
  <objectgroup id="9" name="shurikensItem"/>
- <objectgroup id="10" name="flag">
-  <object id="1847" gid="734" x="720" y="496" width="16" height="16"/>
-  <object id="1848" gid="734" x="720" y="496" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="10" name="flag"/>
  <objectgroup id="11" name="water"/>
  <objectgroup id="12" name="waterTop"/>
  <objectgroup id="13" name="powerUpFireball"/>
@@ -59,20 +59,16 @@
  <objectgroup id="19" name="goomba"/>
  <objectgroup id="20" name="picsInvisible"/>
  <objectgroup id="21" name="sniperEnnemi"/>
- <objectgroup id="22" name="yeti">
-  <object id="1870" gid="687" x="352" y="416" width="16" height="16"/>
-  <object id="1871" gid="687" x="384" y="448" width="16" height="16"/>
-  <object id="1872" gid="687" x="272" y="400" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="23" name="machineGunnerEnnemi">
-  <object id="1869" gid="467" x="304" y="448" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="22" name="yeti"/>
+ <objectgroup id="23" name="machineGunnerEnnemi"/>
  <objectgroup id="24" name="teleportItem"/>
  <objectgroup id="25" name="platformFalling"/>
  <objectgroup id="26" name="laserVertical"/>
  <objectgroup id="27" name="platformMoving"/>
  <objectgroup id="28" name="laserHorizontal"/>
- <objectgroup id="29" name="lanceGrenade"/>
+ <objectgroup id="29" name="lanceGrenade">
+  <object id="1880" gid="505" x="944" y="448" width="16" height="16"/>
+ </objectgroup>
  <objectgroup id="30" name="lanceRoquette"/>
  <objectgroup id="31" name="drone"/>
  <objectgroup id="32" name="boss"/>

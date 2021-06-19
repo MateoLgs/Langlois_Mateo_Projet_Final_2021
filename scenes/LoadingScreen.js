@@ -8,9 +8,13 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('loadingScreen', 'assets/loadingScreen.png');
         this.load.image('loadingScreenControls', 'assets/loadingScreenControls.png');
         this.load.spritesheet('loadingIconSpritesheet', 'assets/loadingIconSpritesheet.png', { frameWidth: 40, frameHeight: 40 });
+        this.load.audio('gameMusic1', ['assets/VFX/gameMusic1.mp3']);
 
     }
     create() {
+        gameMusic1 = this.sound.add("gameMusic1", { loop: true, volume: 0.05  });
+        gameMusic1.play()
+        
         this.loadingScreenTips = [
         "Grab some of the walls to see if you can climb them.", 
         "Do not hesitate to get hit by a bullet in order to get somewhere.", 
@@ -55,7 +59,7 @@ class LoadingScreen extends Phaser.Scene {
         var randomTip = Phaser.Math.Between(0, 6);
         this.textPieces = this.add.text((this.cameras.main.centerX*2)*0.5,(this.cameras.main.centerY*2)*0.9,  "Tip : " + this.loadingScreenTips[randomTip],{ fill:'#fff', size:200}).setScrollFactor(0).setDepth(1).setOrigin(0.5,0.5);  
 
-        this.time.delayedCall(5000, this.startMenu, null, this);
+        this.time.delayedCall(1000, this.startMenu, null, this);
     }
     startMenu(){
 

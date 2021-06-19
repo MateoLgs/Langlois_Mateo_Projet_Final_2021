@@ -12,6 +12,8 @@ class Jeu extends Phaser.Scene{
 /////////////////BOSS///////////////
 tirSoldatBoss(boss){
     for (const boss of this.bosses.children.entries) {
+        if(Math.abs(boss.x-player.x)<this.cameras.main.centerX){
+
         var ballesSoldatBoss = this.ballesSoldats.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
         this.physics.moveTo(ballesSoldatBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSoldatEnnemi);
@@ -26,11 +28,15 @@ tirSoldatBoss(boss){
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
         }
+        this.soldierShot.play()
+    }
     }
 }
 
 tirSniperBoss(boss){ 
     for (const boss of this.bosses.children.entries) {
+        if(Math.abs(boss.x-player.x)<this.cameras.main.centerX){
+
         var ballesSniperBoss = this.ballesSnipers.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
         this.physics.moveTo(ballesSniperBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSniperEnnemi);
@@ -44,11 +50,15 @@ tirSniperBoss(boss){
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
         }
+        this.sniperShot.play()
+    }
     }
 }
 
 tirMachineGunnerBoss(boss){
     for (const boss of this.bosses.children.entries) {
+        if(Math.abs(boss.x-player.x)<this.cameras.main.centerX){
+
         var ballesMachineGunnerBoss = this.ballesMachineGunners.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
         this.physics.moveTo(ballesMachineGunnerBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
@@ -64,11 +74,15 @@ tirMachineGunnerBoss(boss){
         else if(player.x>boss.x){
             boss.play('soldierShoot', true).setFlipX(true);
         }
+        this.soldierShot.play()
     }
+}
 }
 
 tirLanceGrenadeBoss(){
     for (const boss of this.bosses.children.entries) {
+        if(Math.abs(boss.x-player.x)<this.cameras.main.centerX){
+
         var grenadeLanceGrenadeBoss = this.grenadesLanceGrenade.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesLanceGrenades = Phaser.Math.Between(-250, 250);
         this.physics.moveTo(grenadeLanceGrenadeBoss, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
@@ -87,12 +101,17 @@ tirLanceGrenadeBoss(){
         else if(player.x>boss.x){
             //boss.play('soldierShoot', true).setFlipX(true);
         }
+        this.grenadeShot.play()
+
     }
+}
 }
 
 tirLanceRoquetteBoss(){
           
-    for (const boss of this.bosses.children.entries) {
+    for (const boss of this.bosses.children.entries) {        
+        if(Math.abs(boss.x-player.x)<this.cameras.main.centerX){
+
         var roquetteLanceRoquetteBoss = this.roquettesLanceRoquettes.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
         this.physics.moveTo(roquetteLanceRoquetteBoss, player.x, player.y, vitesseRoquetteLanceRoquetteEnnemi);
         var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
@@ -114,27 +133,34 @@ tirLanceRoquetteBoss(){
          //   boss.play('soldierShoot', true).setFlipX(true);
 
         }
+        this.roquetteShot.play()
+    }
     }
 }
 
 tirDrones(){
-    for (const boss of this.drones.children.entries) {
-        var ballesMachineGunnerBoss = this.ballesMachineGunners.create(boss.x, boss.y, 'snowball').setFlipX(true).setScale(0.80);
+    for (const drone of this.drones.children.entries) {
+        if(Math.abs(drone.x-player.x)<this.cameras.main.centerX){
+
+        var ballesMachineGunnerBoss = this.ballesMachineGunners.create(drone.x, drone.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesMachineGunners = Phaser.Math.Between(-150, 150);
         this.physics.moveTo(ballesMachineGunnerBoss, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleDrone);
-        var angleBalle = (Math.atan2(player.y - boss.y, player.x - boss.x) * 180 / Math.PI);
-        ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, boss);
+        var angleBalle = (Math.atan2(player.y - drone.y, player.x - drone.x) * 180 / Math.PI);
+        ballesMachineGunnerBoss.rotation = Phaser.Math.Angle.BetweenPoints(player, drone);
         this.physics.add.overlap(player, ballesMachineGunnerBoss,  this.degatBalleMachineGunner,null,this)
 
         ballesMachineGunnerBoss.body.setAllowGravity(false);
-        if(player.x<boss.x){
+        if(player.x<drone.x){
             //boss.play('soldierShoot', true).setFlipX(false);
             //ballesMachineGunnerBoss.setGravityY(1000);
         }
-        else if(player.x>boss.x){
+        else if(player.x>drone.x){
            // boss.play('soldierShoot', true).setFlipX(true);
         }
+        this.soldierShot.play()
     }
+    }
+
 }
 
 damageBoss(boss, shuriken){
@@ -212,6 +238,7 @@ joueurPrendDegats(degat){
 tirSniperEnnemi(sniperEnnemi){ 
           let pointer = this.input.activePointer;
           for (const sniperEnnemi of this.sniperEnnemis.children.entries) {
+              if(Math.abs(sniperEnnemi.x-player.x)<this.cameras.main.centerX*2){
           var ballesSniper = this.ballesSnipers.create(sniperEnnemi.x, sniperEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
           var randomBallesMachineGunners = Phaser.Math.Between(-50, 50);
           this.physics.moveTo(ballesSniper, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleSniperEnnemi);
@@ -231,12 +258,18 @@ tirSniperEnnemi(sniperEnnemi){
           //sniperEnnemi.play('soldierShoot', true).setFlipX(true);
 
       }
+      this.sniperShot.play()
+      console.log("test")
     }
+    }
+    
 }
 
 tirMachineGunnerEnnemi(machineGunnerEnnemi){
           
           for (const machineGunnerEnnemi of this.machineGunnerEnnemis.children.entries) {
+            if(Math.abs(machineGunnerEnnemi.x-player.x)<this.cameras.main.centerX){
+
           var ballesMachineGunner = this.ballesMachineGunners.create(machineGunnerEnnemi.x, machineGunnerEnnemi.y, 'snowball').setFlipX(true).setScale(0.80);
           var randomBallesMachineGunners = Phaser.Math.Between(-100, 100);
           this.physics.moveTo(ballesMachineGunner, player.x+randomBallesMachineGunners, player.y+randomBallesMachineGunners, vitesseBalleMachineGunnerEnnemi);
@@ -256,11 +289,16 @@ tirMachineGunnerEnnemi(machineGunnerEnnemi){
          // machineGunnerEnnemi.play('soldierShoot', true).setFlipX(true);
 
       }
+      this.soldierShot.play()
+
     }
+}
 }
 
 tirLanceGrenadeEnnemi(){  
     for (const lanceGrenade of this.lanceGrenades.children.entries) {
+        if(Math.abs(lanceGrenade.x-player.x)<this.cameras.main.centerX*2){
+
         var grenadeLanceGrenade = this.grenadesLanceGrenade.create(lanceGrenade.x, lanceGrenade.y, 'snowball').setFlipX(true).setScale(0.80);
         var randomBallesLanceGrenades = Phaser.Math.Between(-250, 250);
         this.physics.moveTo(grenadeLanceGrenade, player.x+randomBallesLanceGrenades, player.y-1000+randomBallesLanceGrenades, vitesseGrenadeLanceGrenadeEnnemi);
@@ -282,12 +320,16 @@ tirLanceGrenadeEnnemi(){
           //  lanceGrenade.play('soldierShoot', true).setFlipX(true);
 
         }
+        this.grenadeShot.play()
     }
+}
 }
 
 tirLanceRoquetteEnnemi(){
           
     for (const lanceRoquette of this.lanceRoquettes.children.entries) {
+        if(Math.abs(lanceRoquette.x-player.x)<this.cameras.main.centerX){
+
         var roquetteLanceRoquette = this.roquettesLanceRoquettes.create(lanceRoquette.x, lanceRoquette.y, 'snowball').setFlipX(true).setScale(0.80);
         this.physics.moveTo(roquetteLanceRoquette, player.x, player.y, vitesseRoquetteLanceRoquetteEnnemi);
         var angleBalle = (Math.atan2(player.y - lanceRoquette.y, player.x - lanceRoquette.x) * 180 / Math.PI);
@@ -309,7 +351,9 @@ tirLanceRoquetteEnnemi(){
             lanceRoquette.play('soldierShoot', true).setFlipX(true);
 
         }
+        this.roquetteShot.play()
     }
+}
 }
 
 activateLaserVertical(){
@@ -394,6 +438,8 @@ destroyBalle(platform, balle){
 
 tirSoldatEnnemi(yeti){               
     for (const yeti of this.yetis.children.entries) {
+        if(Math.abs(yeti.x-player.x)<this.cameras.main.centerX){
+
            // yeti.play('soldierShoot', true);
             var ballesSoldat = this.ballesSoldats.create(yeti.x, yeti.y, 'snowball');
             this.physics.moveTo(ballesSoldat, player.x, player.y, vitesseBalleSoldatEnnemi);
@@ -410,6 +456,9 @@ tirSoldatEnnemi(yeti){
          //   yeti.anims.play('soldierShoot',true).setFlipX(true)
         }
     }
+    this.soldierShot.play()
+
+}
 }
   
 killSnowman(snowman, shuriken){
@@ -583,6 +632,7 @@ teleportToTeleporter(teleport){
     player.x=teleport.x
     player.y=teleport.y-32
     teleport.destroy();
+    this.teleport.play()
 }
 
 destroyShuriken(shuriken){
@@ -590,7 +640,8 @@ destroyShuriken(shuriken){
       .setOrigin(0.5,0.5)
       .setDepth(-1)
       .setSize(35,35)
-      shuriken.destroy();    
+      shuriken.destroy();
+      this.shurikenHitWall.play()    
 }  
 
 killShuriken(shuriken){
@@ -906,6 +957,10 @@ setSpeedPlatformIce (player, platform) {
     }
   if(canResetIceVelocity==true){
       player.setVelocityX(0)
+      player.anims.play('idleNinja',true).setFlipX(false);      
+
+      this.walking.pause()
+
       canResetIceVelocity=false
   }
     playerCanResetVelocity=false
@@ -919,6 +974,10 @@ goRight(){
 
    if((keyQ.isDown) && onPlatform != "ice"){
       player.setVelocityX(0);
+      player.anims.play('idleNinja',true).setFlipX(false);      
+
+      this.walking.pause()
+
 
      // player.anims.play('idleNinja',true).setFlipX(false);
   }
@@ -934,6 +993,8 @@ goRight(){
       } 
 
     player.setVelocityX(250*runSpeed);
+    this.walking.resume()
+
     playerDirection="right"
     }
     else if(standing==false){
@@ -948,13 +1009,14 @@ goRight(){
       } 
     
     player.setVelocityX(250*runSpeed);
+    this.walking.pause()
+
     playerDirection="right"
     }
   
 
         if(onPlatform=="ice"){
  
-              player.setAccelerationX(200)
               if(playerSkin=="ninja"){
                  // player.play('run', true).setFlipX(false);     
       } 
@@ -971,12 +1033,8 @@ goRight(){
 }
 
 goRightGamepad(){
-    if((keyQ.isDown) && onPlatform != "ice"){
-       player.setVelocityX(0);
- 
-       //player.anims.play('idleNinja',true).setFlipX(false);
-   }
-     else if(standing==true){    
+
+      if(standing==true){    
        if(playerSkin=="ninja"){
          //  player.play('run', true).setFlipX(false);           
        } 
@@ -1002,6 +1060,8 @@ goRightGamepad(){
        } 
      
      player.setVelocityX(250*runSpeed*axisWidth);
+     this.walking.pause()
+
      playerDirection="right"
      }
    
@@ -1039,6 +1099,8 @@ goLeft(){
 
     playerDirection="left"
         player.setVelocityX(-250*runSpeed);
+        this.walking.resume()
+
     }
     else if(standing==false){
       if(playerSkin=="ninja"){
@@ -1052,6 +1114,8 @@ goLeft(){
       } 
           playerDirection="left"
         player.setVelocityX(-250*runSpeed);
+        this.walking.pause()
+
     }
   }
   if(onPlatform=="ice"){
@@ -1086,6 +1150,8 @@ goLeftGamepad(){
 
     playerDirection="left"
         player.setVelocityX(-250*runSpeed*axisWidth*-1);
+        this.walking.resume()
+
     }
     else if(standing==false){
       if(playerSkin=="ninja"){
@@ -1099,6 +1165,8 @@ goLeftGamepad(){
       } 
           playerDirection="left"
         player.setVelocityX(-250*runSpeed*axisWidth*-1);
+        this.walking.pause()
+
     }
   }
   if(onPlatform=="ice"){
@@ -1136,6 +1204,10 @@ jump(){
 
       if( keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2){
           player.setVelocityX(0)
+         player.anims.play('idleNinja',true).setFlipX(false);      
+
+          this.walking.pause()
+
       }
   }
   if(gravity==100){
@@ -1152,6 +1224,10 @@ jump(){
 
       if(keyQ.isUp && keyD.isUp && onPlatform !="ice" && axisWidth <=0.2 && axisHeight <=0.2 && axisWidth >=-0.2 && axisHeight >=-0.2){
           player.setVelocityX(0)
+          player.anims.play('idleNinja',true).setFlipX(false);      
+
+          this.walking.pause()
+
       }
    
   }
@@ -1214,6 +1290,7 @@ death(){
         this.deathCalled = true
     this.input.keyboard.shutdown();
       player.setVelocityX(0);
+      this.walking.pause()
       //player.anims.play('die');
       player.setTint(0xff0000)
       this.physics.pause();
@@ -1578,7 +1655,7 @@ declareVariables(){
     var ballesLanceGrenades;
     
     var vitesseRoquetteLanceRoquetteEnnemi=150
-    var cooldownTirLanceRoquetteEnnemi=200
+    var cooldownTirLanceRoquetteEnnemi=300
     var cooldownTirLanceRoquetteEnnemiBeforeShoot =cooldownTirLanceRoquetteEnnemi
     var ballesLanceRoquettes;
     var cooldownRecalculationRoquetteDirection = 60
@@ -1760,7 +1837,7 @@ this.joyStickMovement.thumb.setAlpha(0)
 
     this.nextShotShuriken.destroy()
     this.nextShotTeleportation.destroy()
-
+*/
 }
 
 damageDrone(shuriken, drone){
@@ -1768,7 +1845,7 @@ damageDrone(shuriken, drone){
     drone.pv-=1
     if(drone.pv==0){
         drone.destroy()
-    }*/
+    }
 }
 
 loadAnimations(){
@@ -1862,7 +1939,7 @@ preload (){
 
 
 
-     this.load.spritesheet('spritesheetPlayerNinja', 'assets/spritesheetPlayerNinja.png', { frameWidth: 80, frameHeight: 96 });
+     this.load.spritesheet('spritesheetPlayerNinja', 'assets/spritesheetPlayerNinja.png', { frameWidth: 48, frameHeight: 96 });
      this.load.spritesheet('spritesheetPlayerNinjaRed', 'assets/spritesheetPlayerNinjaRed.png', { frameWidth: 520, frameHeight: 480 });
      this.load.spritesheet('spritesheetPlayerNinjaGreen', 'assets/spritesheetPlayerNinjaGreen.png', { frameWidth: 520, frameHeight: 480 });    
      this.load.spritesheet('spritesheetSoldatEnnemi', 'assets/spritesheetSoldatEnnemi.png', { frameWidth: 325, frameHeight: 591 });
@@ -1883,17 +1960,41 @@ preload (){
    this.load.tilemapTiledJSON('level3', './levels/level3.json');
    this.load.tilemapTiledJSON('level4', './levels/level4.json');
 
+   this.load.audio('sniperShot', ['assets/VFX/sniperShot.wav']);
+   this.load.audio('soldierShot', ['assets/VFX/soldierShot.wav']);
+   this.load.audio('droneShot', ['assets/VFX/droneShot.wav']);
+   this.load.audio('cacShot', ['assets/VFX/cacShot.wav']);
+   this.load.audio('grenadeShot', ['assets/VFX/grenadeShot.wav']);
+   this.load.audio('roquetteShot', ['assets/VFX/roquetteShot.mp3']);
+   this.load.audio('shurikenHitWall', ['assets/VFX/shurikenHitWall.wav']);
+   this.load.audio('teleport', ['assets/VFX/teleport.wav']);
+   this.load.audio('walking', ['assets/VFX/walking.wav']);
+
+   this.load.audio('gameMusic2', ['assets/VFX/gameMusic2.wav']);
+
 
 }
 
-create (){
+create(){
+    this.sniperShot = this.sound.add("sniperShot", { loop: false, volume: 0.3  });
+    this.soldierShot = this.sound.add("soldierShot", { loop: false, volume: 0.3  });
+    this.droneShot = this.sound.add("droneShot", { loop: false, volume: 0.3  });
+    this.cacShot = this.sound.add("cacShot", { loop: false, volume: 0.3  });
+    this.grenadeShot = this.sound.add("grenadeShot", { loop: false, volume: 0.3  });
+    this.roquetteShot = this.sound.add("roquetteShot", { loop: false, volume: 0.3  });
+    this.shurikenHitWall = this.sound.add("shurikenHitWall", { loop: false, volume: 0.3  });
+    this.teleport = this.sound.add("teleport", { loop: false, volume: 0.5  });
+    this.walking = this.sound.add("walking", { loop: true, volume: 10  });
+this.walking.play()
+   /* this.gameMusic2 = this.sound.add("gameMusic2", { loop: false, volume: 0.1  });
+    this.gameMusic2.play()*/
 
 
    if(level=="level1"){
-         this.map = this.make.tilemap({ key: 'level1' });
+        this.map = this.make.tilemap({ key: 'level1' });
     }
     if(level=="level2"){
-       this.map = this.make.tilemap({ key: 'level2' });
+        this.map = this.make.tilemap({ key: 'level2' });
     }     
     if(level=="level3"){
          this.map = this.make.tilemap({ key: 'level3' });
@@ -2018,14 +2119,17 @@ this.loadAnimations()
   });*/
 
 
-/*
+
 if(playerSkin=="ninja"){
   this.anims.create({
-      key: 'runNinja',
-      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 1, end: 3 }),
-      frameRate: 10,
+      key: 'idleNinja',
+      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 3 }),
+      frameRate: 4,
       repeat: -1
   });
+}
+
+  /*
   this.anims.create({
       key: 'idleNinja',
       frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
@@ -3040,7 +3144,10 @@ this.physics.add.overlap(rectCrouchPlayer, this.caisses, this.uncrouchDisabled, 
 
     
 for (const drone of this.drones.children.entries) {    
+    if(Math.abs(drone.x-player.x)<this.cameras.main.centerX*2){
+
         this.physics.moveTo(drone, player.x,player.y-200, vitesseDeplacementDrone);
+    }
     }
     cooldownTirDrone--
     if(cooldownTirDrone<=0){
@@ -3305,6 +3412,8 @@ if(spaceBar.isDown){
         .setDepth(-1)
         .setFlipX(true)
     }
+    this.cacShot.play()
+
     this.time.delayedCall(50, this.stopSlash, [cacAttaque], this);
     spaceBar.reset()
 }
@@ -3412,6 +3521,9 @@ if(playerSkin=="ninjaGreen"){
       
       player.setAccelerationX(0);
       player.setVelocityX(0);
+      player.anims.play('idleNinja',true).setFlipX(false);      
+
+      this.walking.pause()
 
       if(keyS.isUp){
           if(!(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y-20) || this.platform.hasTileAtWorldXY(player.body.position.x+player.body.width, player.body.position.y-20)|| this.platform.hasTileAtWorldXY(player.body.position.x+45/2, player.body.position.y-20))) {
@@ -3507,6 +3619,8 @@ if(gameSupport=="controller"){
       if(axisWidth<0.2 && axisWidth>-0.2){
       player.setAccelerationX(0);
       player.setVelocityX(0);
+      player.anims.play('idleNinja',true).setFlipX(false);      
+
       }
   }
 

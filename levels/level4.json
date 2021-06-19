@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"level4.json"
+        }
+    },
  "height":34,
  "infinite":false,
  "layers":[
@@ -129,31 +137,7 @@
          "draworder":"topdown",
          "id":10,
          "name":"flag",
-         "objects":[
-                {
-                 "gid":734,
-                 "height":16,
-                 "id":1847,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":720,
-                 "y":496
-                }, 
-                {
-                 "gid":734,
-                 "height":16,
-                 "id":1848,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":720,
-                 "y":496
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -285,43 +269,7 @@
          "draworder":"topdown",
          "id":22,
          "name":"yeti",
-         "objects":[
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1870,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":352,
-                 "y":416
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1871,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":384,
-                 "y":448
-                }, 
-                {
-                 "gid":687,
-                 "height":16,
-                 "id":1872,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":272,
-                 "y":400
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -332,19 +280,7 @@
          "draworder":"topdown",
          "id":23,
          "name":"machineGunnerEnnemi",
-         "objects":[
-                {
-                 "gid":467,
-                 "height":16,
-                 "id":1869,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":304,
-                 "y":448
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -410,7 +346,19 @@
          "draworder":"topdown",
          "id":29,
          "name":"lanceGrenade",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":505,
+                 "height":16,
+                 "id":1880,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":944,
+                 "y":448
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -462,7 +410,7 @@
          "y":0
         }],
  "nextlayerid":34,
- "nextobjectid":1873,
+ "nextobjectid":1881,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
