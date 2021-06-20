@@ -6,31 +6,14 @@ class Menu extends Phaser.Scene {
     }
 
         preload(){
-            this.load.image('deathScreen', 'assets/deathScreen.png');
-            this.load.image('victoireScreen', 'assets/victoireScreen.jpg');
-            this.load.image('replayLevelButton', 'assets/replayLevelButton.jpg');
-            this.load.image('homeButton', 'assets/homeButton.jpg');
-            this.load.image('adForReward', 'assets/adForReward.png');
-            this.load.image('crossRed', 'assets/crossRed.png');
-            this.load.image('blackSquare', 'assets/blackSquare.png');
 
-
-              this.load.image('Menu', 'assets/menuScreen.png');
-              this.load.image('startButton', 'assets/startButton.png');
-              this.load.image('tutorialButton', 'assets/tutorialButton.png');
-              this.load.image('skinsButton', 'assets/skinsButton.png');
-              this.load.image('shopButton', 'assets/shopButton.png');
-              this.load.image('achievementsButton', 'assets/achievements.png');
-              this.load.image('exitButton', 'assets/exitButton.png');
-              this.load.image('blackRectangle', 'assets/blackRectangle.png');        
-              this.load.image('mouseCursor', 'assets/mouseCursor.png');        
-
-                this.load.spritesheet('skinsButtonOpenSpritesheet', 'assets/skinsButtonOpenSpritesheet.png', { frameWidth: 64, frameHeight: 120 });
+                this.load.audio('gameMusic1', ['assets/VFX/gameMusic1.mp3']);
 
             }
     create() {
 
-        
+        this.gameMusic1 = this.sound.add("gameMusic1", { loop: true, volume: 0.05  });
+        this.gameMusic1.play()
        /* this.input.gamepad.once('connected', function (pad) {
             //   'pad' is a reference to the gamepad that was just connected
                 paddle = pad;
@@ -46,7 +29,8 @@ class Menu extends Phaser.Scene {
         this.skinsButtonAnim = this.add.sprite((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.865, 'skinsButton').setScale(1).setOrigin(0.5,0.5).setAlpha(0);    
         this.shopButton = this.physics.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.3).setInteractive().setImmovable(true);
         this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(0.3).setInteractive().setImmovable(true);
-      
+        this.controlsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(0.3).setInteractive().setImmovable(true);
+
         this.anims.create({
             key: 'skinsButtonOpenSpritesheet',
             frames: this.anims.generateFrameNumbers('skinsButtonOpenSpritesheet',  {start: 0, end: 3 }),
@@ -90,6 +74,12 @@ class Menu extends Phaser.Scene {
   this.achievementsButton.on('pointerdown', () => {
     this.scene.stop("Menu");
     this.scene.start('Achievements');
+}) 
+
+
+this.controlsButton.on('pointerdown', () => {
+    this.scene.stop("Menu");
+    this.scene.start('Controls');
 }) 
 
 

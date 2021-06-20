@@ -27,14 +27,13 @@ class Shop extends Phaser.Scene {
         mouseCursor.setCollideWorldBounds(true)
         mouseCursor.setSize(20, 20, false)
 */
-this.menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1);
+this.menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1).setInteractive();;
 this.choixLevelStartButton = this.physics.add.image((this.cameras.main.centerX*2)*0.495, (this.cameras.main.centerY*2)*0.51, 'startButton').setScale(0.555).setInteractive().setImmovable(true);
 this.skinsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.84, 'skinsButton').setScale(1).setInteractive().setImmovable(true).setOrigin(0.5,0.5);    
 this.skinsButtonAnim = this.add.sprite((this.cameras.main.centerX*2)*0.125, (this.cameras.main.centerY*2)*0.865, 'skinsButton').setScale(1).setOrigin(0.5,0.5).setAlpha(0);    
 this.shopButton = this.physics.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.08, 'shopButton').setScale(0.3).setInteractive().setImmovable(true);
 this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.85, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(0.3).setInteractive().setImmovable(true);
 
-        var menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(0.7).setInteractive();
 
         var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setInteractive();
         var exitButton = this.physics.add.image((this.cameras.main.centerX*2)*0.83,(this.cameras.main.centerY*2)*0.14, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setImmovable(true);
@@ -47,6 +46,7 @@ this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0
         var coinsAmountBackground = this.add.image((this.cameras.main.centerX*2)*0.233, (this.cameras.main.centerY*2)*0.14, 'choixSkinScreen').setScale(0.5).setOrigin(0.5,0.5);
         var totalCoinsText = this.add.text((this.cameras.main.centerX*2)*0.25, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
         this.totalCoinsTextNumber = this.add.text((this.cameras.main.centerX*2)*0.233, (this.cameras.main.centerY*2)*0.17,  totalCoins,{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);  
+        this.controlsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(0.3).setInteractive().setImmovable(true);
 
       /*  this.physics.add.overlap(mouseCursor,exitButton,this.exitShop,null,this)
         this.physics.add.overlap(mouseCursor,shopPack1,this.openShopPack1Gamepad,null,this)
@@ -57,7 +57,7 @@ this.achievementsButton = this.physics.add.image((this.cameras.main.centerX*2)*0
         this.physics.add.overlap(mouseCursor,shopPack6,this.openShopPack6Gamepad,null,this)
 */
         
-        menuBackgroundEscape.on('pointerdown', () => {
+        this.menuBackgroundEscape.on('pointerdown', () => {
             this.scene.stop("Shop");
             this.scene.start('Menu');
         })

@@ -994,11 +994,12 @@ goRight(){
 
     player.setVelocityX(250*runSpeed);
     this.walking.resume()
+    player.anims.play('ninjaWalking', true).setFlipX(false);       
 
     playerDirection="right"
     }
     else if(standing==false){
-      if(playerSkin=="ninja"){
+   /*   if(playerSkin=="ninja"){
         //  player.anims.play('jumpUpNinja',true).setFlipX(false);      
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1006,10 +1007,11 @@ goRight(){
       } 
       if(playerSkin=="ninjaGreen"){
          // player.play('jumpUpNinjaGreen', true).setFlipX(false);            
-      } 
+      }*/ 
     
     player.setVelocityX(250*runSpeed);
     this.walking.pause()
+   // player.anims.play('ninjaWalking', true).setFlipX(false);       
 
     playerDirection="right"
     }
@@ -1034,60 +1036,64 @@ goRight(){
 
 goRightGamepad(){
 
-      if(standing==true){    
-       if(playerSkin=="ninja"){
-         //  player.play('run', true).setFlipX(false);           
-       } 
-       if(playerSkin=="ninjaRouge"){
-         //  player.play('runNinjaRouge', true).setFlipX(false);            
-       } 
-       if(playerSkin=="ninjaGreen"){
-          // player.play('runNinjaGreen', true).setFlipX(false);            
-       } 
- 
-     player.setVelocityX(250*runSpeed*axisWidth);
-     playerDirection="right"
-     }
-     else if(standing==false){
-       if(playerSkin=="ninja"){
-          // player.anims.play('jumpUpNinja',true).setFlipX(false);      
-       } 
-       if(playerSkin=="ninjaRouge"){
-           //player.play('jumpUpRouge', true).setFlipX(false);        
-       } 
-       if(playerSkin=="ninjaGreen"){
-           //player.play('jumpUpNinjaGreen', true).setFlipX(false);            
-       } 
-     
-     player.setVelocityX(250*runSpeed*axisWidth);
-     this.walking.pause()
+    if(onPlatform!="ice"){
+        if(standing==true){   
+        /*  if(playerSkin=="ninja"){
+              player.play('run', true).setFlipX(true); 
+          } 
+          if(playerSkin=="ninjaRouge"){
+              player.play('runNinjaRouge', true).setFlipX(true);
+          }  
+          if(playerSkin=="ninjaGreen"){
+              player.play('runNinjaGreen', true).setFlipX(true);
+          }  */
+    
+        playerDirection="left"
+            player.setVelocityX(250*runSpeed*axisWidth*-1);
+            player.anims.play('ninjaWalking', true).setFlipX(false);       
+    
+            this.walking.resume()
+    
+        }
+        else if(standing==false){
+        /*  if(playerSkin=="ninja"){
+            //  player.play('run', true).setFlipX(true); 
+          } 
+          if(playerSkin=="ninjaRouge"){
+              player.play('runNinjaRouge', true).setFlipX(false);
+          } 
+          if(playerSkin=="ninjaGreen"){
+              player.play('runNinjaGreen', true).setFlipX(false);
+          } */
+        //  player.anims.play('ninjaWalking', true).setFlipX(false);       
 
-     playerDirection="right"
-     }
-   
- 
-         if(onPlatform=="ice"){
-  
-               player.setAccelerationX(200)
-               if(playerSkin=="ninja"){
-                 //  player.play('run', true).setFlipX(false);     
-       } 
-       if(playerSkin=="ninjaRouge"){
-          // player.play('runNinjaRouge', true).setFlipX(false);  
-       } 
-       if(playerSkin=="ninjaGreen"){
-          // player.play('runNinjaGreen', true).setFlipX(false);            
-       } 
-              
-               playerDirection="right"
-       }
+              playerDirection="left"
+            player.setVelocityX(250*runSpeed*axisWidth*-1);
+            this.walking.pause()
+    
+        }
+      }
+      if(onPlatform=="ice"){
+                  player.setAccelerationX(200)
+                  if(playerSkin=="ninja"){
+                      player.play('run', true).setFlipX(false);
+          } 
+          if(playerSkin=="ninjaRouge"){
+              player.play('runNinjaRouge', true).setFlipX(false);
+          } 
+          if(playerSkin=="ninjaGreen"){
+              player.play('runNinjaGreen', true).setFlipX(false);
+          } 
+                
+                  playerDirection="left"
+          }
      
 }
 
 goLeft(){
     if(onPlatform!="ice"){
     if(standing==true){   
-      if(playerSkin=="ninja"){
+  /*    if(playerSkin=="ninja"){
           player.play('run', true).setFlipX(true); 
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1095,15 +1101,17 @@ goLeft(){
       }  
       if(playerSkin=="ninjaGreen"){
           player.play('runNinjaGreen', true).setFlipX(true);
-      }  
+      }  */
 
     playerDirection="left"
         player.setVelocityX(-250*runSpeed);
+        player.anims.play('ninjaWalking', true).setFlipX(true);       
+        console.log("left")
         this.walking.resume()
 
     }
     else if(standing==false){
-      if(playerSkin=="ninja"){
+    /*  if(playerSkin=="ninja"){
           player.play('run', true).setFlipX(true); 
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1111,16 +1119,18 @@ goLeft(){
       } 
       if(playerSkin=="ninjaGreen"){
           player.play('runNinjaGreen', true).setFlipX(true);
-      } 
+      } */
           playerDirection="left"
         player.setVelocityX(-250*runSpeed);
+        //player.anims.play('ninjaWalking', true).setFlipX(true);       
+
         this.walking.pause()
 
     }
   }
   if(onPlatform=="ice"){
               player.setAccelerationX(-200)
-              if(playerSkin=="ninja"){
+        /*      if(playerSkin=="ninja"){
                   player.play('run', true).setFlipX(true);
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1128,7 +1138,7 @@ goLeft(){
       } 
       if(playerSkin=="ninjaGreen"){
           player.play('runNinjaGreen', true).setFlipX(true);
-      } 
+      } */
             
               playerDirection="left"
       }
@@ -1138,7 +1148,7 @@ goLeftGamepad(){
 
     if(onPlatform!="ice"){
     if(standing==true){   
-      if(playerSkin=="ninja"){
+    /*  if(playerSkin=="ninja"){
           player.play('run', true).setFlipX(true); 
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1146,24 +1156,28 @@ goLeftGamepad(){
       }  
       if(playerSkin=="ninjaGreen"){
           player.play('runNinjaGreen', true).setFlipX(true);
-      }  
+      }  */
 
     playerDirection="left"
         player.setVelocityX(-250*runSpeed*axisWidth*-1);
+        player.anims.play('ninjaWalking', true).setFlipX(true);       
+
         this.walking.resume()
 
     }
     else if(standing==false){
-      if(playerSkin=="ninja"){
-          player.play('run', true).setFlipX(true); 
+   /*   if(playerSkin=="ninja"){
+        //  player.play('run', true).setFlipX(true); 
       } 
       if(playerSkin=="ninjaRouge"){
           player.play('runNinjaRouge', true).setFlipX(true);
       } 
       if(playerSkin=="ninjaGreen"){
           player.play('runNinjaGreen', true).setFlipX(true);
-      } 
+      } */
           playerDirection="left"
+        //  player.anims.play('ninjaWalking', true).setFlipX(true);       
+
         player.setVelocityX(-250*runSpeed*axisWidth*-1);
         this.walking.pause()
 
@@ -1171,7 +1185,7 @@ goLeftGamepad(){
   }
   if(onPlatform=="ice"){
               player.setAccelerationX(-200)
-              if(playerSkin=="ninja"){
+    if(playerSkin=="ninja"){
                   player.play('run', true).setFlipX(true);
       } 
       if(playerSkin=="ninjaRouge"){
@@ -1869,108 +1883,8 @@ preload (){
 
 
 
-        var pluginUrl;
-        pluginUrl = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
-        this.load.plugin('rexvirtualjoystickplugin', pluginUrl, true);
 
 
-    this.load.image("bg_1", "assets/bg-1.png");
-    this.load.image("bg_2", "assets/bg-2.png");
-
-  this.load.image('nextShotTeleportation', 'assets/nextShotTeleportation.png');
-  this.load.image('nextShotShuriken', 'assets/nextShotShuriken.png');
-  this.load.image('mobileGameModeButton', 'assets/mobileGameModeButton.jpg');
-  this.load.image('keyboardGameModeButton', 'assets/keyboardGameModeButton.png');
-  this.load.image('controllerGameModeButton', 'assets/controllerGameModeButton.png');
-  this.load.image('crouchButton', 'assets/crouchButton.png');
-  this.load.image('jumpButton', 'assets/jumpButton.png');
-  this.load.image('backgroundBarHealth', 'assets/backgroundBarHealth.png');
-  this.load.image('powerUpHealth', 'assets/powerUpHealth.png');
-  this.load.image('platformFake', 'assets/platformFake.png');
-  this.load.image('platformFalling', 'assets/platformFake.png');
-  this.load.image('platformInvisible', 'assets/platformFake.png');
-  this.load.image('platformMoving', 'assets/platformFake.png');
-  this.load.image('picsInvisible', 'assets/picsInvisible.png');
-  this.load.image('laserHorizontal', 'assets/laserHorizontal.png');
-  this.load.image('laserVertical', 'assets/laserVertical.png');
-  this.load.image('drone', 'assets/drone.png');
-  this.load.image('shuriken', 'assets/shuriken.png');
-  this.load.image('coin', 'assets/coin.png');
-  this.load.image('snowball', 'assets/mediumBullet.png');
-  this.load.image('soldatEnnemi', 'assets/soldatEnnemi.png');
-  //this.load.image('sky', 'assets/sky.png');
-  this.load.image('flag', 'assets/igloo.png');
-  this.load.image('snowman', 'assets/snowman.png');
- // this.load.image('ground', 'assets/platform.png');
-  this.load.image('life', 'assets/life.png')
-  this.load.image('explosion', 'assets/explosion.png')
- // this.load.image('health', 'assets/star.png', { width: 10,  height: 20,});
-  this.load.image('snowstorm', 'assets/snowstorm.png');
-  this.load.image('water', 'assets/water.png');
-  this.load.image('castor', 'assets/castor.png');
-  this.load.image('player1Ninja', 'assets/playerNinjaIdle1.png');
-  this.load.image('teleport', 'assets/teleporter.png');
-  this.load.image('caisse', 'assets/caisse.png');
-  this.load.image('caisseBroken', 'assets/caisseBroken.jpg');
-  this.load.image('cacAttaque', 'assets/slash.png');
-
-
-
-
-
-
-
-  this.load.image('katanaHealthImage1', 'assets/katanaHealthImage1.png');
-  this.load.image('katanaHealthImage2', 'assets/katanaHealthImage2.png');
-  this.load.image('katanaHealthImage3', 'assets/katanaHealthImage3.png');
-  this.load.image('katanaHealthImage4', 'assets/katanaHealthImage4.png');
-  this.load.image('katanaHealthImage5', 'assets/katanaHealthImage5.png');
-  this.load.image('healthBarGreen', 'assets/healthBarGreen.png');
-
-
-  this.load.spritesheet('teleporterSpritesheet', 'assets/teleporterSpritesheet.png', { frameWidth: 824, frameHeight: 812 });
-  this.load.spritesheet('shurikenSpritesheet', 'assets/shurikenSpritesheet.png', { frameWidth: 35, frameHeight: 35 });
-
-  
-
-
-
-
-
-
-
-     this.load.spritesheet('spritesheetPlayerNinja', 'assets/spritesheetPlayerNinja.png', { frameWidth: 48, frameHeight: 96 });
-     this.load.spritesheet('spritesheetPlayerNinjaRed', 'assets/spritesheetPlayerNinjaRed.png', { frameWidth: 520, frameHeight: 480 });
-     this.load.spritesheet('spritesheetPlayerNinjaGreen', 'assets/spritesheetPlayerNinjaGreen.png', { frameWidth: 520, frameHeight: 480 });    
-     this.load.spritesheet('spritesheetSoldatEnnemi', 'assets/spritesheetSoldatEnnemi.png', { frameWidth: 325, frameHeight: 591 });
-
-  
-  
-  this.load.spritesheet('spritesheetCastor', 'assets/spritesheetCastor.png', { frameWidth: 27, frameHeight: 20 });
-
-  
-  
-   this.load.image('tiles', './assets/tileset.png');
-   this.load.atlas('atlas', 'assets/mario-atlas.png', 'assets/mario-atlas.json');
-
-    
-
-   this.load.tilemapTiledJSON('level1', './levels/level1.json');
-   this.load.tilemapTiledJSON('level2', './levels/level2.json');
-   this.load.tilemapTiledJSON('level3', './levels/level3.json');
-   this.load.tilemapTiledJSON('level4', './levels/level4.json');
-
-   this.load.audio('sniperShot', ['assets/VFX/sniperShot.wav']);
-   this.load.audio('soldierShot', ['assets/VFX/soldierShot.wav']);
-   this.load.audio('droneShot', ['assets/VFX/droneShot.wav']);
-   this.load.audio('cacShot', ['assets/VFX/cacShot.wav']);
-   this.load.audio('grenadeShot', ['assets/VFX/grenadeShot.wav']);
-   this.load.audio('roquetteShot', ['assets/VFX/roquetteShot.mp3']);
-   this.load.audio('shurikenHitWall', ['assets/VFX/shurikenHitWall.wav']);
-   this.load.audio('teleport', ['assets/VFX/teleport.wav']);
-   this.load.audio('walking', ['assets/VFX/walking.wav']);
-
-   this.load.audio('gameMusic2', ['assets/VFX/gameMusic2.wav']);
 
 
 }
@@ -1978,7 +1892,6 @@ preload (){
 create(){
     this.sniperShot = this.sound.add("sniperShot", { loop: false, volume: 0.3  });
     this.soldierShot = this.sound.add("soldierShot", { loop: false, volume: 0.3  });
-    this.droneShot = this.sound.add("droneShot", { loop: false, volume: 0.3  });
     this.cacShot = this.sound.add("cacShot", { loop: false, volume: 0.3  });
     this.grenadeShot = this.sound.add("grenadeShot", { loop: false, volume: 0.3  });
     this.roquetteShot = this.sound.add("roquetteShot", { loop: false, volume: 0.3  });
@@ -2032,24 +1945,37 @@ this.controllerGameModeButton.on('pointerdown', () => {
 
 this.loadAnimations()
 
-  this.bg_1 = this.add.tileSprite(0, 0, 10000, 10000, "bg_1").setDepth(-10).setScale(2.6);
-  this.bg_1.setOrigin(0, 0);
-  this.bg_1.setScrollFactor(0.25);
+  this.bg_0 = this.add.tileSprite(0, 0, 10000, 10000, "bg_0").setDepth(-10).setScale(1);
+  this.bg_0.setOrigin(0, 0);
+  this.bg_0.setScrollFactor(0.05);
   
-  this.bg_2 = this.add.tileSprite(0, 0, 10000, 10000, "bg_2").setDepth(-10).setScale(2.6);
+  this.bg_1 = this.add.tileSprite(0, 0, 10000, 10000, "bg_1").setDepth(-10).setScale(1);
+  this.bg_1.setOrigin(0, 0);
+  this.bg_1.setScrollFactor(0.1);
+
+  this.bg_2 = this.add.tileSprite(0, 0, 10000, 10000, "bg_2").setDepth(-10).setScale(1);
   this.bg_2.setOrigin(0, 0);
   this.bg_2.setScrollFactor(0.5);
 
+  this.bg_3 = this.add.tileSprite(0, 0, 10000, 10000, "bg_3").setDepth(-10).setScale(1);
+  this.bg_3.setOrigin(0, 0);
+  this.bg_3.setScrollFactor(0.75);
+
+  this.bg_4 = this.add.tileSprite(0, 0, 10000, 10000, "bg_4").setDepth(-10).setScale(1);
+  this.bg_4.setOrigin(0, 0);
+  this.bg_4.setScrollFactor(0.75);
+
+
 
   this.tileset = this.map.addTilesetImage('tileset', 'tiles');
-  this.background = this.map.createDynamicLayer('background', this.tileset, 0, 0);
-  this.platform = this.map.createDynamicLayer('platform', this.tileset, 0, 0);
-  var platformEscalierDroit = this.map.createDynamicLayer('platformEscalierDroit', this.tileset, 0, 0);
-  var platformEscalierGauche = this.map.createDynamicLayer('platformEscalierGauche', this.tileset, 0, 0);
-  this.platformMontagne = this.map.createDynamicLayer('platformMontagne', this.tileset, 0, 0);
-  var platformSnow = this.map.createDynamicLayer('platformSnow', this.tileset, 0, 0);
-  var platformIce = this.map.createDynamicLayer('platformIce', this.tileset, 0, 0);
-  var pics = this.map.createDynamicLayer('pics', this.tileset, 0, 0);
+  this.background = this.map.createLayer('background', this.tileset, 0, 0);
+  this.platform = this.map.createLayer('platform', this.tileset, 0, 0);
+  var platformEscalierDroit = this.map.createLayer('platformEscalierDroit', this.tileset, 0, 0);
+  var platformEscalierGauche = this.map.createLayer('platformEscalierGauche', this.tileset, 0, 0);
+  this.platformMontagne = this.map.createLayer('platformMontagne', this.tileset, 0, 0);
+  var platformSnow = this.map.createLayer('platformSnow', this.tileset, 0, 0);
+  var platformIce = this.map.createLayer('platformIce', this.tileset, 0, 0);
+  var pics = this.map.createLayer('pics', this.tileset, 0, 0);
   
     
  this.platform.setCollisionByExclusion(-1, true);
@@ -2080,7 +2006,7 @@ this.loadAnimations()
   this.katanaHealth = this.physics.add.sprite((this.cameras.main.centerX*2)*0.29,(this.cameras.main.centerY*2)*0.1,'katanaHealthImage1').setScrollFactor(0).setScale(0.25).setDepth(1).setAlpha(1).setOrigin(0,0.5).setFlipX(true);
 
 
-  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.063,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinja');
+  player = this.physics.add.sprite((this.cameras.main.centerX*2)*0.063,(this.cameras.main.centerY*2)*0.75, 'spritesheetPlayerNinjaWalking');
   player.setGravityY(1000)
 
   player.body.setSize(45, 90, false).setOffset(20, 0)
@@ -2089,53 +2015,25 @@ this.loadAnimations()
 
 
   
-/*  this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNames('atlas', {
-          prefix: 'mario-atlas_',
-          start: 1,
-          end: 3,
-      }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.anims.create({
-      key: 'idle',
-      frames: [{ key: 'atlas', frame: 'mario-atlas_0' }],
-      frameRate: 10
-  });
-
-  this.anims.create({
-      key: 'jump',
-      frames: [{ key: 'atlas', frame: 'mario-atlas_4' }],
-      frameRate: 10
-  });
-
-  this.anims.create({
-      key: 'die',
-      frames: [{ key: 'atlas', frame: 'mario-atlas_5' }],
-      frameRate: 10
-  });*/
 
 
 
 if(playerSkin=="ninja"){
   this.anims.create({
       key: 'idleNinja',
-      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinjaWalking',  {start: 0, end: 0 }),
       frameRate: 4,
       repeat: -1
   });
 }
 
-  /*
+  
   this.anims.create({
-      key: 'idleNinja',
-      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 0, end: 0 }),
-      frameRate: 10,
+      key: 'ninjaWalking',
+      frames: this.anims.generateFrameNumbers('spritesheetPlayerNinjaWalking',  {start: 0, end: 7 }),
+      frameRate: 15,
       repeat: -1
-  });
+  });/*
   this.anims.create({
       key: 'jumpUpNinja',
       frames: this.anims.generateFrameNumbers('spritesheetPlayerNinja',  {start: 4, end: 4 }),
@@ -2841,7 +2739,7 @@ this.physics.add.collider(this.lanceRoquettes, this.platform);
    this.snowmen = this.physics.add.group();
 
   for (const snowman of snowmanObjects) {
-  this.snowmen.create(snowman.x+snowman.width/2, snowman.y-snowman.height/2, 'snowman').setScale(0.01)
+  this.snowmen.create(snowman.x+snowman.width/2, snowman.y-snowman.height/2, 'snowman').setScale(0.2)
       .setOrigin(0.5,0.5)
       .setGravityY(1000)
 }
