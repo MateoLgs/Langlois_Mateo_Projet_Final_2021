@@ -4,18 +4,6 @@ class Shop extends Phaser.Scene {
         super('Shop');
     }
     preload(){
-        this.load.image('Menu', 'assets/menuScreen.png');
-        this.load.image('buySkin', 'assets/unlockSkin.png');
-        this.load.image('startButton', 'assets/startButton.png');
-        this.load.image('tutorialButton', 'assets/tutorialButton.png');
-        this.load.image('skinsButton', 'assets/skinsButton.png');
-        this.load.image('easy', 'assets/easy.png');
-        this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
-    
-        this.load.image('exitButton', 'assets/exitButton.png');
-        this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
-        this.load.image('ninjaSkin', 'assets/playerNinjaIdle1.png');
-        this.load.image('ninjaSkinGreen', 'assets/playerNinjaGreenIdle1.png');
     }
     create() {
      /*   this.input.gamepad.once('connected', function (pad) {

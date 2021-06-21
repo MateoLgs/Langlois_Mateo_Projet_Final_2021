@@ -4,11 +4,7 @@ class ShopSkin extends Phaser.Scene {
         super('ShopSkin');
     }
     preload(){
-        this.load.image('randomButton', 'assets/random.png');
-        this.load.image('whiteSquare', 'assets/whiteSquare.png');
-        this.load.image('coin', 'assets/coin.png');
-        this.load.image('shareButton', 'assets/share.png');
-        this.load.spritesheet('unlockCoinsAnimation', 'assets/unlockCoinsSpritesheet.png', { frameWidth: 200, frameHeight: 200 });
+
         
     }
     create(){
@@ -22,14 +18,14 @@ class ShopSkin extends Phaser.Scene {
 
 
         
-        var screenShopSkinBackground = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.6, 'choixSkinScreen').setScale(1.8).setOrigin(0.5,0.5).setInteractive();
-        var randomButton = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.65, 'randomButton').setScale(0.75).setOrigin(0.5,0.5).setInteractive();
-        var buyASkinText = this.add.text((this.cameras.main.centerX*2)*0.25, (this.cameras.main.centerY*2)*0.30,  "Buy a Skin",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(75);  
+        var screenShopSkinBackground = this.add.image(this.cameras.main.centerX, (this.cameras.main.centerY*2)*0.6, 'choixSkinScreen1').setScale(1).setOrigin(0.5,0.5).setInteractive();
+        var randomButton = this.add.image((this.cameras.main.centerX*2)*0.52, (this.cameras.main.centerY*2)*0.75, 'randomButton').setScale(0.75).setOrigin(0.5,0.5).setInteractive();
+      //  var buyASkinText = this.add.text((this.cameras.main.centerX*2)*0.25, (this.cameras.main.centerY*2)*0.30,  "Buy a Skin",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(75);  
         var coinsAmountBackground = this.add.image((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.14, 'choixSkinScreen').setScale(0.5).setOrigin(0.5,0.5);
         var totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
         var totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{ fill:'#000', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);  
 
-        var priceToPaySkin = this.add.text((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.9,  "Unlock for: "+ priceToPaySkinNumber,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);  
+       // var priceToPaySkin = this.add.text((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.9,  "Unlock for: "+ priceToPaySkinNumber,{ fill:'#0f0', size:200}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);  
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.78,(this.cameras.main.centerY*2)*0.31, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
         var shareButton = this.add.image((this.cameras.main.centerX*2)*100,(this.cameras.main.centerY*2)*100, 'shareButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
        

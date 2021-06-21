@@ -4,13 +4,6 @@ class Achievements extends Phaser.Scene {
         super('Achievements');
     }
     preload(){
-        this.load.image('Menu', 'assets/menuScreen.png');
-        this.load.image('buySkin', 'assets/unlockSkin.png');
-        this.load.image('startButton', 'assets/startButton.png');
-        this.load.image('tutorialButton', 'assets/tutorialButton.png');
-        this.load.image('skinsButton', 'assets/skinsButton.png');
-        this.load.image('easy', 'assets/easy.png');
-        this.load.image('backgroundScreen', 'assets/choixSkinScreen.jpg');
     }
     create(){
         this.menuBackgroundEscape = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1).setAlpha(1).setInteractive();

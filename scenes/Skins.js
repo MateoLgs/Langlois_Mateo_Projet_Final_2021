@@ -4,20 +4,7 @@ class Skins extends Phaser.Scene {
         super('Skins');
     }
     preload(){
-        this.load.image('Menu', 'assets/menuScreen.png');
-        this.load.image('buySkin', 'assets/unlockSkin.png');
-        this.load.image('startButton', 'assets/startButton.png');
-        this.load.image('tutorialButton', 'assets/tutorialButton.png');
-        this.load.image('skinsButton', 'assets/skinsButton.png');
-        this.load.image('skinsButtonOpen', 'assets/skinsButtonOpen.png');
-        this.load.image('easy', 'assets/easy.png');
-        this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
-    
-        this.load.image('choixSkinScreen', 'assets/choixSkinScreen.jpg');
-        this.load.image('exitButton', 'assets/exitButton.png');
-        this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
-        this.load.image('ninjaSkin', 'assets/playerNinjaIdle1.png');
-        this.load.image('ninjaSkinGreen', 'assets/playerNinjaGreenIdle1.png');
+
     }
     create() {
 
@@ -33,40 +20,34 @@ class Skins extends Phaser.Scene {
         this.controlsButton = this.physics.add.image((this.cameras.main.centerX*2)*0.1, (this.cameras.main.centerY*2)*0.08, 'achievementsButton').setScale(0.3).setInteractive().setImmovable(true);
 
 
-        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'choixSkinScreen').setScale(2.1).setAlpha(1).setOrigin(0.5,0.5).setInteractive();
-        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.80, (this.cameras.main.centerY*2)*0.76, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+        var choixSkinScreen = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'skinsBackground').setScale(1.2).setAlpha(1).setOrigin(0.5,0.5).setInteractive();
+        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.52, (this.cameras.main.centerY*2)*0.76, 'randomButton').setScale(0.6).setInteractive().setAlpha(1);
         var exitButton = this.add.image((this.cameras.main.centerX*2)*0.83, (this.cameras.main.centerY*2)*0.15, 'exitButton').setScale(0.1).setInteractive().setAlpha(1);
 
         
         if(ninjaRougeSkinUnlocked==true){
-            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.30,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1);
+            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.62,(this.cameras.main.centerY*2)*0.5, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.30,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text((this.cameras.main.centerX*2)*0.308,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);       
+            var ninjaRougeSkin = this.add.image((this.cameras.main.centerX*2)*0.62,(this.cameras.main.centerY*2)*0.5, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
+            this.add.text((this.cameras.main.centerX*2)*0.628,(this.cameras.main.centerY*2)*0.5,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);       
         }
         if(ninjaGreenSkinUnlocked==true){
-            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.40,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1);
+            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.52,(this.cameras.main.centerY*2)*0.5, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.40,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000).setOrigin(0.5,0.5);
-            this.add.text((this.cameras.main.centerX*2)*0.408,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);      
+            var ninjaGreenSkin = this.add.image((this.cameras.main.centerX*2)*0.52,(this.cameras.main.centerY*2)*0.5, 'ninjaSkinGreen').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000).setOrigin(0.5,0.5);
+            this.add.text((this.cameras.main.centerX*2)*0.528,(this.cameras.main.centerY*2)*0.5,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);      
              
         }
         if(ninjaSkinUnlocked==true){
-            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.20,(this.cameras.main.centerY*2)*0.25, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1);
+            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.42,(this.cameras.main.centerY*2)*0.5, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1);
         }
         else {
-            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.20,(this.cameras.main.centerY*2)*0.25, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text((this.cameras.main.centerX*2)*0.208,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);          }
+            var ninjaSkin = this.add.image((this.cameras.main.centerX*2)*0.42,(this.cameras.main.centerY*2)*0.5, 'ninjaSkin').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
+            this.add.text((this.cameras.main.centerX*2)*0.428,(this.cameras.main.centerY*2)*0.5,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10);          }
 
-
-
-            var skinPlaceHolder1 = this.add.image((this.cameras.main.centerX*2)*0.50,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text((this.cameras.main.centerX*2)*0.508,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10); 
-            
-            var skinPlaceHolder2 = this.add.image((this.cameras.main.centerX*2)*0.60,(this.cameras.main.centerY*2)*0.25, 'ninjaSkinRouge').setScale(0.2).setInteractive().setAlpha(1).setTint(0x000000);
-            this.add.text((this.cameras.main.centerX*2)*0.608,(this.cameras.main.centerY*2)*0.25,  "LOCKED",{ fill:'#ffffff', size:200}).setScrollFactor(0).setDepth(1).setTint(0xffffff).setOrigin(0.5,0.5).setFontSize(10); 
+          
             this.popupAchievement();
 
 

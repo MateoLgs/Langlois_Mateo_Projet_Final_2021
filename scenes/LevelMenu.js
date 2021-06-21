@@ -4,31 +4,14 @@ class LevelMenu extends Phaser.Scene {
     constructor () {
         super('LevelMenu');
     }
-        preload(){     
-            this.load.image('levelButton_1', 'assets/levelButton_1.png');    
-            this.load.image('levelButton_2', 'assets/levelButton_2.png');    
-            this.load.image('levelButton_3', 'assets/levelButton_3.png');    
-            this.load.image('levelButton_4', 'assets/levelButton_4.png');    
-            this.load.image('levelButton_5', 'assets/levelButton_5.png');    
-            this.load.image('levelButton_6', 'assets/levelButton_6.png');    
-            this.load.image('levelButton_7', 'assets/levelButton_7.png');    
-            this.load.image('levelButton_8', 'assets/levelButton_8.png');    
-            this.load.image('levelButton_9', 'assets/levelButton_9.png');    
-            this.load.image('levelButton_10', 'assets/levelButton_10.png');    
-            this.load.image('levelButton_11', 'assets/levelButton_11.png');    
-            this.load.image('levelButton_12', 'assets/levelButton_12.png');    
-            this.load.image('levelButton_13', 'assets/levelButton_13.png');    
-            this.load.image('levelButton_14', 'assets/levelButton_14.png');    
-            this.load.image('levelButton_15', 'assets/levelButton_15.png');    
-            this.load.image('levelButton_16', 'assets/levelButton_16.png');    
-            this.load.image('levelButton_17', 'assets/levelButton_17.png');    
-            this.load.image('levelButton_18', 'assets/levelButton_18.png');    
-
-            this.load.image('backButton', 'assets/backButton.png');    
+    init(data){
+        this.data = data
+    }
+        preload(){
         }
     create() {
         level1Unlocked = true;
-        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'Menu').setScale(1);
+        var menuBackground = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'MenuScreenLevelChoix').setScale(1);
         var backButton = this.add.image((this.cameras.main.centerX*2)*0.04,(this.cameras.main.centerY*2)*0.075, 'backButton').setAlpha(1).setScale(0.3).setInteractive().setOrigin(0.5,0.5);
 
         if(pageLevelMenu==1){
@@ -76,7 +59,7 @@ class LevelMenu extends Phaser.Scene {
             this.scene.restart();
         })    
         menuLevel1Button.on('pointerdown', () => {
-            this.choixMenuLevelButton("level4");
+            this.choixMenuLevelButton("level1");
         })      
         menuLevel2Button.on('pointerdown', () => {
             this.choixMenuLevelButton("level2");
@@ -231,7 +214,7 @@ class LevelMenu extends Phaser.Scene {
     choixMenuLevelButton(varLevel){
               level=varLevel
              // this.scene.stop("LevelMenu");
-      this.scene.start('Jeu');
+      this.scene.start('Jeu', this.data);
     }
 
 
