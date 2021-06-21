@@ -323,7 +323,7 @@ this.load.spritesheet('spritesheetPlayerNinjaCrouchCam', 'assets/spritesheets/sp
         }).setScrollFactor(0).setDepth(1).setOrigin(0.5, 0.5);
 
        while (!this.isLoaded) {}
-        this.time.delayedCall(1000,this.startMenu,null,this)
+        this.time.delayedCall(5000,this.startMenu,null,this)
 
     }
 
@@ -342,7 +342,7 @@ this.load.spritesheet('spritesheetPlayerNinjaCrouchCam', 'assets/spritesheets/sp
 
         gameMusic1.play()
 
-        this.scene.start('Jeu',
+        this.scene.start('Menu',
             {
                 sound:
                     {

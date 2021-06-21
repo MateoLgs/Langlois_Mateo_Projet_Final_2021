@@ -2150,7 +2150,7 @@ this.anims.create({
         player = this.physics.add.sprite((this.cameras.main.centerX * 2) * 0.2, (this.cameras.main.centerY * 2) * 1.25, 'spritesheetPlayerNinjaWalking');
         player.setGravityY(1000)
 
-        player.body.setSize(45, 90, false).setOffset(20, 0)
+        player.body.setSize(45, 90, false).setOffset(20, 5)
         player.setCollideWorldBounds(false)
 
 
@@ -3135,7 +3135,7 @@ if(currentlyCrouching==false){
 
 
             rectCrouchPlayer.destroy()
-            rectCrouchPlayer = this.physics.add.sprite(player.x, player.y, 'spritesheetPlayerNinja').setAlpha(0).setOffset(20, 0);
+            rectCrouchPlayer = this.physics.add.sprite(player.x, player.y, 'spritesheetPlayerNinja').setAlpha(0).setOffset(20, 5);
             rectCrouchPlayer.body.setSize(45, 90, true)
             this.physics.add.overlap(rectCrouchPlayer, this.caisses, this.uncrouchDisabled, null, this);
 
@@ -3449,7 +3449,7 @@ if(currentlyCrouching==false){
 
                 if ((keyS.isUp) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 45)) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 20, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 20)) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 20, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 10))) {
                     if (uncrouchPossible == true) {
-                        player.body.setSize(45, 90, false).setOffset(20, 0);
+                        player.body.setSize(45, 90, false).setOffset(20, 5);
 
                     } else {
                         console.log("uncrouch")
@@ -3635,7 +3635,7 @@ if(currentlyCrouching==false){
 
                 if (!pad.B && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 45) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 45)) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 20, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 20) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 20)) && !(this.platform.hasTileAtWorldXY(player.body.position.x, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 20, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 10) || this.platform.hasTileAtWorldXY(player.body.position.x + 45 / 2, player.body.position.y - 10))) {
                     if (uncrouchPossible == true) {
-                        player.body.setSize(45, 90, false).setOffset(20, 0);
+                        player.body.setSize(45, 90, false).setOffset(20, 5);
                     } else {
                         uncrouchPossible = true;
                     }
