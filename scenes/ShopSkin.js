@@ -32,7 +32,7 @@ class ShopSkin extends Phaser.Scene {
         
         this.anims.create({
             key: 'unlockCoins',
-            frames: this.anims.generateFrameNumbers('unlockCoinsAnimation',  {start: 0, end: 6 }),
+            frames: this.anims.generateFrameNumbers('loadingIconSpritesheet',  {start: 0, end: 10 }),
             frameRate: 10,
             repeat: -1
         });
@@ -44,8 +44,6 @@ class ShopSkin extends Phaser.Scene {
                 totalCoins-=50
                 localStorage.setItem(localDataTotalCoins, totalCoins);
 
-                priceToPaySkin.destroy();
-                buyASkinText.destroy();
                 exitButton.destroy();
 
                 this.randomUnlockSkin(randomButton, totalCoinsTextBuySkin, totalCoinsTextBuySkinNumber, shareButton);
@@ -103,7 +101,7 @@ class ShopSkin extends Phaser.Scene {
                 ninjaGreenSkinUnlocked=true
                 localStorage.setItem(localDataNinjaGreenSkinUnlocked, ninjaGreenSkinUnlocked);
 
-                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(3);
                 animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                 totalCoinsTextBuySkin.destroy();
                 totalCoinsTextBuySkinNumber.destroy();
@@ -131,7 +129,7 @@ class ShopSkin extends Phaser.Scene {
                         shareButton.on('pointerdown', () => {
                         this.shareSkin("I just unlocked the Green Ninja !");
                         }) 
-                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'randomButton').setScale(0.6).setInteractive().setAlpha(1);
                         buySkin.on('pointerdown', () => {
                             this.scene.start('ShopSkin');
                         }) 
@@ -153,7 +151,7 @@ class ShopSkin extends Phaser.Scene {
                     localStorage.setItem(localDataNinjaRougeSkinUnlocked, ninjaRougeSkinUnlocked);
 
 
-                    var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                    var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(3);
                     animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                     totalCoinsTextBuySkin.destroy();
                     totalCoinsTextBuySkinNumber.destroy();
@@ -180,7 +178,7 @@ class ShopSkin extends Phaser.Scene {
                             shareButton.on('pointerdown', () => {
                             this.shareSkin("I just unlocked the Red Ninja !");
                             }) 
-                            var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                            var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'randomButton').setScale(0.6).setInteractive().setAlpha(1);
                             buySkin.on('pointerdown', () => {
                                 this.scene.start('ShopSkin');
                             }) 
@@ -195,7 +193,7 @@ class ShopSkin extends Phaser.Scene {
             }
 
             else{
-                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(0.2);
+                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(3);
                 animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                 totalCoinsTextBuySkin.destroy();
                 totalCoinsTextBuySkinNumber.destroy();
@@ -210,14 +208,14 @@ class ShopSkin extends Phaser.Scene {
                 this.time.addEvent({
                     delay: 1000,
                     callback: ()=>{
-                        var skinAfficheRandomUnlockSkinImage = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.6, 'coin').setScale(0.22).setOrigin(0.5,0.5);
+                        var skinAfficheRandomUnlockSkinImage = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.6, 'coin').setScale(2).setOrigin(0.5,0.5);
                         totalCoinsTextBuySkin.destroy();
                         totalCoinsTextBuySkinNumber.destroy();
                         totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
                         totalCoinsTextBuySkinNumber = this.add.text((this.cameras.main.centerX*2)*0.283, (this.cameras.main.centerY*2)*0.17,  totalCoins,{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(25).setOrigin(0.5,0.5);               
                         exitButton = this.add.image((this.cameras.main.centerX*2)*0.78,(this.cameras.main.centerY*2)*0.31, 'exitButton').setScale(0.1).setInteractive().setAlpha(1).setOrigin(0.5,0.5);
                         animUnlock.destroy()
-                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'buySkin').setScale(0.16).setInteractive().setAlpha(1);
+                        var buySkin = this.add.image((this.cameras.main.centerX*2)*0.75, (this.cameras.main.centerY*2)*0.83, 'randomButton').setScale(0.6).setInteractive().setAlpha(1);
                         buySkin.on('pointerdown', () => {
                             this.scene.start('ShopSkin');
                         }) 
