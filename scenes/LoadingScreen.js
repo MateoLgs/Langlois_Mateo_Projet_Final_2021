@@ -273,6 +273,13 @@ this.load.spritesheet('spritesheetPlayerNinjaCrouchCam', 'assets/spritesheets/sp
         this.load.image('choixSkinScreen1', 'assets/choixSkinScreen1.png');
         this.load.image('skinsBackground', 'assets/skinsBackground.png');
 
+        this.load.image('shop1', 'assets/shop1.png');
+        this.load.image('shop2', 'assets/shop2.png');
+        this.load.image('shop3', 'assets/shop3.png');
+        this.load.image('shop4', 'assets/shop4.png');
+        this.load.image('shop5', 'assets/shop5.png');
+        this.load.image('shop6', 'assets/shop6.png');
+
 
         this.load.image('ninjaSkinRouge', 'assets/playerNinjaRedIdle1.png');
         this.load.image('ninjaSkin', 'assets/playerNinjaIdle1.png');

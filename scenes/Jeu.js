@@ -1406,7 +1406,7 @@ console.log("test")
         shuriken.destroy()
         if (caisse.pv == 2) {
             caisse.destroy()
-            caisse = this.caisses.create(caisse.x, caisse.y, 'caisseBroken').setScale(0.06)
+            caisse = this.caisses.create(caisse.x, caisse.y, 'caisseBroken').setScale(0.1)
                 .setOrigin(0.5, 0.5)
                 .setDepth(2)
             caisse.pv = 1

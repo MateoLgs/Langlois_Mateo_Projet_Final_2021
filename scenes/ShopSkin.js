@@ -193,7 +193,7 @@ class ShopSkin extends Phaser.Scene {
             }
 
             else{
-                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)/2, 'coin').setScale(3);
+                var animUnlock = this.physics.add.sprite((this.cameras.main.centerX*2)*0.53, (this.cameras.main.centerY*2)*0.75, 'coin').setScale(3);
                 animUnlock.anims.play('unlockCoins',true).setFlipX(false);
                 totalCoinsTextBuySkin.destroy();
                 totalCoinsTextBuySkinNumber.destroy();
@@ -208,7 +208,7 @@ class ShopSkin extends Phaser.Scene {
                 this.time.addEvent({
                     delay: 1000,
                     callback: ()=>{
-                        var skinAfficheRandomUnlockSkinImage = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.6, 'coin').setScale(2).setOrigin(0.5,0.5);
+                        var skinAfficheRandomUnlockSkinImage = this.physics.add.sprite((this.cameras.main.centerX*2)/2, (this.cameras.main.centerY*2)*0.8, 'coin').setScale(2).setOrigin(0.5,0.5);
                         totalCoinsTextBuySkin.destroy();
                         totalCoinsTextBuySkinNumber.destroy();
                         totalCoinsTextBuySkin = this.add.text((this.cameras.main.centerX*2)*0.3, (this.cameras.main.centerY*2)*0.1,  "Coins : ",{fill:'#0f0', size:200, strokeThickness: 2, stroke: '#0f0'}).setScrollFactor(0).setDepth(1).setFontSize(30).setOrigin(0.5,0.5);  
