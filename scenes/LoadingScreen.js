@@ -73,7 +73,7 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('player1Ninja', 'assets/playerNinjaIdle1.png');
         this.load.image('teleport', 'assets/teleporter.png');
         this.load.image('caisse', 'assets/caisse.png');
-        this.load.image('caisseBroken', 'assets/caisseBroken.jpg');
+        this.load.image('caisseBroken', 'assets/caisseBroken.png');
         this.load.image('cacAttaque', 'assets/slash.png');
 
 
@@ -323,7 +323,7 @@ this.load.spritesheet('spritesheetPlayerNinjaCrouchCam', 'assets/spritesheets/sp
         }).setScrollFactor(0).setDepth(1).setOrigin(0.5, 0.5);
 
        while (!this.isLoaded) {}
-        this.time.delayedCall(5000,this.startMenu,null,this)
+        this.time.delayedCall(1000,this.startMenu,null,this)
 
     }
 
@@ -342,7 +342,7 @@ this.load.spritesheet('spritesheetPlayerNinjaCrouchCam', 'assets/spritesheets/sp
 
         gameMusic1.play()
 
-        this.scene.start('Menu',
+        this.scene.start('Jeu',
             {
                 sound:
                     {

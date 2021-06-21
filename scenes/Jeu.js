@@ -1425,10 +1425,10 @@ console.log("test")
 
 
         var level="level1";
-        var teleportationsLeft = 1;
+        var teleportationsLeft = 0;
         var teleportationsLeftText;
         
-        var shurikenLeft =5;
+        var shurikenLeft =0;
         var shurikenLeftText;
         
         var cooldownShuriken = 120;
@@ -2332,7 +2332,7 @@ this.anims.create({
         });
 
         for (const caisse of caisseObjects) {
-            this.caisses.create(caisse.x + caisse.width / 2, caisse.y - caisse.height / 2, 'caisse').setScale(0.075)
+            this.caisses.create(caisse.x/* + caisse.width / 2*/, caisse.y /*- caisse.height / 2*/, 'caisse').setScale(0.1)
                 .setOrigin(0.5, 0.5)
                 .setDepth(-1)
         }
